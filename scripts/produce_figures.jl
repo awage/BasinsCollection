@@ -52,4 +52,7 @@ include("rikitake.jl")
 
 include("thomas.jl")
 
+include("kur_halekotte.jl")
 
+
+include("lorenz84.jl")

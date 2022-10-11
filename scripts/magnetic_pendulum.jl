@@ -24,7 +24,7 @@ function print_fig(w,h,cmap, γ, d, α, ω, N, res)
     params = @strdict γ d α ω N res
     data, file = produce_or_load(
         datadir("basins"), params, compute_mag_pend;
-        prefix = "mag_pend", storepatch = false, suffix = "jld2", force = true
+        prefix = "mag_pend", storepatch = false, suffix = "jld2", force = false
     )
     @unpack bsn, grid = data
     xg, yg = grid

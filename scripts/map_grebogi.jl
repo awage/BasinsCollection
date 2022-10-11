@@ -43,7 +43,7 @@ function print_fig(w, h, cmap, res)
     params = @strdict res 
     data, file = produce_or_load(
         datadir("basins"), params, compute_grebogi;
-        prefix = "grebogi", storepatch = false, suffix = "jld2", force = true
+        prefix = "grebogi", storepatch = false, suffix = "jld2", force = false
     )
     @unpack bsn, grid = data
     xg, yg = grid

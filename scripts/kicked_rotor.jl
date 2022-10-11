@@ -61,7 +61,7 @@ function print_fig(w, h, cmap, f0, ν, res)
     else
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end
-    save(string("../plots/kicked_rotor_", res, ".svg"),fig)
+    save(string("../plots/kicked_rotor_", res, ".png"),fig)
 end
 
 

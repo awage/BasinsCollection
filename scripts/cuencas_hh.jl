@@ -85,21 +85,6 @@ function print_fig(w, h, E, res)
             xticklabelfont = "cmr10", 
             yticklabelfont = "cmr10")
     heatmap!(ax, xg, yg, bsn; rasterize = 1, colormap = cmap)
-    save(string("basins_hh_", E, ".png"),fig)
+    save(string("../plots/basins_hh_", E, ".png"),fig)
 
-    # Merge version
-    ind = findall(bsn .== 2)
-    bsn[ind] .= 1
-    ind = findall(bsn .== 3)
-    bsn[ind] .= 2
-    cmap = ColorScheme([RGB(1,1,1), RGB(1,1,0), RGB(0,0,1)] )
-    fig = Figure(resolution = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"y", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    heatmap!(ax, xg, yg, bsn; rasterize = 1, colormap = cmap)
-    save(string("merge_basins_hh_", E, ".png"),fig)
 end

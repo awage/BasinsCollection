@@ -49,7 +49,7 @@ function print_fig(w, h, cmap, a, r, res)
     params = @strdict res a r
     data, file = produce_or_load(
         datadir("basins"), params, compute_feudel;
-        prefix = "feudel", storepatch = false, suffix = "jld2", force = true
+        prefix = "feudel", storepatch = false, suffix = "jld2", force = false
     )
     @unpack bsn, grid = data
     xg, yg = grid
