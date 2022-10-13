@@ -9,18 +9,18 @@ using OrdinaryDiffEq:Vern9
 function compute_more_chaos(di::Dict)
     @unpack res = di
     ds = Systems.more_chaos_example()
-    xg=range(-10.,10.,length=10000)
-    yg=range(-10.,10.,length=10000)
+    xg = yg = zg = range(-10.,10.,length=10000)
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
-    pmap = poincaremap(ds, (3, 0.), Tmax=1e6; idxs = 1:2, diffeq)
-    mapper = AttractorsViaRecurrences(pmap, (xg,yg); sparse = true,    
+    mapper = AttractorsViaRecurrences(ds, (xg,yg,zg); sparse = true, Δt = 1.,
         mx_chk_fnd_att = 1000,
         mx_chk_loc_att = 1000, safety_counter_max = Int(1e7), show_progress = true)
     y1 = range(-10., 10., length = res)
     y2 = range(-10., 10., length = res)
-    bsn, att = basins_of_attraction(mapper, (y1,y2); show_progress = true)
+    bsn = @showprogress [ mapper([x,y,0.]) for x in y1, y in y2]
+    att = mapper.bsn_nfo.attractors
+    # bsn, att = basins_of_attraction(mapper, (y1,y2); show_progress = true)
     grid = (y1,y2)
-    return @strdict(bsn, att, grid, β, idc, irf, Ω, res)
+    return @strdict(bsn, att, grid, res)
 end
 
 
@@ -28,7 +28,7 @@ function print_fig(w, h, cmap, res)
     params = @strdict res
     data, file = produce_or_load(
         datadir("basins"), params, compute_more_chaos;
-        prefix = "more_chaos", storepatch = false, suffix = "jld2", force = false
+        prefix = "more_chaos", storepatch = false, suffix = "jld2", force = true
     )
     @unpack bsn, grid = data
     xg, yg = grid

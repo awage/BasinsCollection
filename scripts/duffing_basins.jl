@@ -61,3 +61,9 @@ function get_Sb(d, F, ω, res)
     return basin_entropy(bsn)
 end
 
+cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
+d = 0.1; F=0.1; ω=0.1;  # smooth boundary
+print_fig(600, 500, cmap, d, F, ω, 600) 
+
+d = 0.4; F=0.1; ω=0.1;  # smooth boundary
+print_fig(600, 500, cmap, d, F, ω, 600) 

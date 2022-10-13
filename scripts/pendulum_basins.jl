@@ -79,3 +79,11 @@ function get_Sb(d, F, ω, res)
     @unpack bsn, grid = data
     return basin_entropy(bsn)
 end
+
+d = 0.2; F = 1.3636363636363635; ω = 0.5 # Parameters for Riddled Basins
+cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
+print_fig(600, 500, cmap, d, F, ω, 1000)
+
+d = 0.2; F = 1.66; ω = 1. # Parameters for Wada Basins
+cmap = ColorScheme([RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
+print_fig(600, 500, cmap, d, F, ω, 1000)

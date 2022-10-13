@@ -88,3 +88,8 @@ function print_fig(w, h, E, res)
     save(string("../plots/basins_hh_", E, ".png"),fig)
 
 end
+
+
+print_fig(600, 600, 0.25, 800) 
+print_fig(600, 600, 0.2, 800) 
+

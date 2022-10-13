@@ -4,7 +4,7 @@ using DynamicalSystems
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
-
+using ProgressMeter
 
 
 function compute_thomas(di::Dict)
@@ -16,7 +16,7 @@ function compute_thomas(di::Dict)
         mx_chk_fnd_att = 10000,
         mx_chk_loc_att = 10000, safety_counter_max = Int(1e7), show_progress = true, diffeq)
     y1 = y2 = range(-5, 5, length = res)
-    bsn = [ mapper([x,y,0.]) for x in y1, y in y2]
+    bsn = @showprogress [ mapper([x,y,0.]) for x in y1, y in y2]
     att = mapper.bsn_nfo.attractors
     # bsn, att = basins_of_attraction(mapper, (y1,y2); show_progress = true)
     grid = (y1,y2)
@@ -28,8 +28,7 @@ function print_fig(w, h, cmap, b, res)
     params = @strdict res b
     data, file = produce_or_load(
         datadir("basins"), params, compute_thomas;
-        prefix = "thomas", storepatch = false, suffix = "jld2", force = false
-    )
+        prefix = "thomas", storepatch = false, suffix = "jld2", force = false)
     @unpack bsn, grid = data
     xg, yg = grid
     fig = Figure(resolution = (w, h))
@@ -48,4 +47,4 @@ function print_fig(w, h, cmap, b, res)
 end
 
 b=0.1665
-print_fig(600,600, nothing, b, 200) 
+print_fig(600,600, nothing, b, 500) 

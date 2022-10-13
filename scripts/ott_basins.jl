@@ -73,3 +73,6 @@ function get_Sb(res)
     @unpack basins, xg, yg = data
     return basin_entropy(basins)
 end
+
+cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
+print_fig(600, 500, cmap, 1200) 

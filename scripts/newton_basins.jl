@@ -68,15 +68,7 @@ function get_Sb(N, res)
     ind = findall(bsn .== -1)
     bsn[ind] .= 1
     @show  basin_entropy(bsn)
-
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_basins_newton_zoom;
-        prefix = "newton_zoom", storepatch = false, suffix = "jld2", force = true
-    )
-    @unpack bsn, grid = data
-    ind = findall(bsn .== -1)
-    bsn[ind] .= 1
-    xg, yg = grid
-
-    @show basin_entropy(bsn)
 end
+
+cmap = ColorScheme([RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
+print_fig(600, 600, cmap, 3, 2000) 
