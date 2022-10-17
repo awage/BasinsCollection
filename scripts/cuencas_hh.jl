@@ -1,5 +1,5 @@
 using DrWatson
-@quickactivate "PerspectiveFigures" # exports DynamicalSystems, GLMakie and other goodies in `src`
+@quickactivate # exports DynamicalSystems, GLMakie and other goodies in `src`
 
 using OrdinaryDiffEq
 using DynamicalSystems
@@ -20,13 +20,13 @@ end
 
 
 function salida(sol)
-    a=sol[1,end]
-    b=sol[3,end]
-    if b>1
+    x=sol[1,end]
+    y=sol[3,end]
+    if y>1
         sal=1;
-    elseif b<0 && a<-1
+    elseif y<0 && x<-1
         sal=2;
-    elseif b<0 && a>1
+    elseif y<0 && x>1
         sal=3;
     else sal=0;
     end
