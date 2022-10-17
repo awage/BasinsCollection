@@ -22,7 +22,7 @@ end
 
 
 
-function compute_feudel(di::Dict)
+function compute_henon(di::Dict)
     @unpack μ, j, res = di
     ds = DiscreteDynamicalSystem(henon_map, [1.0, 0.0], [μ, j], henon_map_J)
     yg = xg = range(-2., 2., length = 2500)
@@ -37,10 +37,10 @@ end
 
 
 function print_fig(w, h, cmap, μ, j, res)
-    params = @strdict res a r
+    params = @strdict res μ j
     data, file = produce_or_load(
-        datadir("basins"), params, compute_feudel;
-        prefix = "feudel", storepatch = false, suffix = "jld2", force = false
+        datadir("basins"), params, compute_henon;
+        prefix = "henon", storepatch = false, suffix = "jld2", force = false
     )
     @unpack bsn, grid = data
     xg, yg = grid
@@ -56,9 +56,9 @@ function print_fig(w, h, cmap, μ, j, res)
     else
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end
-    save(string(projectdir(), "/plots/feudel",res,".png"),fig)
+    save(string(projectdir(), "/plots/henon",res,".png"),fig)
 end
 
-r = 3.833
-a = 0.0015
-print_fig(600,600, nothing, a, r, 400) 
+μ = 1.08
+j = 0.9
+print_fig(600,600, nothing, μ, j, 1000) 
