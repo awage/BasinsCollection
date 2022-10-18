@@ -4,13 +4,15 @@ using OrdinaryDiffEq
 using DynamicalSystems
 using CairoMakie
 using LaTeXStrings
+using ProgressMeter
 
 function cold_atoms_de!(dv,v,p,t)
     # α1 = p[1]; α2 = p[2]; β1 = p[3]; θ = p[4];   
     α1 = α2 = β1 = β2 = 1; θ = π/4;   
     x, px, y, py = v
-    ∂H∂x = 2*α2*β2*sin(θ)*(sin(θ)*x+cos(θ)*y)*exp(-β2*(sin(θ)*x+cos(θ)*y)^2);
-    ∂H∂y = 2*α1*β1*y*exp(-β1*y^2)+2*α2*β2*cos(θ)*(sin(θ)*x+cos(θ)*y)*exp(-β2*(sin(θ)*x+cos(θ)*y)^2);
+    f(x,y) = (sin(θ)*x+cos(θ)*y)
+    ∂H∂x = 2*α2*β2*sin(θ)*f(x,y)*exp(-β2*f(x,y)^2);
+    ∂H∂y = 2*α1*β1*y*exp(-β1*y^2)+2*α2*β2*cos(θ)*f(x,y)*exp(-β2*f(x,y)^2);
     ∂H∂px = px;
     ∂H∂py = py;
     dv[1] = ∂H∂px;
@@ -66,7 +68,7 @@ function compute_cold_atoms(di::Dict)
     yr = range(-3, 3, length = res)
     vyr = range(-1.5, 1.5, length = res)
     bsn = zeros(Int16, res, res)
-    for i in 1:length(yr)
+    @showprogress for i in 1:length(yr)
         Threads.@threads for k in 1:length(vyr)
             bsn[i,k] = get_cold_atoms(x, vx, yr[i], vyr[k])
         end
@@ -99,4 +101,4 @@ function print_fig(w, h, x, vx, res)
 end
 
 x = -500; vx = 0.1;
-print_fig(600, 600, x, vx, 200) 
+print_fig(600, 600, x, vx, 300) 

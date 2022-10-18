@@ -36,3 +36,9 @@ include("lorenz84.jl")
 include("slim_fractals.jl")
 
 include("sporadical_map.jl")
+
+include("henon_map.jl")
+
+include("cold_atoms.jl")
+
+include("competition_ecology_plancton.jl")
