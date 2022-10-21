@@ -5,6 +5,7 @@ using DynamicalSystems
 using CairoMakie
 using LaTeXStrings
 using ProgressMeter
+using DiffEqPhysics
 
 function cold_atoms_de!(dv,v,p,t)
     # α1 = p[1]; α2 = p[2]; β1 = p[3]; θ = p[4];   
@@ -21,10 +22,17 @@ function cold_atoms_de!(dv,v,p,t)
     dv[4] = -∂H∂y;
 end
 
+function Hca(p,q, prm) 
+    α1 = α2 = β1 = β2 = 1; θ = π/4;   
+    x, y = q
+    px, py = p
+    H = 0.5*(px^2+py^2) - α1*exp(-β1*y^2) - α2*exp(-β2*(x*sin(θ) + y*cos(θ))^2)
+end
+
 
 function salida(sol)
-    x = sol[1,end]
-    y = sol[3,end]
+    x = sol[3,end]
+    y = sol[4,end]
     # @show (x,y, sol.t[end])
     if x > 20 && abs(y) < 4
         sal = 1;
@@ -53,15 +61,15 @@ function get_cold_atoms(x, vx, y, vy)
     vi = [x, vx, y, vy];
     tspan=(0.0,50000.)
     # Define callback to halt solver
-    condition(u,t,integrator) = (u[1]^2+u[3]^2) > 40^2 && t > 5500
+    condition(u,t,integrator) = (u[3]^2+u[4]^2) > 40^2 && t > 5500
     affect!(integrator) = terminate!(integrator)
     cb = DiscreteCallback(condition,affect!)
-    ds = ContinuousDynamicalSystem(cold_atoms_de!, vi, [])
-    prob = ODEProblem(cold_atoms_de!, vi, tspan, callback=cb)
+    p0 = [vx, vy]; q0 =[x, y] 
+    prob = HamiltonianProblem(Hca, p0, q0, tspan, callback = cb)
+    # prob = ODEProblem(cold_atoms_de!, vi, tspan, callback=cb)
     sol = solve(prob, Vern9(), reltol=1e-12, abstol=1e-12)
     return salida(sol)
 end
-
 
 function compute_cold_atoms(di::Dict)
     @unpack vx, x, res = di
@@ -77,12 +85,11 @@ function compute_cold_atoms(di::Dict)
     return @strdict(bsn, grid, x, vx, res)
 end
 
-
 function print_fig(w, h, x, vx, res) 
     params = @strdict x vx res
     data, file = produce_or_load(
         datadir("basins"), params, compute_cold_atoms;
-        prefix = "cold_atoms", storepatch = false, suffix = "jld2", force = false
+        prefix = "cold_atoms", storepatch = false, suffix = "jld2", force = true
     )
     @unpack bsn, grid = data
     xg, yg = grid
@@ -97,8 +104,7 @@ function print_fig(w, h, x, vx, res)
     # heatmap!(ax, xg, yg, bsn; rasterize = 1, colormap = cmap)
     heatmap!(ax, xg, yg, bsn; rasterize = 1)
     save(string("../plots/basins_coldatoms_", res, ".png"),fig)
-
 end
 
 x = -500; vx = 0.1;
-print_fig(600, 600, x, vx, 300) 
+print_fig(600, 600, x, vx, 50) 

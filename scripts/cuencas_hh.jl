@@ -35,6 +35,9 @@ end
 
 
 function get_hh_exit(Ei, y, x)
+# H(p,q,p) = 0.5*(p[1]^2 + p[2]^2) + 0.5*(q[1]^2 + q[2]^2) + (q[1]^2*q[1] - q[1]^3/3) 
+# p0 = [0. ,1.]; q0 =[ 1., 0.] 
+# HamiltonianProblem(H,p0,q0,(0,10.))
     Esqrt = 2*Ei -x^2 -2*x^2*y - y^2 + 2/3 * y^3 
     if Esqrt < 0
         return 0
