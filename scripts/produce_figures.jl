@@ -37,8 +37,14 @@ include("slim_fractals.jl")
 
 include("sporadical_map.jl")
 
-include("henon_map.jl")
+include("map_henon.jl")
 
 include("cold_atoms.jl")
 
 include("competition_ecology_plancton.jl")
+
+include("open_billiard_sinai.jl")
+
+include("aguirre_billiard.jl")
+
+include("kicked_ott.jl")

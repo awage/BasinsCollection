@@ -65,7 +65,7 @@ function print_fig(w, h, cmap, f0, res)
 
     data, file = produce_or_load(
         datadir("basins"), params, compute_kicked_rotor_ott;
-        prefix = "kicked_rotor_ott", storepatch = false, suffix = "jld2", force = true
+        prefix = "kicked_rotor_ott", storepatch = false, suffix = "jld2", force = false
     )
 
 
@@ -83,7 +83,7 @@ function print_fig(w, h, cmap, f0, res)
     else
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end
-    save(string("../plots/kicked_rotor_cont_", res, ".png"),fig)
+    save(string("../plots/kicked_rotor_ott_", res, ".png"),fig)
 end
 
  

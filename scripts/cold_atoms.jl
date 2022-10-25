@@ -89,7 +89,7 @@ function print_fig(w, h, x, vx, res)
     params = @strdict x vx res
     data, file = produce_or_load(
         datadir("basins"), params, compute_cold_atoms;
-        prefix = "cold_atoms", storepatch = false, suffix = "jld2", force = true
+        prefix = "cold_atoms", storepatch = false, suffix = "jld2", force = false
     )
     @unpack bsn, grid = data
     xg, yg = grid
@@ -107,4 +107,4 @@ function print_fig(w, h, x, vx, res)
 end
 
 x = -500; vx = 0.1;
-print_fig(600, 600, x, vx, 50) 
+print_fig(600, 600, x, vx, 300) 
