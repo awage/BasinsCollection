@@ -477,6 +477,12 @@ git-tree-sha1 = "34c0e9ad262e5f7fc75b10a9952ca7692cfc5fbe"
 uuid = "d96e819e-fc66-5662-9728-84c9c7592b0a"
 version = "0.12.3"
 
+[[deps.Peaks]]
+deps = ["Compat"]
+git-tree-sha1 = "5f1390b0a0ef6d6411f9a9a37c4444d6a7e44780"
+uuid = "18e31ff7-3703-566c-8e60-38913d67486b"
+version = "0.4.1"
+
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
