@@ -13,7 +13,7 @@ function forced_particle!(du, u, p, t)
     du[1] = dx
     du[2] = dy
     du[3] = -γ*dx -(-4x*(1-x^2) + 2*s*x*y^2) +  f₀*sin(ω*t)*x₀
-    du[4] = -γ*dy -(2*y*s*(x^2-p)+2*k*y) +  f₀*sin(ω*t)*y₀
+    du[4] = -γ*dy -(2*y*s*(x^2-p)+4*k*y^3) +  f₀*sin(ω*t)*y₀
 end
 
 
@@ -27,7 +27,7 @@ function _get_basins_sommerer(d)
     smap = stroboscopicmap(df, 2π/ω; diffeq)
     # psys = projected_integrator(smap, [1,2], [0., 0,])
     mapper = AttractorsViaRecurrences(smap, (xg, yg, xg, yg); 
-            mx_chk_att = 5,
+            # mx_chk_att = 5,
             sparse = true)
 
     xg = range(-1.,1.,length=res)
@@ -72,4 +72,4 @@ end
 
 
 # cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
-print_fig(600, 600, nothing, 200) 
+print_fig(600, 600, nothing, 1000) 
