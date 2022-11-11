@@ -48,3 +48,7 @@ include("open_billiard_sinai.jl")
 include("aguirre_billiard.jl")
 
 include("kicked_ott.jl")
+
+include("poon_billiard.jl")
+
+include("hidden_chua.jl")
