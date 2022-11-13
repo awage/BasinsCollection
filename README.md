@@ -50,4 +50,4 @@ everything should work out of the box, including correctly finding local paths.
 * Poon billiard: Poon, Campos, Ott, Grebogi IJBC, vol6. nº2 1996 251-265
 * Hidden attractors in Chua oscillators:  Physics Letters A Volume 375, Issue 23, 6 June 2011, Pages 2230-2233 Localization of hidden Chuaʼs attractors A.Leonov N.V. Kuznetsov  V.I.Vagaitsev
 * Li Sprott oscillator:  International Journal of Bifurcation and Chaos, Vol. 26, No. 14 (2016) 1650233 (11 pages) DOI: 10.1142/S0218127416502333 Crisis in Amplitude Control Hides in Multistability Int. J. Bifurcation Chaos 2016.26.  Chunbiao Li, Julien Clinton Sprott, Hongyan Xing. 
-
+* Riddled Basins from: Sommerer, J. C. (1995). The end of classical determinism. Johns Hopkins APL Technical Digest, 16(4), 333.

@@ -54,3 +54,5 @@ include("poon_billiard.jl")
 include("hidden_chua.jl")
 
 include("li_sprott.jl")
+
+include("sommerers_basins.jl")
