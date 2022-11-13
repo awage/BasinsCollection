@@ -2,9 +2,14 @@ name = "BasinsCollection"
 authors = ["Wagemakers"]
 
 [deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 DiffEqPhysics = "055956cb-9e8b-5191-98cc-73ae4a59e68a"
 DrWatson = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
+DynamicalSystems = "61744808-ddfa-5f27-97ff-6e42cc95d634"
+LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
+OrdinaryDiffEq = "1dea7af3-3e70-54e6-95c3-0bf5283fa5ed"
 Peaks = "18e31ff7-3703-566c-8e60-38913d67486b"
+ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
 
 [compat]
 DrWatson = "2.9.1"
