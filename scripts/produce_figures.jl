@@ -52,3 +52,5 @@ include("kicked_ott.jl")
 include("poon_billiard.jl")
 
 include("hidden_chua.jl")
+
+include("li_sprott.jl")
