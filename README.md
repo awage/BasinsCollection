@@ -52,3 +52,5 @@ everything should work out of the box, including correctly finding local paths.
 * Li Sprott oscillator: https://doi.org/10.1142/S0218127416502333 
 * Riddled Basins from: Sommerer, John C. "The end of classical determinism." Johns Hopkins APL Technical Digest 16.4 (1995): 333.
 * Binary Black Holes escape basins: https://doi.org/10.1103/PhysRevD.98.084050
+* Discrete predator Prey system: https://doi.org/10.1016/j.chaos.2022.112833
+

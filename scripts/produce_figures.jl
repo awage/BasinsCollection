@@ -56,3 +56,7 @@ include("hidden_chua.jl")
 include("li_sprott.jl")
 
 include("sommerers_basins.jl")
+
+include("black_holes.jl")
+
+include("predator_prey_discrete.jl")

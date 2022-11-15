@@ -38,7 +38,6 @@ function compute_kicked_rotor_4d(di)
             # mx_chk_att = 2,
              sparse = true
     )
-    res = 400
     θ1 = range(-π, π, length = res)
     θ2 = range(-π, π, length = res)
     grid = (θ1, θ2)
@@ -87,4 +86,4 @@ W1 = [a b; b d]; W2 = [d -b; -b a];
 L = W1*exp(λ1*T) + W2*exp(λ2*T)  
 M = W1*(exp(λ1*T)-1)/λ1 + W2*(exp(λ2*T) -1)/λ2
 
-print_fig(600,600, nothing, M, L , ρ, 100) 
+print_fig(600,600, nothing, M, L , ρ, 400) 
