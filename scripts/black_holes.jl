@@ -13,15 +13,16 @@ function double_black_hole_de!(dv, v, p, t)
     z, pz, ρ, pρ = v
     t_ρ_z1 = (ρ^2+(z-z1)^2)
     t_ρ_z2 = (ρ^2+(z-z2)^2)
-    ∂H∂z = pz/(1 + M/√t_ρ_z1 + M/√t_ρ_z2)^2
-    ∂H∂pz = -2*(1 + M/√t_ρ_z1 + M/√t_ρ_z2)*((z-z1)*M/(t_ρ_z1)^1.5 + (z-z2)*M/(t_ρ_z2)^1.5)
-    ∂H∂ρ = pρ/(1 + M/√t_ρ_z1 + M/√t_ρ_z2)^2
-    ∂H∂pρ = -2*ρ*(1 + M/√t_ρ_z1 + M/√t_ρ_z2)*(M/(t_ρ_z1^1.5) + M/(t_ρ_z2^1.5)) + pϕ^2/ρ^3/(1 + M/√t_ρ_z1 + M/√t_ρ_z2)^2
-
-    dv[1] = ∂H∂pz
-    dv[2] = -∂H∂z
-    dv[3] = ∂H∂pρ
-    dv[4] = -∂H∂ρ
+    t_M_z1_z2 = (1 + M/√t_ρ_z1 + M/√t_ρ_z2)
+    ∂H∂z = pz/t_M_z1_z2^2
+    ∂H∂pz = -2*t_M_z1_z2*((z-z1)*M/(t_ρ_z1^1.5) + (z-z2)*M/(t_ρ_z2^1.5))
+    ∂H∂ρ = pρ/t_M_z1_z2^2
+    ∂H∂pρ = -2*ρ*t_M_z1_z2*(M/(t_ρ_z1^1.5) + M/(t_ρ_z2^1.5)) + pϕ^2/ρ^3/t_M_z1_z2^2
+    # ∂H∂ϕ = pϕ/ρ^2/(1+M/√t_ρ_z1+M/√t_ρ_z2)^2;
+    dv[1] = ∂H∂z
+    dv[2] = ∂H∂pz
+    dv[3] = ∂H∂ρ
+    dv[4] = ∂H∂pρ
 end
 
 function Hbh(p,q, prm) 
@@ -34,9 +35,9 @@ function Hbh(p,q, prm)
 end
 
 function salida_ρ_z(ρ, z, p)
-    z1 = p[1]; z2 = p[2]; eps = 1.
+    z1 = p[1]; z2 = p[2]; eps = 1/50
     sal =0 
-    if √(ρ^2+z^2) > 10 # escaping photons
+    if √(ρ^2+z^2) > 100 # escaping photons
         sal=0;
     elseif abs(z-z1) + abs(ρ) < eps # upper shadow
         sal=1;
@@ -49,8 +50,8 @@ return sal
 end
 
 function condition_ρ_z(ρ, z)
-    z1 = 0.5 ; z2 = -0.5; eps = 0.5
-    if √(ρ^2+z^2) > 10 # escaping photons
+    z1 = 0.5 ; z2 = -0.5; eps = 1/50
+    if √(ρ^2+z^2) > 100 # escaping photons
         return true
     elseif abs(z-z1) + abs(ρ) < eps # upper shadow
         return true
@@ -75,7 +76,7 @@ function get_basin_BH(ρ,z, prm)
     t_ρ_z1 = (ρ^2+(z-z1)^2)
     t_ρ_z2 = (ρ^2+(z-z2)^2)
     U = 1 + M/√t_ρ_z1 + M/√t_ρ_z2
-    @show U^4 - pϕ^2/ρ^2 
+    # @show U^4 - pϕ^2/ρ^2 
     if U^4 - pϕ^2/ρ^2 < 0
         return -1 
     else
@@ -93,15 +94,13 @@ function get_basin_BH(ρ,z, prm)
     vi = [z, pz, ρ, pρ];
     tspan=(0.0,50000.)
     # Define callback to halt solver
-    condition(u,t,integrator) = condition_ρ_z(u[3], u[4])
+    condition(u,t,integrator) = condition_ρ_z(u[3], u[1])
     affect!(integrator) = terminate!(integrator)
     cb = DiscreteCallback(condition,affect!)
-    p0 = [pz, pρ]; q0 =[z, ρ] 
-    prob = HamiltonianProblem(Hbh, p0, q0, tspan, prm, callback = cb)
-    # prob = ODEProblem(double_black_hole_de!, vi, tspan, prm, callback=cb)
+    prob = ODEProblem(double_black_hole_de!, vi, tspan, prm, callback=cb)
     sol = solve(prob, Vern9(), reltol=1e-12, abstol=1e-12)
-    @show u = sol[end]
-    return salida_ρ_z(u[3], u[4], prm)
+    u = sol[end]
+    return salida_ρ_z(u[3], u[1], prm)
 end
 
 
@@ -133,7 +132,7 @@ function print_fig(w, h, Δϕ, res)
     params = @strdict Δϕ res
     data, file = produce_or_load(
         datadir("basins"), params, compute_BH;
-        prefix = "black_holes", storepatch = false, suffix = "jld2", force = true
+        prefix = "black_holes", storepatch = false, suffix = "jld2", force = false
     )
     @unpack bsn, grid = data
     xg, yg = grid
@@ -151,5 +150,5 @@ function print_fig(w, h, Δϕ, res)
 
 end
 
-Δϕ = 0.04
-print_fig(600, 600, Δϕ, 100) 
+Δϕ = 0.03
+print_fig(600, 600, Δϕ, 500) 
