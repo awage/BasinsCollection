@@ -55,4 +55,4 @@ everything should work out of the box, including correctly finding local paths.
 * Discrete predator Prey system: https://doi.org/10.1016/j.chaos.2022.112833
 * Extreme multistable system: https://doi.org/10.1103/PhysRevE.85.035202
 * Disipative nontwist map: https://doi.org/10.48550/arXiv.2211.06921
-
+* 6D Shear Flow model: https://doi.org/10.1017/jfm.2013.38

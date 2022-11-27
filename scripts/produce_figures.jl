@@ -60,3 +60,5 @@ include("sommerers_basins.jl")
 include("black_holes.jl")
 
 include("predator_prey_discrete.jl")
+
+include("lebovitz_mariotti.jl")
