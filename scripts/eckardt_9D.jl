@@ -8,6 +8,13 @@ using CairoMakie
 using Random
 using ProgressMeter
 
+# A low-dimensional model for turbulent shear flows
+# Jeff Moehlis , Holger Faisst and Bruno Eckhardt
+# DOI: 10.1088/1367-2630/6/1/056
+
+# Geometry of the edge of chaos in a low-dimensional turbulent shear flow model
+# Madhura Joglekar,Ulrike Feudel, and James A. Yorke
+# DOI: 10.1103/PhysRevE.91.052903
 mutable struct E9DParameters{M}
     k::M
     σ::M
@@ -70,7 +77,7 @@ function compute_E9D(di::Dict)
      vatt = patt - plam;
      vattsym = pattsym - plam
      u0(x,y) = x*(vatt+vattsym) +  y*(vatt-vattsym)
-    y1r = range(0, 1.5, length = res)
+    y1r = range(-1, 1.5, length = res)
     y2r = range(-0.3, 0.3, length = res)
     ics = [ u0(y1,y2) for y1 in y1r, y2 in y2r]
     bsn = [ mapper(u) for u in ics]
