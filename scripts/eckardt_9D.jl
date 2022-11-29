@@ -6,7 +6,7 @@ using DynamicalSystems
 using OrdinaryDiffEq:Vern9
 using CairoMakie
 using Random
-
+using ProgressMeter
 
 mutable struct E9DParameters{M}
     k::M
@@ -62,15 +62,20 @@ function compute_E9D(di::Dict)
     yg = range(-5, 5; length = 10001)
     grid = ntuple(x -> yg, 9)
     mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = .01,   
-        mx_chk_fnd_att = 300, 
+        mx_chk_fnd_att = 1000, 
         mx_chk_loc_att = 100, safety_counter_max = Int(1e7), diffeq)
-    u0(x,y) = [x, 0.0511, -0.0391, 0.0016, y, 0.126, 0., 0., 0.]
-    y1r = range(-1, 1, length = res)
-    y2r = range(-1, 1, length = res)
+     patt = [0.129992; -0.0655929; 0.0475706; 0.0329967; 0.0753854; -0.00325098; -0.042364; -0.019685; -0.101453]
+     pattsym = [0.129992; 0.0655929; -0.0475706; -0.0329967; -0.0753854; -0.00325098; -0.042364; -0.019685; -0.101453]; 
+     plam = [1; 0; 0; 0; 0; 0; 0; 0; 0]; 
+     vatt = patt - plam;
+     vattsym = pattsym - plam
+     u0(x,y) = x*(vatt+vattsym) +  y*(vatt-vattsym)
+    y1r = range(0, 1.5, length = res)
+    y2r = range(-0.3, 0.3, length = res)
     ics = [ u0(y1,y2) for y1 in y1r, y2 in y2r]
     bsn = [ mapper(u) for u in ics]
-    grid = (y1r,y2r)
-    return @strdict(bsn, grid, Re, res)
+    grid = (y1r,y2r); att = mapper.bsn_nfo.attractors
+    return @strdict(bsn, grid, att, Re, res)
 end
 
 
@@ -83,7 +88,7 @@ function print_basins(w,h,cmap, Re, res)
     @unpack bsn, grid = data
     xg, yg = grid
     fig = Figure(resolution = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$y$", xlabel = L"x", yticklabelsize = 30, 
+    ax = Axis(fig[1,1], ylabel = L"$V_{att}-V_{att,sym}$", xlabel = L"V_{att}+V_{att,sym}", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 
             xlabelsize = 30, 
@@ -100,6 +105,6 @@ end
 
 
 
-print_basins(600,600, nothing, 407., 300)
+print_basins(600,600, nothing, 425., 200)
 # f,a,r = continuation_E9D()
 # plot_filled_curves(f,r,"tst.png")
