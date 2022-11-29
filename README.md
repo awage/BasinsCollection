@@ -56,3 +56,4 @@ everything should work out of the box, including correctly finding local paths.
 * Extreme multistable system: https://doi.org/10.1103/PhysRevE.85.035202
 * Disipative nontwist map: https://doi.org/10.48550/arXiv.2211.06921
 * 6D Shear Flow model: https://doi.org/10.1017/jfm.2013.38
+* 9D model of Fluid dynamics: https://doi.org/10.1088/1367-2630/6/1/056 and https://doi.org/10.1103/PhysRevE.91.052903

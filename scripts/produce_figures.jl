@@ -62,3 +62,5 @@ include("black_holes.jl")
 include("predator_prey_discrete.jl")
 
 include("lebovitz_mariotti.jl")
+
+include("eckhardt_9D.jl")
