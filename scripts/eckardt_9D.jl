@@ -74,7 +74,7 @@ function compute_E9D(di::Dict)
      patt = [0.129992; -0.0655929; 0.0475706; 0.0329967; 0.0753854; -0.00325098; -0.042364; -0.019685; -0.101453]
      pattsym = [0.129992; 0.0655929; -0.0475706; -0.0329967; -0.0753854; -0.00325098; -0.042364; -0.019685; -0.101453]; 
      plam = [1; 0; 0; 0; 0; 0; 0; 0; 0]; 
-     vatt = patt - plam;
+     vatt = patt -  plam;
      vattsym = pattsym - plam
      u0(x,y) = x*(vatt+vattsym) +  y*(vatt-vattsym)
     y1r = range(-1, 1.5, length = res)
@@ -112,6 +112,6 @@ end
 
 
 
-print_basins(600,600, nothing, 425., 200)
+print_basins(600,600, nothing, 425., 330)
 # f,a,r = continuation_E9D()
 # plot_filled_curves(f,r,"tst.png")
