@@ -64,3 +64,7 @@ include("predator_prey_discrete.jl")
 include("lebovitz_mariotti.jl")
 
 include("eckhardt_9D.jl")
+
+include("map_cbic.jl")
+
+include("map_kapitaniak.jl")
