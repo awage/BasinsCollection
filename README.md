@@ -60,3 +60,4 @@ everything should work out of the box, including correctly finding local paths.
 * Wada basins in the cubic 2D map: http://dx.doi.org/10.1016/j.physleta.2013.03.027
 * Riddled basins of discrete 2D system: https://doi.org/10.1103/PhysRevE.57.R6253
 * Coupled logistic maps with riddled basins (Fig 15 of the paper has an error): https://doi.org/10.1103/PhysRevE.57.2713
+* Sprott-memristor model: https://doi.org/10.1016/j.chaos.2022.111834

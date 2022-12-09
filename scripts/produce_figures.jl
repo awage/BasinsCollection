@@ -68,3 +68,7 @@ include("eckhardt_9D.jl")
 include("map_cbic.jl")
 
 include("map_kapitaniak.jl")
+
+include("map_cpld_logstc.jl")
+
+include("sprott_memristive.jl")
