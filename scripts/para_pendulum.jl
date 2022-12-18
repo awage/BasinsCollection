@@ -42,13 +42,13 @@ function print_fig(w,h, A_1, A_2, ω, res)
     params = @strdict A_1 A_2 ω res
     data, file = produce_or_load(
         datadir("basins"), params, compute_basins_pend_pforced;
-        prefix = "pend_pforced", storepatch = false, suffix = "jld2", force = true
+        prefix = "pend_pforced", storepatch = false, suffix = "jld2", force = false
     )
     @unpack bsn, grid = data
     xg, yg = grid
 
     fig = Figure(resolution = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$\dot{x}$", xlabel = L"x", yticklabelsize = 30, 
+    ax = Axis(fig[1,1], ylabel = L"$\dot{\varphi}$", xlabel = L"\varphi", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 
             xlabelsize = 30, 

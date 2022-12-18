@@ -61,3 +61,6 @@ everything should work out of the box, including correctly finding local paths.
 * Riddled basins of discrete 2D system: https://doi.org/10.1103/PhysRevE.57.R6253
 * Coupled logistic maps with riddled basins (Fig 15 of the paper has an error): https://doi.org/10.1103/PhysRevE.57.2713
 * Sprott-memristor model: https://doi.org/10.1016/j.chaos.2022.111834
+* Parametrically forced pendulum: http://dx.doi.org/10.1142/S0218127411030167
+* Bogdanov map:  https://doi.org/10.1142/S021812749300074X
+* Coupled Lorenz systems:  https://doi.org/10.1103/PhysRevE.96.062203
