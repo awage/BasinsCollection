@@ -84,5 +84,5 @@ end
 
 r = 3.35; res = 1500;
 params = @strdict r res
-print_fig(params , "cyc_comp", compute_cyc_comp; force = true) 
+print_fig(params , "cyc_comp", compute_cyc_comp; xlab = "", ylab = "") 
 
