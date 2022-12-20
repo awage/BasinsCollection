@@ -29,7 +29,7 @@ everything should work out of the box, including correctly finding local paths.
 * Duffing oscillator basins 
 * Forced pendulum basins
 * Henon Heiles open Hamiltonian escape basins 
-* 4D kicked map rotor from: https://doi.org/10.1016/S0960-0779(97)00058-1
+* 4D kicked map rotor (1998) `4d_kicked.jl`: https://doi.org/10.1016/S0960-0779(97)00058-1
 * 4D kicked map rotor from: https://doi.org/10.1103/PhysRevE.54.71
 * 4D kicked map rotor from: https://doi.org/10.1016/0167-2789(87)90108-4
 * A map with Wada: https://doi.org/10.1103/PhysRevE.58.3060
@@ -57,10 +57,11 @@ everything should work out of the box, including correctly finding local paths.
 * Disipative nontwist map: https://doi.org/10.48550/arXiv.2211.06921
 * 6D Shear Flow model: https://doi.org/10.1017/jfm.2013.38
 * 9D model of Fluid dynamics: https://doi.org/10.1088/1367-2630/6/1/056 and https://doi.org/10.1103/PhysRevE.91.052903 (this last paper has a basins that I cannot reproduce)
-* Wada basins in the cubic 2D map: http://dx.doi.org/10.1016/j.physleta.2013.03.027
+* Wada basins in the cubic 2D map (`map_cbic.jl`): http://dx.doi.org/10.1016/j.physleta.2013.03.027
 * Riddled basins of discrete 2D system: https://doi.org/10.1103/PhysRevE.57.R6253
 * Coupled logistic maps with riddled basins (Fig 15 of the paper has an error): https://doi.org/10.1103/PhysRevE.57.2713
 * Sprott-memristor model: https://doi.org/10.1016/j.chaos.2022.111834
 * Parametrically forced pendulum: http://dx.doi.org/10.1142/S0218127411030167
 * Bogdanov map:  https://doi.org/10.1142/S021812749300074X
 * Coupled Lorenz systems:  https://doi.org/10.1103/PhysRevE.96.062203
+* Rock-Paper-Scisors competition model `cyclic_competition.jl`:  https://doi.org/10.1063/1.5045366

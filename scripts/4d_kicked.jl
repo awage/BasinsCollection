@@ -3,7 +3,9 @@ using DrWatson
 using CairoMakie
 using LaTeXStrings
 using DynamicalSystems
+using Attractors
 using StaticArrays
+include("../src/print_fig.jl")
 
 
 # REFERENCE: Feudel, U., Grebogi, C., Poon, L., & Yorke, J. A. (1998). Dynamical properties of a simple mechanical system with a large number of coexisting periodic attractors. Chaos, Solitons & Fractals, 9(1-2), 171-180.
@@ -46,35 +48,6 @@ function compute_kicked_rotor_4d(di)
 end
 
 
-
-function print_fig(w, h, cmap, M, L, ρ, res) 
-    params = @strdict M L ρ res
-
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_kicked_rotor_4d;
-        prefix = "kicked_rotor_4d", storepatch = false, suffix = "jld2", force = false
-    )
-
-
-    @unpack bsn, grid = data
-    xg ,yg = grid
-    fig = Figure(resolution = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"\dot{\theta}", xlabel = L"\theta", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string("../plots/kicked_rotor_4d_", res, ".png"),fig)
-end
-
-
-
  
 
 ν = 0.2; ρ = 6.5; T = 1
@@ -85,5 +58,6 @@ a = 0.5*(1 + ν1/Δ); d = 0.5*(1 - ν1/Δ); b = -ν2/Δ;
 W1 = [a b; b d]; W2 = [d -b; -b a];
 L = W1*exp(λ1*T) + W2*exp(λ2*T)  
 M = W1*(exp(λ1*T)-1)/λ1 + W2*(exp(λ2*T) -1)/λ2
-
-print_fig(600,600, nothing, M, L , ρ, 400) 
+res = 400
+params = @strdict res  M L  ρ
+print_fig(params, "kicked_rotor_4d", compute_kicked_rotor_4d; ylab = L"\dot{\theta}", xlab = L"\theta")
