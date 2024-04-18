@@ -1,5 +1,5 @@
 using DrWatson
-@quickactivate "PerspectiveFigures" # exports Attractors, GLMakie and other goodies in `src`
+@quickactivate 
 using Attractors
 using CairoMakie
 using LaTeXStrings
@@ -22,7 +22,7 @@ end
 
 function compute_basins_newton(di::Dict)
     @unpack N, res = di
-    ds = DiscreteDynamicalSystem(newton_map,[0.1, 0.2], [N] , newton_map_J)
+    ds = DeterministicIteratedMap(newton_map,[0.1, 0.2], [N])
     xg=range(-3.,3.,length = res)
     yg=range(-3.,3.,length = res)
     mapper = AttractorsViaRecurrences(ds, (xg, yg))
@@ -58,17 +58,9 @@ function print_fig(w,h,cmap, N, res)
 end
 
 
-function get_Sb(N, res)
-    params = @strdict N res
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_basins_newton;
-        prefix = "newton", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    ind = findall(bsn .== -1)
-    bsn[ind] .= 1
-    @show  basin_entropy(bsn)
-end
-
 cmap = ColorScheme([RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
-print_fig(600, 600, cmap, 3, 2000) 
+
+N = 3; res = 2000
+params = @strdict N res
+print_fig(params, "newton",compute_basins_newton; ylab = L"\Im{(z)}", xlab = L"\Re{(z)}", cmap)
+# print_fig(600, 600, cmap, 3, 2000) 

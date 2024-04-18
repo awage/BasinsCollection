@@ -40,28 +40,8 @@ function compute_li_sprott(di::Dict)
     return @strdict(bsn, att, grid, res)
 end
 
+a = 13.; b = 0.55; res = 500
+params = @strdict res a b
+print_fig(params, "li_sprott", compute_li_sprott) 
 
-function print_fig(w, h, cmap, a, b, res)
-    params = @strdict res a b
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_li_sprott;
-        prefix = "li_sprott", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$y$", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/li_sprott",res,".png"),fig)
-end
 
-print_fig(600,600, nothing, 13., 0.55, 500) 

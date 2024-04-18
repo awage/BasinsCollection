@@ -72,3 +72,9 @@ include("map_kapitaniak.jl")
 include("map_cpled_logstc.jl")
 
 include("sprott_memristive.jl")
+ 
+include("coupled_lorenz.jl")
+
+include("map_bogdanov.jl")
+
+include("cyclic_competition.jl")

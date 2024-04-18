@@ -57,31 +57,6 @@ function compute_cyc_comp(di::Dict)
 end
 
 
-# function print_fig(w,h,cmap, r, res)
-#     params = @strdict r res
-#     data, file = produce_or_load(
-#         datadir("basins"), params, compute_basins_cyc_comp;
-#         prefix = "cyc_comp", storepatch = false, suffix = "jld2", force = false
-#     )
-#     @unpack bas, grid = data
-#     xg, yg = grid
-#     fig = Figure(size = (w, h))
-#     ax = Axis(fig[1,1], yticklabelsize = 30, 
-#             xticklabelsize = 30, 
-#             ylabelsize = 30, 
-#             xlabelsize = 30, 
-#             xticklabelfont = "cmr10", 
-#             yticklabelfont = "cmr10")
-#     if isnothing(cmap)
-#         heatmap!(ax, xg, yg, bas, rasterize = 1)
-#     else
-#         heatmap!(ax, xg, yg, bas, rasterize = 1, colormap = cmap)
-#     end
-
-#     save(string("../plots/basins_cyc_comp", res,".png"),fig)
-
-# end
-
 r = 3.35; res = 1500;
 params = @strdict r res
 print_fig(params , "cyc_comp", compute_cyc_comp; xlab = "", ylab = "") 

@@ -95,14 +95,14 @@ end
 
 ni = 5, 300
 params = @strdict ni res
-print_fig(params, string("basins_kur_",ni), compute_kur_halekotte) 
+print_fig(params, string("basins_kur_",ni), compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 ni = 14, 300
 params = @strdict ni res
-print_fig(params, string("basins_kur_",ni), compute_kur_halekotte) 
+print_fig(params, string("basins_kur_",ni), compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 ni = 58, 300
 params = @strdict ni res
-print_fig(params, string("basins_kur_",ni), compute_kur_halekotte) 
+print_fig(params, string("basins_kur_",ni), compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 ni = 76, 300
 params = @strdict ni res
-print_fig(params, string("basins_kur_",ni), compute_kur_halekotte) 
+print_fig(params, string("basins_kur_",ni), compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 

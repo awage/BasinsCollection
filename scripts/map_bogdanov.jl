@@ -18,16 +18,12 @@ function bogdanov_map!(dz, z, p, n)
     return
 end
 
-# dummy function to keep the initializator happy
-function bogdanov_map_J(J, z0, p, n)
-    return
-end
 
 
 
 function compute_bogdanov(di::Dict)
     @unpack μ, k, ε, res = di
-    ds = DiscreteDynamicalSystem(bogdanov_map!, [1.0, 0.0], [μ, k, ε], bogdanov_map_J)
+    ds = DeterministicIteratedMap(bogdanov_map!, [1.0, 0.0], [μ, k, ε])
     yg = xg = range(-2., 2., length = 2500)
     mapper = AttractorsViaRecurrences(ds, (xg,yg); sparse = true,    
         mx_chk_fnd_att = 1000,
@@ -39,30 +35,9 @@ function compute_bogdanov(di::Dict)
 end
 
 
-function print_fig(w, h, cmap, μ, k, ε, res)
-    params = @strdict res μ k ε
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_bogdanov;
-        prefix = "bogdanov", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$y$", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/bogdanov",res,".png"),fig)
-end
-
 μ = -0.1
 k = 1.2
 ε = 0.0125 
-print_fig(600,600, nothing, μ, k, ε, 1000) 
+res = 1000
+params = @strdict res μ k ε
+print_fig(params, "bogdanov", compute_bogdanov) 
