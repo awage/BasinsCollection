@@ -1,6 +1,6 @@
 using DrWatson
-@quickactivate # exports DynamicalSystems, GLMakie and other goodies in `src`
-using DynamicalSystems
+@quickactivate # exports Attractors, GLMakie and other goodies in `src`
+using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
 using LaTeXStrings
@@ -38,7 +38,7 @@ function print_fig(w,h,cmap, d, F, ω, res)
     @unpack bsn, grid = data
     xg, yg = grid
 
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"$\dot{x}$", xlabel = L"x", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

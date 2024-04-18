@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate 
 using CairoMakie
 using LaTeXStrings
-using DynamicalSystems
+using Attractors
 using OrdinaryDiffEq:Vern9
 
 # Reference: PHYSICAL REVIEW E 85, 035202(R) (2012)
@@ -58,7 +58,7 @@ function print_fig(w,h,res)
         prefix = "rossler", storepatch = false, suffix = "jld2", force = false
     )
     @unpack P, bas, y1 = data
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = "xn", yticklabelsize = 20, xticklabelsize = 20, ylabelsize = 20)
     scatter!(ax, P[:,1],P[:,2], markersize = 0.7, color = :black, rasterize = 4)
     save(string("../plots/bif_diag_em_rossler", res,".png"),fig)

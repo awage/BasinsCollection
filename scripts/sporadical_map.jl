@@ -1,4 +1,4 @@
-using DynamicalSystems
+using Attractors
 
 function Ms(x)
     y=0.
@@ -18,11 +18,7 @@ function chaotic_map(dz,z, p, n)
     return
 end
 
-# dummy function to keep the initializator happy
-function chaotic_map_J(J,z0, p, n)
-   return
-end
-ds = DiscreteDynamicalSystem(chaotic_map,[1., 0.], [1.1] , chaotic_map_J)
+ds = DeterministicIteratedMap(chaotic_map,[1., 0.], [1.1])
 integ  = integrator(ds)
 
 function escape_function(y)
@@ -50,7 +46,7 @@ function print_fig(w, h, cmap, res)
     integ.p[1] = 1.1
     bsn = [get_color(integ,x,y) for x in xg, y in yg]
 
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"$\dot{x}$", xlabel = L"x", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

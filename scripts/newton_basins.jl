@@ -1,6 +1,6 @@
 using DrWatson
-@quickactivate "PerspectiveFigures" # exports DynamicalSystems, GLMakie and other goodies in `src`
-using DynamicalSystems
+@quickactivate "PerspectiveFigures" # exports Attractors, GLMakie and other goodies in `src`
+using Attractors
 using CairoMakie
 using LaTeXStrings
 
@@ -43,7 +43,7 @@ function print_fig(w,h,cmap, N, res)
     ind = findall(bsn .== -1)
     bsn[ind] .= 1
     xg, yg = grid
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"\Im{(z)}", xlabel = L"\Re{(z)}", 
             aspect = AxisAspect(1.),
             yticklabelsize = 30, 

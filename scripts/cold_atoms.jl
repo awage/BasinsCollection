@@ -1,7 +1,7 @@
 using DrWatson
-@quickactivate # exports DynamicalSystems, GLMakie and other goodies in `src`
+@quickactivate # exports Attractors, GLMakie and other goodies in `src`
 using OrdinaryDiffEq
-using DynamicalSystems
+using Attractors
 using CairoMakie
 using LaTeXStrings
 using ProgressMeter
@@ -94,7 +94,7 @@ function print_fig(w, h, x, vx, res)
     @unpack bsn, grid = data
     xg, yg = grid
     # cmap = ColorScheme([RGB(1,1,1), RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"v_y", xlabel = L"y", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

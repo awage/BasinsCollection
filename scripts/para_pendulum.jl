@@ -1,6 +1,6 @@
 using DrWatson
-@quickactivate # exports DynamicalSystems, GLMakie and other goodies in `src`
-using DynamicalSystems
+@quickactivate # exports Attractors, GLMakie and other goodies in `src`
+using Attractors
 using Attractors
 using OrdinaryDiffEq
 using CairoMakie
@@ -47,7 +47,7 @@ function print_fig(w,h, A_1, A_2, ω, res)
     @unpack bsn, grid = data
     xg, yg = grid
 
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"$\dot{\varphi}$", xlabel = L"\varphi", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

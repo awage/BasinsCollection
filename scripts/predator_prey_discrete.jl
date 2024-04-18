@@ -2,8 +2,7 @@ using DrWatson
 @quickactivate
 using CairoMakie
 using LaTeXStrings
-using DynamicalSystems
-using ChaosTools
+using Attractors
 using StaticArrays
 
 # Organized periodic structures and coexistence of triple attractors in a
@@ -24,18 +23,13 @@ function compute_pred_prey(di)
     @unpack m, k, res = di
     u0 = [0.; 0.]
     p = [m, k]
-    df = DiscreteDynamicalSystem(predator_prey!, u0, p) 
+    df = CoupledODEs(predator_prey!, u0, p) 
     x1 = range(-1, 20, length = 600001)
     y1 = range(-1, 30, length = 600001)
     grid_rec = (x1, y1)
     mapper = AttractorsViaRecurrences(df, grid_rec,
-            # mx_chk_lost = 10, 
-            mx_chk_fnd_att = 1000, 
-            mx_chk_loc_att = 1000, 
-            mx_chk_att = 4,
-            safety_counter_max = Int(1e8),
-            sparse = true, Ttr = 500
-    )
+        consecutive_recurrences = 1000,
+        attractor_locate_steps = 1000, maximum_iterations = Int(1e8), show_progress = true)
     x = range(0.1, 2, length = res)
     y = range(0.01, 0.2, length = res)
     grid = (x,y)
@@ -56,7 +50,7 @@ function print_fig(w, h, cmap, k, m, res)
 
     @unpack bsn, grid = data
     xg ,yg = grid
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"y_0", xlabel = L"x_0", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

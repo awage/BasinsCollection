@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate
 using CairoMakie
 using LaTeXStrings
-using DynamicalSystems
+using Attractors
 
 # Reference: Map with more than 100 coexisting low-period periodic attractors, Ulrike Feudel,  Celso Grebogi, Brian R. Hunt, and James A. Yorke
 # PHYSICAL REVIEW E, VOLUME 54, NUMBER 1 1996
@@ -49,7 +49,7 @@ function print_fig(w, h, cmap, f0, ν, res)
 
     @unpack bsn, grid = data
     xg ,yg = grid
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"\dot{\theta}", xlabel = L"\theta", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

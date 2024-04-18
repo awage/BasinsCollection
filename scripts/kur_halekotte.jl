@@ -1,6 +1,6 @@
 using Graphs
 using OrdinaryDiffEq:Tsit5
-using DynamicalSystems
+using Attractors
 using JLD2
 
 
@@ -12,7 +12,6 @@ end
 
 
 function get_basins(ni , res)
-
 	# Set up the parameters for the network
 	N = 120 # in this case this is the number of oscillators, the system dimension is twice this value
         @load "param_GB_directed.jld2"
@@ -61,10 +60,10 @@ function get_trajectory(ui)
 end
 
 
-function makesim(di::Dict)
+function compute_kur_halekotte(di::Dict)
     @unpack ni, res = di
     bsn, att, grid = get_basins(ni, res)
-    return @strdict(bsn, att, grid, ni, res)
+    return @strdict(bsn, grid, ni, res)
 end
 
 function print_fig(ni, res)
@@ -81,7 +80,7 @@ function print_fig(ni, res)
 
     xg, yg = grid
 
-    fig = Figure(resolution = (600, 600))
+    fig = Figure(size = (600, 600))
     ax = Axis(fig[1,1], ylabel = L"$\phi$", xlabel = L"\omega", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 
@@ -94,9 +93,16 @@ function print_fig(ni, res)
 
 end
 
-
-print_fig(5, 300)
-print_fig(14, 300)
-print_fig(58, 300)
-print_fig(76, 300)
+ni = 5, 300
+params = @strdict ni res
+print_fig(params, string("basins_kur_",ni), compute_kur_halekotte) 
+ni = 14, 300
+params = @strdict ni res
+print_fig(params, string("basins_kur_",ni), compute_kur_halekotte) 
+ni = 58, 300
+params = @strdict ni res
+print_fig(params, string("basins_kur_",ni), compute_kur_halekotte) 
+ni = 76, 300
+params = @strdict ni res
+print_fig(params, string("basins_kur_",ni), compute_kur_halekotte) 
 

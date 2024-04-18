@@ -55,7 +55,7 @@ include("hidden_chua.jl")
 
 include("li_sprott.jl")
 
-include("sommerers_basins.jl")
+include("sommerer_basins.jl")
 
 include("black_holes.jl")
 
@@ -69,6 +69,6 @@ include("map_cbic.jl")
 
 include("map_kapitaniak.jl")
 
-include("map_cpld_logstc.jl")
+include("map_cpled_logstc.jl")
 
 include("sprott_memristive.jl")

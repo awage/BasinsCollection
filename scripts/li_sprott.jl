@@ -1,6 +1,6 @@
 using DrWatson
 @quickactivate
-using DynamicalSystems
+using Attractors
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
@@ -25,12 +25,12 @@ end
 
 function compute_li_sprott(di::Dict)
     @unpack a, b, res = di
-    ds = ContinuousDynamicalSystem(li_sprott!, rand(3), [a,b])
+    ds = CoupledODEs(li_sprott!, rand(3), [a,b])
     xg = yg = zg = range(-5,5,length=10000)
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
     mapper = AttractorsViaRecurrences(ds, (xg,yg,zg); sparse = true,    
-        mx_chk_fnd_att = 1000,
-        mx_chk_loc_att = 1000, safety_counter_max = Int(1e8), show_progress = true)
+        consecutive_recurrences = 1000,
+        attractor_locate_steps = 1000, maximum_iterations = Int(1e8), show_progress = true)
     x1 = range(-1, 1, length = res) 
     y1 = range(-5, 5, length = res)
     bsn = @showprogress [ mapper([x,y,-1.]) for x in x1, y in y1]
@@ -45,11 +45,11 @@ function print_fig(w, h, cmap, a, b, res)
     params = @strdict res a b
     data, file = produce_or_load(
         datadir("basins"), params, compute_li_sprott;
-        prefix = "li_sprott", storepatch = false, suffix = "jld2", force = true
+        prefix = "li_sprott", storepatch = false, suffix = "jld2", force = false
     )
     @unpack bsn, grid = data
     xg, yg = grid
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"$y$", xlabel = L"x", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

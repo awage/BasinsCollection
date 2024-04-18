@@ -1,7 +1,7 @@
 using DrWatson
 @quickactivate
 using LaTeXStrings
-using DynamicalSystems
+using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
 
@@ -77,7 +77,7 @@ function print_fig(w,h,cmap, Re, res)
     )
     @unpack bsn, grid = data
     xg, yg = grid
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"$y$", xlabel = L"x", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

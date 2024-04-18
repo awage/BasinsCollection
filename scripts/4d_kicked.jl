@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate
 using CairoMakie
 using LaTeXStrings
-using DynamicalSystems
+using Attractors
 using Attractors
 using StaticArrays
 include("../src/print_fig.jl")

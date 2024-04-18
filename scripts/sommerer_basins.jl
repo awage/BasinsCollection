@@ -1,7 +1,7 @@
 using DrWatson
 @quickactivate 
 using OrdinaryDiffEq:Vern9
-using DynamicalSystems
+using Attractors
 using CairoMakie
 using ProgressMeter
 # Sommerer, J. C. (1995). The end of classical determinism. Johns Hopkins APL Technical Digest, 16(4), 333.
@@ -48,13 +48,13 @@ function print_fig(w,h,cmap, res)
         @dict(res), # container
         _get_basins_sommerer, # function
         prefix = "basin_sommerer", # prefix for savename
-        force = true
+        force = false
     )
     @unpack basins, xg, yg = data
 
     # xg = range(-2,2,length = res)
     # yg = range(0.,2,length = res)
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"y_0", xlabel = L"x_0", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

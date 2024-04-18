@@ -1,6 +1,6 @@
 using DrWatson
 @quickactivate
-using DynamicalSystems
+using Attractors
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
@@ -25,11 +25,11 @@ end
 
 function compute_kapitaniak(di::Dict)
     @unpack l, pp, d1, d2, res = di
-    ds = DiscreteDynamicalSystem(kapitaniak_map!, [1.0, 0.0], [l, pp, d1, d2], kapitaniak_map_J)
+    ds = DeterministicIteratedMap(kapitaniak_map!, [1.0, 0.0], [l, pp, d1, d2])
     yg = xg = range(-3., 3., length = 10000)
     mapper = AttractorsViaRecurrences(ds, (xg,yg); sparse = true,    
-        mx_chk_fnd_att = 10000,
-        mx_chk_loc_att = 10000, safety_counter_max = Int(1e7), show_progress = true)
+        consecutive_recurrences = 10000,
+        attractor_locate_steps = 10000, maximum_iterations = Int(1e8), show_progress = true)
     yg = xg = range(-2, 2, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg); show_progress = true)
     grid = (xg, yg)
@@ -37,30 +37,9 @@ function compute_kapitaniak(di::Dict)
 end
 
 
-function print_fig(w, h, cmap, l, pp, d1, d2, res)
-    params = @strdict res l pp d1 d2
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_kapitaniak;
-        prefix = "kapitaniak", storepatch = false, suffix = "jld2", force = true
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(resolution = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$y$", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/kapitaniak",res,".png"),fig)
-end
-
 # l = 1.3; pp = -2.; d1 = 0.725; d2 = 0.725;
 l = √2; pp = -√2; d1 = d2 = -0.935;
 
-print_fig(600,600, nothing, l, pp, d1, d2, 2000) 
+
+params = @strdict res l pp d1 d2
+print_fig(params, "kapitaniak", compute_kapitaniak) 

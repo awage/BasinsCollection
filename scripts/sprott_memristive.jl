@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate 
 using CairoMakie
 using LaTeXStrings
-using DynamicalSystems
+using Attractors
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
 # using Plots
@@ -29,48 +29,23 @@ end
 function compute_basins_memristor(di::Dict)
     @unpack α, β, γ, g, r, m, res = di
 
-    ds = ContinuousDynamicalSystem(memristor!, rand(4), [α, β, γ, g, r, m])
     diffeq = (alg = Vern9(), reltol = 1e-10, maxiters = 1e9)
+    ds = CoupledODEs(memristor!, rand(4), [α, β, γ, g, r, m]; diffeq)
     xg = yg = zg = tg = range(-3, 3; length = 10001)
     grid = (xg, yg, zg, tg)
     mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = 0.01,   
-        mx_chk_hit_bas = 200,
-        mx_chk_fnd_att = 1000,
-        mx_chk_loc_att = 1000, safety_counter_max = Int(1e8), diffeq)
+        consecutive_basin_steps = 200,
+        consecutive_recurrences = 1000,
+        attractor_locate_steps = 1000, maximum_iterations = Int(1e8), show_progress = true)
     yr = range(-2, 2, length = res)
     xr = range(-2, 2, length = res)
-    bas = @showprogress [ mapper([x,y,0.]) for x in xr, y in yr]
+    bsn = @showprogress [ mapper([x,y,0.]) for x in xr, y in yr]
     grid = (xr,yr)
-    return @strdict(bas, grid, res)
+    return @strdict(bsn, grid, res)
 end
 
-
-function print_fig(w,h,cmap, α, β, γ, g, r, m, res)
-    params = @strdict α β γ g r m res
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_basins_memristor;
-        prefix = "hidden_memristor", storepatch = false, suffix = "jld2", force = true
-    )
-    @unpack bas, grid = data
-    xg, yg = grid
-
-    fig = Figure(resolution = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"y", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bas, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bas, rasterize = 1, colormap = cmap)
-    end
-
-    save(string("../plots/basins_hidden_memristor", res,".png"),fig)
-
-end
 
 α = 1; β = 0.05; γ = 0.5; g = 0.03; r = 5.8; m = 11; 
-print_fig(600, 500, nothing, α, β, γ, g, r, m, 500) 
 
+params = @strdict α β γ g r m res
+print_fig(params, "hidden_memristor", compute_basins_memristor; force = false) 

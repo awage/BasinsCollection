@@ -2,7 +2,7 @@
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "bc93528a80dea08ea340406fec5229a1e576a85d"
+project_hash = "3f06cc81b2c000a4b515eb65d9399d8239f2f944"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "016833eb52ba2d6bea9fcb50ca295980e728ee24"
@@ -508,6 +508,12 @@ git-tree-sha1 = "5837a837389fccf076445fce071c8ddaea35a566"
 uuid = "fa6b7ba4-c1ee-5f82-b5fc-ecf0adba8f74"
 version = "0.6.8"
 
+[[deps.DynamicalBilliards]]
+deps = ["Distributed", "Elliptic", "InteractiveUtils", "LinearAlgebra", "Scratch", "StaticArrays", "Test"]
+git-tree-sha1 = "a5fe32cacf239cd7b7e020ddc6d105a764fc2893"
+uuid = "4986ee89-4ee5-5cef-b6b8-e49ba721d7a5"
+version = "4.0.0"
+
 [[deps.DynamicalSystemsBase]]
 deps = ["ForwardDiff", "LinearAlgebra", "OrdinaryDiffEq", "Reexport", "Roots", "SciMLBase", "SparseArrays", "StateSpaceSets", "Statistics"]
 git-tree-sha1 = "e375b22ff119e960d4f0262b60bf48e4fba1ad88"
@@ -519,6 +525,11 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "e3290f2d49e661fbd94046d7e3726ffcb2d41053"
 uuid = "5ae413db-bbd1-5e63-b57d-d24a61df00f5"
 version = "2.2.4+0"
+
+[[deps.Elliptic]]
+git-tree-sha1 = "71c79e77221ab3a29918aaf6db4f217b89138608"
+uuid = "b305315f-e792-5b7a-8f41-49f472929428"
+version = "1.0.1"
 
 [[deps.EnumX]]
 git-tree-sha1 = "bdb1942cd4c45e3c678fd11569d5cccd80976237"

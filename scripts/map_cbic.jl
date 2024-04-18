@@ -1,6 +1,6 @@
 using DrWatson
 @quickactivate
-using DynamicalSystems
+using Attractors
 using Attractors
 using LaTeXStrings
 using CairoMakie
@@ -25,22 +25,19 @@ end
 
 function compute_cbic_map(di::Dict)
     @unpack μ, j, res = di
-    ds = DiscreteDynamicalSystem(cubic_map!, [1.0, 0.0], [μ, j], cubic_map_J)
+    ds = DeterministicIteratedMap(cubic_map!, [1.0, 0.0], [μ, j])
     yg = xg = range(-2., 2., length = 2500)
     mapper = AttractorsViaRecurrences(ds, (xg,yg); sparse = true,    
-        mx_chk_fnd_att = 10000,
-        mx_chk_loc_att = 10000, mx_chk_safety = Int(1e7), show_progress = true)
+        consecutive_recurrences = 1000,
+        attractor_locate_steps = 1000, maximum_iterations = Int(1e8), show_progress = true)
     yg = xg = range(-2, 2, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg); show_progress = true)
     grid = (xg, yg)
     return @strdict(bsn, att, grid, μ, j, res)
 end
 
-
-
 μ = 2.9
 j = 0.66
 res = 1000
 params = @strdict res μ j
 print_fig(params, "cbic_map", compute_cbic_map) 
-# function print_fig(params, sys_name; w = 600, h = 600, cmap = nothing, xlab = L"x", ylab = L"y" )

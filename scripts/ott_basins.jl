@@ -49,7 +49,7 @@ function print_fig(w,h,cmap, res)
 
     # xg = range(-2,2,length = res)
     # yg = range(0.,2,length = res)
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"y_0", xlabel = L"x_0", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

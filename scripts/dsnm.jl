@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate
 using CairoMakie
 using LaTeXStrings
-using DynamicalSystems
+using Attractors
 using ChaosTools
 using StaticArrays
 
@@ -53,7 +53,7 @@ function print_fig(w, h, cmap, a, b, res)
 
     @unpack bsn, grid = data
     xg ,yg = grid
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"y_0", xlabel = L"x_0", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 

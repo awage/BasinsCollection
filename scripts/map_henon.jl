@@ -1,6 +1,6 @@
 using DrWatson
 @quickactivate
-using DynamicalSystems
+using Attractors
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
@@ -44,7 +44,7 @@ function print_fig(w, h, cmap, μ, j, res)
     )
     @unpack bsn, grid = data
     xg, yg = grid
-    fig = Figure(resolution = (w, h))
+    fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = L"$\dot{x}$", xlabel = L"x", yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 
