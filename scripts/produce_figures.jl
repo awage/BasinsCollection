@@ -80,3 +80,5 @@ include("coupled_lorenz.jl")
 include("map_bogdanov.jl")
 
 include("cyclic_competition.jl")
+
+include("dsnm.jl")
