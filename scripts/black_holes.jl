@@ -150,5 +150,6 @@ function print_fig(w, h, Δϕ, res)
 
 end
 
-Δϕ = 0.03
-print_fig(600, 600, Δϕ, 500) 
+Δϕ = 0.03; res = 500
+params = @strdict Δϕ res
+print_fig(params, "black_holes", compute_BH; ylab = L"\rho", xlab = L"z")

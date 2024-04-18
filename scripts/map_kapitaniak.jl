@@ -16,12 +16,6 @@ function kapitaniak_map!(dz, z, p, n)
     return
 end
 
-# dummy function to keep the initializator happy
-function kapitaniak_map_J(J, z0, p, n)
-    return
-end
-
-
 
 function compute_kapitaniak(di::Dict)
     @unpack l, pp, d1, d2, res = di

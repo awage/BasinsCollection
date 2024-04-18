@@ -18,8 +18,6 @@ function chaotic_map(dz,z, p, n)
     return
 end
 
-ds = DeterministicIteratedMap(chaotic_map,[1., 0.], [1.1])
-integ  = integrator(ds)
 
 function escape_function(y)
     if y > 10000
@@ -39,28 +37,22 @@ function  get_color(integ,x,y)
     return escape_function(integ.u[2]);
 end
 
-
-function print_fig(w, h, cmap, res)
+function compute_sporadical(di)
+    @unpack res = di
     xg=range(0.,1.,length=600)
     yg=range(-2.,6.,length=600)
+    ds = DeterministicIteratedMap(chaotic_map,[1., 0.], [1.1])
+    integ  = integrator(ds)
     integ.p[1] = 1.1
     bsn = [get_color(integ,x,y) for x in xg, y in yg]
-
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$\dot{x}$", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-        else
-            heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-        end
-    save(string(projectdir(), "/plots/sporadical_",res,".png"),fig)
+    grid = (xg,yg)
+    return @strdict(bsn, grid)
 end
 
 
 
-print_fig(600,600, nothing, 500) 
+res = 500
+params = @strdict res
+print_fig(params, "sporadical", compute_sporadical)
+
+

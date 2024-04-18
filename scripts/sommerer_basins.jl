@@ -21,55 +21,23 @@ function _get_basins_sommerer(d)
     @unpack res = d
     xg = range(-3,3,length = 3000)
     yg = range(-3,3,length = 3000)
-    df = ContinuousDynamicalSystem(forced_particle!,rand(4),(0.0,20.0))
     diffeq = (reltol = 1e-9,  alg = Vern9())
+    df = CoupledODEs(forced_particle!,rand(4),(0.0,20.0); diffeq)
     ω = 2.2136
-    smap = stroboscopicmap(df, 2π/ω; diffeq)
+    smap = StroboscopicMap(df, 2π/ω)
     # psys = projected_integrator(smap, [1,2], [0., 0,])
     mapper = AttractorsViaRecurrences(smap, (xg, yg, xg, yg); 
-            # mx_chk_att = 5,
             sparse = true)
 
     xg = range(-1.,1.,length=res)
     yg = range(-1.,1.,length=res)
-    basins = @showprogress [ mapper([x,y,0., 0.]) for x in xg, y in yg]
+    bsn = @showprogress [ mapper([x,y,0., 0.]) for x in xg, y in yg]
     att = mapper.bsn_nfo.attractors
     grid = (xg, yg)
-    return @strdict(basins, xg, yg, att)
+    return @strdict(bsn, grid, att)
 end
 
 
-
-function print_fig(w,h,cmap, res)
-
-    # res = 1500
-    data, file = produce_or_load(
-        datadir("basins"), # path
-        @dict(res), # container
-        _get_basins_sommerer, # function
-        prefix = "basin_sommerer", # prefix for savename
-        force = false
-    )
-    @unpack basins, xg, yg = data
-
-    # xg = range(-2,2,length = res)
-    # yg = range(0.,2,length = res)
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"y_0", xlabel = L"x_0", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, basins, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, basins, rasterize = 1, colormap = cmap)
-    end
-    save("../plots/basins_riddle_sommerer.png",fig)
-end
-
-
-
-# cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
-print_fig(600, 600, nothing, 1000) 
+res = 1000
+params = @strdict res
+print_fig(params, "basin_sommerer", _get_basins_sommerer)

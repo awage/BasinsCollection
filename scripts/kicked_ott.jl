@@ -39,7 +39,7 @@ function compute_kicked_rotor_ott(di)
     @unpack f0, res = di
     u0 = [0.; 0.; 0.; 0.]
     p = [f0]
-    df = DiscreteDynamicalSystem(kicked_ott!, u0, p) 
+    df = DeterministicIteratedMap(kicked_ott!, u0, p) 
     θ1 = θ2= range(-2π, 2π, length = 10001)
     θd1 = θd2 = range(-30, 30, length = 10001)
     grid_rec = (θ1, θ2, θd1, θd2)
@@ -58,34 +58,6 @@ function compute_kicked_rotor_ott(di)
     return @strdict(bsn, att, grid, f0, res)
 end
 
-
-
-function print_fig(w, h, cmap, f0, res) 
-    params = @strdict f0 res
-
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_kicked_rotor_ott;
-        prefix = "kicked_rotor_ott", storepatch = false, suffix = "jld2", force = false
-    )
-
-
-    @unpack bsn, grid = data
-    xg ,yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"\dot{\theta}", xlabel = L"\theta", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string("../plots/kicked_rotor_ott_", res, ".png"),fig)
-end
-
- 
-f0 = 0.1
-print_fig(600,600, nothing, f0, 700) 
+f0 = 0.1; res = 700
+params = @strdict f0 res
+print_fig(params, "kicked_rotor_ott", compute_kicked_rotor_ott)

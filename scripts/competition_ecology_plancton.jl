@@ -56,16 +56,16 @@ end
 # Huisman, J; Weissing, FJ, American Naturalist DOI: 10.1086/319929
 function compute_competition_model(di)
     @unpack res = di
-    ds = ContinuousDynamicalSystem(comptetion_model!, rand(8+3), [])
+    diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
+    ds = CoupledODEs(comptetion_model!, rand(8+3), []; diffeq)
     yg = range(0, 100; length = 41)
     grid = ntuple(x -> yg, dimension(ds))
-    diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
     mapper = AttractorsViaRecurrences(ds, grid;
             # mx_chk_lost = 10, 
             mx_chk_fnd_att = 300, 
             mx_chk_loc_att = 300, 
             # mx_chk_att = 2,
-             sparse = true, diffeq
+             sparse = true
     )
     xg = range(0.,2.,length = res)
     yg = range(0.,2.,length = res)
@@ -74,7 +74,7 @@ function compute_competition_model(di)
     ics = Array{Vector{Float64}}(undef, res, res)
     for i in 1:res
         Threads.@threads for j in 1:res
-            u = trajectory(ds, 1000, [0.1, xg[i], 0.1, yg[j], 0.1, 0., 0., 0., 10., 10., 10.]; diffeq)
+            u,t = trajectory(ds, 1000, [0.1, xg[i], 0.1, yg[j], 0.1, 0., 0., 0., 10., 10., 10.])
             @show ics[i,j] = vec(u[end]) + [zeros(5); 0.1; 0.1; 0.1; zeros(3)]
         end
     end
@@ -85,35 +85,6 @@ function compute_competition_model(di)
     return @strdict(bsn, att, grid, res)
 end
 
-
-function print_fig(w, h, cmap, res)
-    params = @strdict res
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_competition_model;
-        prefix = "comptetion_model", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$\dot{x}$", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/comptetion_model",res,".png"),fig)
-end
-
-print_fig(600,600, nothing, 800) 
-# diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
-# ds = ContinuousDynamicalSystem(comptetion_model!, rand(5+3), [])
-# integ = integrator(ds,  [0.1, 0.1, 0.1, 0.1, 0.1, 10., 10., 10.]; diffeq)
-# @profview u = trajectory(ds, 10, [0.1, 0.1, 0.1, 0.1, 0.1, 10., 10., 10.]; diffeq)
-# @profview step!(integ, 30)
-# using Plots
-# plot(Matrix(u)[:,1:5])
+res = 500
+params = @strdict res
+print_fig(params, "comptetion_model", compute_competition_model)

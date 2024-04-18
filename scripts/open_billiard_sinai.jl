@@ -76,27 +76,6 @@ function compute_exit_open_sinai(di::Dict)
     return @strdict(bsn, grid, Δ, res)
 end
 
-function print_fig(w, h, cmap, Δ, res)
-    params = @strdict Δ res
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_exit_open_sinai;
-        prefix = "open_sinai", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$\theta$", xlabel = L"x_0", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/open_sinai_",res,".png"),fig)
-end
-
-print_fig(600,600, nothing, 0.8, 700) 
+Δ = 0.8; res = 700
+params = @strdict Δ res
+print_fig(params, "open_sinai", compute_exit_open_sinai)

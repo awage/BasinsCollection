@@ -67,27 +67,6 @@ function compute_exit_poon_disks(di::Dict)
 end
 
 
-function print_fig(w, h, cmap, ww, res)
-    params = @strdict ww res
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_exit_poon_disks;
-        prefix = "poon_disks", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$\theta$", xlabel = L"x_0", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/poon_disks_",res,".png"),fig)
-end
-
-print_fig(600,600, nothing, 0.1, 1400) 
+ww = 0.1; res = 1400
+params = @strdict ww res
+print_fig(params, "poon_disks", compute_exit_poon_disks)

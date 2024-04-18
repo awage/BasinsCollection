@@ -86,4 +86,6 @@ function print_fig(w, h, cmap, ww, res)
     save(string(projectdir(), "/plots/open_disks_",res,".png"),fig)
 end
 
-print_fig(600,600, nothing, 0.001, 400) 
+ww = 0.001; res = 400
+params = @strdict ww res
+print_fig(params, "open_disks", compute_exit_three_disk)

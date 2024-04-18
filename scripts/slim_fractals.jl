@@ -40,14 +40,13 @@ end
 function compute_slim_fractal(di)
     @unpack res,μ = di
     p = [μ]
-    df = ContinuousDynamicalSystem(slim_fractal_U2!, rand(4), p) 
+    diffeq = (reltol = 1e-9,  alg = Vern9())
+    df = CoupledODEs(slim_fractal_U2!, rand(4), p; diffeq) 
     x1 = x2 = y1 = y2 =  range(-2, 2, length = 1001)
     grid_rec = (x1, x2, y1, y2)
-    diffeq = (reltol = 1e-9,  alg = Vern9())
     mapper = AttractorsViaRecurrences(df, grid_rec; Δt = 1.,
             mx_chk_fnd_att = 300, 
             mx_chk_loc_att = 300, 
-            sparse = true, diffeq
     )
     θr = range(0, 2π/3, length = res)
     ur = range(0, 1, length = res)
@@ -61,38 +60,6 @@ function compute_slim_fractal(di)
     return @strdict(bsn, att, grid, μ, res)
 end
 
-
-
-function print_fig(w, h, cmap, μ, res) 
-    params = @strdict μ res
-
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_slim_fractal;
-        prefix = "slim_fractal", storepatch = false, suffix = "jld2", force = false
-    )
-
-
-    @unpack bsn, grid = data
-    xg ,yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"\dot{\theta}", xlabel = L"\theta", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string("../plots/slim_fractal_", res, ".png"),fig)
-end
-
-μ = 0.2
-print_fig(600,600, nothing, μ, 800) 
-# using Plots
-# df = ContinuousDynamicalSystem(slim_fractal_U3!, rand(4), [μ]) 
-# diffeq = (reltol = 1e-9,  alg = Vern9())
-# u = trajectory(df, 100, [0.4, 0, 0.4, 0]; Ttr = 100, diffeq)
-# plot(Matrix(u[1000:2000])[:,4])
+μ = 0.2; res = 800
+params = @strdict μ res
+print_fig(params, "slim_fractal", compute_slim_fractal; ylab = L"\dot{\theta}", xlab = L"\theta")

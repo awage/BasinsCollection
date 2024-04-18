@@ -15,16 +15,16 @@ function get_basins(ni , res)
 	# Set up the parameters for the network
 	N = 120 # in this case this is the number of oscillators, the system dimension is twice this value
         @load "param_GB_directed.jld2"
-        ds = ContinuousDynamicalSystem(second_order_kuramoto!, zeros(2*N), [N, 0.1, K, AI, vec(P)], (J,z0, p, n) -> nothing)
         diffeq = (alg = Tsit5(), reltol = 1e-9, maxiters = 1e6)
+        ds = ContinuousDynamicalSystem(second_order_kuramoto!, zeros(2*N), [N, 0.1, K, AI, vec(P)]; diffeq)
 
         # get the equilibrium state of the system after a long transient.
-        uu = trajectory(ds, 1500; Δt = 0.1, diffeq)
+        uu = trajectory(ds, 1500; Δt = 0.1)
         Δϕ = uu[end][1:N]; Δω = uu[end][N+1:2N]; 
         
         _complete(y) = (length(y) == N) ? [Δϕ; Δω] : y; 
         _proj_state(y) = y[N+1:2*N]
-        psys = projected_integrator(ds, _proj_state, _complete; diffeq)
+        psys = ProjectedDynamicalSystem(ds, _proj_state, _complete)
         yg = range(-17, 17; length = 31)
         grid = ntuple(x -> yg, dimension(psys))
 	mapper = AttractorsViaRecurrences(psys, grid; sparse = true, Δt = .1,   
@@ -49,60 +49,23 @@ function get_basins(ni , res)
 end
 
 
-function get_trajectory(ui)
-	# Set up the parameters for the network
-	N = 120 # in this case this is the number of oscillators, the system dimension is twice this value
-        @load "param_GB_directed.jld2"
-        ds = ContinuousDynamicalSystem(second_order_kuramoto!, zeros(2*N), [N, α, K, AI, vec(P)], (J,z0, p, n) -> nothing)
-        diffeq = (alg = Vern9(), abstol = 1e-12, reltol = 1e-12,  maxiters = 1e7)
-        pp = trajectory(ds, 1500, ui; Δt = 0.1, diffeq)
-	return pp
-end
-
-
 function compute_kur_halekotte(di::Dict)
     @unpack ni, res = di
     bsn, att, grid = get_basins(ni, res)
     return @strdict(bsn, grid, ni, res)
 end
 
-function print_fig(ni, res)
 
-    params = @strdict ni res
-
-    data, file = produce_or_load(
-        datadir("basins"), params, makesim;
-        prefix = "basins_kur", storepatch = false, suffix = "jld2", force = false
-    )
-
-
-    @unpack bsn, grid = data
-
-    xg, yg = grid
-
-    fig = Figure(size = (600, 600))
-    ax = Axis(fig[1,1], ylabel = L"$\phi$", xlabel = L"\omega", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    # heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    save(string("../plots/basins_", ni,".png"),fig)
-
-end
-
-ni = 5, 300
+ni = 5; res = 300
 params = @strdict ni res
-print_fig(params, string("basins_kur_",ni), compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
-ni = 14, 300
+print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
+ni = 14
 params = @strdict ni res
-print_fig(params, string("basins_kur_",ni), compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
-ni = 58, 300
+print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
+ni = 58
 params = @strdict ni res
-print_fig(params, string("basins_kur_",ni), compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
-ni = 76, 300
+print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
+ni = 76
 params = @strdict ni res
-print_fig(params, string("basins_kur_",ni), compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
+print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 

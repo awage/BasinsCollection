@@ -15,12 +15,6 @@ function cplog_map(dz, z, p, n)
     return
 end
 
-# dummy function to keep the initializator happy
-function cplog_map_J(J, z0, p, n)
-    return
-end
-
-
 
 function compute_cplog(di::Dict)
     @unpack a, ε, res = di
@@ -39,7 +33,6 @@ end
 
 # a = 3.57480493875920; ε = -0.2
 a = 3.6; ε = -1.
-
 params = @strdict res a ε
 print_fig(params, "cplog", compute_cplog) 
 

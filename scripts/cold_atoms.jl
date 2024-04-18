@@ -85,26 +85,6 @@ function compute_cold_atoms(di::Dict)
     return @strdict(bsn, grid, x, vx, res)
 end
 
-function print_fig(w, h, x, vx, res) 
-    params = @strdict x vx res
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_cold_atoms;
-        prefix = "cold_atoms", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    # cmap = ColorScheme([RGB(1,1,1), RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"v_y", xlabel = L"y", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    # heatmap!(ax, xg, yg, bsn; rasterize = 1, colormap = cmap)
-    heatmap!(ax, xg, yg, bsn; rasterize = 1)
-    save(string("../plots/basins_coldatoms_", res, ".png"),fig)
-end
-
-x = -500; vx = 0.1;
-print_fig(600, 600, x, vx, 300) 
+x = -500; vx = 0.1; res = 300
+params = @strdict x vx res
+print_fig(params, "cold_atoms", compute_cold_atoms; ylab = L"v_y", xlab = L"y")

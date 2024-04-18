@@ -38,39 +38,6 @@ function compute_pred_prey(di)
 end
 
 
-
-function print_fig(w, h, cmap, k, m, res) 
-    params = @strdict k m res
-
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_pred_prey;
-        prefix = "pred_prey", storepatch = false, suffix = "jld2", force = false
-    )
-
-
-    @unpack bsn, grid = data
-    xg ,yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"y_0", xlabel = L"x_0", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string("../plots/pred_prey_discrt", res, ".png"),fig)
-end
-
-
- 
-m = 0.104; k = 7.935 
-print_fig(600,600, nothing, k, m, 600) 
-
-# p = [m, k]
-# df = DiscreteDynamicalSystem(predator_prey!, rand(2), p) 
-# u = trajectory(df, 1000, [0.3, 0.2])
-
+m = 0.104; k = 7.935; res = 600
+params = @strdict k m res
+print_fig(params, "pred_prey", compute_pred_prey; ylab = L"y_0", xlab = L"x_0")

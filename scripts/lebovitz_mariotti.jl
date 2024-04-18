@@ -53,13 +53,13 @@ end
 function compute_LM(di::Dict)
     @unpack res, Re = di
     p = LMD6Parameters(; Re = Re)
-    ds = ContinuousDynamicalSystem(LMD6!, zeros(6), p, (J,z0, p, n) -> nothing)
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
+    ds = ContinuousDynamicalSystem(LMD6!, zeros(6), p, diffeq)
     yg = range(-5, 5; length = 10001)
     grid = ntuple(x -> yg, dimension(ds))
     mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = .1,   
         mx_chk_fnd_att = 300,
-        mx_chk_loc_att = 100, safety_counter_max = Int(1e7), diffeq)
+        mx_chk_loc_att = 100, maximum_iterations = Int(1e7), diffeq)
     u0(x,y) = [x, -0.0511, -0.0391, 0.0016, y, 0.126]
     y1r = range(-1, 1, length = res)
     y2r = range(-1, 1, length = res)
@@ -69,27 +69,7 @@ function compute_LM(di::Dict)
     return @strdict(bsn, grid, Re, res)
 end
 
-function print_fig(w,h,cmap, Re, res)
-    params = @strdict res Re
-    @time data, file = produce_or_load(
-        datadir("basins"), params, compute_LM;
-        prefix = "lebovitz", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$y$", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/lebovitz_",res,".png"),fig)
-end
 
-print_fig(600,600, nothing, 307., 450)
+res = 450; Re = 307.
+params = @strdict res Re
+print_fig(params, "lebovitz", compute_LM)

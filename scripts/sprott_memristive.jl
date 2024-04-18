@@ -5,7 +5,6 @@ using LaTeXStrings
 using Attractors
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
-# using Plots
 
 # Multistable dynamics and control of a new 4D memristive chaotic
 # Sprott B system
