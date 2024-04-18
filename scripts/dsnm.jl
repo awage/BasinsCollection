@@ -39,41 +39,8 @@ function compute_dsnm(di)
     bsn, att = basins_of_attraction(mapper, grid; show_progress = true)
     return @strdict(bsn, att, grid, res)
 end
-
-
-
-function print_fig(w, h, cmap, a, b, res) 
-    params = @strdict a b res
-
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_dsnm;
-        prefix = "dsnm", storepatch = false, suffix = "jld2", force = true
-    )
-
-
-    @unpack bsn, grid = data
-    xg ,yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"y_0", xlabel = L"x_0", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string("../plots/dsnm", res, ".png"),fig)
-end
-
-
  
-a = 0.55; b = 0.45 
-print_fig(600,600, nothing, a, b, 1000) 
-
-# p = [m, k]
-# df = DiscreteDynamicalSystem(predator_prey!, rand(2), p) 
-# u = trajectory(df, 1000, [0.3, 0.2])
+a = 0.55; b = 0.45; res = 1000
+params = @strdict a b res
+print_fig(params, "dsnm", compute_dsnm)
 
