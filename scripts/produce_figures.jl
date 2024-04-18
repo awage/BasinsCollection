@@ -3,6 +3,8 @@ using DrWatson
 using Colors
 using ColorSchemes
 
+include(srcdir("print_fig.jl"))
+
 include("newton_basins.jl")
 
 include("ott_basins.jl")

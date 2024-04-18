@@ -56,17 +56,14 @@ function get_hh_exit(Ei, y, x)
 end
 
 
-function comp_basins_hh(Ei, res)
+
+
+function comp_basins_hh(di::Dict)
+    @unpack E, res = di
     ry = range(-1.1, 1.4, length = res)
     rx = range(-1.2, 1.2, length = res)
-    @time basins = [get_hh_exit(Ei, y, x) for x in rx, y in ry]
-    return basins, (rx, ry)
-end
-
-
-function makesim(di::Dict)
-    @unpack E, res = di
-    bsn, grid = comp_basins_hh(E, res)
+    @time bsn = [get_hh_exit(E, y, x) for x in rx, y in ry]
+    grid = (rx, ry)
     return @strdict(bsn, grid, E, res)
 end
 
@@ -92,7 +89,11 @@ function print_fig(w, h, E, res)
 
 end
 
+E = 0.25; res = 800
+params = @strdict E res
+print_fig(params, "hh", comp_basins_hh)
 
-print_fig(600, 600, 0.25, 800) 
-print_fig(600, 600, 0.2, 800) 
+E = 0.2; res = 800
+params = @strdict E res
+print_fig(params, "hh", comp_basins_hh)
 

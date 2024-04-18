@@ -14,18 +14,10 @@ function grebogi_map(dz,z, p, n)
     return
 end
 
-# dummy function to keep the initializator happy
-function grebogi_map_J(J,z0, p, n)
-   return
-end
-
-
-
-
 
 function compute_grebogi(di::Dict)
     @unpack res = di
-    ds = DiscreteDynamicalSystem(grebogi_map,[1., -1.], [] , grebogi_map_J)
+    ds = DeterministicIteratedMap(grebogi_map,[1., -1.], [] )
     θ = range(0, 2π, length = 2000)
     xg = range(-0.5, 0.5, length = 2000)
     mapper = AttractorsViaRecurrences(ds, (θ,xg); sparse = true,    
@@ -62,4 +54,5 @@ function print_fig(w, h, cmap, res)
     save(string(projectdir(), "/plots/grebogi",res,".png"),fig)
 end
 
-print_fig(600,600, nothing, 400) 
+params = @strdict res 
+print_fig(params, "grebogi", compute_grebogi; ylab = L"y", xlab = L"x")

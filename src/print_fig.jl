@@ -1,5 +1,3 @@
-using DrWatson
-@quickactivate
 using LaTeXStrings
 using CairoMakie
 
@@ -23,6 +21,6 @@ function print_fig(params, sys_name, fun_name; w = 600, h = 600, cmap = nothing,
     else
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end
-    save(string(projectdir(), "/plots/", sys_name, ".png"),fig)
+    save(plotsdir(savename(sys_name,params,"png")),fig)
 end
 

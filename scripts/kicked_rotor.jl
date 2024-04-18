@@ -18,17 +18,13 @@ end
 function compute_kicked_rotor(di)
     @unpack f0, ν, res = di
     u0 = [0., 0.6]
-    df = DiscreteDynamicalSystem(kicked_feudel!, u0, [ν,f0]) 
+    df = DeterministicIteratedMap(kicked_feudel!, u0, [ν,f0]) 
     xg = range(0, 2π, length = 10000)
     yg = range(-220, 220, length = 10000)
     grid_rec = (xg, yg)
     mapper = AttractorsViaRecurrences(df, grid_rec,
-            mx_chk_lost = 10, 
-            mx_chk_fnd_att = 3000, 
-            mx_chk_loc_att = 3000, 
-            mx_chk_att = 5,
-            sparse = true
-            )
+        consecutive_recurrences = 1000,
+        attractor_locate_steps = 1000, maximum_iterations = Int(1e8), show_progress = true)
     xg = range(0, 2π, length = res)
     yg = range(-π, π, length = res)
     grid = (xg,yg)
@@ -37,36 +33,9 @@ function compute_kicked_rotor(di)
 end
 
 
-
-function print_fig(w, h, cmap, f0, ν, res) 
-    params = @strdict f0 ν res
-
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_kicked_rotor;
-        prefix = "kicked_rotor", storepatch = false, suffix = "jld2", force = false
-    )
-
-
-    @unpack bsn, grid = data
-    xg ,yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"\dot{\theta}", xlabel = L"\theta", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string("../plots/kicked_rotor_", res, ".png"),fig)
-end
-
-
-
 res = 500
 f0 = 4.
 ν = 0.02
-print_fig(600,600, nothing, f0, ν, 400) 
+params = @strdict f0 ν res
+print_fig(params, "kicked_rotor", compute_kicked_rotor; ylab = L"\dot{\theta}", xlab = L"\theta")
+# print_fig(600,600, nothing, f0, ν, 400) 

@@ -32,58 +32,28 @@ end
 
 function compute_basins_pend(di::Dict)
     @unpack d, F, ω, res = di
-    df = ContinuousDynamicalSystem(forced_pendulum,rand(2), [d, F, ω])
     condition(u,t,integrator) = (integrator.u[1] < -π  || integrator.u[1] > π)
     cb = DiscreteCallback(condition,affect!)
     diffeq = (reltol = 1e-9,  alg = Vern9(), callback = cb)
+    df = CoupledODEs(forced_pendulum,rand(2), [d, F, ω]; diffeq)
     xg = range(-pi,pi,length = res)
     yg = range(-4.,4.,length = res)
-    smap = stroboscopicmap(df, 2*pi/ω; diffeq)
+    smap = StroboscopicMap(df, 2*pi/ω)
     mapper = AttractorsViaRecurrences(smap, (xg, yg))
-    bsn, att = basins_of_attraction(mapper)
     grid = (xg, yg)
+    bsn, att = basins_of_attraction(mapper, grid)
     return @strdict(bsn, att, grid, d, F, ω, res)
 end
 
 
-function print_fig(w, h, cmap, d, F, ω, res) 
-    # d = 0.2; F = 1.3636363636363635; ω = 0.5 # Parameters for Riddled Basins
-    # res = 2000
-    params = @strdict d F ω res
-
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_basins_pend;
-        prefix = "pendulum", storepatch = false, suffix = "jld2", force = false
-    )
-
-
-    @unpack bsn, grid = data
-    xg ,yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"\dot{\theta}", xlabel = L"\theta", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    save(string("../plots/basins_pendulum_", ω, ".png"),fig)
-end
-
-function get_Sb(d, F, ω, res)
-    params = @strdict d F ω res
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_basins_pend;
-        prefix = "pendulum", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    return basin_entropy(bsn)
-end
-
 d = 0.2; F = 1.3636363636363635; ω = 0.5 # Parameters for Riddled Basins
+res = 1000
 cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
-print_fig(600, 500, cmap, d, F, ω, 1000)
+params = @strdict d F ω res
+# print_fig(600, 500, cmap, d, F, ω, 1000)
+print_fig(params, "pendulum", compute_basins_pend; cmap, ylab= L"\dot{\theta}", xlab= L"\theta")
 
 d = 0.2; F = 1.66; ω = 1. # Parameters for Wada Basins
+params = @strdict d F ω res
 cmap = ColorScheme([RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
-print_fig(600, 500, cmap, d, F, ω, 1000)
+print_fig(params, "pendulum", compute_basins_pend; cmap, ylab= L"\dot{\theta}", xlab= L"\theta")

@@ -22,16 +22,10 @@ function chaotic_map(dz, z, p, n)
     return
 end
 
-# dummy function to keep the initializator happy
-function chaotic_map_J(J, z0, p, n)
-    return
-end
-
-
 
 function compute_feudel(di::Dict)
     @unpack a, r, res = di
-    ds = DiscreteDynamicalSystem(chaotic_map, [1.0, 0.0], [a, r], chaotic_map_J)
+    ds = DeterministicIteratedMap(chaotic_map, [1.0, 0.0], [a, r])
     θ = range(0.0, 1.0, length = 2500)
     xg = range(0.0, 1.0, length = 2500)
     mapper = AttractorsViaRecurrences(ds, (xg,θ); sparse = true,    
@@ -45,29 +39,8 @@ function compute_feudel(di::Dict)
 end
 
 
-function print_fig(w, h, cmap, a, r, res)
-    params = @strdict res a r
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_feudel;
-        prefix = "feudel", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$\dot{x}$", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/feudel",res,".png"),fig)
-end
-
 r = 3.833
 a = 0.0015
-print_fig(600,600, nothing, a, r, 400) 
+res = 400
+params = @strdict res a r
+print_fig(params, "feudel", compute_feudel; ylab = L"\dot{x}", xlab = L"x")
