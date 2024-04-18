@@ -11,12 +11,19 @@ function print_fig(params, sys_name, fun_name; w = 600, h = 600, cmap = nothing,
     @unpack bsn, grid = data
     xg, yg = grid
     fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, yticklabelsize = 30, 
+    ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
+            yticklabelsize = 30, 
             xticklabelsize = 30, 
             ylabelsize = 30, 
             xlabelsize = 30, 
             xticklabelfont = "cmr10", 
             yticklabelfont = "cmr10")
+    # ax = Axis(fig[1,1], 
+    #     xticksvisible = false, 
+    #     yticksvisible = false, 
+    #     xticklabelsvisible = false, 
+    #     yticklabelsvisible = false)
+        
     if isnothing(cmap)
         heatmap!(ax, xg, yg, bsn, rasterize = 1)
     else
