@@ -1,7 +1,7 @@
 using DrWatson
 @quickactivate 
 using OrdinaryDiffEq:Vern9
-using DynamicalSystems
+using Attractors
 using CairoMakie
 # Equations of motion: E. Ott, et al. I Physica D 76 (1994) 384-410
 function forced_particle!(du, u, p, t)
@@ -76,3 +76,4 @@ end
 
 cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
 print_fig(600, 500, cmap, 1200) 
+# print_fig(512, 1767, cmap, 1200) 
