@@ -5,7 +5,6 @@ using Attractors
 using CairoMakie
 using LaTeXStrings
 using ProgressMeter
-using DiffEqPhysics
 
 function cold_atoms_de!(dv,v,p,t)
     # α1 = p[1]; α2 = p[2]; β1 = p[3]; θ = p[4];   
@@ -64,8 +63,6 @@ function get_cold_atoms(x, vx, y, vy)
     condition(u,t,integrator) = (u[3]^2+u[4]^2) > 40^2 && t > 5500
     affect!(integrator) = terminate!(integrator)
     cb = DiscreteCallback(condition,affect!)
-    # p0 = [vx, vy]; q0 =[x, y] 
-    # prob = HamiltonianProblem(Hca, p0, q0, tspan, callback = cb)
     prob = ODEProblem(cold_atoms_de!, vi, tspan, callback=cb)
     sol = solve(prob, Vern9(), reltol=1e-12, abstol=1e-12)
     return salida(sol)

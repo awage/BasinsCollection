@@ -4,6 +4,7 @@ using OrdinaryDiffEq:Vern9
 using Attractors
 using CairoMakie
 using ProgressMeter
+
 # Sommerer, J. C. (1995). The end of classical determinism. Johns Hopkins APL Technical Digest, 16(4), 333.
 function forced_particle!(du, u, p, t)
     γ = 0.632; f₀ = 1.0688  ; ω = 2.2136; 

@@ -23,7 +23,8 @@ function print_fig(params, sys_name, fun_name; w = 600, h = 600, cmap = nothing,
     #     yticksvisible = false, 
     #     xticklabelsvisible = false, 
     #     yticklabelsvisible = false)
-        
+    # cmap = :mk_12
+
     if isnothing(cmap)
         heatmap!(ax, xg, yg, bsn, rasterize = 1)
     else
