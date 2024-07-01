@@ -39,6 +39,6 @@ function _get_basins_sommerer(d)
 end
 
 
-res = 1000
+# res = 1000
 params = @strdict res
 print_fig(params, "basin_sommerer", _get_basins_sommerer)

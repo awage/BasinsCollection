@@ -47,7 +47,7 @@ end
 
 
 d = 0.2; F = 1.3636363636363635; ω = 0.5 # Parameters for Riddled Basins
-res = 1000
+# res = 1000
 cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
 params = @strdict d F ω res
 # print_fig(600, 500, cmap, d, F, ω, 1000)

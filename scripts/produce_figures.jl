@@ -5,6 +5,8 @@ using ColorSchemes
 
 include(srcdir("print_fig.jl"))
 
+res = 1200
+
 include("newton_basins.jl")
 
 include("ott_basins.jl")
@@ -32,8 +34,6 @@ include("magnetic_pendulum.jl")
 include("rikitake.jl")
 
 include("thomas.jl")
-
-include("kur_halekotte.jl")
 
 include("lorenz84.jl")
 
@@ -67,8 +67,6 @@ include("predator_prey_discrete.jl")
 
 include("lebovitz_mariotti.jl")
 
-include("eckhardt_9D.jl")
-
 include("map_cbic.jl")
 
 include("map_kapitaniak.jl")
@@ -84,3 +82,7 @@ include("map_bogdanov.jl")
 include("cyclic_competition.jl")
 
 include("dsnm.jl")
+
+include("eckhardt_9D.jl")
+
+include("kur_halekotte.jl")
