@@ -22,6 +22,6 @@ function compute_thomas(di::Dict)
 end
 
 
-b=0.1665; res = 500
+b=0.1665; #res = 500
 params = @strdict res b
 print_fig(params, "thomas", compute_thomas; ylab = L"\dot{x}", xlab = L"x")

@@ -38,6 +38,6 @@ end
 
 μ = 2.9
 j = 0.66
-res = 1000
+# res = 1000
 params = @strdict res μ j
 print_fig(params, "cbic_map", compute_cbic_map) 

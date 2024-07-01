@@ -76,6 +76,6 @@ function compute_exit_open_sinai(di::Dict)
     return @strdict(bsn, grid, Δ, res)
 end
 
-Δ = 0.8; res = 700
+Δ = 0.8; #res = 700
 params = @strdict Δ res
 print_fig(params, "open_sinai", compute_exit_open_sinai)

@@ -33,7 +33,5 @@ end
 
 # l = 1.3; pp = -2.; d1 = 0.725; d2 = 0.725;
 l = √2; pp = -√2; d1 = d2 = -0.935;
-
-
 params = @strdict res l pp d1 d2
 print_fig(params, "kapitaniak", compute_kapitaniak) 

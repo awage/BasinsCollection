@@ -89,11 +89,11 @@ function print_fig(w, h, E, res)
 
 end
 
-E = 0.25; res = 800
+E = 0.25; #res = 800
 params = @strdict E res
 print_fig(params, "hh", comp_basins_hh)
 
-E = 0.2; res = 800
+E = 0.2; #res = 800
 params = @strdict E res
 print_fig(params, "hh", comp_basins_hh)
 

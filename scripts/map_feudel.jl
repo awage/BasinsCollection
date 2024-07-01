@@ -41,6 +41,6 @@ end
 
 r = 3.833
 a = 0.0015
-res = 400
+# res = 400
 params = @strdict res a r
 print_fig(params, "feudel", compute_feudel; ylab = L"\dot{x}", xlab = L"x")

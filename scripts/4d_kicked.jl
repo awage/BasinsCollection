@@ -57,6 +57,6 @@ a = 0.5*(1 + ν1/Δ); d = 0.5*(1 - ν1/Δ); b = -ν2/Δ;
 W1 = [a b; b d]; W2 = [d -b; -b a];
 L = W1*exp(λ1*T) + W2*exp(λ2*T)  
 M = W1*(exp(λ1*T)-1)/λ1 + W2*(exp(λ2*T) -1)/λ2
-res = 400
+# res = 400
 params = @strdict res  M L  ρ
 print_fig(params, "kicked_rotor_4d", compute_kicked_rotor_4d; ylab = L"\dot{\theta}", xlab = L"\theta")

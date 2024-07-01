@@ -82,6 +82,6 @@ function compute_cold_atoms(di::Dict)
     return @strdict(bsn, grid, x, vx, res)
 end
 
-x = -500; vx = 0.1; res = 300
+x = -500; vx = 0.1; #res = 300
 params = @strdict x vx res
 print_fig(params, "cold_atoms", compute_cold_atoms; ylab = L"v_y", xlab = L"y")

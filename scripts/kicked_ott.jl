@@ -58,6 +58,6 @@ function compute_kicked_rotor_ott(di)
     return @strdict(bsn, att, grid, f0, res)
 end
 
-f0 = 0.1; res = 700
+f0 = 0.1; #res = 700
 params = @strdict f0 res
 print_fig(params, "kicked_rotor_ott", compute_kicked_rotor_ott)

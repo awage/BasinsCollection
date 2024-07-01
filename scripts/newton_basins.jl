@@ -2,9 +2,12 @@ using DrWatson
 @quickactivate 
 using Attractors
 using CairoMakie
+using ProgressMeter
+using Colors; using ColorSchemes
 using LaTeXStrings
 using ForwardDiff: derivative
 using LinearAlgebra:norm
+include(srcdir("print_fig.jl"))
 
 func_list = [x -> (x*x - 1) * (x*x + 1),
 x -> x*x*x - 1,
@@ -108,12 +111,10 @@ function compute_basins_newton(di::Dict)
     return @strdict(bsn, att, grid,  res)
 end
 
-# cmap = ColorScheme([RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
-cmap = :Spectral_7
-
+# cmap = ColorScheme([RGB(0,0,0), RGB(1,0,0), RGB(0,1,0), RGB(0,0,1), RGB(1,1,0), RGB(1,0,1), RGB(0,1,1)] )
+cmap = nothing
 for i in 1:14
-    res = 1000
+    # res = 1000
     params = @strdict  res i
     print_fig(params, string("newton_",i),compute_basins_newton; ylab = L"\Im{(z)}", xlab = L"\Re{(z)}", cmap)
-# print_fig(600, 600, cmap, 3, 2000) 
 end

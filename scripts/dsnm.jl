@@ -39,7 +39,7 @@ function compute_dsnm(di)
     return @strdict(bsn, att, grid, res)
 end
  
-a = 0.55; b = 0.45; res = 1000
+a = 0.55; b = 0.45; #res = 1000
 params = @strdict a b res
 print_fig(params, "dsnm", compute_dsnm)
 

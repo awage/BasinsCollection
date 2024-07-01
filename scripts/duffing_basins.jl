@@ -17,7 +17,6 @@ end
 
 function compute_basins_duffing(di::Dict)
     @unpack d, F, ω, res = di
-
     diffeq = (;reltol = 1e-9, alg = Vern9(), maxiters = 1e6)
     ds = ContinuousDynamicalSystem(duffing, rand(2), [d, F, ω]; diffeq)
     xg = yg = range(-2.2,2.2,length = res)
@@ -31,7 +30,8 @@ end
 
 cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
 
-res = 600; d = 0.1; F=0.1; ω=0.1;  # smooth boundary
+# res = 600; 
+d = 0.1; F=0.1; ω=0.1;  # smooth boundary
 params = @strdict d F ω res
 print_fig(params, string("duffing_",d), compute_basins_duffing; ylab = L"$\dot{x}$", xlab = L"x", cmap) 
 

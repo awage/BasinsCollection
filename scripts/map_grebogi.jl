@@ -31,28 +31,5 @@ function compute_grebogi(di::Dict)
 end
 
 
-function print_fig(w, h, cmap, res)
-    params = @strdict res 
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_grebogi;
-        prefix = "grebogi", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"$\dot{x}$", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
-    else
-        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
-    end
-    save(string(projectdir(), "/plots/grebogi",res,".png"),fig)
-end
-
 params = @strdict res 
 print_fig(params, "grebogi", compute_grebogi; ylab = L"y", xlab = L"x")

@@ -40,7 +40,7 @@ function compute_li_sprott(di::Dict)
     return @strdict(bsn, att, grid, res)
 end
 
-a = 13.; b = 0.55; res = 500
+a = 13.; b = 0.55; #res = 500
 params = @strdict res a b
 print_fig(params, "li_sprott", compute_li_sprott) 
 

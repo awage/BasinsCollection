@@ -57,7 +57,7 @@ function compute_cyc_comp(di::Dict)
 end
 
 
-r = 3.35; res = 1500;
+r = 3.35; #res = 1500;
 params = @strdict r res
 print_fig(params , "cyc_comp", compute_cyc_comp; xlab = "", ylab = "") 
 

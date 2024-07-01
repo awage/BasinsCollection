@@ -47,6 +47,6 @@ function compute_basins_josephson(di::Dict)
 end
 
 
-β = 25; idc = 1.878; irf = 10.198; Ω = 1; res = 700
+β = 25; idc = 1.878; irf = 10.198; Ω = 1; #res = 700
 params = @strdict β idc irf Ω res
 print_fig(params, "josephson", compute_basins_josephson; ylab = L"\dot{x}", xlab = L"x")

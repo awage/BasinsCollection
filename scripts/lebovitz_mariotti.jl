@@ -70,6 +70,7 @@ function compute_LM(di::Dict)
 end
 
 
-res = 450; Re = 307.
+# res = 450; 
+Re = 307.
 params = @strdict res Re
 print_fig(params, "lebovitz", compute_LM)

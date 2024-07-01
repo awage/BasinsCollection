@@ -38,6 +38,6 @@ end
 
 μ = 1.08
 j = 0.9
-res = 1000
+# res = 1000
 params = @strdict res μ j
 print_fig(params, "henon", compute_henon)

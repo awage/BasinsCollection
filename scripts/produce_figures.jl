@@ -13,6 +13,8 @@ include("duffing_basins.jl")
 
 include("pendulum_basins.jl")
 
+include("para_pendulum.jl")
+
 include("cuencas_hh.jl")
 
 include("4d_kicked.jl")

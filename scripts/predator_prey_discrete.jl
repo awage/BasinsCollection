@@ -38,6 +38,6 @@ function compute_pred_prey(di)
 end
 
 
-m = 0.104; k = 7.935; res = 600
+m = 0.104; k = 7.935; #res = 600
 params = @strdict k m res
 print_fig(params, "pred_prey", compute_pred_prey; ylab = L"y_0", xlab = L"x_0")

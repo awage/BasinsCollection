@@ -33,7 +33,7 @@ function compute_kicked_rotor(di)
 end
 
 
-res = 500
+# res = 500
 f0 = 4.
 ν = 0.02
 params = @strdict f0 ν res

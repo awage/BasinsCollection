@@ -21,6 +21,6 @@ end
 
 
 
-γ=1; d=0.3; α=0.2; ω=0.5; N=3; res = 300
+γ=1; d=0.3; α=0.2; ω=0.5; N=3; #res = 300
 params = @strdict γ d α ω N res
 print_fig(params, "mag_pend", compute_mag_pend; ylab = L"\dot{x}", xlab = L"x")

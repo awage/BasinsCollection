@@ -51,7 +51,7 @@ end
 
 
 
-res = 500
+# res = 500
 params = @strdict res
 print_fig(params, "sporadical", compute_sporadical)
 

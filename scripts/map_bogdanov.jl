@@ -38,6 +38,6 @@ end
 μ = -0.1
 k = 1.2
 ε = 0.0125 
-res = 1000
+# res = 1000
 params = @strdict res μ k ε
 print_fig(params, "bogdanov", compute_bogdanov) 

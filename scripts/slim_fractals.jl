@@ -60,6 +60,6 @@ function compute_slim_fractal(di)
     return @strdict(bsn, att, grid, μ, res)
 end
 
-μ = 0.2; res = 800
+μ = 0.2; #res = 800
 params = @strdict μ res
 print_fig(params, "slim_fractal", compute_slim_fractal; ylab = L"\dot{\theta}", xlab = L"\theta")

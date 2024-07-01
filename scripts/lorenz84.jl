@@ -73,6 +73,6 @@ end
 
  
 
-F=6.846; G=1.287; a=0.25; b=4.; res = 600
+F=6.846; G=1.287; a=0.25; b=4.; #res = 600
 params = @strdict F G a b res
 print_fig(params, "lorenz84", compute_lorenz84; ylab = L"\dot{\theta}", xlab = L"\theta")

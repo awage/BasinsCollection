@@ -26,6 +26,6 @@ end
 
 
 
-μ = 0.47; α = 1.; res = 700
+μ = 0.47; α = 1.; #res = 700
 params = @strdict res μ α
 print_fig(params, "rikitake", compute_rikitake; ylab = L"\dot{x}", xlab = L"x")
