@@ -31,7 +31,7 @@ function _get_basins_ott(d)
     yg = range(0.,1.2,length=res)
     bsn, att = basins_of_attraction(mapper, (xg, yg))
     grid = (xg,yg)
-    return @strdict(bsn, xg, yg)
+    return @strdict(bsn, xg, yg, grid, att)
 end
 
 

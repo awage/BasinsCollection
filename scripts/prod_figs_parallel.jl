@@ -88,6 +88,7 @@ file_arr = [
 
 "kur_halekotte.jl"]
 
-Threads.@threads for k in 1:length(file_arr) 
+using Distributed
+@distributed for k in 1:length(file_arr) 
     include(file_arr[k])
 end
