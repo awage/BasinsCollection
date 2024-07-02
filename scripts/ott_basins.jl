@@ -36,7 +36,7 @@ end
 
 
 cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
-res = 1200 
+# res = 1200 
 params = @strdict res 
 print_fig(params, "basins_riddle_ott", _get_basins_ott; cmap, xlab = L"x_0", ylab = L"y_0") 
 
