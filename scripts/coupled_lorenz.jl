@@ -30,7 +30,7 @@ function compute_lorenz(di::Dict)
     grid = ntuple(x -> yg, 6)
     mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = .1,   
         mx_chk_fnd_att = 100, show_progress = true,
-        mx_chk_loc_att = 100, mx_chk_safety = Int(1e8), diffeq)
+        mx_chk_loc_att = 100, maximum_iterations = Int(1e8), diffeq)
 
     y1r = range(0, 20, length = res)
     y2r = range(0, 20, length = res)

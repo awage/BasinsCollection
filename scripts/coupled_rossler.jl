@@ -28,7 +28,7 @@ function compute_EM_rossler(di::Dict)
     grid = ntuple(x -> yg, dimension(ds))
     mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = .1,   
         mx_chk_fnd_att = 300,
-        mx_chk_loc_att = 100, safety_counter_max = Int(1e7), diffeq)
+        mx_chk_loc_att = 100, maximum_iterations = Int(1e7), diffeq)
 
     y1 = range(-8, 8, length = res)
     y2 = 1.

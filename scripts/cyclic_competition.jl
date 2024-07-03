@@ -33,7 +33,7 @@ function compute_cyc_comp(di::Dict)
     mapper = AttractorsViaRecurrences(ds, (xg, yg, zg); sparse = true, Δt = .1,
         mx_chk_att = 2,
         mx_chk_fnd_att = 1000,
-        mx_chk_loc_att = 1000, mx_chk_safety = Int(1e8), diffeq)
+        mx_chk_loc_att = 1000, maximum_iterations = Int(1e8), diffeq)
     # We force the mapper to find the attractors first. For some reasons it cannot find them all normally. 
     mapper([sqrt(2/r), 0, 0]); mapper([0, sqrt(2/r), 0]); mapper([0, 0, sqrt(2/r)])
 

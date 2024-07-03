@@ -30,7 +30,7 @@ function compute_feudel(di::Dict)
     xg = range(0.0, 1.0, length = 2500)
     mapper = AttractorsViaRecurrences(ds, (xg,θ); sparse = true,    
         mx_chk_fnd_att = 10000,
-        mx_chk_loc_att = 10000, safety_counter_max = Int(1e7), show_progress = true)
+        mx_chk_loc_att = 10000, maximum_iterations = Int(1e7), show_progress = true)
     θ = range(0.0, 1.0, length = res)
     xg = range(0.0, 1.0, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,θ); show_progress = true)

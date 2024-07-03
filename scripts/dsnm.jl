@@ -30,7 +30,7 @@ function compute_dsnm(di)
             mx_chk_fnd_att = 1000, 
             mx_chk_loc_att = 1000, 
             mx_chk_att = 4,
-            safety_counter_max = Int(1e8),
+            maximum_iterations = Int(1e8),
             sparse = true, Ttr = 300)
     x = range(0., 1, length = res)
     y = range(-2, 2, length = res)

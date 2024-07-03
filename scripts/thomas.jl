@@ -13,7 +13,7 @@ function compute_thomas(di::Dict)
     xg = yg = zg = range(-7, 7,length=10000)
     mapper = AttractorsViaRecurrences(ds, (xg,yg,zg); sparse = true,    
         mx_chk_fnd_att = 10000,
-        mx_chk_loc_att = 10000, safety_counter_max = Int(1e7), show_progress = true, diffeq)
+        mx_chk_loc_att = 10000, maximum_iterations = Int(1e7), show_progress = true, diffeq)
     y1 = y2 = range(-5, 5, length = res)
     bsn = @showprogress [ mapper([x,y,0.]) for x in y1, y in y2]
     att = mapper.bsn_nfo.attractors

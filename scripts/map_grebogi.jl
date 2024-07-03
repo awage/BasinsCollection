@@ -22,7 +22,7 @@ function compute_grebogi(di::Dict)
     xg = range(-0.5, 0.5, length = 2000)
     mapper = AttractorsViaRecurrences(ds, (θ,xg); sparse = true,    
         mx_chk_fnd_att = 10000,
-        mx_chk_loc_att = 10000, safety_counter_max = Int(1e7), show_progress = true)
+        mx_chk_loc_att = 10000, maximum_iterations = Int(1e7), show_progress = true)
     θ = range(0, 2π, length = res)
     xg = range(-0.5, 0.5, length = res)
     bsn, att = basins_of_attraction(mapper, (θ,xg); show_progress = true)

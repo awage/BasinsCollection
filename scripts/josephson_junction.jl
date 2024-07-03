@@ -38,7 +38,7 @@ function compute_basins_josephson(di::Dict)
     y2 = range(-5, 5, length = 8000)
     mapper = AttractorsViaRecurrences(pstrob, (y1,y2); sparse = true,    
         mx_chk_fnd_att = 1000,
-        mx_chk_loc_att = 1000, safety_counter_max = Int(1e7) )
+        mx_chk_loc_att = 1000, maximum_iterations = Int(1e7) )
     y1 = range(-pi, pi, length = res)
     y2 = range(-3, 1, length = res)
     bsn, att = basins_of_attraction(mapper, (y1,y2))

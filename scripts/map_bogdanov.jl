@@ -27,7 +27,7 @@ function compute_bogdanov(di::Dict)
     yg = xg = range(-2., 2., length = 2500)
     mapper = AttractorsViaRecurrences(ds, (xg,yg); sparse = true,    
         mx_chk_fnd_att = 1000,
-        mx_chk_loc_att = 1000, mx_chk_safety = Int(1e7), show_progress = true)
+        mx_chk_loc_att = 1000, maximum_iterations = Int(1e7), show_progress = true)
     yg = xg = range(-0.8, 1.1, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg); show_progress = true)
     grid = (xg, yg)
