@@ -24,7 +24,7 @@ end
 
 function compute_lorenz(di::Dict)
     @unpack res, α, β, ε, γ = di
-    ds = ContinuousDynamicalSystem(coupled_lorenz!, zeros(6), [α, β, ε, γ])
+    ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ])
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
     yg = range(-37, 37; length = 10001)
     grid = ntuple(x -> yg, 6)

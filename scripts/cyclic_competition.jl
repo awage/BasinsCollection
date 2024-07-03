@@ -26,7 +26,7 @@ end
 function compute_cyc_comp(di::Dict)
     @unpack r, res = di
 
-    ds = ContinuousDynamicalSystem(cyc_comp!, rand(3), r, (J,z0, p, n) -> nothing)
+    ds = CoupledODEs(cyc_comp!, rand(3), r, (J,z0, p, n) -> nothing)
     diffeq = (alg = Vern9(), reltol = 1e-10, maxiters = 1e9)
     yg = xg = zg = range(0., 4; length = 10001)
     

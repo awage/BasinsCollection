@@ -54,7 +54,7 @@ function compute_LM(di::Dict)
     @unpack res, Re = di
     p = LMD6Parameters(; Re = Re)
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
-    ds = ContinuousDynamicalSystem(LMD6!, zeros(6), p, diffeq)
+    ds = CoupledODEs(LMD6!, zeros(6), p, diffeq)
     yg = range(-5, 5; length = 10001)
     grid = ntuple(x -> yg, dimension(ds))
     mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = .1,   

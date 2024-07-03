@@ -22,7 +22,7 @@ end
 function compute_EM_rossler(di::Dict)
     @unpack res = di
     a = 0.2; b = 0.2; c = 5.7
-    ds = ContinuousDynamicalSystem(coupled_rossler!, zeros(6), [a, b, c], (J,z0, p, n) -> nothing)
+    ds = CoupledODEs(coupled_rossler!, zeros(6), [a, b, c], (J,z0, p, n) -> nothing)
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
     yg = range(-25, 25; length = 10001)
     grid = ntuple(x -> yg, dimension(ds))

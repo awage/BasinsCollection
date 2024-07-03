@@ -30,7 +30,7 @@ end
 function compute_split_ring(di::Dict)
     @unpack  res, ω, μ = di
     diffeq = (;reltol = 1e-9, alg = Vern9(), maxiters = 1e6)
-    ds = ContinuousDynamicalSystem(split_ring_res, rand(2), [ω, μ]; diffeq)
+    ds = CoupledODEs(split_ring_res, rand(2), [ω, μ]; diffeq)
     xg = yg = range(-50,50, length = 10000)
     smap = StroboscopicMap(ds, 2*pi/ω)
     mapper = AttractorsViaRecurrences(smap, (xg, yg))

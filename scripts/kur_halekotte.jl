@@ -16,7 +16,7 @@ function get_basins(ni , res)
 	N = 120 # in this case this is the number of oscillators, the system dimension is twice this value
         @load "param_GB_directed.jld2"
         diffeq = (alg = Tsit5(), reltol = 1e-9, maxiters = 1e6)
-        ds = ContinuousDynamicalSystem(second_order_kuramoto!, zeros(2*N), [N, 0.1, K, AI, vec(P)]; diffeq)
+        ds = CoupledODEs(second_order_kuramoto!, zeros(2*N), [N, 0.1, K, AI, vec(P)]; diffeq)
 
         # get the equilibrium state of the system after a long transient.
         uu = trajectory(ds, 1500; Δt = 0.1)

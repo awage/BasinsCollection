@@ -20,7 +20,7 @@ function compute_basins_duffing_pforced(di::Dict)
     @unpack a, b, c, ω, res = di
     # diffeq = (;reltol = 1e-9, alg = Vern9(), maxiters = 1e6)
     diffeq = (;reltol = 1e-9, alg = Tsit5(), maxiters = 1e6, dt = 0.01)
-    ds = ContinuousDynamicalSystem(duffing_pforced, rand(2), [a,b,c, ω]; diffeq)
+    ds = CoupledODEs(duffing_pforced, rand(2), [a,b,c, ω]; diffeq)
     xg = yg = range(-2.2,2.2,length = res)
     smap = StroboscopicMap(ds, 2*pi/ω)
     mapper = AttractorsViaRecurrences(smap, (xg, yg))
