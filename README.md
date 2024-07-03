@@ -65,3 +65,4 @@ everything should work out of the box, including correctly finding local paths.
 * Bogdanov map:  https://doi.org/10.1142/S021812749300074X
 * Coupled Lorenz systems:  https://doi.org/10.1103/PhysRevE.96.062203
 * Rock-Paper-Scisors competition model `cyclic_competition.j`:  https://doi.org/10.1063/1.5045366
+* Split Ring Resonator model `split_ring_resonator.jl`:  https://doi.org/10.1063/5.0157489

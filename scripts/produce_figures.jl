@@ -83,6 +83,8 @@ include("cyclic_competition.jl")
 
 include("dsnm.jl")
 
+include("split_ring_resonator.jl")
+
 include("eckhardt_9D.jl")
 
 include("kur_halekotte.jl")
