@@ -3,6 +3,7 @@ using DrWatson
 using DynamicalBilliards
 using LaTeXStrings
 using CairoMakie
+using ProgressMeter
 
 function escapewall!(p::AbstractParticle{T}, bd::Billiard{T}, t)::T where {T<:AbstractFloat}
 
@@ -57,7 +58,7 @@ function compute_exit_three_disk(di::Dict)
     x0 = range(-ww/2, ww/2, length = res) 
     θ0 = range(0,pi,length = res)
     u(x,θ) = Particle([x, 0.0001, θ])
-    bsn = [ escapewall!(u(x,θ), br, 20000000) for x in x0, θ in θ0] 
+    bsn = @showprogress [ escapewall!(u(x,θ), br, 20000000) for x in x0, θ in θ0] 
     grid = (x0,θ0)
     return @strdict(bsn, grid, ww, res)
 end

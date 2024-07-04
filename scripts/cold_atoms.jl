@@ -43,7 +43,7 @@ function salida(sol)
         sal = 2
     else 
         sal = -1;
-        @show x,y
+        # @show x,y
     end
     return sal
 end

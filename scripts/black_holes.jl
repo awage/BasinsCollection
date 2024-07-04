@@ -118,36 +118,14 @@ function compute_BH(di::Dict)
     zr = range(-1., 1.; length = res)
     ρr = range(0., 2.; length = res)
     bsn = zeros(Int16, res, res)
-    for i in 1:res
-        for j in 1:res
+    @showprogress for i in 1:res
+        Threads.@threads for j in 1:res
             z = zr[i]; ρ = ρr[j];
             bsn[i,j] = get_basin_BH(ρ, z, prm) 
         end
     end
     grid = (zr, ρr)
     return @strdict(bsn, grid, Δϕ, res)
-end
-
-function print_fig(w, h, Δϕ, res) 
-    params = @strdict Δϕ res
-    data, file = produce_or_load(
-        datadir("basins"), params, compute_BH;
-        prefix = "black_holes", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    # cmap = ColorScheme([RGB(1,1,1), RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"\rho", xlabel = L"z", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    # heatmap!(ax, xg, yg, bsn; rasterize = 1, colormap = cmap)
-    heatmap!(ax, yg, xg, bsn'; rasterize = 1)
-    save(string("../plots/basins_blackholes_", res, ".png"),fig)
-
 end
 
 Δϕ = 0.03; #res = 500

@@ -60,7 +60,7 @@ function compute_exit_poon_disks(di::Dict)
     y0 = range(-0.2, 0.2, length = res) 
     θ0 = range(1.4, 2,length = res)
     u(y,θ) = Particle([y, -0.5,  θ])
-    bsn = [ escapewall!(u(y,θ), br, 20000000) for y in y0, θ in θ0] 
+    bsn = @showprogress [ escapewall!(u(y,θ), br, 20000000) for y in y0, θ in θ0] 
     bsn[bsn .>= 7] .= 0
     grid = (y0,θ0)
     return @strdict(bsn, grid, ww, res)

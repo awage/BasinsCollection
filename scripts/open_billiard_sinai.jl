@@ -3,6 +3,7 @@ using DrWatson
 using DynamicalBilliards
 using LaTeXStrings
 using CairoMakie
+using ProgressMeter
 
 function escapewall!(p::AbstractParticle{T}, bd::Billiard{T}, t)::T where {T<:AbstractFloat}
 
@@ -70,7 +71,7 @@ function compute_exit_open_sinai(di::Dict)
     x0 = range(-1, 1, length = res) 
     θ0 = range(-pi+pi/2,pi+pi/2,length = res)
     u(x,θ) = Particle([x, 1.25, θ])
-    bsn = [ escapewall!(u(x,θ), br, 10999) for x in x0, θ in θ0] 
+    bsn = @showprogress [ escapewall!(u(x,θ), br, 10999) for x in x0, θ in θ0] 
     θ0 = range(-pi,pi,length = res)
     grid = (x0,θ0)
     return @strdict(bsn, grid, Δ, res)

@@ -43,9 +43,9 @@ include("sporadical_map.jl")
 
 include("map_henon.jl")
 
-include("cold_atoms.jl")
+# include("cold_atoms.jl")
 
-include("competition_ecology_plancton.jl")
+# include("competition_ecology_plancton.jl")
 
 include("open_billiard_sinai.jl")
 
@@ -87,4 +87,4 @@ include("split_ring_resonator.jl")
 
 include("eckhardt_9D.jl")
 
-include("kur_halekotte.jl")
+# include("kur_halekotte.jl")

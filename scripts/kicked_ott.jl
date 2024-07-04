@@ -4,6 +4,7 @@ using CairoMakie
 using LaTeXStrings
 using Attractors
 using OrdinaryDiffEq
+using ProgressMeter
 
 # Multi dimenioned intertwined basin boundaries: basin structure of
 # THE KICKED DOUBLE ROTOR
@@ -52,7 +53,7 @@ function compute_kicked_rotor_ott(di)
     )
     θ1 = range(-π, π, length = res)
     θ2 = range(-π, π, length = res)
-    bsn = [ mapper([x,y,0., 0.]) for x in θ1, y in θ2]
+    bsn = @showprogress [ mapper([x,y,0., 0.]) for x in θ1, y in θ2]
     att = mapper.bsn_nfo.attractors
     grid = (θ1, θ2)
     return @strdict(bsn, att, grid, f0, res)
