@@ -3,7 +3,7 @@ using DrWatson
 using CairoMakie
 using LaTeXStrings
 using Attractors
-using Attractors
+using ProgressMeter
 using OrdinaryDiffEq:Vern9
 
 # PHYSICAL REVIEW E 96, 062203 (2017)
@@ -24,17 +24,16 @@ end
 
 function compute_lorenz(di::Dict)
     @unpack res, α, β, ε, γ = di
-    ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ])
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
+    ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ]; diffeq)
     yg = range(-37, 37; length = 10001)
     grid = ntuple(x -> yg, 6)
-    mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = .1,   
+    mapper = AttractorsViaRecurrences(ds, grid; 
         mx_chk_fnd_att = 100, show_progress = true,
-        mx_chk_loc_att = 100, maximum_iterations = Int(1e8), diffeq)
-
+        mx_chk_loc_att = 100, maximum_iterations = Int(1e8))
     y1r = range(0, 20, length = res)
     y2r = range(0, 20, length = res)
-    bsn = [ mapper([1, 1, y1, 1, 1, y2]) for y1 in y1r, y2 in y2r] 
+    bsn = @showprogress [ mapper([1, 1, y1, 1, 1, y2]) for y1 in y1r, y2 in y2r] 
     grid = (y1r,y2r); att = mapper.bsn_nfo.attractors
     return @strdict(bsn, grid, att, res)
 end

@@ -1,7 +1,6 @@
 using DrWatson
 @quickactivate
 using LaTeXStrings
-# using Attractors
 using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
@@ -80,14 +79,14 @@ function compute_E9D(di::Dict)
     y1r = range(-1, 1.5, length = res)
     y2r = range(-0.3, 0.3, length = res)
     ics = [ u0(y1,y2) for y1 in y1r, y2 in y2r]
-    bsn = [ mapper(u) for u in ics]
+    bsn = @showprogress [ mapper(u) for u in ics]
     grid = (y1r,y2r); att = mapper.bsn_nfo.attractors
     return @strdict(bsn, grid, att, Re, res)
 end
 
 
 
-Re = 425.; res = 330
+Re = 425.; res = 1200
 params = @strdict res Re
 print_fig(params, "eckhardt", compute_E9D; ylab = L"$V_{att}-V_{att,sym}$", xlab = L"V_{att}+V_{att,sym}") 
 

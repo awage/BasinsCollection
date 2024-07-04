@@ -65,7 +65,7 @@ include("black_holes.jl")
 
 include("predator_prey_discrete.jl")
 
-# include("lebovitz_mariotti.jl")
+include("lebovitz_mariotti.jl")
 
 include("map_cbic.jl")
 

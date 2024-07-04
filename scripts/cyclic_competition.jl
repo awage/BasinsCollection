@@ -26,14 +26,14 @@ end
 function compute_cyc_comp(di::Dict)
     @unpack r, res = di
 
-    ds = CoupledODEs(cyc_comp!, rand(3), r, (J,z0, p, n) -> nothing)
     diffeq = (alg = Vern9(), reltol = 1e-10, maxiters = 1e9)
+    ds = CoupledODEs(cyc_comp!, rand(3), r; diffeq)
     yg = xg = zg = range(0., 4; length = 10001)
     
-    mapper = AttractorsViaRecurrences(ds, (xg, yg, zg); sparse = true, Δt = .1,
+    mapper = AttractorsViaRecurrences(ds, (xg, yg, zg); 
         mx_chk_att = 2,
         mx_chk_fnd_att = 1000,
-        mx_chk_loc_att = 1000, maximum_iterations = Int(1e8), diffeq)
+        mx_chk_loc_att = 1000, maximum_iterations = Int(1e8))
     # We force the mapper to find the attractors first. For some reasons it cannot find them all normally. 
     mapper([sqrt(2/r), 0, 0]); mapper([0, sqrt(2/r), 0]); mapper([0, 0, sqrt(2/r)])
 
