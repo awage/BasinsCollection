@@ -20,10 +20,10 @@ end
 function compute_kapitaniak(di::Dict)
     @unpack l, pp, d1, d2, res = di
     ds = DeterministicIteratedMap(kapitaniak_map!, [1.0, 0.0], [l, pp, d1, d2])
-    yg = xg = range(-3., 3., length = 10000)
-    mapper = AttractorsViaRecurrences(ds, (xg,yg); sparse = true,    
-        consecutive_recurrences = 10000,
-        attractor_locate_steps = 10000, maximum_iterations = Int(1e8), show_progress = true)
+    yg = xg = range(-3., 3., length = 100000)
+    mapper = AttractorsViaRecurrences(ds, (xg,yg);     
+        consecutive_recurrences = 20000,
+        attractor_locate_steps = 20000, maximum_iterations = Int(1e8), show_progress = true)
     yg = xg = range(-2, 2, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg); show_progress = true)
     grid = (xg, yg)

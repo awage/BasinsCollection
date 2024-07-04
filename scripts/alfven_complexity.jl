@@ -24,17 +24,18 @@ function compute_alfven(di::Dict)
     @unpack  res,ν = di
     diffeq = (;reltol = 1e-9, alg = Vern9(), maxiters = 1e6)
     ds = CoupledODEs(alfven, rand(2), [ν]; diffeq)
-    xg = yg = range(-3,3,length = 15000)
+    xg = yg = range(-3,3,length = 50000)
     ω = 1
     smap = StroboscopicMap(ds, 2*pi/ω)
-    mapper = AttractorsViaRecurrences(smap, (xg, yg))
+    mapper = AttractorsViaRecurrences(smap, (xg, yg); 
+       consecutive_recurrences = 1000 )
     xg = yg = range(-2.2,2.2,length = res)
     grid = (xg,yg)
     bsn, att = basins_of_attraction(mapper, grid)
     return @strdict(bsn, att, grid,  res)
 end
 
-ν = 0.01747; res = 1200
+ν = 0.01747; res = 400
 params = @strdict ν res
 print_fig(params, "alfven", compute_alfven; ylab = L"$\dot{x}$", xlab = L"x", force = true) 
 

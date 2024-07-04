@@ -54,17 +54,17 @@ function compute_LM(di::Dict)
     @unpack res, Re = di
     p = LMD6Parameters(; Re = Re)
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
-    ds = CoupledODEs(LMD6!, zeros(6), p, diffeq)
+    ds = CoupledODEs(LMD6!, zeros(6), p; diffeq)
     yg = range(-5, 5; length = 10001)
     grid = ntuple(x -> yg, dimension(ds))
-    mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = .1,   
-        mx_chk_fnd_att = 300,
-        mx_chk_loc_att = 100, maximum_iterations = Int(1e7), diffeq)
+    mapper = AttractorsViaRecurrences(ds, grid;  Δt = .1,   
+        mx_chk_fnd_att = 300, 
+        mx_chk_loc_att = 100, maximum_iterations = Int(1e7))
     u0(x,y) = [x, -0.0511, -0.0391, 0.0016, y, 0.126]
     y1r = range(-1, 1, length = res)
     y2r = range(-1, 1, length = res)
     ics = [ u0(y1,y2) for y1 in y1r, y2 in y2r]
-    bsn = [ mapper(u) for u in ics]
+    bsn = @showprogress [ mapper(u) for u in ics]
     grid = (y1r,y2r)
     return @strdict(bsn, grid, Re, res)
 end
