@@ -24,13 +24,14 @@ end
 
 function compute_lorenz(di::Dict)
     @unpack res, α, β, ε, γ = di
-    diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
-    ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ]; diffeq)
-    yg = range(-37, 37; length = 10001)
+    diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8, dt = 1.)
+    ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ])
+    yg = range(-37, 37; length = 2001)
     grid = ntuple(x -> yg, 6)
-    mapper = AttractorsViaRecurrences(ds, grid; 
-        mx_chk_fnd_att = 100, show_progress = true,
-        mx_chk_loc_att = 100, maximum_iterations = Int(1e8))
+    mapper = AttractorsViaRecurrences(ds, grid;
+    consecutive_recurrences = 100)
+        # mx_chk_fnd_att = 100, 
+        # mx_chk_loc_att = 100, maximum_iterations = Int(1e8))
     y1r = range(0, 20, length = res)
     y2r = range(0, 20, length = res)
     bsn = @showprogress [ mapper([1, 1, y1, 1, 1, y2]) for y1 in y1r, y2 in y2r] 
@@ -39,6 +40,7 @@ function compute_lorenz(di::Dict)
 end
 
 
+res = 200
 α = 10; β = 24.76; ε = 1.1; γ = 8/3; 
 params = @strdict res α β ε γ
 print_fig(params, "coupled_lorenz", compute_lorenz) 

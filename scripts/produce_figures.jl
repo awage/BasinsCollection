@@ -43,7 +43,7 @@ include("sporadical_map.jl")
 
 include("map_henon.jl")
 
-# include("cold_atoms.jl")
+include("cold_atoms.jl")
 
 # include("competition_ecology_plancton.jl")
 
@@ -57,7 +57,7 @@ include("poon_billiard.jl")
 
 include("hidden_chua.jl")
 
-# include("li_sprott.jl")
+include("li_sprott.jl")
 
 include("sommerer_basins.jl")
 
@@ -75,7 +75,7 @@ include("map_cpled_logstc.jl")
 
 include("sprott_memristive.jl")
  
-include("coupled_lorenz.jl")
+# include("coupled_lorenz.jl")
 
 include("map_bogdanov.jl")
 
