@@ -15,37 +15,42 @@ using ProgressMeter
     # C = [0.2 0.10 0.10 0.10 0.10;
     #     0.10 0.20 0.10 0.10 0.20;
     #     0.10 0.10 0.20 0.20 0.1]
-    K = [0.2 0.05 0.50 0.05 0.50 0.03 0.51 0.51;
-        0.15 0.06 0.05 0.50 0.30 0.18 0.04 0.31 ;
-        0.15 0.50 0.30 0.06 0.05 0.18 0.31 0.04]
 
-    C = [0.2  0.10 0.10 0.10 0.10 0.22 0.10 0.10;
-        0.10 0.20 0.10 0.10 0.20 0.10 0.22 0.10;
-        0.10 0.10 0.20 0.20 0.10 0.10 0.10 0.22]
-    d = 1.
-    D = 0.25/d
-    S = 10. *ones(3)
-    n = 8 
-    r = ones(n)*d
-    m = D*ones(n)
-# array of functions
-    μ = [ R -> min(r[k]*R[1]/(K[1,k]+R[1]), r[k]*R[2]/(K[2,k]+R[2]), r[k]*R[3]/(K[3,k]+R[3]))   for k in 1:n]
+    # S = 10. *ones(3)
+    # n = 8 
+    # r = ones(n)*d
+    # m = D*ones(n)
+# # array of functions
+    # μ = [ R -> min(r[k]*R[1]/(K[1,k]+R[1]), r[k]*R[2]/(K[2,k]+R[2]), r[k]*R[3]/(K[3,k]+R[3]))   for k in 1:n]
 
 
 function comptetion_model!(du, u, p, t)
     n = length(u)-3
     R = u[n+1:n+3]
+    d = 1.
+    D = 0.25/d
+    K = [0.2 0.05 0.50 0.05 0.50 0.03 0.51 0.51;
+        0.15 0.06 0.05 0.50 0.30 0.18 0.04 0.31 ;
+        0.15 0.50 0.30 0.06 0.05 0.18 0.31 0.04]
+    C = [0.2  0.10 0.10 0.10 0.10 0.22 0.10 0.10;
+        0.10 0.20 0.10 0.10 0.20 0.10 0.22 0.10;
+        0.10 0.10 0.20 0.20 0.10 0.10 0.10 0.22]
     # μ_v = [min(r[k]*R[1]/(K[1,k]+R[1]), r[k]*R[2]/(K[2,k]+R[2]), r[k]*R[3]/(K[3,k]+R[3]))   for k in 1:n]
-    μ_v = [min(R[1]/(K[1,k]+R[1]), R[2]/(K[2,k]+R[2]), R[3]/(K[3,k]+R[3]))   for k in 1:n]
+    tmp_v = zeros(n)
+    for k in 1:n
+        # μ_v[k] = min(R[1]/(K[1,k]+R[1]), R[2]/(K[2,k]+R[2]), R[3]/(K[3,k]+R[3])) 
+        tmp_v[k] = u[k]*min(R[1]/(K[1,k]+R[1]), R[2]/(K[2,k]+R[2]), R[3]/(K[3,k]+R[3]))
+        du[k] = tmp_v[k] - u[k]*D
+    end
 
-    tmp_v = u[1:n].*μ_v[1:n]
-    du[1:n] = tmp_v .- u[1:n]*D
+    # tmp_v = u[1:n].*μ_v[1:n]
+    # du[1:n] = tmp_v .- u[1:n]*D
     # for k in 1:n
     #     du[k] = u[k]*(μ_v[k] - m[k])
     # end
 
-    tv = C*tmp_v    
-    du[n+1:n+3] = D*(10 .- R) .- tv
+    # tv = C*tmp_v    
+    du[n+1:n+3] = D*(10 .- R) .- C*tmp_v
     # for k in 1:3
     #     du[n+k] = D*(10 - R[k]) - tv[k] # sum(u[1:n].*μ_v[1:n].*C[k,1:n])
     # end
@@ -72,10 +77,10 @@ function compute_competition_model(di)
     bsn = zeros(Int16, res, res)
 # Caching initial conditions with parallel threads. This is the longest part.
     ics = Array{Vector{Float64}}(undef, res, res)
-    for i in 1:res
+    @showprogress for i in 1:res
         Threads.@threads for j in 1:res
             u,t = trajectory(ds, 1000, [0.1, xg[i], 0.1, yg[j], 0.1, 0., 0., 0., 10., 10., 10.])
-            @show ics[i,j] = vec(u[end]) + [zeros(5); 0.1; 0.1; 0.1; zeros(3)]
+            ics[i,j] = vec(u[end]) + [zeros(5); 0.1; 0.1; 0.1; zeros(3)]
         end
     end
     # u0 = vec(u[end]) + [zeros(5); 0.1; 0.1; 0.1; zeros(3)]
@@ -85,6 +90,6 @@ function compute_competition_model(di)
     return @strdict(bsn, att, grid, res)
 end
 
-# res = 500
+res = 30
 params = @strdict res
-print_fig(params, "comptetion_model", compute_competition_model)
+print_fig(params, "comptetion_model", compute_competition_model; force = true)
