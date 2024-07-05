@@ -17,26 +17,12 @@ function comptetion_model!(du, u, p, t)
     C = [0.2  0.10 0.10 0.10 0.10 0.22 0.10 0.10;
         0.10 0.20 0.10 0.10 0.20 0.10 0.22 0.10;
         0.10 0.10 0.20 0.20 0.10 0.10 0.10 0.22]
-    # μ_v = [min(r[k]*R[1]/(K[1,k]+R[1]), r[k]*R[2]/(K[2,k]+R[2]), r[k]*R[3]/(K[3,k]+R[3]))   for k in 1:n]
     tmp_v = zeros(n)
     for k in 1:n
-        # μ_v[k] = min(R[1]/(K[1,k]+R[1]), R[2]/(K[2,k]+R[2]), R[3]/(K[3,k]+R[3])) 
         tmp_v[k] = u[k]*min(R[1]/(K[1,k]+R[1]), R[2]/(K[2,k]+R[2]), R[3]/(K[3,k]+R[3]))
         du[k] = tmp_v[k] - u[k]*D
     end
-
-    # tmp_v = u[1:n].*μ_v[1:n]
-    # du[1:n] = tmp_v .- u[1:n]*D
-    # for k in 1:n
-    #     du[k] = u[k]*(μ_v[k] - m[k])
-    # end
-
-    # tv = C*tmp_v    
     du[n+1:n+3] = D*(10 .- R) .- C*tmp_v
-    # for k in 1:3
-    #     du[n+k] = D*(10 - R[k]) - tv[k] # sum(u[1:n].*μ_v[1:n].*C[k,1:n])
-    # end
-
 end
 
 # Reference: Fundamental unpredictability in multispecies competition
@@ -55,8 +41,6 @@ function compute_competition_model(di)
     yg = range(0.,2.,length = res)
     bsn = zeros(Int16, res, res)
 # Caching initial conditions with parallel threads. This is the longest part.
-    # u,t = trajectory(ds, 1000, [0.1, xg[1], 0.1, yg[1], 0.1, 0., 0., 0., 10., 10., 10.])
-    # ics = Array{typeof(u[end])}(undef, res, res)
     ds_arr = [deepcopy(ds) for k in 1:Threads.nthreads()]
     ics = Array{Vector{Float64}}(undef, res, res)
     @showprogress for i in 1:res
@@ -65,13 +49,13 @@ function compute_competition_model(di)
             ics[i,j] = vec(u[end]) + [zeros(5); 0.1; 0.1; 0.1; zeros(3)]
         end
     end
-    # u0 = vec(u[end]) + [zeros(5); 0.1; 0.1; 0.1; zeros(3)]
     bsn = @showprogress  [mapper(ics[i,j]) for i in 1:res, j in 1:res]
     att = mapper.bsn_nfo.attractors
     grid = (xg, yg)
     return @strdict(bsn, att, grid, res)
 end
 
-res = 1200
+let res = 800
 params = @strdict res
-print_fig(params, "comptetion_model", compute_competition_model; force = true)
+print_fig(params, "comptetion_model", compute_competition_model; force = false)
+end

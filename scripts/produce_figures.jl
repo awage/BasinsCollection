@@ -9,7 +9,7 @@ res = 1200
 
 include("newton_basins.jl")
 
-# include("ott_basins.jl")
+include("ott_basins.jl")
 
 include("duffing_basins.jl")
 

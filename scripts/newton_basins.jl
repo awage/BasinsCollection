@@ -113,8 +113,7 @@ end
 
 # cmap = ColorScheme([RGB(0,0,0), RGB(1,0,0), RGB(0,1,0), RGB(0,0,1), RGB(1,1,0), RGB(1,0,1), RGB(0,1,1)] )
 cmap = nothing
-for i in 1:14
-    # res = 1000
+for i in [1,2,4,7,11,12,14]
     params = @strdict  res i
     print_fig(params, string("newton_",i),compute_basins_newton; ylab = L"\Im{(z)}", xlab = L"\Re{(z)}", cmap)
 end
