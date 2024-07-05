@@ -6,24 +6,6 @@ using CairoMakie
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
 
-# function comptetion_model!(du, u, p, t)
-
-    # K = [0.2 0.05 1.00 0.05 1.20;
-    #      0.25 0.10 0.05 1.00 0.40;
-    #      0.15 0.95 0.35 0.10 0.05]
-
-    # C = [0.2 0.10 0.10 0.10 0.10;
-    #     0.10 0.20 0.10 0.10 0.20;
-    #     0.10 0.10 0.20 0.20 0.1]
-
-    # S = 10. *ones(3)
-    # n = 8 
-    # r = ones(n)*d
-    # m = D*ones(n)
-# # array of functions
-    # μ = [ R -> min(r[k]*R[1]/(K[1,k]+R[1]), r[k]*R[2]/(K[2,k]+R[2]), r[k]*R[3]/(K[3,k]+R[3]))   for k in 1:n]
-
-
 function comptetion_model!(du, u, p, t)
     n = length(u)-3
     R = u[n+1:n+3]
@@ -66,20 +48,20 @@ function compute_competition_model(di)
     yg = range(0, 100; length = 41)
     grid = ntuple(x -> yg, dimension(ds))
     mapper = AttractorsViaRecurrences(ds, grid;
-            # mx_chk_lost = 10, 
             mx_chk_fnd_att = 300, 
             mx_chk_loc_att = 300, 
-            # mx_chk_att = 2,
-             sparse = true
     )
     xg = range(0.,2.,length = res)
     yg = range(0.,2.,length = res)
     bsn = zeros(Int16, res, res)
 # Caching initial conditions with parallel threads. This is the longest part.
+    # u,t = trajectory(ds, 1000, [0.1, xg[1], 0.1, yg[1], 0.1, 0., 0., 0., 10., 10., 10.])
+    # ics = Array{typeof(u[end])}(undef, res, res)
+    ds_arr = [deepcopy(ds) for k in 1:Threads.nthreads()]
     ics = Array{Vector{Float64}}(undef, res, res)
     @showprogress for i in 1:res
         Threads.@threads for j in 1:res
-            u,t = trajectory(ds, 1000, [0.1, xg[i], 0.1, yg[j], 0.1, 0., 0., 0., 10., 10., 10.])
+            u,t = trajectory(ds_arr[Threads.threadid()], 1000., [0.1, xg[i], 0.1, yg[j], 0.1, 0., 0., 0., 10., 10., 10.])
             ics[i,j] = vec(u[end]) + [zeros(5); 0.1; 0.1; 0.1; zeros(3)]
         end
     end
@@ -90,6 +72,6 @@ function compute_competition_model(di)
     return @strdict(bsn, att, grid, res)
 end
 
-res = 30
+res = 1200
 params = @strdict res
 print_fig(params, "comptetion_model", compute_competition_model; force = true)
