@@ -56,7 +56,8 @@ function compute_kur_halekotte(di::Dict)
 end
 
 
-ni = 5; res = 300
+let res = 300
+ni = 5; 
 params = @strdict ni res
 print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 ni = 14
@@ -68,4 +69,4 @@ print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"
 ni = 76
 params = @strdict ni res
 print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
-
+end 

@@ -18,8 +18,6 @@ using LaTeXStrings
     return SVector{2}(du1, du2)
 end
 
-
-
 function compute_alfven(di::Dict)
     @unpack  res,ν = di
     diffeq = (;reltol = 1e-9, alg = Vern9(), maxiters = 1e6)
@@ -35,8 +33,9 @@ function compute_alfven(di::Dict)
     return @strdict(bsn, att, grid,  res)
 end
 
-ν = 0.01747; res = 400
+let res = 400
+ν = 0.01747; 
 params = @strdict ν res
 print_fig(params, "alfven", compute_alfven; ylab = L"$\dot{x}$", xlab = L"x", force = true) 
-
+end
 

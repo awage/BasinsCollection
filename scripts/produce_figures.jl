@@ -87,4 +87,6 @@ include("split_ring_resonator.jl")
 
 include("eckhardt_9D.jl")
 
-# include("kur_halekotte.jl")
+include("kur_halekotte.jl")
+
+include("alfven_complexity.jl")
