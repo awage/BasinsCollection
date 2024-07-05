@@ -63,10 +63,10 @@ print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"
 ni = 14
 params = @strdict ni res
 print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
-ni = 58
-params = @strdict ni res
-print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
-ni = 76
-params = @strdict ni res
-print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
+# ni = 58
+# params = @strdict ni res
+# print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
+# ni = 76
+# params = @strdict ni res
+# print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 end 

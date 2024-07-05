@@ -15,21 +15,22 @@ function predator_prey!(dz, z, p, n)
     m, k = p
     dz[1] = x*exp(R*m + R*(1-m)/(1+k*y) - D1 - P*x - A*(1-m)*y/(B+(1-m)*x))
     dz[2] = y*exp(c*A*(1-m)*x/(B+(1-m)*x) - D2)
+    return nothing
 end
 
 
 
 function compute_pred_prey(di)
     @unpack m, k, res = di
-    u0 = [0.; 0.]
-    p = [m, k]
-    df = CoupledODEs(predator_prey!, u0, p) 
-    x1 = range(-1, 20, length = 600001)
-    y1 = range(-1, 30, length = 600001)
+    df = DeterministicIteratedMap(predator_prey!, rand(2), [m,k]) 
+    y1 = collect(range(-1, 20, length = 40000))
+    # y1 = range(0, 10, length = 600001)
+    pow = 2; x1 = range(0, 20.0^(1/pow); length = 40000).^pow
     grid_rec = (x1, y1)
     mapper = AttractorsViaRecurrences(df, grid_rec,
-        consecutive_recurrences = 1000,
-        attractor_locate_steps = 1000, maximum_iterations = Int(1e8), show_progress = true)
+        consecutive_recurrences = 10000,
+        consecutive_attractor_steps = 100
+        ,attractor_locate_steps = 10000)
     x = range(0.1, 2, length = res)
     y = range(0.01, 0.2, length = res)
     grid = (x,y)
@@ -38,6 +39,8 @@ function compute_pred_prey(di)
 end
 
 
-m = 0.104; k = 7.935; #res = 600
+let res = 1200
+m = 0.104; k = 7.935; 
 params = @strdict k m res
-print_fig(params, "pred_prey", compute_pred_prey; ylab = L"y_0", xlab = L"x_0")
+print_fig(params, "pred_prey", compute_pred_prey; ylab = L"y_0", xlab = L"x_0", force = true)
+end

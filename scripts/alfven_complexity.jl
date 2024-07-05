@@ -36,6 +36,6 @@ end
 let res = 400
 ν = 0.01747; 
 params = @strdict ν res
-print_fig(params, "alfven", compute_alfven; ylab = L"$\dot{x}$", xlab = L"x", force = true) 
+print_fig(params, "alfven", compute_alfven; ylab = L"$\dot{x}$", xlab = L"x", force = false) 
 end
 
