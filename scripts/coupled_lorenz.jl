@@ -24,17 +24,27 @@ end
 
 function compute_lorenz(di::Dict)
     @unpack res, α, β, ε, γ = di
-    diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8, dt = 1.)
-    ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ])
-    yg = range(-37, 37; length = 10001)
+    diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
+    ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ]; diffeq)
+    # projection = [1, 2, 3]
+    # # complete_state = [1.,1.,1.,1.] # completed state just in the plane of last two dimensions
+    # complete_state(y) = [1,1,y[1],1,1,y[2]]
+    # prods = ProjectedDynamicalSystem(ds, projection, complete_state)
+
+
+    yg = range(-37, 37; length = 1001)
     grid = ntuple(x -> yg, 6)
-    mapper = AttractorsViaRecurrences(ds, grid;
-    # consecutive_recurrences = 100)
-        mx_chk_fnd_att = 100, 
-        mx_chk_loc_att = 100, maximum_iterations = Int(1e8))
-    y1r = range(0, 20, length = res)
-    y2r = range(0, 20, length = res)
+    mapper = AttractorsViaRecurrences(ds, grid; Δt = 1., Ttr = 100)
+    # mapper = AttractorsViaRecurrences(prods, grid; Δt = 1.,
+    # consecutive_recurrences = 1000, 
+    # attractor_locate_steps = 10000,
+    # consecutive_attractor_steps = 10)
+        # mx_chk_fnd_att = 100,  
+        # mx_chk_loc_att = 100, maximum_iterations = Int(1e8), Ttr = 100)
+    y1r = range(1, 20, length = res)
+    y2r = range(1, 20, length = res)
     bsn = @showprogress [ mapper([1, 1, y1, 1, 1, y2]) for y1 in y1r, y2 in y2r] 
+    # bsn = @showprogress [ mapper([y1,y2]) for y1 in y1r, y2 in y2r] 
     grid = (y1r,y2r); att = mapper.bsn_nfo.attractors
     return @strdict(bsn, grid, att, res)
 end
@@ -42,5 +52,5 @@ end
 let res = 1000
 α = 10; β = 24.76; ε = 1.1; γ = 8/3; 
 params = @strdict res α β ε γ
-print_fig(params, "coupled_lorenz", compute_lorenz; force = false) 
+print_fig(params, "coupled_lorenz", compute_lorenz; force = true) 
 end

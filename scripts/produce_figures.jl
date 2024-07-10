@@ -45,7 +45,7 @@ include("map_henon.jl")
 
 include("cold_atoms.jl")
 
-# include("competition_ecology_plancton.jl")
+include("competition_ecology_plancton.jl")
 
 include("open_billiard_sinai.jl")
 

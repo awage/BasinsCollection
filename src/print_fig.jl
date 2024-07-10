@@ -23,10 +23,15 @@ function print_fig(params, sys_name, fun_name; w = 1200, h = 1200, cmap = nothin
         yticksvisible = false, 
         xticklabelsvisible = false, 
         yticklabelsvisible = false)
-    cmap = :mk_12
 
     if isnothing(cmap)
-        heatmap!(ax, xg, yg, bsn, rasterize = 1)
+        println("Number of basins: " , length(unique(bsn)))
+        cmap = :mk_12
+        # cmap = :berlin10
+        # cmap = :seaborn_bright
+        # cmap = :dracula
+        # cmap = :flag
+        heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     else
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end

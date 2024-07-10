@@ -55,7 +55,7 @@ function compute_competition_model(di)
     return @strdict(bsn, att, grid, res)
 end
 
-let res = 800
+let res = 1200
 params = @strdict res
 print_fig(params, "comptetion_model", compute_competition_model; force = false)
 end

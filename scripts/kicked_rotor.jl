@@ -37,5 +37,5 @@ end
 f0 = 4.
 ν = 0.02
 params = @strdict f0 ν res
-print_fig(params, "kicked_rotor", compute_kicked_rotor; ylab = L"\dot{\theta}", xlab = L"\theta")
+print_fig(params, "kicked_rotor", compute_kicked_rotor; ylab = L"\dot{\theta}", xlab = L"\theta", cmap = :flag)
 # print_fig(600,600, nothing, f0, ν, 400) 

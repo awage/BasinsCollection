@@ -33,7 +33,7 @@ function compute_alfven(di::Dict)
     return @strdict(bsn, att, grid,  res)
 end
 
-let res = 400
+let res = 1200
 ν = 0.01747; 
 params = @strdict ν res
 print_fig(params, "alfven", compute_alfven; ylab = L"$\dot{x}$", xlab = L"x", force = false) 

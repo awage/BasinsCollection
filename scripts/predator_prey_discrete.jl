@@ -29,12 +29,12 @@ function compute_pred_prey(di)
     grid_rec = (x1, y1)
     mapper = AttractorsViaRecurrences(df, grid_rec,
         consecutive_recurrences = 10000,
-        consecutive_attractor_steps = 100
-        ,attractor_locate_steps = 10000)
+        consecutive_attractor_steps = 100,
+        attractor_locate_steps = 10000)
     x = range(0.1, 2, length = res)
     y = range(0.01, 0.2, length = res)
     grid = (x,y)
-    bsn, att = basins_of_attraction(mapper, grid; show_progress = true)
+    bsn, att = basins_of_attraction(mapper, grid)
     return @strdict(bsn, att, grid, res)
 end
 
@@ -42,5 +42,5 @@ end
 let res = 1200
 m = 0.104; k = 7.935; 
 params = @strdict k m res
-print_fig(params, "pred_prey", compute_pred_prey; ylab = L"y_0", xlab = L"x_0", force = true)
+print_fig(params, "pred_prey", compute_pred_prey; ylab = L"y_0", xlab = L"x_0", force = false)
 end
