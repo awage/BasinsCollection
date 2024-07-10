@@ -52,5 +52,5 @@ end
 let res = 1000
 α = 10; β = 24.76; ε = 1.1; γ = 8/3; 
 params = @strdict res α β ε γ
-print_fig(params, "coupled_lorenz", compute_lorenz; force = true) 
+print_fig(params, "coupled_lorenz", compute_lorenz; force = false) 
 end

@@ -14,30 +14,10 @@ include(srcdir("print_fig.jl"))
 # Physics Letters A 374 (2009) 228–234
 # doi:10.1016/j.physleta.2009.10.061
 
-function pumped_laser!(du, u, p, t)
-    # α, β, γ, m0, m1 = p
-    # L = 70; Tr = 8.7; r0 = 1.4e-4; σ12 = 3e-21; 
-    # τ = 1e-2; ξ1 = 2; ξ2= 0.4; N0 = 1.3e20; R = 0.8
-    # w0 = 3.5e-4; γ0 = 0.038; λg = 1.56e-4; β = 0.5
-    # α0 = N0*σ12 
-    # αth = γ0 + 1/(2*L)*log(1/R)
-    # # rw = 1 - exp(-2*(r0/w0)^2)
-    # rw = 0.308
-    # P,N = u
-    # md = 0.5; fd = 35e3
-    # md = 0.8; fd = 70.2e3
-    # Pp = 7.4e19*(1+md*sin(2*π*fd*t/2.8e8))
-    # Psp = N*1e-3/(τ*Tr)*(λg/w0)^2*r0^2*α0*L/(4*π^2*σ12)
-    # Ppump = Pp*(1-exp(-α0*β*L*(1-N)))/(N0*π*r0^2*L)
+# Model has been normalized see https://doi.org/10.3390/photonics11020176
+# for more details
 
-    # du[1] = 2*L/Tr*P*(rw*α0*(N*(ξ1 - ξ2) - 1) - αth) + Psp
-    # du[2] = -σ12*rw*P/(π*r0^2)*(N*ξ1 - 1) - N/τ + Ppump
-    
-    # a1 = 2.4; a2 = 6.9e-13; a3 = 5.1e-13; b1 = 3.5e-7; 
-    # b2 = 2.6e-7; b3 = 0.5; P0 = 2e-23*Pp
-    # x,y = u
-    # du[1] = x*y - a1*x + a2*y + a3
-    # du[2] = -x*y - b1*y - b2 + P0*(1-b3*exp(y)) 
+function pumped_laser!(du, u, p, t)
     a = 6.6207e7; b =7.4151e6; c = 0.0163;
     d = 4.0763e3; ρ = 0.3075; m = 0.8; f = 70.2e3
     pm = 506*(1 + m*sin(2*π*f*t))
