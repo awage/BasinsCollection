@@ -18,8 +18,10 @@ include(srcdir("print_fig.jl"))
 # for more details
 
 function pumped_laser!(du, u, p, t)
+    m,f = p
+    # m = 0.8; f = 70.2e3
     a = 6.6207e7; b =7.4151e6; c = 0.0163;
-    d = 4.0763e3; ρ = 0.3075; m = 0.8; f = 70.2e3
+    d = 4.0763e3; ρ = 0.3075; 
     pm = 506*(1 + m*sin(2*π*f*t))
     x,y = u
     du[1] = a*x*y - b*x + c*(y + ρ)
@@ -31,9 +33,9 @@ end
 
 
 function compute_basins_lasers(di::Dict)
-    @unpack  res = di
+    @unpack  res, m ,f = di
     diffeq = (alg = Vern9(), reltol = 1e-10, maxiters = 1e9)
-    ds = CoupledODEs(pumped_laser!, rand(2), []; diffeq)
+    ds = CoupledODEs(pumped_laser!, rand(2), [m,f]; diffeq)
     pow = 2; xg = range(0, 50^(1/pow); length = 20000).^pow
     # yg =  collect(range(0, 1; length = 20000))
     yg =  collect(range(0, 50; length = 20000))
@@ -51,7 +53,8 @@ end
 
 
 let res = 1200
-params = @strdict res
+m = 0.8; f = 70.2e3
+params = @strdict res m f
 print_fig(params, "basins_lasers", compute_basins_lasers; force = false)
 end
 
