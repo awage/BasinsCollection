@@ -34,15 +34,14 @@ end
 
 function compute_basins_lasers(di::Dict)
     @unpack  res, m ,f = di
-    diffeq = (alg = Vern9(), reltol = 1e-10, maxiters = 1e9)
-    ds = CoupledODEs(pumped_laser!, rand(2), [m,f]; diffeq)
-    pow = 2; xg = range(0, 50^(1/pow); length = 20000).^pow
-    # yg =  collect(range(0, 1; length = 20000))
-    yg =  collect(range(0, 50; length = 20000))
+    ds = CoupledODEs(pumped_laser!, rand(2), [m,f])
+    smap = StroboscopicMap(ds, 1/f)
+    pow = 2; xg = range(0, 1^(1/pow); length = 5000).^pow
+    yg =  collect(range(0, 1; length = 5000))
     grid = (xg, yg)
-    mapper = AttractorsViaRecurrences(ds, grid; Δt = 1e-7, 
-    consecutive_recurrences = 1000, 
-    consecutive_attractor_steps = 20)
+    mapper = AttractorsViaRecurrences(smap, grid;
+    consecutive_recurrences = 2000) 
+    # consecutive_attractor_steps = 10)
     yr = range(0.09, 0.13, length = res)
     xr = range(0.0, 15, length = res)
     bsn = @showprogress [ mapper([x,y]) for x in xr, y in yr]
@@ -54,13 +53,8 @@ end
 
 let res = 1200
 m = 0.8; f = 70.2e3
+# m = 1; f = 80e3
 params = @strdict res m f
 print_fig(params, "basins_lasers", compute_basins_lasers; force = false)
 end
-
-# diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e9)
-# ds = CoupledODEs(pumped_laser!, rand(2), []; diffeq)
-# y,t = trajectory(ds, 0.006, [0.01*rand(),rand()];Δt  = 0.000001); 
-
-# lines(y[1:1000,1])
 

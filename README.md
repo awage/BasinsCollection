@@ -67,5 +67,6 @@ everything should work out of the box, including correctly finding local paths.
 * Rock-Paper-Scisors competition model `cyclic_competition.j`:  https://doi.org/10.1063/1.5045366
 * Split Ring Resonator model `split_ring_resonator.jl`:  https://doi.org/10.1063/5.0157489
 * Alfven Complexity `alfven_complexity.jl`: https://doi.org/10.1142/S0218127402005303
-* Pump modulation erbium doped fiber laser `pumped_laser_dynamics.jl`: # https://doi.org/10.1016/j.physleta.2009.10.061
+* Pump modulation erbium doped fiber laser  (basins are slightly different) `pumped_laser_dynamics.jl`: https://doi.org/10.1016/j.physleta.2009.10.061
+* CO2 modulated laser model (the basins in the paper are wrong due to numerical instabilities in the model) `co2_modulated_laser.jl`: https://doi.org/10.1063/5.0093727
 
