@@ -75,7 +75,7 @@ include("map_cpled_logstc.jl")
 
 include("sprott_memristive.jl")
  
-# include("coupled_lorenz.jl")
+include("coupled_lorenz.jl")
 
 include("map_bogdanov.jl")
 
@@ -90,3 +90,11 @@ include("eckhardt_9D.jl")
 include("kur_halekotte.jl")
 
 include("alfven_complexity.jl")
+
+include("co2_modulated_laser.jl")
+
+include("pumped_laser_dynamics.jl")
+ 
+include("economic_geographic_model.jl")
+
+include("TLNs_network.jl")

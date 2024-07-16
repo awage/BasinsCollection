@@ -44,6 +44,7 @@ function compute_basins_CO2_lasers(di::Dict)
     yr = range(0.1, 4, length = res)
     xr = log.(collect(range(0.1, 15, length = res)))
     bsn = @showprogress [ mapper([x,y]) for x in xr, y in yr]
+    xr = range(0.1, 15, length = res)
     grid = (xr,yr)
     att = extract_attractors(mapper)
     return @strdict(bsn, grid, res, att)
