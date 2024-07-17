@@ -55,7 +55,7 @@ everything should work out of the box, including correctly finding local paths.
 * Discrete predator Prey system `predator_prey_discrete.jl`: https://doi.org/10.1016/j.chaos.2022.112833
 * Extreme multistable system: https://doi.org/10.1103/PhysRevE.85.035202
 * Disipative nontwist map `dsnm.jl`: https://doi.org/10.48550/arXiv.2211.06921
-* 6D Shear Flow model : https://doi.org/10.1017/jfm.2013.38
+* 6D Shear Flow model `lebovitz_mariotti.jl`: https://doi.org/10.1017/jfm.2013.38
 * 9D model of Fluid dynamics `eckhardt_9D.jl`: https://doi.org/10.1088/1367-2630/6/1/056 and https://doi.org/10.1103/PhysRevE.91.052903 (this last paper has a basins that I cannot reproduce)
 * Wada basins in the cubic 2D map (`map_cbic.jl`): http://dx.doi.org/10.1016/j.physleta.2013.03.027
 * Riddled basins of discrete 2D system : https://doi.org/10.1103/PhysRevE.57.R6253
