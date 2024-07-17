@@ -3,7 +3,9 @@ using DrWatson
 using OrdinaryDiffEq:Vern9
 using Attractors
 using CairoMakie
+
 # Equations of motion: E. Ott, et al. I Physica D 76 (1994) 384-410
+# https://doi.org/10.1016/0167-2789(94)90047-7
 function forced_particle!(du, u, p, t)
     γ=0.05  ; x̄ = 1.9  ; f₀=2.3  ; ω =3.5
     x₀=1. ; y₀=0.;

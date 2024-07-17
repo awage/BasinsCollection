@@ -2,7 +2,7 @@
 
 julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "5922a156ebc4bc20482e2a00fda06e8acc102206"
+project_hash = "74a8d848c04060f30617b793afbe324f6ad04a10"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "ae44a0c3d68a420d4ac0fa1f7e0c034ccecb6dc5"
@@ -1206,6 +1206,12 @@ weakdeps = ["ChainRulesCore", "ForwardDiff", "SpecialFunctions"]
     [deps.LoopVectorization.extensions]
     ForwardDiffExt = ["ChainRulesCore", "ForwardDiff"]
     SpecialFunctionsExt = "SpecialFunctions"
+
+[[deps.LsqFit]]
+deps = ["Distributions", "ForwardDiff", "LinearAlgebra", "NLSolversBase", "Printf", "StatsAPI"]
+git-tree-sha1 = "40acc20cfb253cf061c1a2a2ea28de85235eeee1"
+uuid = "2fda8390-95c7-5789-9bda-21331edee243"
+version = "0.15.0"
 
 [[deps.MKL_jll]]
 deps = ["Artifacts", "IntelOpenMP_jll", "JLLWrappers", "LazyArtifacts", "Libdl", "oneTBB_jll"]

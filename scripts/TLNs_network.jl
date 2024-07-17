@@ -5,6 +5,8 @@ using LaTeXStrings
 using Attractors
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
+using LinearAlgebra 
+
 include(srcdir("print_fig.jl"))
 # Core motifs predict dynamic attractors in combinatorial threshold-linear networks
 #     Caitlyn Parmelee,  Samantha Moore,Katherine Morrison , Carina Curto
@@ -54,6 +56,6 @@ end
 let res = 1200
 θ = 1.; 
 params = @strdict res θ
-print_fig(params, "basins_tlns", compute_basins_tlns; force = true)
+print_fig(params, "basins_tlns", compute_basins_tlns; force = false)
 end
 

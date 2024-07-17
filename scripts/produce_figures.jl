@@ -98,3 +98,5 @@ include("pumped_laser_dynamics.jl")
 include("economic_geographic_model.jl")
 
 include("TLNs_network.jl")
+
+include("kuramoto_basins_with_tentacles.jl")

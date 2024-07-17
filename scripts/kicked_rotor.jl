@@ -5,7 +5,8 @@ using LaTeXStrings
 using Attractors
 
 # Reference: Map with more than 100 coexisting low-period periodic attractors, Ulrike Feudel,  Celso Grebogi, Brian R. Hunt, and James A. Yorke
-# PHYSICAL REVIEW E, VOLUME 54, NUMBER 1 1996
+# Physical Review E, volume 54, number 1 1996
+# https://doi.org/10.1103/PhysRevE.54.71
 function kicked_feudel!(dz, z, p, n)
     xn = z[1]; yn = z[2]
     ν = p[1]; f0 = p[2]

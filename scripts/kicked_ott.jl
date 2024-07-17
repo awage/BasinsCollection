@@ -7,9 +7,10 @@ using OrdinaryDiffEq
 using ProgressMeter
 
 # Multi dimenioned intertwined basin boundaries: basin structure of
-# THE KICKED DOUBLE ROTOR
-# Celso GREBOGI a, Eric KOSTELICH b, Edward OTT a,c and James A. YORKE b
+# the kicked double rotor
+# Celso Grebogi, Eric Kostelich, Edward Ott a,c and james a. yorke b
 # Physica 25D 1987
+# https://doi.org/10.1016/0167-2789(87)90108-4
 function kicked_ott!(dz, z, p, t)
     f0 = p[1]; T = 1
     m1 = m2 = 1; 
