@@ -11,18 +11,18 @@ function print_fig(params, sys_name, fun_name; w = 1200, h = 1200, cmap = nothin
     @unpack bsn, grid = data
     xg, yg = grid
     fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
-            yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    # ax = Axis(fig[1,1], 
-    #     xticksvisible = false, 
-    #     yticksvisible = false, 
-    #     xticklabelsvisible = false, 
-    #     yticklabelsvisible = false)
+    # ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
+            # yticklabelsize = 30, 
+            # xticklabelsize = 30, 
+            # ylabelsize = 30, 
+            # xlabelsize = 30, 
+            # xticklabelfont = "cmr10", 
+            # yticklabelfont = "cmr10")
+    ax = Axis(fig[1,1], 
+        xticksvisible = false, 
+        yticksvisible = false, 
+        xticklabelsvisible = false, 
+        yticklabelsvisible = false)
 
     if isnothing(cmap)
         println("Number of basins: " , length(unique(bsn)))
