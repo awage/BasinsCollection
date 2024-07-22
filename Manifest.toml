@@ -126,9 +126,9 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 
 [[deps.Attractors]]
 deps = ["BlackBoxOptim", "Clustering", "ComplexityMeasures", "Distances", "Distributions", "DynamicalSystemsBase", "LinearAlgebra", "Mmap", "Neighborhood", "Optim", "ProgressMeter", "Random", "Reexport", "StateSpaceSets"]
-git-tree-sha1 = "12d4da5c156da5c1f8730ac79df7e7c4592082c7"
+path = "../Attractors.jl"
 uuid = "f3fd9213-ca85-4dba-9dfd-7fc91308fec7"
-version = "1.17.1"
+version = "1.18.5"
 weakdeps = ["Makie"]
 
     [deps.Attractors.extensions]

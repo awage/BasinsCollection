@@ -70,22 +70,24 @@ function compute_basin_tentacle_feats(N, res)
     θ₁ = 2π*10/N*(1:N)
     @show P1, P2, θ₁
     _get_ic(y) =   y[1].*P1 .+ y[2].*P2 .+ θ₁
-    ics = Vector{typeof(_get_ic([1.,1.]))}()
-    for x in α1, y in α2
-        push!(ics, _get_ic([x,y]))
-    end
-    fs, labs = basins_fractions(mapper, StateSpaceSet(ics))
-    bas = reshape(labs,res,res)
+    bsn = @showprogress [mapper(_get_ic([a1, a2])) for a1 in α1, a2 in α2]
+    # ics = Vector{typeof(_get_ic([1.,1.]))}()
+    # for x in α1, y in α2
+    #     push!(ics, _get_ic([x,y]))
+    # end
+    # fs, labs = basins_fractions(mapper, StateSpaceSet(ics))
+    # bas = reshape(labs,res,res)
     grid = (α1,α2)
     att = extract_attractors(mapper)
-    return @strdict(fs, labs, grid, res, att, bas)
+    # return @strdict(fs, labs, grid, res, att, bas)
+    return @strdict(bsn, grid, res, att)
 end
 
-let res = 1200
-    N = 40
-    params = @strdict res N
-    print_fig(params, "basins_tentacles", compute_basin_tentacle; force = false)
-end
+# let res = 1200
+#     N = 40
+#     params = @strdict res N
+#     print_fig(params, "basins_tentacles", compute_basin_tentacle; force = false)
+# end
 
-# dd = compute_basin_tentacle_feats(40, 100)
+dd = compute_basin_tentacle_feats(40, 100)
 
