@@ -25,6 +25,11 @@ function proj_fun(y)
     return p
 end
 
+function _proj_fun_f(y,t)
+    p = proj_fun(Array(y[end]))
+    return [p[1]] 
+end
+
 
 default_diffeq = (alg = Vern9(), reltol = 1e-9,  maxiters = 1e8)
 mutable struct KuramotoParameters{M}

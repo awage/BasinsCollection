@@ -30,11 +30,9 @@ function kuramoto_mapper(N)
     ds = ring_kuramotos(N = N)
     P1 = shuffle([zeros(Int(N/2)) ; ones(Int(N/2))])
     P2 = shuffle([zeros(Int(N/2)) ; ones(Int(N/2))])
-    # θ0 = rand(N)*2π .- π
     θ₁ = 2π*10/N*(1:N)
     @show P1, P2, θ₁
     _get_ic(y) =   y[1].*P1 .+ y[2].*P2 .+ θ₁
-    # _get_ic(y) =   y[1:N]
     psys = ProjectedDynamicalSystem(ds, proj_fun, _get_ic)
     xg = range(-N/2,N/2; length = 1001)
     yg = range(-10,10; length = 11)
@@ -44,17 +42,9 @@ function kuramoto_mapper(N)
     return mapper
 end
 
-
 function compute_basin_tentacle(d::Dict) 
     @unpack N, res = d
-
     mapper = kuramoto_mapper(N)
-    # warm up mapper with q-twisted states: 
-    # m_q = round(N/4)
-    # for q in -m_q:m_q
-    #     @show   θ₁ = 2π*q/N*(1:N)
-    #     @show  mapper(θ₁)
-    # end
     α1 = range(-π, π, length = res) 
     α2 = range(-π, π, length = res)
     bsn = @showprogress [mapper([a1, a2]) for a1 in α1, a2 in α2]
@@ -63,6 +53,33 @@ function compute_basin_tentacle(d::Dict)
     return @strdict(bsn, grid, res, att)
 end
 
+function kuramoto_featurizer(N) 
+    ds = ring_kuramotos(N = N)
+    m_q = round(N/4)
+    templates = Dict( Int(u) => u for (k,u) in enumerate(range(-m_q, m_q, step = 1.)))
+    mapper = AttractorsViaFeaturizing(ds, _proj_fun_f, GroupViaNearestFeature(templates); Ttr = 100., T = 200., Δt = 1.) 
+    return mapper
+end
+
+function compute_basin_tentacle_feats(N, res)    
+    mapper = kuramoto_featurizer(N)
+    α1 = range(-π, π, length = res) 
+    α2 = range(-π, π, length = res)
+    P1 = shuffle([zeros(Int(N/2)) ; ones(Int(N/2))])
+    P2 = shuffle([zeros(Int(N/2)) ; ones(Int(N/2))])
+    θ₁ = 2π*10/N*(1:N)
+    @show P1, P2, θ₁
+    _get_ic(y) =   y[1].*P1 .+ y[2].*P2 .+ θ₁
+    ics = Vector{typeof(_get_ic([1.,1.]))}()
+    for x in α1, y in α2
+        push!(ics, _get_ic([x,y]))
+    end
+    fs, labs = basins_fractions(mapper, StateSpaceSet(ics))
+    bas = reshape(labs,res,res)
+    grid = (α1,α2)
+    att = extract_attractors(mapper)
+    return @strdict(fs, labs, grid, res, att, bas)
+end
 
 let res = 1200
     N = 40
@@ -70,6 +87,5 @@ let res = 1200
     print_fig(params, "basins_tentacles", compute_basin_tentacle; force = false)
 end
 
-
-
+# dd = compute_basin_tentacle_feats(40, 100)
 
