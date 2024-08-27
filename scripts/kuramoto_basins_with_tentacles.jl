@@ -83,11 +83,11 @@ function compute_basin_tentacle_feats(N, res)
     return @strdict(bsn, grid, res, att)
 end
 
-# let res = 1200
-#     N = 40
-#     params = @strdict res N
-#     print_fig(params, "basins_tentacles", compute_basin_tentacle; force = false)
-# end
+let res = 1200
+    N = 40
+    params = @strdict res N
+    print_fig(params, "basins_tentacles", compute_basin_tentacle; force = false)
+end
 
-dd = compute_basin_tentacle_feats(40, 100)
+# dd = compute_basin_tentacle_feats(40, 100)
 
