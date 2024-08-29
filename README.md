@@ -71,3 +71,5 @@ everything should work out of the box, including correctly finding local paths.
 * CO2 modulated laser model (the basins in the paper are wrong due to numerical instabilities in the model) `co2_modulated_laser.jl`: https://doi.org/10.1063/5.0093727
 * Threshold-Linear Networks with multistable patterns `TLNs_network.jl`: https://doi.org/10.1371/journal.pone.0264456 
 * Basins with tentacles `kuramoto_basins_with_tentacles.jl`:  https://doi.org/10.1103/PhysRevLett.127.194101
+* Riddled basins in coupled cuadratic map `map_ashwin.jl`: https://doi.org/10.1088/0951-7715/9/3/006
+* Active Photonic Couplers `photonic_coupler.jl`: https://doi.org/10.1103/PhysRevA.100.043834

@@ -9,9 +9,9 @@ using LaTeXStrings
 # split-ring resonator under electromagnetic
 # radiation
 # Cite as: Chaos 33, 103131 (2023); doi: 10.1063/5.0157489
-# Gervais Dolvis Leutcho,a)
+# Gervais Dolvis Leutcho,
 # Lyne Woodward,
-# and François Blancharda)
+# and François Blanchard
 
 @inline @inbounds function split_ring_res(u, p, t)
     σ = 0.38
