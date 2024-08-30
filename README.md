@@ -74,4 +74,5 @@ everything should work out of the box, including correctly finding local paths.
 * Riddled basins in coupled cuadratic map `map_ashwin.jl`: https://doi.org/10.1088/0951-7715/9/3/006
 * Active Photonic Couplers `photonic_coupler.jl`: https://doi.org/10.1103/PhysRevA.100.043834
 * Multistable Chimera in reduced Kuramoto model (two coupled populations) `chimera_reduced_model.jl`: https://doi.org/10.1088/1367-2630/18/2/022002
-
+* Carpet oscillator `carpet_oscillator.jl`: https://doi.org/10.1007/s12043-018-1581-6
+* Megastability: nested attractors: `megastability_sprott.jl`: https://doi.org/10.1140/epjst/e2017-70037-1
