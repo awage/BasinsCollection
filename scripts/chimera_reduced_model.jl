@@ -5,6 +5,10 @@ using OrdinaryDiffEq:Vern9
 using CairoMakie
 using LaTeXStrings
 
+# Basins of attraction for chimera states
+# Erik A Martens1,2, Mark J Panaggio3,4 and Daniel M Abrams
+# New J. Phys. 18 (2016) 022002
+# doi:10.1088/1367-2630/18/2/022002
 @inline @inbounds function chimera(u, p, t)
     ν, μ, β  = p
     s, d, ψ = u
