@@ -19,7 +19,7 @@ end
 function compute_ashwin(di::Dict)
     @unpack α, ν, ε, res = di
     ds = DeterministicIteratedMap(cplog_ashwin, [1.0, 0.0], [α, ν, ε])
-    yg = xg = range(-20., 20., length = 25000)
+    yg = xg = range(-20., 20., length = 25001)
     mapper = AttractorsViaRecurrences(ds, (xg,yg); sparse = true,    
         consecutive_recurrences = 1000,
         attractor_locate_steps = 1000, maximum_iterations = Int(1e8), show_progress = true)
