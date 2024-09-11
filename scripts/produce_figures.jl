@@ -104,3 +104,5 @@ include("kuramoto_basins_with_tentacles.jl")
 include("map_ashwin.jl")
 
 include("photonic_coupler.jl")
+
+include("megastability_sprott.jl")

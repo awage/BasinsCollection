@@ -35,7 +35,7 @@ function compute_megastable(di::Dict)
 end
 
 
-res = 100
+res = 1200
 params = @strdict res
-print_fig(params, "megastable", compute_megastable; force = true)
+print_fig(params, "megastable", compute_megastable; force = false)
 
