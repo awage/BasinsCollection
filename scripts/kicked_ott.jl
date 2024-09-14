@@ -26,8 +26,8 @@ function kicked_ott!(dz, z, p, t)
 
     L = W1*exp(-s1) + W2*exp(-s2)
     M = W1*exp(-s1)/s1 + W2*exp(-s2)/s2
-    I1 = (m1 + m2)*l1^2
-    I2 = m2*l2^2
+    # I1 = (m1 + m2)*l1^2
+    # I2 = m2*l2^2
     I1 = (m1 + m2)*l1^2; I2 = m2*l2^2
 
     dz[1:2] = rem2pi.(M*z[3:4] .+ z[1:2], RoundDown)
@@ -62,4 +62,4 @@ end
 
 f0 = 0.1; #res = 700
 params = @strdict f0 res
-print_fig(params, "kicked_rotor_ott", compute_kicked_rotor_ott)
+print_fig(params, "kicked_rotor_ott", compute_kicked_rotor_ott; xlab = L"\theta_1", ylab = L"\theta_2")

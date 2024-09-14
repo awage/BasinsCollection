@@ -31,16 +31,13 @@ function compute_kicked_rotor_4d(di)
     θ2 = range(-2π, 2π, length = 10001)
     grid_rec = (θ1, θ2)
     projection = [1,2]; complete_state = [9. , 2.5]
-    pinteg = projected_integrator(df, projection, complete_state)
+    pinteg = ProjectedDynamicalSystem(df, projection, complete_state)
     mapper = AttractorsViaRecurrences(pinteg, grid_rec,
-            # mx_chk_lost = 10, 
             mx_chk_fnd_att = 300, 
             mx_chk_loc_att = 300, 
-            # mx_chk_att = 2,
-             sparse = true
     )
-    θ1 = range(-π, π, length = res)
-    θ2 = range(-π, π, length = res)
+    θ1 = range(1.6, 2.3, length = res)
+    θ2 = range(4.4, 5.3, length = res)
     grid = (θ1, θ2)
     bsn, att = basins_of_attraction(mapper, grid; show_progress = true)
     return @strdict(bsn, att, grid, M, L, ρ, res)
@@ -59,4 +56,4 @@ L = W1*exp(λ1*T) + W2*exp(λ2*T)
 M = W1*(exp(λ1*T)-1)/λ1 + W2*(exp(λ2*T) -1)/λ2
 # res = 400
 params = @strdict res  M L  ρ
-print_fig(params, "kicked_rotor_4d", compute_kicked_rotor_4d; ylab = L"\dot{\theta}", xlab = L"\theta")
+print_fig(params, "kicked_rotor_4d", compute_kicked_rotor_4d; ylab = L"\theta_2", xlab = L"\theta_1", force = false)

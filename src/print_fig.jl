@@ -12,10 +12,10 @@ function print_fig(params, sys_name, fun_name; w = 1200, h = 1200, cmap = nothin
     xg, yg = grid
     fig = Figure(size = (w, h))
     ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
-            yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
+            yticklabelsize = 40, 
+            xticklabelsize = 40, 
+            ylabelsize = 40, 
+            xlabelsize = 40, 
             xticklabelfont = "cmr10", 
             yticklabelfont = "cmr10")
     # ax = Axis(fig[1,1], 
@@ -33,6 +33,7 @@ function print_fig(params, sys_name, fun_name; w = 1200, h = 1200, cmap = nothin
         # cmap = :flag
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     else
+        println("Number of basins: " , length(unique(bsn)))
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end
     save(plotsdir(savename(sys_name,params,"png")),fig)
