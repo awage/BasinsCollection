@@ -4,8 +4,6 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 
-
-
 function henon_map!(dz, z, p, n)
     xn = z[1]; yn = z[2]
     μ, j = p

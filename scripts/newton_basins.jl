@@ -84,7 +84,7 @@ end
 
 function compute_basins_newton(di::Dict)
     @unpack i, res = di
-    ε = 1e-14; max_it = 50; β = -1
+    ε = 1e-14; max_it = 50; β = 0.
     N_β = beta_map(func_list[i])
     ds = DiscreteDynamicalSystem(N_β, [0.1, 0.2], [β])
     xg = yg = range(-10, 10; length = 10000)
@@ -112,8 +112,8 @@ function compute_basins_newton(di::Dict)
 end
 
 # cmap = ColorScheme([RGB(0,0,0), RGB(1,0,0), RGB(0,1,0), RGB(0,0,1), RGB(1,1,0), RGB(1,0,1), RGB(0,1,1)] )
-cmap = nothing
+cmap = :flag
 for i in [1,2,4,7,11,12,14]
     params = @strdict  res i
-    print_fig(params, string("newton_",i),compute_basins_newton; ylab = L"\Im{(z)}", xlab = L"\Re{(z)}", cmap)
+    print_fig(params, string("newton_",i),compute_basins_newton; ylab = L"\Im{(z)}", xlab = L"\Re{(z)}", cmap, force =true)
 end

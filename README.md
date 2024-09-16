@@ -77,3 +77,4 @@ everything should work out of the box, including correctly finding local paths.
 * Carpet oscillator `carpet_oscillator.jl`: https://doi.org/10.1007/s12043-018-1581-6
 * Megastability: nested attractors: `megastability_sprott.jl`: https://doi.org/10.1140/epjst/e2017-70037-1
 * Matryoshka multistability: `matryoshka.jl`: https://doi.org/10.1016/j.chaos.2024.115412
+* Bairstow application: `map_bairstow.jl`: https://doi.org/10.1063/1.166158
