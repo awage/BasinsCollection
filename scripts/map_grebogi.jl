@@ -20,9 +20,7 @@ function compute_grebogi(di::Dict)
     ds = DeterministicIteratedMap(grebogi_map,[1., -1.], [] )
     θ = range(0, 2π, length = 2000)
     xg = range(-0.5, 0.5, length = 2000)
-    mapper = AttractorsViaRecurrences(ds, (θ,xg); sparse = true,    
-        mx_chk_fnd_att = 10000,
-        mx_chk_loc_att = 10000, maximum_iterations = Int(1e7), show_progress = true)
+    mapper = AttractorsViaRecurrences(ds, (θ,xg))
     θ = range(0, 2π, length = res)
     xg = range(-0.5, 0.5, length = res)
     bsn, att = basins_of_attraction(mapper, (θ,xg); show_progress = true)
@@ -32,4 +30,4 @@ end
 
 
 params = @strdict res 
-print_fig(params, "grebogi", compute_grebogi; ylab = L"y", xlab = L"x")
+print_fig(params, "grebogi", compute_grebogi; ylab = L"x", xlab = L"\theta")

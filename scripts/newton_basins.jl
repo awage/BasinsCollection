@@ -115,5 +115,5 @@ end
 cmap = :flag
 for i in [1,2,4,7,11,12,14]
     params = @strdict  res i
-    print_fig(params, string("newton_",i),compute_basins_newton; ylab = L"\Im{(z)}", xlab = L"\Re{(z)}", cmap, force =true)
+    print_fig(params, string("newton_",i),compute_basins_newton; ylab = L"\Im{(z)}", xlab = L"\Re{(z)}", cmap, force = false)
 end

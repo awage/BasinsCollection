@@ -29,9 +29,7 @@ function compute_feudel(di::Dict)
     ds = DeterministicIteratedMap(chaotic_map, [1.0, 0.0], [a, r])
     θ = range(0.0, 1.0, length = 2500)
     xg = range(0.0, 1.0, length = 2500)
-    mapper = AttractorsViaRecurrences(ds, (xg,θ); sparse = true,    
-        mx_chk_fnd_att = 10000,
-        mx_chk_loc_att = 10000, maximum_iterations = Int(1e7), show_progress = true)
+    mapper = AttractorsViaRecurrences(ds, (xg,θ))
     θ = range(0.0, 1.0, length = res)
     xg = range(0.0, 1.0, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,θ); show_progress = true)
@@ -44,4 +42,4 @@ r = 3.833
 a = 0.0015
 # res = 400
 params = @strdict res a r
-print_fig(params, "feudel", compute_feudel; ylab = L"\dot{x}", xlab = L"x")
+print_fig(params, "feudel", compute_feudel; xlab = L"x", ylab = L"\theta", force = false)
