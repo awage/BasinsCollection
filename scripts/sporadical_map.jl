@@ -1,4 +1,9 @@
+using DrWatson
+@quickactivate
 using Attractors
+using LaTeXStrings
+using CairoMakie
+include("../src/print_fig.jl")
 
 function Ms(x)
     y=0.
@@ -9,7 +14,6 @@ function Ms(x)
      return y
  end
 
-# Basin bifurcation in quasiperiodically forced systems Ulrike Feudel, Annette Witt, Ying-Cheng Lai, and Celso Grebogi PRE 28, 1998
 function chaotic_map(dz,z, p, n)
     xn = z[1]; yn = z[2]
     λ=p[1];
@@ -53,6 +57,6 @@ end
 
 # res = 500
 params = @strdict res
-print_fig(params, "sporadical", compute_sporadical)
+print_fig(params, "sporadical", compute_sporadical; xlab = L"x", ylab = L"y")
 
 

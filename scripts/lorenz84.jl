@@ -4,7 +4,8 @@ using CairoMakie
 using LaTeXStrings
 using Attractors
 using StaticArrays
-
+using ProgressMeter
+using OrdinaryDiffEq:Vern9
 
 # Multistability, phase diagrams, and intransitivity in the Lorenz-84 low-order atmospheric circulation model
 # Chaos 18, 033121 (2008); https://doi.org/10.1063/1.2953589
@@ -17,31 +18,23 @@ using StaticArrays
     return SVector{3}(dx, dy, dz)
 end
 
-
 function compute_lorenz84(di)
     @unpack F, G, a, b, res = di
-#F=6.846; G=1.287; a=0.25; b=4.;
-    ds = Systems.lorenz84(F = F, G = G, a = a, b = b)
-    xg=range(-2.,2.,length = 2000)
-    yg=range(-2.,2.,length = 2000)
-    zg=range(-2.,2.,length = 2000)
-    grid_rec = (xg,yg,zg)
-    mapper = AttractorsViaRecurrences(ds, grid_rec,
-                mx_chk_fnd_att = 300, 
-                mx_chk_loc_att = 300, 
-                sparse = true
-    )
-    xg = yg =range(-2.,2.,length = res)
-    bsn = [ mapper([x,y,0.]) for x in xg, y in yg]
+    diffeq = (alg = Vern9(), reltol = 1e-7, maxiters = 1e8)
+    ds =  CoupledODEs(lorenz84, rand(3), [F,G,a,b]; diffeq)
+    xg = yg = zg = range(-4, 4,length = 250)
+    mapper = AttractorsViaRecurrences(ds, (xg,yg,zg); 
+                consecutive_recurrences = 2000, 
+                attractor_locate_steps = 2000,
+                consecutive_attractor_steps = 100)
+    xg = range(0.5,1.5,length = res)
+    yg = range(-1.5,-0.5,length = res)
+    bsn = @showprogress [ mapper([x,y,0.]) for x in xg, y in yg]
     att = mapper.bsn_nfo.attractors
     grid = (xg, yg)
     return @strdict(bsn, att, grid, F, G, a, b, res)
 end
 
-
-
- 
-
-F=6.846; G=1.287; a=0.25; b=4.; #res = 600
+F=6.846; G=1.287; a=0.25; b=4.; res = 1200
 params = @strdict F G a b res
-print_fig(params, "lorenz84", compute_lorenz84; ylab = L"\dot{\theta}", xlab = L"\theta")
+print_fig(params, "lorenz84", compute_lorenz84; ylab = L"y", xlab = L"x", force = false)

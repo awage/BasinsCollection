@@ -69,4 +69,4 @@ end
 
 ww = 0.1; # res = 1400
 params = @strdict ww res
-print_fig(params, "poon_disks", compute_exit_poon_disks)
+print_fig(params, "poon_disks", compute_exit_poon_disks; xlab = L"x_0", ylab = L"\theta_0")

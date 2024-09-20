@@ -36,12 +36,13 @@ function get_basins(ni , res)
         ϕ = range(-pi, pi; length = res)
         ω = range(-14, 14; length = res)
         ic = [Δϕ; Δω]
+        ic_ref = [Δϕ; Δω]
         basins = zeros(Int16,length(ω), length(ϕ))
         for k in 1:length(ω), j in 1:length(ϕ)
            # Prepare the perturbation of the steady state on node n
            # Notice that we are working with a projected system on variables N+1:2N 
            # but we need to define the initial conditions on the full state space. 
-           ic[n] = ϕ[j]; ic[n+N] = ω[k]
+           ic[n] = ic_ref[n] + ϕ[j]; ic[n+N] = ic_ref[n+N] + ω[k]
            @show basins[j,k] = mapper(ic)
         end     
 
@@ -57,12 +58,12 @@ end
 
 
 let res = 300
-ni = 5; 
-params = @strdict ni res
-print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
+# ni = 5; 
+# params = @strdict ni res
+# print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 ni = 14
 params = @strdict ni res
-print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
+print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\Delta\phi", ylab = L"\omega", force = false) 
 # ni = 58
 # params = @strdict ni res
 # print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 

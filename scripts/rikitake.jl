@@ -7,25 +7,39 @@ using OrdinaryDiffEq:Vern9
 using ProgressMeter
 # This system is problematic: very very long transient (t > 2000 sometimes) that can be mistaken with attractors.
 
+# ```
+# Rikitake's dynamo [^Rikitake1958] is a system that tries to model the magnetic
+# reversal events by means of a double-disk dynamo system.
 
+# [^Rikitake1958]: T. Rikitake Math. Proc. Camb. Phil. Soc. **54**, pp 89–105, (1958)
+# """
+function rikitake_rule(u, p, t)
+    μ, α = p
+    x,y,z = u
+    xdot = -μ*x + y*z
+    ydot = -μ*y + x*(z - α)
+    zdot = 1 - x*y
+    return SVector{3}(xdot, ydot, zdot)
+end
 
 
 function compute_rikitake(di::Dict)
     @unpack μ, α, res = di
-    ds = Systems.rikitake(μ = μ, α = α)
-    xg = yg = zg = range(-5,5,length=10000)
-    mapper = AttractorsViaRecurrences(ds, (xg,yg,zg); sparse = true,    
+    diffeq = (alg = Vern9(), reltol = 1e-6, maxiters = 1e8)
+    ds = CoupledODEs(rikitake_rule, rand(3), [μ, α]; diffeq)
+    xg = yg = range(-5,5,length=14001)
+    psys = ProjectedDynamicalSystem(ds, [1,2], [0.])
+    mapper = AttractorsViaRecurrences(psys, (xg, yg) ; Δt = 0.1,
         mx_chk_fnd_att = 10000,
-        mx_chk_loc_att = 10000, maximum_iterations = Int(1e7), show_progress = true)
-    y1 = y2 = range(-2.5, 2.5, length = res)
-    bsn = @showprogress [ mapper([x,y,0.]) for x in y1, y in y2]
+        mx_chk_loc_att = 10000)
+    xg = yg = range(-2.5, 2.5, length = res)
+    bsn, att = basins_of_attraction(mapper, (xg,yg))
     att = mapper.bsn_nfo.attractors
-    grid = (y1,y2)
+    grid = (xg,yg)
     return @strdict(bsn, att, grid, μ, α, res)
 end
 
-
-
-μ = 0.47; α = 1.; #res = 700
+# μ = 0.47; α = 1.; res = 200
+μ = 0.5; α = 1.; #res = 200
 params = @strdict res μ α
-print_fig(params, "rikitake", compute_rikitake; ylab = L"\dot{x}", xlab = L"x")
+print_fig(params, "rikitake", compute_rikitake; ylab = L"y", xlab = L"x", force = false)

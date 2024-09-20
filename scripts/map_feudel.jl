@@ -40,6 +40,8 @@ end
 
 r = 3.833
 a = 0.0015
+# r = 3.846
+# a = 0.0024
 # res = 400
 params = @strdict res a r
 print_fig(params, "feudel", compute_feudel; xlab = L"x", ylab = L"\theta", force = false)

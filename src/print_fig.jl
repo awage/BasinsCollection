@@ -36,7 +36,17 @@ function print_fig(params, sys_name, fun_name; w = 1200, h = 1200, cmap = nothin
         println("Number of basins: " , length(unique(bsn)))
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end
-    save(plotsdir(savename(sys_name,params,"png")),fig)
+    save(plotsdir(savename(sys_name,params,"pdf")),fig)
 end
 
+
+function get_att(params, sys_name, fun_name; force = false)
+    println(sys_name)
+    data, file = produce_or_load(
+        datadir("basins"), params, fun_name;
+        prefix = sys_name, storepatch = false, suffix = "jld2", force = force
+    )
+    @unpack bsn, grid, att = data
+    return att 
+end
 

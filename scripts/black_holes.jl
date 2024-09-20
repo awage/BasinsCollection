@@ -63,12 +63,7 @@ function condition_ρ_z(ρ, z)
 end
 
 
-
-
-
-
 # Variables to store trajectories and energy evolution
-
 # y0 = range(ρi, ρf, npuntos) 
 # yp = range(zi, zf, npuntos) 
 function get_basin_BH(ρ,z, prm)
@@ -109,25 +104,25 @@ end
 
 
 function compute_BH(di::Dict)
-    @unpack Δϕ, res = di
+    @unpack Δpϕ, res = di
     φ = 0.5(1+√5)
     pϕ_crit = 0.5*5^(5/4)*φ^(3/2) # critical value 
-    pϕ = pϕ_crit - Δϕ
+    pϕ = pϕ_crit - Δpϕ
     M = 1; z1 = 0.5; z2 = -0.5        
     prm = [z1, z2, M, pϕ]
-    zr = range(-1., 1.; length = res)
+    zr = range(-0.7, 0.7; length = res)
     ρr = range(0., 2.; length = res)
     bsn = zeros(Int16, res, res)
     @showprogress for i in 1:res
         Threads.@threads for j in 1:res
-            z = zr[i]; ρ = ρr[j];
+            z = zr[j]; ρ = ρr[i];
             bsn[i,j] = get_basin_BH(ρ, z, prm) 
         end
     end
-    grid = (zr, ρr)
-    return @strdict(bsn, grid, Δϕ, res)
+    grid = (ρr, zr)
+    return @strdict(bsn, grid, Δpϕ, res)
 end
 
-Δϕ = 0.03; #res = 500
-params = @strdict Δϕ res
-print_fig(params, "black_holes", compute_BH; ylab = L"\rho", xlab = L"z")
+Δpϕ = 0.03; #res = 500
+params = @strdict Δpϕ res
+print_fig(params, "black_holes", compute_BH; xlab = L"\rho", ylab = L"z", force = true)

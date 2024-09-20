@@ -26,8 +26,10 @@ everything should work out of the box, including correctly finding local paths.
 
 * Basins for the Newton root finding algorithm
 * Riddled basins `ott_basins.jl`: https://doi.org/10.1016/0167-2789(94)90047-7
+* Riddled Basins from `sommerer_basins.jl`: Sommerer, John C. "The end of classical determinism." Johns Hopkins APL Technical Digest 16.4 (1995): 333.
 * Duffing oscillator basins `duffing_basins.jl`
 * Forced pendulum basins `pendulum_basins.jl`
+* Hénon map `map_henon.jl`: https://doi.org/10.1016/j.physrep.2014.02.007
 * Henon Heiles open Hamiltonian escape basins `cuencas_hh.jl`
 * 4D kicked map rotor (1998) `4d_kicked.jl`: https://doi.org/10.1016/S0960-0779(97)00058-1
 * 4D kicked map rotor from `kicked_rotor.jl`: https://doi.org/10.1103/PhysRevE.54.71
@@ -42,7 +44,6 @@ everything should work out of the box, including correctly finding local paths.
 * Lorenz 84 system `lorenz84.jl`: https://doi.org/10.1063/1.2953589
 * Slim fractals `slim_fractals.jl`: https://doi.org/10.1103/PhysRevX.7.021040
 * Sporadical map `sporadical_map.jl`: https://doi.org/10.1103/PhysRevLett.82.3597
-* Hénon map `map_henon.jl`: https://doi.org/10.1016/j.physrep.2014.02.007
 * Cold atoms `cold_atoms.jl`: https://doi.org/10.1103/PhysRevA.95.013629
 * Competition ecology plancton `competition_ecology_plancton.jl`: https://doi.org/10.1086/319929
 * Open Sinai billiard `open_billiard_sinai.jl`: https://doi.org/10.1103/PhysRevA.38.930
@@ -50,7 +51,6 @@ everything should work out of the box, including correctly finding local paths.
 * Poon billiard `poon_billiard.jl`: https://doi.org/10.1142/S0218127496000035
 * Hidden attractors in Chua oscillators `hidden_chua.jl`: https://doi.org/10.1016/j.physleta.2011.04.037
 * Li Sprott oscillator `li_sprott.jl`: https://doi.org/10.1142/S0218127416502333 
-* Riddled Basins from `sommerer_basins.jl`: Sommerer, John C. "The end of classical determinism." Johns Hopkins APL Technical Digest 16.4 (1995): 333.
 * Binary Black Holes escape basins `black_holes.jl`: https://doi.org/10.1103/PhysRevD.98.084050
 * Discrete predator Prey system `predator_prey_discrete.jl`: https://doi.org/10.1016/j.chaos.2022.112833
 * Extreme multistable system: https://doi.org/10.1103/PhysRevE.85.035202
@@ -78,3 +78,4 @@ everything should work out of the box, including correctly finding local paths.
 * Megastability: nested attractors: `megastability_sprott.jl`: https://doi.org/10.1140/epjst/e2017-70037-1
 * Matryoshka multistability: `matryoshka.jl`: https://doi.org/10.1016/j.chaos.2024.115412
 * Bairstow application: `map_bairstow.jl`: https://doi.org/10.1063/1.166158
+* Quadratic map for basin bifurcations: `map_mira.jl`: https://doi.org/10.1142/S0218127494000241

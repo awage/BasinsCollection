@@ -20,21 +20,6 @@ function slim_fractal_U2!(dz, z, p, n)
     dz[4] = -μ*dy - dUdy(x,y)
     return 
 end
-function slim_fractal_U1!(dz, z, p, n)
-    x = z[1]; dx = z[2]; 
-    y = z[3]; dy = z[4]; 
-    μ = p[1] 
-    # U(r,θ) = -r^2*cos(3θ) + 1/2*r^4
-    # U(x,y) = -xr(-3 + 4x^2/r^2) +1/2*r^4
-    dUdx = 2*x^3+(-2*x^4-3*x^2*y^2+3*y^4)/(x^2+y^2)^(3/2) + 2*x*y^2
-    dUdy = 2*y^3 + y*(x*(7*x^2+3*y^2)/(x^2+y^2)^(3/2) + 2*x^2)
-    dz[1] = dx
-    dz[2] = -μ*dx - dUdx
-    dz[3] = dy 
-    dz[4] = -μ*dy - dUdy
-    return 
-end
-
 
 
 function compute_slim_fractal(di)
@@ -62,4 +47,4 @@ end
 
 μ = 0.2; #res = 800
 params = @strdict μ res
-print_fig(params, "slim_fractal", compute_slim_fractal; ylab = L"\dot{\theta}", xlab = L"\theta")
+print_fig(params, "slim_fractal", compute_slim_fractal; ylab = L"v_0/v_{max}", xlab = L"\theta_0/(2\pi/3)")

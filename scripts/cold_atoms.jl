@@ -28,7 +28,6 @@ function Hca(p,q, prm)
     H = 0.5*(px^2+py^2) - α1*exp(-β1*y^2) - α2*exp(-β2*(x*sin(θ) + y*cos(θ))^2)
 end
 
-
 function salida(sol)
     x = sol[3,end]
     y = sol[4,end]

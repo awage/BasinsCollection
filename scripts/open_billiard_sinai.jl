@@ -79,4 +79,4 @@ end
 
 Δ = 0.8; #res = 700
 params = @strdict Δ res
-print_fig(params, "open_sinai", compute_exit_open_sinai)
+print_fig(params, "open_sinai", compute_exit_open_sinai; xlab = L"x_0", ylab = L"\theta_0")

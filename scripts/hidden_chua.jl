@@ -31,15 +31,16 @@ function compute_basins_chua(di::Dict)
     xg = range(-30, 30; length = 10001)
     zg = range(-30, 30; length = 10001)
     grid = (xg, yg, zg)
-    mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = 0.01,   
+    mapper = AttractorsViaRecurrences(ds, grid; Δt = 0.01,   
         mx_chk_hit_bas = 20000,
-        mx_chk_fnd_att = 100,
-        mx_chk_loc_att = 100, maximum_iterations = Int(1e8))
+        mx_chk_fnd_att = 1000,
+        mx_chk_loc_att = 1000, maximum_iterations = Int(1e8))
     yr = range(-5, 5, length = res)
     xr = range(-7, 7, length = res)
     bsn = @showprogress [ mapper([x,y,0.]) for x in xr, y in yr]
     grid = (xr,yr)
-    return @strdict(bsn, grid, α, β, γ, m0, m1, res)
+    att = mapper.bsn_nfo.attractors
+    return @strdict(bsn, grid, att, α, β, γ, m0, m1, res)
 end
 
 
@@ -48,5 +49,5 @@ end
 # α = 8.5; β = 14.28; γ = 0; m0 = -8/7; m1 = -5/7
 α = 8.4562218418; β = 12.0732335925; γ = 0.0051631393; m0 = -0.1767573476; m1 = -1.1467573476; # res = 500
 params = @strdict α β γ m0 m1 res
-print_fig(params, "hidden_chua", compute_basins_chua)
+print_fig(params, "hidden_chua", compute_basins_chua; force = true)
 

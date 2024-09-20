@@ -57,5 +57,5 @@ end
 
 let res = 1200
 params = @strdict res
-print_fig(params, "comptetion_model", compute_competition_model; force = false)
+print_fig(params, "comptetion_model", compute_competition_model; xlab = L"N_2", ylab = L"N_4", force = false)
 end
