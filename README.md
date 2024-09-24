@@ -54,11 +54,11 @@ everything should work out of the box, including correctly finding local paths.
 * Binary Black Holes escape basins `black_holes.jl`: https://doi.org/10.1103/PhysRevD.98.084050
 * Discrete predator Prey system `predator_prey_discrete.jl`: https://doi.org/10.1016/j.chaos.2022.112833
 * Extreme multistable system: https://doi.org/10.1103/PhysRevE.85.035202
-* Disipative nontwist map `dsnm.jl`: https://doi.org/10.48550/arXiv.2211.06921
+* Disipative nontwist map `dsnm.jl`: https://doi.org/10.1103/PhysRevE.107.024216
 * 6D Shear Flow model `lebovitz_mariotti.jl`: https://doi.org/10.1017/jfm.2013.38
 * 9D model of Fluid dynamics `eckhardt_9D.jl`: https://doi.org/10.1088/1367-2630/6/1/056 and https://doi.org/10.1103/PhysRevE.91.052903 (this last paper has a basins that I cannot reproduce)
 * Wada basins in the cubic 2D map (`map_cbic.jl`): http://dx.doi.org/10.1016/j.physleta.2013.03.027
-* Riddled basins of discrete 2D system : https://doi.org/10.1103/PhysRevE.57.R6253
+* Riddled basins of discrete 2D system `map_kapitaniak.jl`: https://doi.org/10.1103/PhysRevE.57.R6253
 * Coupled logistic maps with riddled basins (Fig 15 of the paper has an error) `map_cpled_logstc.jl`:  https://doi.org/10.1103/PhysRevE.57.2713
 * Sprott-memristor model `sprott_memristive.jl`: https://doi.org/10.1016/j.chaos.2022.111834
 * Parametrically forced pendulum `para_pendulum.jl`: http://dx.doi.org/10.1142/S0218127411030167

@@ -4,7 +4,7 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 
- # On noninvertible mappings of the plane: Eruptions
+# On noninvertible mappings of the plane: Eruptions
 # Lora Billings;
 # James H. Curry
 # Chaos 6, 108–120 (1996)

@@ -36,6 +36,6 @@ end
 
 res = 1200
 params = @strdict  res
-print_fig(params, "carpet", compute_carpet; force = true)
+print_fig(params, "carpet", compute_carpet; force = false)
 
 

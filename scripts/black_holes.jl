@@ -8,7 +8,6 @@ using ProgressMeter
 
 # BASINS FOR MAJUMDAR-PAPAPETROU DOUBLE BLACK HOLE SYSTEM WITH SYMPLECTIC ALGORITHM*/
 function double_black_hole_de!(dv, v, p, t)
-	
     z1 = p[1]; z2 = p[2]; M = p[3]; pϕ = p[4] 
     z, pz, ρ, pρ = v
     t_ρ_z1 = (ρ^2+(z-z1)^2)
@@ -125,4 +124,4 @@ end
 
 Δpϕ = 0.03; #res = 500
 params = @strdict Δpϕ res
-print_fig(params, "black_holes", compute_BH; xlab = L"\rho", ylab = L"z", force = true)
+print_fig(params, "black_holes", compute_BH; xlab = L"\rho", ylab = L"z", force = false)

@@ -12,7 +12,6 @@ include(srcdir("print_fig.jl"))
 # Economic Geography model
 # Pasquale Commendatore , Ingrid Kubin, Iryna Sushko
 # http://dx.doi.org/10.1016/j.matcom.2014.01.004
-
 function f(Mr,Ms) 
     if Mr ≤ 0 
         return 0
