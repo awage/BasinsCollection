@@ -22,9 +22,6 @@ function memristor!(du, u, p, t)
     du[4] = a*x*y - t
 end
 
-
-
-
 function compute_basins_memristor(di::Dict)
     @unpack α, β, γ, g, r, m, res = di
 
@@ -43,8 +40,6 @@ function compute_basins_memristor(di::Dict)
     return @strdict(bsn, grid, res)
 end
 
-
 α = 1; β = 0.05; γ = 0.5; g = 0.03; r = 5.8; m = 11; 
-
 params = @strdict α β γ g r m res
 print_fig(params, "hidden_memristor", compute_basins_memristor; force = false) 

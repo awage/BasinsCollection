@@ -79,3 +79,4 @@ everything should work out of the box, including correctly finding local paths.
 * Matryoshka multistability: `matryoshka.jl`: https://doi.org/10.1016/j.chaos.2024.115412
 * Bairstow application: `map_bairstow.jl`: https://doi.org/10.1063/1.166158
 * Quadratic map for basin bifurcations: `map_mira.jl`: https://doi.org/10.1142/S0218127494000241
+* Geographic Economic competition model: `economic_geographic_model.jl`: http://dx.doi.org/10.1016/j.matcom.2014.01.004

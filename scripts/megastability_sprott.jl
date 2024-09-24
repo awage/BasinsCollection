@@ -37,5 +37,5 @@ end
 
 res = 1200
 params = @strdict res
-print_fig(params, "megastable", compute_megastable; force = false)
+print_fig(params, "megastable", compute_megastable; force = false, xlab = L"x", ylab = L"\dot{x}")
 

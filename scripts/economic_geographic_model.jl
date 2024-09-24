@@ -95,6 +95,6 @@ end
 let res = 1500
     Φ = 0.085
     params = @strdict res Φ
-    print_fig(params, "basins_economic", compute_basins_economic; force = false)
+    print_fig(params, "basins_economic", compute_basins_economic; force = false, xlab = L"\lambda_1", ylab = L"\lambda_2")
 end
 

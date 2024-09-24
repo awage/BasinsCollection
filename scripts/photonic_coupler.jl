@@ -44,5 +44,5 @@ end
 let res = 250; 
 α = 2; β = 1.5; ε = 0.5; k = 5 
 params = @strdict res α β ε k 
-print_fig(params, "photonic_coupler", compute_phot_coupler; force = false) 
+print_fig(params, "photonic_coupler", compute_phot_coupler; force = false, xlab = L"A_1", ylab = L"A_2") 
 end
