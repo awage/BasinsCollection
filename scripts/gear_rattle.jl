@@ -5,7 +5,11 @@ using Attractors
 using CairoMakie
 using LaTeXStrings
 using ColorSchemes
-
+# nternational Journal of Bifurcation and Chaos, Vol. 19, No. 1 (2009) 203–224
+# BASINS OF ATTRACTION IN NONSMOOTH MODELS OF GEAR RATTLE
+# JOANNA F. MASON
+# PETRI T. PIIROINEN
+# R. EDDIE WILSON and MARTIN E. HOMER
 function B(x) 
     β = 0.6
     if x ≥ β 
@@ -25,6 +29,7 @@ function gear_rattle(u, p, t)
     κ = 100
     du1 = u[2]
     du2 = -δ*u[2] -2*κ*B(u[1]) + 4*π*δ -4*π^2*ε*cos(2π*t) - 2*π*ε*δ*sin(2π*t)
+    # du2 = -δ*u[2] + 4*π*δ -4*π^2*ε*cos(2π*t) - 2*π*ε*δ*sin(2π*t)
     return SVector{2}(du1, du2)
     end
 end
@@ -32,29 +37,30 @@ end
 # We have to define a callback to wrap the phase in [-π,π]
 function affect!(integrator)
     uu = integrator.u
-    if integrator.u[1] < 0
-        set_state!(integrator, SVector(uu[1] + 2π, uu[2]))
-        u_modified!(integrator, true)
-    else
-        set_state!(integrator, SVector(uu[1] - 2π, uu[2]))
-        u_modified!(integrator, true)
-    end
+    # if integrator.u[1] < 0
+    set_state!(integrator, SVector(uu[1], -uu[2]))
+    u_modified!(integrator, true)
+    # else
+    #     set_state!(integrator, SVector(uu[1] - 2π, uu[2]))
+        # u_modified!(integrator, true)
+    # end
 end
 
 
 function compute_gear_rattle(di::Dict)
     @unpack δ, ε, res = di
+    # β = 0.6
     # condition(u,t,integrator) = (integrator.u[1] < -β  || integrator.u[1] > β)
     # cb = DiscreteCallback(condition,affect!)
     # diffeq = (reltol = 1e-9,  alg = Vern9(), callback = cb)
-    diffeq = (reltol = 1e-8,  alg = Vern9(),)
+    diffeq = (reltol = 1e-10,  alg = Vern9(),)
     df = CoupledODEs(gear_rattle, rand(2), [δ, ε]; diffeq)
     xg = range(-4.,4.,length = 10001)
     yg = range(-4.,4.,length = 10001)
     mapper = AttractorsViaRecurrences(df, (xg, yg);
-            consecutive_basin_steps = 200,
-            consecutive_recurrences = 1000,
-            attractor_locate_steps = 2000)
+            consecutive_basin_steps = 400,
+            consecutive_recurrences = 2000,
+            attractor_locate_steps = 200)
     xg = range(-1.,1.,length = res)
     yg = range(-4.,4.,length = res)
     grid = (xg, yg)
@@ -63,7 +69,7 @@ function compute_gear_rattle(di::Dict)
 end
 
 
-δ = 0.6; ε = 0.1; res = 300
+δ = 0.6; ε = 0.1; res = 200
 params = @strdict δ ε res
 print_fig(params, "gear_rattle", compute_gear_rattle; ylab= L"\dot{\theta}", xlab= L"\theta", force = true)
 # att = get_att(params, "gear_rattle", compute_gear_rattle)
