@@ -12,7 +12,6 @@ using LaTeXStrings
 @inline @inbounds function chimera(u, p, t)
     ν, μ, β  = p
     s, d, ψ = u
-    # ρ1, ρ2, ψ = u
     ρ1 = s + d
     ρ2 = s - d 
     dρ1 = (1-ρ1^2)/2*(μ*ρ1*sin(β) + ν*ρ2*sin(β-ψ))  
@@ -21,23 +20,34 @@ using LaTeXStrings
     ds = (dρ1 + dρ2)/2
     dd = (dρ1 - dρ2)/2
     return SVector{3}(ds, dd, dψ)
-    # return SVector{3}(dρ1, dρ2, dψ)
 end
 
+function affect!(integrator)
+    uu = integrator.u
+    if integrator.u[3] < 0
+        set_state!(integrator, SVector(uu[1], uu[2], uu[3] + 2π))
+        u_modified!(integrator, true)
+    else
+        set_state!(integrator, SVector(uu[1], uu[2], uu[3] - 2π))
+        u_modified!(integrator, true)
+    end
+end
 
 function compute_chimera(di::Dict)
     @unpack  res, ν, μ, β = di
-    diffeq = (;reltol = 1e-7, alg = Vern9(), maxiters = 1e6)
+    # diffeq = (;reltol = 1e-7, alg = Vern9(), maxiters = 1e6)
+    condition(u,t,integrator) = (integrator.u[3] < -π  || integrator.u[3] > π)
+    cb = DiscreteCallback(condition,affect!)
+    diffeq = (reltol = 1e-9,  alg = Vern9(), callback = cb)
     ds = CoupledODEs(chimera, rand(3), [ν, μ, β]; diffeq)
-    xg = yg = range(-2,2, length = 10000)
-    φ  = range(-2π,2π, length = 10000)
+    xg = yg = range(-4,4, length = 10001)
+    φ  = range(-5π,5π, length = 10001)
     mapper = AttractorsViaRecurrences(ds, (xg, yg, φ);
-    consecutive_recurrences = 1000,
+    consecutive_recurrences = 100,
     attractor_locate_steps = 1000)
     dg = range(-0.5, 0.5, length = res)
-    ψg = range(-π, π, length = res)
+    ψg = range(0, 2π, length = res)
     grid = (dg,ψg)
-    # bsn = @showprogress [ mapper([x,1-(μ-ν), y]) for x in dg, y in ψg]
     bsn = @showprogress [ mapper([y,0.56625, x]) for x in ψg, y in dg]
     att = extract_attractors(mapper)
     return @strdict(bsn, att, grid, res)
@@ -48,4 +58,5 @@ res = 1200;
 A = 0.1; β = 0.025
 μ = (A+1)/2; ν = 1 - μ
 params = @strdict res μ ν β 
-print_fig(params, "chimera_states", compute_chimera; force = false, xlab = L"s", ylab = L"\psi") 
+print_fig(params, "chimera_states", compute_chimera; force = true, xlab = L"s", ylab = L"\psi") 
+att = get_att(params, "chimera_states", compute_chimera) 

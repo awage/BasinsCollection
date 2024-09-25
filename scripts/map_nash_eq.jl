@@ -6,14 +6,13 @@ using CairoMakie
 using ProgressMeter
 include(srcdir("print_fig.jl"))
 
-# International Journal of Bifurcation and Chaos, Vol. 19, No. 1 (2009) 203–224
-# c World Scientific Publishing Company
-# BASINS OF ATTRACTION IN NONSMOOTH
-# MODELS OF GEAR RATTLE
-# JOANNA F. MASON∗
-# MACSI, Department of Mathematics & Statistics,
-# PETRI T. PIIROINEN
-# R. EDDIE WILSON and MARTIN E. HOMER
+# title={Multistability in a dynamic Cournot game with three oligopolists},
+# author={Agiza, Hamdy Nabih and Bischi, Gian Italo and Kopel, Michael},
+# journal={Mathematics and Computers in Simulation},
+# volume={51},
+# number={1-2},
+# pages={63--90},
+# year={1999},
 function nash_map!(dz, z, p, n)
     q1, q2, q3 = z
     μ,λ = p
@@ -35,7 +34,7 @@ function compute_nash(di::Dict)
     return @strdict(bsn, att, grid, res)
 end
 
-res = 200; μ = 1.95; λ= 0.5
+res = 1200; μ = 1.95; λ= 0.5
 params = @strdict res μ λ 
-print_fig(params, "nash_equilibrium", compute_nash; xlab = L"q_1", ylab = L"q_2", force = true)
+print_fig(params, "nash_equilibrium", compute_nash; xlab = L"q_1", ylab = L"q_2", force = false)
 # att =  get_att(params, "nash_equilibrium", compute_nash; force = true)
