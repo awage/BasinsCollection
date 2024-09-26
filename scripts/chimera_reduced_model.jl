@@ -58,5 +58,5 @@ res = 1200;
 A = 0.1; β = 0.025
 μ = (A+1)/2; ν = 1 - μ
 params = @strdict res μ ν β 
-print_fig(params, "chimera_states", compute_chimera; force = true, xlab = L"s", ylab = L"\psi") 
+print_fig(params, "chimera_states", compute_chimera; force = false, xlab = L"s", ylab = L"\psi") 
 att = get_att(params, "chimera_states", compute_chimera) 

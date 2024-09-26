@@ -56,6 +56,6 @@ end
 let res = 1200
 θ = 1.; 
 params = @strdict res θ
-print_fig(params, "basins_tlns", compute_basins_tlns; force = false)
+print_fig(params, "basins_tlns", compute_basins_tlns; force = false, xlab = L"x_6", ylab = L"x_7")
 end
 
