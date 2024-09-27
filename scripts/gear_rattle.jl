@@ -62,7 +62,7 @@ end
 
 β = 0.6; δ = 0.6; ε = 0.1; res = 200
 params = @strdict β δ ε res
-print_fig(params, "gear_rattle", compute_gear_rattle; ylab= L"\dot{\theta}", xlab= L"\theta", force = true)
+print_fig(params, "gear_rattle", compute_gear_rattle; ylab= L"\dot{\theta}", xlab= L"\theta", force = false)
 att = get_att(params, "gear_rattle", compute_gear_rattle)
 
 # function gear_rattle!(du,u, p, t)

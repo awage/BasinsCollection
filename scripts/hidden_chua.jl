@@ -49,5 +49,5 @@ end
 # α = 8.5; β = 14.28; γ = 0; m0 = -8/7; m1 = -5/7
 α = 8.4562218418; β = 12.0732335925; γ = 0.0051631393; m0 = -0.1767573476; m1 = -1.1467573476; # res = 500
 params = @strdict α β γ m0 m1 res
-print_fig(params, "hidden_chua", compute_basins_chua; force = true)
+print_fig(params, "hidden_chua", compute_basins_chua; force = false)
 

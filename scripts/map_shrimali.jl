@@ -40,5 +40,5 @@ end
 
 res = 1200; α = 3.2511; ϵp = 0.5  ; β = 0.01 
 params = @strdict res α β ϵp 
-print_fig(params, "shrimali", compute_shrimali; xlab = L"x", ylab = L"y", force = true)
+print_fig(params, "shrimali", compute_shrimali; xlab = L"x", ylab = L"y", force = false)
 # att =  get_att(params, "nash_equilibrium", compute_nash; force = true)

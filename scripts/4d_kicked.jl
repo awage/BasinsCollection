@@ -3,7 +3,6 @@ using DrWatson
 using CairoMakie
 using LaTeXStrings
 using Attractors
-using Attractors
 using StaticArrays
 
 

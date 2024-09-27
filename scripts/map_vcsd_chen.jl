@@ -44,5 +44,5 @@ end
 
 res = 1200; S = 0.77
 params = @strdict res S
-print_fig(params, "chen", compute_chen; xlab = L"x", ylab = L"y", force = true)
+print_fig(params, "chen", compute_chen; xlab = L"x", ylab = L"y", force = false)
 # att =  get_att(params, "nash_equilibrium", compute_nash; force = true)

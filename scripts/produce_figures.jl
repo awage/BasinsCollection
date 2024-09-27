@@ -108,3 +108,24 @@ include("photonic_coupler.jl")
 include("megastability_sprott.jl")
 
 include("matryoshka.jl")
+
+include("megastability_sprott.jl")
+
+include("map_mira.jl")
+
+include("map_nash_eq.jl")
+
+include("map_shrimali.jl")
+
+include("map_vcsd_chen.jl")
+
+include("map_bairstow.jl")
+
+include("carpet_oscillator.jl")
+
+include("chimera_reduced_model.jl")
+
+include("gear_rattle.jl")
+
+include("economic_geographic_model.jl")
+
