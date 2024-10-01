@@ -129,3 +129,4 @@ include("gear_rattle.jl")
 
 include("economic_geographic_model.jl")
 
+include("map_lai.jl")
