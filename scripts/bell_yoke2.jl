@@ -66,27 +66,30 @@ function compute_bell_yoke(di::Dict)
     cb = ContinuousCallback(condition,affect!; abstol = 1e-18, save_positions=(true,true), interp_points = 30)
     diffeq = (reltol = 0, abstol = 1e-17,  alg = Vern9(), callback = cb)
     df = CoupledODEs(bell_yoke!, rand(4), [Tmax, lr]; diffeq)
-    # comp_state(y) = (length(y) == 2) ? rand(8) : y; 
-    psys = ProjectedDynamicalSystem(df, [1,2], [0.0, 0.0])
-    yg = range(-2, 2; length = 12001)
-    grid = ntuple(x -> yg, 2)
-    mapper = AttractorsViaRecurrences(psys, grid; 
+    # psys = ProjectedDynamicalSystem(df, [1,2], [0.0, 0.0])
+    xg = range(-0.7, 0.7; length = 1001)
+    yg = zg = tg = range(-2, 2; length = 1001)
+    grid = (xg, yg, zg, tg)
+    mapper = AttractorsViaRecurrences(df, grid; 
             maximum_iterations = 1e6, 
             consecutive_attractor_steps = 2,
-            consecutive_basin_steps = 400,
-            consecutive_recurrences = 200, Δt = 0.1)
+            consecutive_basin_steps = 100,
+            consecutive_recurrences = 200)
     xg = range(-0.5,0.5,length = res)
     yg = range(-0.5,0.5,length = res)
     grid = (xg, yg)
-    bsn = @showprogress [mapper([x, y]) for x in xg, y in yg]  
+    # bsn = zeros(Int,res, res)
+    # for x in xg,
+    bsn = @showprogress [mapper([x, y, 0., 0.]) for x in xg, y in yg]  
+
     # bsn = @showprogress [mapper([x, y, 0., 0.]) for x in xg, y in yg]  
     att = extract_attractors(mapper)
     return @strdict(bsn, att, grid, res)
 end
 
 
-res = 500; Tmax = 150; lr = -0.03
-params = @strdict res
+res = 5; Tmax = 150; lr = -0.03
+params = @strdict res Tmax lr
 print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = false)
 att = get_att(params, "bell_yoke", compute_bell_yoke)
 
@@ -94,32 +97,32 @@ att = get_att(params, "bell_yoke", compute_bell_yoke)
 # Tmax = 125; lr = 0.20
 # Tmax = 175; lr = 0.16
 # Tmax = 325; lr = -1.21
-Tmax = 150; lr = -0.03
-α = 0.5349 
-Δ = 0.0001
-cond(u,t,integrator) = abs(u[1] -  u[2]) > α + Δ
-function aff!(integrator)
-    uu = integrator.u
-    # println("discrete callback")
-    if uu[1] - uu[2] > α 
-        # set_state!(integrator, SVector(uu[1], uu[1] + α - Δ/2, uu[3], uu[4]))
-        set_state!(integrator, SVector(uu[2] + α - Δ/2 ,uu[2], uu[3], uu[4]))
-        u_modified!(integrator, true)
-    elseif uu[2] - uu[1] > α
-        # set_state!(integrator, SVector(uu[1],uu[1] + α - Δ/2, uu[3], uu[4]))
-        set_state!(integrator, SVector(uu[2] - α + Δ/2, uu[2], uu[3], uu[4]))
-        u_modified!(integrator, true)
-    end
-end
+# Tmax = 150; lr = -0.03
+# α = 0.5349 
+# Δ = 0.0001
+# cond(u,t,integrator) = abs(u[1] -  u[2]) > α + Δ
+# function aff!(integrator)
+#     uu = integrator.u
+#     # println("discrete callback")
+#     if uu[1] - uu[2] > α 
+#         # set_state!(integrator, SVector(uu[1], uu[1] + α - Δ/2, uu[3], uu[4]))
+#         set_state!(integrator, SVector(uu[2] + α - Δ/2 ,uu[2], uu[3], uu[4]))
+#         u_modified!(integrator, true)
+#     elseif uu[2] - uu[1] > α
+#         # set_state!(integrator, SVector(uu[1],uu[1] + α - Δ/2, uu[3], uu[4]))
+#         set_state!(integrator, SVector(uu[2] - α + Δ/2, uu[2], uu[3], uu[4]))
+#         u_modified!(integrator, true)
+#     end
+# end
 
-cbd = DiscreteCallback(cond, aff!)
-cb = ContinuousCallback(condition,affect!; abstol = 1e-18, save_positions=(true,true), interp_points = 30)
-diffeq = (reltol = 0, abstol = 1e-17,  alg = Vern9(), callback = CallbackSet(cb,cbd))
-df = CoupledODEs(bell_yoke!, rand(4), [Tmax, lr]; diffeq)
-y,t = trajectory(df, 2000, rand(4)*0.05)
-# lines(y[:,1],y[:,2])
-# lines(y[19000:20000,1],y[19000:20000,2])
-p = Figure(); ax = Axis(p[1,1])
-lines!(ax, [-0.75; -0.2],  [-0.75+α; -0.2+α])
-lines!(ax,y[18000:18200,1],y[18000:18200,2])
-p
+# cbd = DiscreteCallback(cond, aff!)
+# cb = ContinuousCallback(condition,affect!; abstol = 1e-18, save_positions=(true,true), interp_points = 30)
+# diffeq = (reltol = 0, abstol = 1e-17,  alg = Vern9(), callback = CallbackSet(cb,cbd))
+# df = CoupledODEs(bell_yoke!, rand(4), [Tmax, lr]; diffeq)
+# y,t = trajectory(df, 2000, rand(4)*0.05)
+# # lines(y[:,1],y[:,2])
+# # lines(y[19000:20000,1],y[19000:20000,2])
+# p = Figure(); ax = Axis(p[1,1])
+# lines!(ax, [-0.75; -0.2],  [-0.75+α; -0.2+α])
+# lines!(ax,y[18000:18200,1],y[18000:18200,2])
+# p
