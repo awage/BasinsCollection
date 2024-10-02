@@ -9,7 +9,6 @@ using ProgressMeter
 include(srcdir("print_fig.jl"))
 
 
-
 function bell_yoke!(du, u, p, t)
     ϕ1, ϕ2, dϕ1, dϕ2 = u
     Tmax, lr = p
@@ -24,12 +23,15 @@ function bell_yoke!(du, u, p, t)
 
     du[1] = dϕ1; du[2] = dϕ2; 
 
-    AA = [(Bbr + m*lcr^2)  m*lcr*l*cos(ϕ2 - ϕ1);
-          m*lcr*l*cos(ϕ2-ϕ1)  Bc]
+    # AA = [(Bbr + m*lcr^2)  m*lcr*l*cos(ϕ2 - ϕ1);
+    #       m*lcr*l*cos(ϕ2-ϕ1)  Bc]
 
+    γ = m*lcr*l*cos(ϕ2 - ϕ1)
+    AA_inv = 1/((Bbr + m*lcr^2)*Bc - γ^2 )*[ Bc -γ; -γ (Bbr + m*lcr^2)]
     b1 = m*lcr*l*dϕ2^2*sin(ϕ2-ϕ1) - (M*Lr + m*lcr)*g*sin(ϕ1) - Db*dϕ1 + Dc*(dϕ2-dϕ1) + Mt(ϕ1,dϕ1)
     b2 = - m*lcr*dϕ1^2*sin(ϕ2 - ϕ1) - m*g*sin(ϕ2) - Dc*(dϕ2 - dϕ1) 
-    du[3:4] = AA\[b1;b2]
+    # du[3:4] = AA\[b1;b2]
+    du[3:4] = AA_inv*[b1;b2]
 end
 
 
@@ -87,7 +89,7 @@ end
 
 res = 20; Tmax = 150; lr = -0.03
 params = @strdict res Tmax lr
-print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = false)
+print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = true)
 att = get_att(params, "bell_yoke", compute_bell_yoke)
 
 
