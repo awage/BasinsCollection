@@ -67,28 +67,25 @@ function compute_bell_yoke(di::Dict)
     diffeq = (reltol = 0, abstol = 1e-17,  alg = Vern9(), callback = cb)
     df = CoupledODEs(bell_yoke!, rand(4), [Tmax, lr]; diffeq)
     # psys = ProjectedDynamicalSystem(df, [1,2], [0.0, 0.0])
-    xg = range(-0.7, 0.7; length = 1001)
-    yg = zg = tg = range(-2, 2; length = 1001)
+    xg = range(-0.7, 0.7; length = 101)
+    yg = zg = tg = range(-2, 2; length = 101)
     grid = (xg, yg, zg, tg)
     mapper = AttractorsViaRecurrences(df, grid; 
-            maximum_iterations = 1e6, 
-            consecutive_attractor_steps = 2,
-            consecutive_basin_steps = 100,
-            consecutive_recurrences = 200)
+            # maximum_iterations = 1e6, 
+            consecutive_attractor_steps = 2)
+            # consecutive_basin_steps = 200,
+            # consecutive_recurrences = 200)
     xg = range(-0.5,0.5,length = res)
     yg = range(-0.5,0.5,length = res)
     grid = (xg, yg)
-    # bsn = zeros(Int,res, res)
-    # for x in xg,
     bsn = @showprogress [mapper([x, y, 0., 0.]) for x in xg, y in yg]  
 
-    # bsn = @showprogress [mapper([x, y, 0., 0.]) for x in xg, y in yg]  
     att = extract_attractors(mapper)
     return @strdict(bsn, att, grid, res)
 end
 
 
-res = 5; Tmax = 150; lr = -0.03
+res = 20; Tmax = 150; lr = -0.03
 params = @strdict res Tmax lr
 print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = false)
 att = get_att(params, "bell_yoke", compute_bell_yoke)
