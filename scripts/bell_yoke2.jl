@@ -87,7 +87,7 @@ function compute_bell_yoke(di::Dict)
 end
 
 
-res = 20; Tmax = 150; lr = -0.03
+res = 40; Tmax = 150; lr = -0.03
 params = @strdict res Tmax lr
 print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = true)
 att = get_att(params, "bell_yoke", compute_bell_yoke)

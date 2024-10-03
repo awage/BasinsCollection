@@ -61,20 +61,15 @@ function economic_model!(du, u, p, t)
     return nothing
 end
 
-function fa(x,y,mapper) 
-    if x + y ≤ 1
-        mapper([x,y])
-    else
-        -1
-    end
-end
 
 function compute_basins_economic(di::Dict)
     @unpack  res,Φ = di
     ds = DeterministicIteratedMap(economic_model!, [0.5, 0.5], [Φ])
     yg = xg =  range(-1e-5, 1; length = 5000)
     grid = (xg, yg)
-    mapper = AttractorsViaRecurrences(ds, grid)
+    mapper = AttractorsViaRecurrences(ds, grid; 
+    consecutive_recurrences = 4000
+    )
     xr = yr = range(1e-5, 1, length = res)
     bsn = zeros(res,res)
     @showprogress for (j,x) in enumerate(xr)
@@ -96,5 +91,6 @@ let res = 1500
     Φ = 0.085
     params = @strdict res Φ
     print_fig(params, "basins_economic", compute_basins_economic; force = false, xlab = L"\lambda_1", ylab = L"\lambda_2")
+# att = get_att(params, "basins_economic", compute_basins_economic)
 end
 
