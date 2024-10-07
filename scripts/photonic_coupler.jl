@@ -27,22 +27,28 @@ function compute_phot_coupler(di::Dict)
     @unpack  res, α, β, ε, k = di
     diffeq = (;reltol = 1e-6, alg = Vern9(), maxiters = 1e6)
     ds = CoupledODEs(phot_coupler, rand(3), [α, β, ε, k]; diffeq)
-    xg = yg = range(0,50, length = 10000)
+    pow = 3; xg = range(1, 20^(1/pow); length = 5000).^pow
+    yg = range(-50,50, length = 20000)
     φ  = range(-50,50, length = 10000)
-    mapper = AttractorsViaRecurrences(ds, (xg, yg, φ);
-    attractor_locate_steps = 1000)
+    psys = ProjectedDynamicalSystem(ds, [1,2], [π])
+    mapper = AttractorsViaRecurrences(psys, (xg, yg); Δt = 0.1)
+    # mapper = AttractorsViaRecurrences(ds, (xg, yg, φ);
+    # attractor_locate_steps = 1000, 
+    # horizon_limit = 100, Δt = 0.1)
     xg = range(0.1, 10, length = res)
     yg = range(0.1, 10, length = res)
     grid = (xg,yg)
     # bsn, att = basins_of_attraction(mapper, grid)
-    bsn = @showprogress [ mapper([x,y, π]) for x in xg, y in yg]
+    # bsn = @showprogress [ mapper([x,y, π]) for x in xg, y in yg]
+    bsn = @showprogress [ mapper([x,y]) for x in xg, y in yg]
     att = extract_attractors(mapper)
     return @strdict(bsn, att, grid, res)
 end
 
 
-let res = 250; 
+let res = 1200; 
 α = 2; β = 1.5; ε = 0.5; k = 5 
 params = @strdict res α β ε k 
-print_fig(params, "photonic_coupler", compute_phot_coupler; force = false, xlab = L"A_1", ylab = L"A_2") 
+print_fig(params, "photonic_coupler", compute_phot_coupler; force = true, xlab = L"A_1", ylab = L"A_2") 
+# att = get_att(params, "photonic_coupler", compute_phot_coupler) 
 end
