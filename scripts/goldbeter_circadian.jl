@@ -15,7 +15,7 @@ function circadian_cell_cycle!(du, u, p, t)
     Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, In, Mr, Rc, Rcp, Rn, Rnp, AP1, pRB, pRBc1, pRBp, pRBc2, pRBpp, E2F, E2Fp, Cd, Mdi, Md, Mdp27, Mce, Ce, Mei, Me, Skp2, Mep27, Pei, Pe, Ca, Mai, Ma, Map27, p27, p27p, Cdh1i, Cdh1a, Pai, Pa, Cb, Mbi, Mb, Mbp27, Cdc20i, Cdc20a, Pbi, Pb, Mw, Wee1, Wee1p = u
 
 ### CONSTANTS
-    V_cdk = 3.1623; KI_cdk1 = 0.5; ncdk = 2; v_sw = 2.3
+    V_cdk = 0.3623; KI_cdk1 = 1.5; ncdk = 2; v_sw = 0.01
     k1_clock = 0.8; k2_clock = 0.4; k3_clock = 0.8; k4_clock = 0.4; k5 = 0.8; k6 = 0.4; k7 = 1; k8 = 0.2; k9 = 0.63; k10 = 0.4; 
     K_AP = 0.6; K_AC = 0.6; K_AR = 0.6; K_IB = 1; 
     k_dmb = 0.02; k_dmc = 0.02; k_dmp = 0.02; k_dmr = 0.02; k_dn = 0.02; k_dnc = 0.02; 
@@ -27,9 +27,12 @@ function circadian_cell_cycle!(du, u, p, t)
     v_mC = 2.0; v_mP = 2.2; v_mR = 1.6; v_sB = 1.8; 
     v_sC = 2.2; v_sP = 2.4; v_sR = 1.6; 
     V_1R = 4; V_2R = 8; V_3R = 8; V_4R = 4; v_in = 0.7
-    delta = 1
-    Chk1 = 0
-    GF = 1; K_agf = 0.1; k_dap1 = 0.15; eps = 21.58; v_sap1 = 1
+    delta = 10.
+    Chk1 = 10
+
+eps = 21.58;
+
+GF = 1; K_agf = 0.1; k_dap1 = 0.15;  v_sap1 = 1
     k_de2f = 0.002; k_de2fp = 1.1; k_dprb = 0.01; k_dprbp = 0.06; k_dprbpp = 0.04
     k_pc1 = 0.05; k_pc2 = 0.5; k_pc3 = 0.025; k_pc4 = 0.5; K1 = 0.1; K2 = 0.1; K3 = 0.1
     K4 = 0.1; V1 = 2.2; V2 = 2; V3 = 1; V4 = 2; K_1e2f = 5; K_2e2f = 5; V_1e2f = 4
@@ -59,29 +62,51 @@ function circadian_cell_cycle!(du, u, p, t)
     v_swee1 = 0.0117; nmw = 4; K_aw = 2; V_dmw = 0.5; K_dmw = 0.5
     v_sce = 0.005; K_ice = 1; V_dmce = 0.5; K_dmce = 0.5; nce = 4; k_ce2 = 5
 
-
+f(x,y,p) = x^p/(x^p + y^p) 
+g(x,y) = x/(x+y)
 #circadian clock
-    Mp_d = (v_sP*Bn^n/(K_AP^n+Bn^n)+v_in*KI_cdk1^ncdk/(KI_cdk1^ncdk+Mb^ncdk)-v_mP*Mp/(K_mP+Mp)-k_dmp*Mp)*delta
-    Mc_d = (v_sC*Bn^n/(K_AC^n+Bn^n)+v_in*KI_cdk1^ncdk/(KI_cdk1^ncdk+Mb^ncdk)-v_mC*Mc/(K_mC+Mc)-k_dmc*Mc)*delta
-    Mbmal_d = (v_sB*K_IB^m/(K_IB^m+Rn^m)+v_in*KI_cdk1^ncdk/(KI_cdk1^ncdk+Mb^ncdk)-v_mB*Mbmal/(K_mB+Mbmal)-k_dmb*Mbmal)*delta
-    Pc_d = (k_sP*Mp-V_1P*Pc/(K_p+Pc)+V_2P*Pcp/(K_dp+Pcp)+k4_clock*PCc-k3_clock*Pc*Cc-k_dn*Pc)*delta
-    Cc_d = (k_sC*Mc-V_1C*Cc/(K_p+Cc)+V_2C*Ccp/(K_dp+Ccp)+k4_clock*PCc-k3_clock*Pc*Cc-k_dnc*Cc)*delta
-    Pcp_d = (V_1P*Pc/(K_p+Pc)-V_2P*Pcp/(K_dp+Pcp)-v_dPC*Pcp/(K_d+Pcp)-k_dn*Pcp)*delta
-    Ccp_d = (V_1C*Cc/(K_p+Cc)-V_2C*Ccp/(K_dp+Ccp)-v_dCC*Ccp/(K_d+Ccp)-k_dn*Ccp)*delta
-    PCc_d = (-V_1PC*PCc/(K_p+PCc)+V_2PC*PCcp/(K_dp+PCcp)-k4_clock*PCc+k3_clock*Pc*Cc+k2_clock*PCn-k1_clock*PCc-k_dn*PCc)*delta
-    PCn_d = (-V_3PC*PCn/(K_p+PCn)+V_4PC*PCnp/(K_dp+PCnp)-k2_clock*PCn+k1_clock*PCc-k7*Bn*PCn+k8*In-k_dn*PCn)*delta
-    PCcp_d = (V_1PC*PCc/(K_p+PCc)-V_2PC*PCcp/(K_dp+PCcp)-v_dPCC*PCcp/(K_d+PCcp)-k_dn*PCcp)*delta
-    PCnp_d = (V_3PC*PCn/(K_p+PCn)-V_4PC*PCnp/(K_dp+PCnp)-v_dPCN*PCnp/(K_d+PCnp)-k_dn*PCnp)*delta
-    Bc_d = (k_sB*Mbmal-(V_1B)*Bc/(K_p+Bc)+V_2B*Bcp/(K_dp+Bcp)-k5*Bc+k6*Bn-k_dn*Bc)*delta
-    Bcp_d = ((V_1B)*Bc/(K_p+Bc)-V_2B*Bcp/(K_dp+Bcp)-v_dBC*Bcp/(K_d+Bcp)-k_dn*Bcp)*delta
-    Bn_d = (-V_3B*Bn/(K_p+Bn)+V_4B*Bnp/(K_dp+Bnp)+k5*Bc-k6*Bn-k7*Bn*PCn+k8*In-k_dn*Bn)*delta
-    Bnp_d = (V_3B*Bn/(K_p+Bn)-V_4B*Bnp/(K_dp+Bnp)-v_dBN*Bnp/(K_d+Bnp)-k_dn*Bnp)*delta
-    In_d = (-k8*In+k7*Bn*PCn-v_dIN*In/(K_d+In)-k_dn*In)*delta
-    Mr_d = (v_sR*Bn^h/(K_AR^h+Bn^h)+v_in*KI_cdk1^ncdk/(KI_cdk1^ncdk+Mb^ncdk)-v_mR*Mr/(K_mR+Mr)-k_dmr*Mr)*delta
-    Rc_d = (k_sR*Mr-k9*Rc+k10*Rn-(V_1R+V_cdk*Mb)*Rc/(K_p+Rc)+V_2R*Rcp/(K_dp+Rcp)-k_dn*Rc)*delta
-    Rcp_d = ((V_1R+V_cdk*Mb)*Rc/(K_p+Rc)-V_2R*Rcp/(K_dp+Rcp)-v_dRC*Rcp/(K_d+Rcp)-k_dn*Rcp)*delta
-    Rn_d = (k9*Rc-k10*Rn-(V_3R+V_cdk*Mb)*Rn/(K_p+Rn)+V_4R*Rnp/(K_dp+Rnp)-k_dn*Rn)*delta
-    Rnp_d = ((V_3R+V_cdk*Mb)*Rn/(K_p+Rn)-V_4R*Rnp/(K_dp+Rnp)-v_dRN*Rnp/(K_d+Rnp)-k_dn*Rnp)*delta
+    # Mp_d = (v_sP*Bn^n/(K_AP^n+Bn^n)+v_in*KI_cdk1^ncdk/(KI_cdk1^ncdk+Mb^ncdk)-v_mP*Mp/(K_mP+Mp)-k_dmp*Mp)*delta
+    Mp_d = (v_sP*f(Bn,K_AP,n) + v_in*f(KI_cdk1,Mb,ncdk) - v_mP*g(Mp,K_mP) - k_dmp*Mp)*delta
+    # Mc_d = (v_sC*Bn^n/(K_AC^n+Bn^n)+v_in*KI_cdk1^ncdk/(KI_cdk1^ncdk+Mb^ncdk)-v_mC*Mc/(K_mC+Mc)-k_dmc*Mc)*delta
+    Mc_d = (v_sC*f(Bn,K_AC,n) + v_in*f(KI_cdk1,Mb,ncdk) - v_mC*g(Mc,K_mC) - k_dmc*Mc)*delta
+    # Mbmal_d = (v_sB*K_IB^m/(K_IB^m+Rn^m)+v_in*KI_cdk1^ncdk/(KI_cdk1^ncdk+Mb^ncdk)-v_mB*Mbmal/(K_mB+Mbmal)-k_dmb*Mbmal)*delta
+    Mbmal_d = (v_sB*f(K_IB, Rn, m) + v_in*f(KI_cdk1, Mb, ncdk) - v_mB*g(Mbmal,K_mB) -k_dmb*Mbmal)*delta
+    # Pc_d = (k_sP*Mp-V_1P*Pc/(K_p+Pc)+V_2P*Pcp/(K_dp+Pcp)+k4_clock*PCc-k3_clock*Pc*Cc-k_dn*Pc)*delta
+    Pc_d = (k_sP*Mp - V_1P*g(Pc,K_p) + V_2P*g(Pcp,K_dp)  + k4_clock*PCc - k3_clock*Pc*Cc - k_dn*Pc)*delta
+    # Cc_d = (k_sC*Mc-V_1C*Cc/(K_p+Cc)+V_2C*Ccp/(K_dp+Ccp)+k4_clock*PCc-k3_clock*Pc*Cc-k_dnc*Cc)*delta
+    Cc_d = (k_sC*Mc - V_1C*g(Cc,K_p) + V_2C*g(Ccp,K_dp) + k4_clock*PCc - k3_clock*Pc*Cc - k_dnc*Cc)*delta
+    # Pcp_d = (V_1P*Pc/(K_p+Pc)-V_2P*Pcp/(K_dp+Pcp)-v_dPC*Pcp/(K_d+Pcp)-k_dn*Pcp)*delta
+    Pcp_d = (V_1P*g(Pc, K_p) - V_2P*g(Pcp,K_dp) - v_dPC*g(Pcp,K_d) - k_dn*Pcp)*delta
+    # Ccp_d = (V_1C*Cc/(K_p+Cc)-V_2C*Ccp/(K_dp+Ccp)-v_dCC*Ccp/(K_d+Ccp)-k_dn*Ccp)*delta
+    Ccp_d = (V_1C*g(Cc,K_p) - V_2C*g(Ccp, K_dp) - v_dCC*g(Ccp, K_d) - k_dn*Ccp)*delta
+    # PCc_d = (-V_1PC*PCc/(K_p+PCc)+V_2PC*PCcp/(K_dp+PCcp)-k4_clock*PCc+k3_clock*Pc*Cc+k2_clock*PCn-k1_clock*PCc-k_dn*PCc)*delta
+    PCc_d = (-V_1PC*g(PCc,K_p) + V_2PC*g(PCcp,K_dp) - k4_clock*PCc + k3_clock*Pc*Cc + k2_clock*PCn - k1_clock*PCc - k_dn*PCc)*delta
+    # PCn_d = (-V_3PC*PCn/(K_p+PCn)+V_4PC*PCnp/(K_dp+PCnp)-k2_clock*PCn+k1_clock*PCc-k7*Bn*PCn+k8*In-k_dn*PCn)*delta
+    PCn_d = (-V_3PC*g(PCn,K_p) +V_4PC*g(PCnp,K_dp) -k2_clock*PCn + k1_clock*PCc - k7*Bn*PCn + k8*In - k_dn*PCn)*delta
+    # PCcp_d = (V_1PC*PCc/(K_p+PCc)-V_2PC*PCcp/(K_dp+PCcp)-v_dPCC*PCcp/(K_d+PCcp)-k_dn*PCcp)*delta
+    PCcp_d = (V_1PC*g(PCc,K_p) -V_2PC*g(PCcp,K_dp) -v_dPCC*g(PCcp,K_d) -k_dn*PCcp)*delta
+    # PCnp_d = (V_3PC*PCn/(K_p+PCn)-V_4PC*PCnp/(K_dp+PCnp)-v_dPCN*PCnp/(K_d+PCnp)-k_dn*PCnp)*delta
+    PCnp_d = (V_3PC*g(PCn,K_p) -V_4PC*g(PCnp,K_dp) - v_dPCN*g(PCnp,K_d) - k_dn*PCnp)*delta
+    # Bc_d = (k_sB*Mbmal-(V_1B)*Bc/(K_p+Bc)+V_2B*Bcp/(K_dp+Bcp)-k5*Bc+k6*Bn-k_dn*Bc)*delta
+    Bc_d = (k_sB*Mbmal - (V_1B)*g(Bc,K_p) +V_2B*g(Bcp,K_dp) - k5*Bc + k6*Bn - k_dn*Bc)*delta
+    # Bcp_d = ((V_1B)*Bc/(K_p+Bc)-V_2B*Bcp/(K_dp+Bcp)-v_dBC*Bcp/(K_d+Bcp)-k_dn*Bcp)*delta
+    Bcp_d = ((V_1B)*g(Bc,K_p) - V_2B*g(Bcp,K_dp) - v_dBC*g(Bcp,K_d) - k_dn*Bcp)*delta
+    # Bn_d = (-V_3B*Bn/(K_p+Bn)+V_4B*Bnp/(K_dp+Bnp)+k5*Bc-k6*Bn-k7*Bn*PCn+k8*In-k_dn*Bn)*delta
+    Bn_d = (-V_3B*g(Bn,K_p) +V_4B*g(Bnp,K_dp) + k5*Bc - k6*Bn - k7*Bn*PCn + k8*In - k_dn*Bn)*delta
+    # Bnp_d = (V_3B*Bn/(K_p+Bn)-V_4B*Bnp/(K_dp+Bnp)-v_dBN*Bnp/(K_d+Bnp)-k_dn*Bnp)*delta
+    Bnp_d = (V_3B*g(Bn,K_p) - V_4B*g(Bnp,K_dp) - v_dBN*g(Bnp,K_d) - k_dn*Bnp)*delta
+    # In_d = (-k8*In+k7*Bn*PCn-v_dIN*In/(K_d+In)-k_dn*In)*delta
+    In_d = (-k8*In + k7*Bn*PCn - v_dIN*g(In,K_d) - k_dn*In)*delta
+    # Mr_d = (v_sR*Bn^h/(K_AR^h+Bn^h)+v_in*KI_cdk1^ncdk/(KI_cdk1^ncdk+Mb^ncdk)-v_mR*Mr/(K_mR+Mr)-k_dmr*Mr)*delta
+    Mr_d = (v_sR*f(Bn,K_AR,h) + v_in*f(KI_cdk1,Mb,ncdk) - v_mR*g(Mr,K_mR) - k_dmr*Mr)*delta
+    # Rc_d = (k_sR*Mr-k9*Rc+k10*Rn-(V_1R+V_cdk*Mb)*Rc/(K_p+Rc)+V_2R*Rcp/(K_dp+Rcp)-k_dn*Rc)*delta
+    Rc_d = (k_sR*Mr - k9*Rc + k10*Rn - (V_1R+V_cdk*Mb)*g(Rc,K_p) + V_2R*g(Rcp,K_dp) - k_dn*Rc)*delta
+    # Rcp_d = ((V_1R+V_cdk*Mb)*Rc/(K_p+Rc)-V_2R*Rcp/(K_dp+Rcp)-v_dRC*Rcp/(K_d+Rcp)-k_dn*Rcp)*delta
+    Rcp_d = ((V_1R+V_cdk*Mb)*g(Rc,K_p) -V_2R*g(Rcp,K_dp) -v_dRC*g(Rcp,K_d) - k_dn*Rcp)*delta
+    # Rn_d = (k9*Rc-k10*Rn-(V_3R+V_cdk*Mb)*Rn/(K_p+Rn)+V_4R*Rnp/(K_dp+Rnp)-k_dn*Rn)*delta
+    Rn_d = (k9*Rc - k10*Rn - (V_3R+V_cdk*Mb)*g(Rn,K_p) +V_4R*g(Rnp,K_dp) - k_dn*Rn)*delta
+    # Rnp_d = ((V_3R+V_cdk*Mb)*Rn/(K_p+Rn)-V_4R*Rnp/(K_dp+Rnp)-v_dRN*Rnp/(K_d+Rnp)-k_dn*Rnp)*delta
+    Rnp_d = ((V_3R+V_cdk*Mb)*g(Rn,K_p) -V_4R*g(Rnp,K_dp) -v_dRN*g(Rnp,K_d) - k_dn*Rnp)*delta
 
 
 #cell cycle
@@ -137,7 +162,9 @@ function circadian_cell_cycle!(du, u, p, t)
     Wee1_d = (k_sw*Mw-V_m7b*(Mb+i_b)*(Wee1/(K_7b+Wee1))+V_m8b*(Wee1p/(K_8b+Wee1p))-k_dwee1*Wee1)*eps
     Wee1p_d = (V_m7b*(Mb+i_b)*(Wee1/(K_7b+Wee1))-V_m8b*(Wee1p/(K_8b+Wee1p))-k_dwee1p*Wee1p)*eps
 
-    du = Mp_d, Mc_d, Mbmal_d, Pc_d, Cc_d, Pcp_d, Ccp_d, PCc_d, PCn_d, PCcp_d, PCnp_d, Bc_d, Bcp_d, Bn_d, Bnp_d, In_d, Mr_d, Rc_d, Rcp_d, Rn_d, Rnp_d, AP1_d, pRB_d, pRBc1_d, pRBp_d, pRBc2_d, pRBpp_d, E2F_d, E2Fp_d, Cd_d, Mdi_d, Md_d, Mdp27_d, Mce_d, Ce_d, Mei_d, Me_d, Skp2_d, Mep27_d, Pei_d, Pe_d, Ca_d, Mai_d, Ma_d, Map27_d, p27_d, p27p_d, Cdh1i_d, Cdh1a_d, Pai_d, Pa_d, Cb_d, Mbi_d, Mb_d, Mbp27_d, Cdc20i_d, Cdc20a_d, Pbi_d, Pb_d, Mw_d, Wee1_d, Wee1p_d
+    # du = Mp_d, Mc_d, Mbmal_d, Pc_d, Cc_d, Pcp_d, Ccp_d, PCc_d, PCn_d, PCcp_d, PCnp_d, Bc_d, Bcp_d, Bn_d, Bnp_d, In_d, Mr_d, Rc_d, Rcp_d, Rn_d, Rnp_d, AP1_d, pRB_d, pRBc1_d, pRBp_d, pRBc2_d, pRBpp_d, E2F_d, E2Fp_d, Cd_d, Mdi_d, Md_d, Mdp27_d, Mce_d, Ce_d, Mei_d, Me_d, Skp2_d, Mep27_d, Pei_d, Pe_d, Ca_d, Mai_d, Ma_d, Map27_d, p27_d, p27p_d, Cdh1i_d, Cdh1a_d, Pai_d, Pa_d, Cb_d, Mbi_d, Mb_d, Mbp27_d, Cdc20i_d, Cdc20a_d, Pbi_d, Pb_d, Mw_d, Wee1_d, Wee1p_d
+
+du = Mp_d, Mc_d, Mbmal_d, Pc_d, Cc_d, Pcp_d, Ccp_d, PCc_d, PCn_d, PCcp_d, PCnp_d, Bc_d, Bcp_d, Bn_d, Bnp_d, In_d, Mr_d, Rc_d, Rcp_d, Rn_d, Rnp_d, AP1_d, pRB_d, pRBc1_d, pRBp_d, pRBc2_d, pRBpp_d, E2F_d, E2Fp_d, Cd_d, Mdi_d, Md_d, Mdp27_d, Mce_d, Ce_d, Mei_d, Me_d, Skp2_d, Mep27_d, Pei_d, Pe_d, Ca_d, Mai_d, Ma_d, Map27_d, p27_d, p27p_d, Cdh1i_d, Cdh1a_d, Pai_d, Pa_d, Cb_d, Mbi_d, Mb_d, Mbp27_d, Cdc20i_d, Cdc20a_d, Pbi_d, Pb_d, Mw_d, Wee1_d, Wee1p_d 
 
 end
 
@@ -156,4 +183,5 @@ Wee1p=0.01
 u = [Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, In, Mr, Rc, Rcp, Rn, Rnp, AP1, pRB, pRBc1, pRBp, pRBc2, pRBpp, E2F, E2Fp, Cd, Mdi, Md, Mdp27, Mce, Ce, Mei, Me, Skp2, Mep27, Pei, Pe, Ca, Mai, Ma, Map27, p27, p27p, Cdh1i, Cdh1a, Pai, Pa, Cb, Mbi, Mb, Mbp27, Cdc20i, Cdc20a, Pbi, Pb, Mw, Wee1, Wee1p]
 
 df = CoupledODEs(circadian_cell_cycle!,rand(62))
-y,t = trajectory(df, 100, u)
+y,t = trajectory(df, 10000, rand(62))
+plot(t, y[:,62])
