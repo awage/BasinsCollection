@@ -16,7 +16,7 @@ function circadian_cell_cycle!(du, u, p, t)
 # @show length(u)
 #
 ### CONSTANTS
-    V_cdk = 3.623; KI_cdk1 = 0.5; ncdk = 2; v_sw = 20.
+    V_cdk = 3.623; KI_cdk1 = 0.5; ncdk = 2; v_sw = 0.1
     k1_clock = 0.8; k2_clock = 0.4; k3_clock = 0.8; k4_clock = 0.4; k5 = 0.8; k6 = 0.4; k7 = 1; k8 = 0.2; k9 = 0.63; k10 = 0.4; 
     K_AP = 0.6; K_AC = 0.6; K_AR = 0.6; K_IB = 1; 
     k_dmb = 0.02; k_dmc = 0.02; k_dmp = 0.02; k_dmr = 0.02; k_dn = 0.02; k_dnc = 0.02; 
@@ -143,7 +143,7 @@ g(x,y) = x/(x+y)
     Wee1p_d = (V_m7b*(Mb+i_b)*g(Wee1,K_7b) -V_m8b*g(Wee1p,K_8b) -k_dwee1p*Wee1p)*eps
 
 
-du = [Mp_d Mc_d Mbmal_d Pc_d Cc_d Pcp_d Ccp_d PCc_d PCn_d PCcp_d PCnp_d Bc_d Bcp_d Bn_d Bnp_d In_d Mr_d Rc_d Rcp_d Rn_d Rnp_d AP1_d pRB_d pRBc1_d pRBp_d pRBc2_d pRBpp_d E2F_d E2Fp_d Cd_d Mdi_d Md_d Mdp27_d Mce_d Ce_d Mei_d Me_d Skp2_d Mep27_d Pei_d Pe_d Ca_d Mai_d Ma_d Map27_d p27_d p27p_d Cdh1i_d Cdh1a_d Pai_d Pa_d Cb_d Mbi_d Mb_d Mbp27_d Cdc20i_d Cdc20a_d Pbi_d Pb_d Mw_d Wee1_d Wee1p_d]
+du .= Mp_d, Mc_d, Mbmal_d, Pc_d, Cc_d, Pcp_d, Ccp_d, PCc_d, PCn_d, PCcp_d, PCnp_d, Bc_d, Bcp_d, Bn_d, Bnp_d, In_d, Mr_d, Rc_d, Rcp_d, Rn_d, Rnp_d, AP1_d, pRB_d, pRBc1_d, pRBp_d, pRBc2_d, pRBpp_d, E2F_d, E2Fp_d, Cd_d, Mdi_d, Md_d, Mdp27_d, Mce_d, Ce_d, Mei_d, Me_d, Skp2_d, Mep27_d, Pei_d, Pe_d, Ca_d, Mai_d, Ma_d, Map27_d, p27_d, p27p_d, Cdh1i_d, Cdh1a_d, Pai_d, Pa_d, Cb_d, Mbi_d, Mb_d, Mbp27_d, Cdc20i_d, Cdc20a_d, Pbi_d, Pb_d, Mw_d, Wee1_d, Wee1p_d
 
 # @show length(du)
 return nothing
@@ -165,9 +165,9 @@ u0 = [Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, I
 
 diffeq = (reltol = 1e-9,  alg = Vern9())
 df = CoupledODEs(circadian_cell_cycle!, rand(62); diffeq)
-prob = ODEProblem(circadian_cell_cycle!, u0, (0,1.))
-sol = solve(prob, DP8(), abstol = 1e-12; dt = 0.01, adaptive = false)
+# prob = ODEProblem(circadian_cell_cycle!, u0, (0,1.))
+# sol = solve(prob, DP8(), abstol = 1e-12; dt = 0.01, adaptive = false)
 
 # y,t = trajectory(df, 10., rand(62)*100; Δt = 0.01)
-# y,t = trajectory(df, 10., u0; Δt = 0.01)
-# plot(t, y[:,62])
+y,t = trajectory(df, 200., u0; Δt = 0.01)
+plot(t, y[:,62])
