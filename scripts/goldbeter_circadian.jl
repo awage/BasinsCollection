@@ -7,16 +7,13 @@ using LaTeXStrings
 using ColorSchemes
 
 
-
-
-
 function circadian_cell_cycle!(du, u, p, t)
 # Variables
     Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, In, Mr, Rc, Rcp, Rn, Rnp, AP1, pRB, pRBc1, pRBp, pRBc2, pRBpp, E2F, E2Fp, Cd, Mdi, Md, Mdp27, Mce, Ce, Mei, Me, Skp2, Mep27, Pei, Pe, Ca, Mai, Ma, Map27, p27, p27p, Cdh1i, Cdh1a, Pai, Pa, Cb, Mbi, Mb, Mbp27, Cdc20i, Cdc20a, Pbi, Pb, Mw, Wee1, Wee1p = u
 # @show length(u)
-#
+
 ### CONSTANTS
-    V_cdk = 3.623; KI_cdk1 = 0.5; ncdk = 2; v_sw = 0.1
+    V_cdk = 4.; KI_cdk1 = 0.45; ncdk = 2.; v_sw = 1.6
     k1_clock = 0.8; k2_clock = 0.4; k3_clock = 0.8; k4_clock = 0.4; k5 = 0.8; k6 = 0.4; k7 = 1; k8 = 0.2; k9 = 0.63; k10 = 0.4; 
     K_AP = 0.6; K_AC = 0.6; K_AR = 0.6; K_IB = 1; 
     k_dmb = 0.02; k_dmc = 0.02; k_dmp = 0.02; k_dmr = 0.02; k_dn = 0.02; k_dnc = 0.02; 
@@ -31,9 +28,9 @@ function circadian_cell_cycle!(du, u, p, t)
     delta = 1.
     Chk1 = 0
 
-eps = 23.
+    eps = 20.5
 
-GF = 1; K_agf = 0.1; k_dap1 = 0.15;  v_sap1 = 1
+    GF = 1; K_agf = 0.1; k_dap1 = 0.15;  v_sap1 = 1
     k_de2f = 0.002; k_de2fp = 1.1; k_dprb = 0.01; k_dprbp = 0.06; k_dprbpp = 0.04
     k_pc1 = 0.05; k_pc2 = 0.5; k_pc3 = 0.025; k_pc4 = 0.5; K1 = 0.1; K2 = 0.1; K3 = 0.1
     K4 = 0.1; V1 = 2.2; V2 = 2; V3 = 1; V4 = 2; K_1e2f = 5; K_2e2f = 5; V_1e2f = 4
@@ -63,8 +60,8 @@ GF = 1; K_agf = 0.1; k_dap1 = 0.15;  v_sap1 = 1
     v_swee1 = 0.0117; nmw = 4; K_aw = 2; V_dmw = 0.5; K_dmw = 0.5
     v_sce = 0.005; K_ice = 1; V_dmce = 0.5; K_dmce = 0.5; nce = 4; k_ce2 = 5
 
-f(x,y,p) = x^p/(x^p + y^p) 
-g(x,y) = x/(x+y)
+    f(x,y,p) = x^p/(x^p + y^p) 
+    g(x,y) = x/(x+y)
 #circadian clock
     Mp_d = (v_sP*f(Bn,K_AP,n) + v_in*f(KI_cdk1,Mb,ncdk) - v_mP*g(Mp,K_mP) - k_dmp*Mp)*delta
     Mc_d = (v_sC*f(Bn,K_AC,n) + v_in*f(KI_cdk1,Mb,ncdk) - v_mC*g(Mc,K_mC) - k_dmc*Mc)*delta
@@ -143,10 +140,10 @@ g(x,y) = x/(x+y)
     Wee1p_d = (V_m7b*(Mb+i_b)*g(Wee1,K_7b) -V_m8b*g(Wee1p,K_8b) -k_dwee1p*Wee1p)*eps
 
 
-du .= Mp_d, Mc_d, Mbmal_d, Pc_d, Cc_d, Pcp_d, Ccp_d, PCc_d, PCn_d, PCcp_d, PCnp_d, Bc_d, Bcp_d, Bn_d, Bnp_d, In_d, Mr_d, Rc_d, Rcp_d, Rn_d, Rnp_d, AP1_d, pRB_d, pRBc1_d, pRBp_d, pRBc2_d, pRBpp_d, E2F_d, E2Fp_d, Cd_d, Mdi_d, Md_d, Mdp27_d, Mce_d, Ce_d, Mei_d, Me_d, Skp2_d, Mep27_d, Pei_d, Pe_d, Ca_d, Mai_d, Ma_d, Map27_d, p27_d, p27p_d, Cdh1i_d, Cdh1a_d, Pai_d, Pa_d, Cb_d, Mbi_d, Mb_d, Mbp27_d, Cdc20i_d, Cdc20a_d, Pbi_d, Pb_d, Mw_d, Wee1_d, Wee1p_d
+    du .= Mp_d, Mc_d, Mbmal_d, Pc_d, Cc_d, Pcp_d, Ccp_d, PCc_d, PCn_d, PCcp_d, PCnp_d, Bc_d, Bcp_d, Bn_d, Bnp_d, In_d, Mr_d, Rc_d, Rcp_d, Rn_d, Rnp_d, AP1_d, pRB_d, pRBc1_d, pRBp_d, pRBc2_d, pRBpp_d, E2F_d, E2Fp_d, Cd_d, Mdi_d, Md_d, Mdp27_d, Mce_d, Ce_d, Mei_d, Me_d, Skp2_d, Mep27_d, Pei_d, Pe_d, Ca_d, Mai_d, Ma_d, Map27_d, p27_d, p27p_d, Cdh1i_d, Cdh1a_d, Pai_d, Pa_d, Cb_d, Mbi_d, Mb_d, Mbp27_d, Cdc20i_d, Cdc20a_d, Pbi_d, Pb_d, Mw_d, Wee1_d, Wee1p_d
 
 # @show length(du)
-return nothing
+    return nothing
 end
 
 Mp=0.1; Mc=0.1; Mbmal=0.1; Pc=0.1; Cc=0.1; 
@@ -163,11 +160,24 @@ Wee1p=0.01
 
 u0 = [Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, In, Mr, Rc, Rcp, Rn, Rnp, AP1, pRB, pRBc1, pRBp, pRBc2, pRBpp, E2F, E2Fp, Cd, Mdi, Md, Mdp27, Mce, Ce, Mei, Me, Skp2, Mep27, Pei, Pe, Ca, Mai, Ma, Map27, p27, p27p, Cdh1i, Cdh1a, Pai, Pa, Cb, Mbi, Mb, Mbp27, Cdc20i, Cdc20a, Pbi, Pb, Mw, Wee1, Wee1p]
 
-diffeq = (reltol = 1e-9,  alg = Vern9())
+# 14 -> Bn
+# 54 -> Mb 
+# 37 -> Me
+diffeq = (reltol = 1e-6,  alg = Tsit5())
 df = CoupledODEs(circadian_cell_cycle!, rand(62); diffeq)
+proj = ProjectedDynamicalSystem(df, [14, 37, 54], u0[[1:13; 15:36; 38:53; 55:62]])
+
+yg = xg = zg = range(0., 3., length = 2001)
+mapper = AttractorsViaRecurrences(proj, (xg,yg,zg); Δt = 1.0, consecutive_recurrences = 500)    
+
+# for _ in 1:1000
+#     @show mapper(rand(3))
+# end
+#
 # prob = ODEProblem(circadian_cell_cycle!, u0, (0,1.))
 # sol = solve(prob, DP8(), abstol = 1e-12; dt = 0.01, adaptive = false)
 
 # y,t = trajectory(df, 10., rand(62)*100; Δt = 0.01)
-y,t = trajectory(df, 200., u0; Δt = 0.01)
-plot(t, y[:,62])
+y,t = trajectory(df, 400., rand(3); Ttr = 200, Δt = 0.01)
+# plot(t, y[:,62])
+plot(y[:,1], y[:,2])
