@@ -37,10 +37,10 @@ function compute_biorhythm(di)
     return @strdict(bsn, att, grid,  res)
 end
 
-res = 350; 
+res = 1200; 
 
 # for ks in 2.0:0.05:2.5
-ks = 1.98
+ks = 1.99
 params = @strdict  ks res
 print_fig(params, "biorhythm", compute_biorhythm; ylab = L"y", xlab = L"x", force = false)
 att = get_att(params, "biorhythm", compute_biorhythm)
