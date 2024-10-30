@@ -10,10 +10,9 @@ using ColorSchemes
 function circadian_cell_cycle!(du, u, p, t)
 # Variables
     Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, In, Mr, Rc, Rcp, Rn, Rnp, AP1, pRB, pRBc1, pRBp, pRBc2, pRBpp, E2F, E2Fp, Cd, Mdi, Md, Mdp27, Mce, Ce, Mei, Me, Skp2, Mep27, Pei, Pe, Ca, Mai, Ma, Map27, p27, p27p, Cdh1i, Cdh1a, Pai, Pa, Cb, Mbi, Mb, Mbp27, Cdc20i, Cdc20a, Pbi, Pb, Mw, Wee1, Wee1p = u
-# @show length(u)
 
 ### CONSTANTS
-    V_cdk = 0.; KI_cdk1 = 0.8; ncdk = 1.; v_sw = 2.2
+V_cdk = 0.; KI_cdk1 = 0.8; ncdk = 1.; v_sw = p[1]
     k1_clock = 0.8; k2_clock = 0.4; k3_clock = 0.8; k4_clock = 0.4; k5 = 0.8; k6 = 0.4; k7 = 1; k8 = 0.2; k9 = 0.63; k10 = 0.4; 
     K_AP = 0.6; K_AC = 0.6; K_AR = 0.6; K_IB = 1; 
     k_dmb = 0.02; k_dmc = 0.02; k_dmp = 0.02; k_dmr = 0.02; k_dn = 0.02; k_dnc = 0.02; 
@@ -25,9 +24,9 @@ function circadian_cell_cycle!(du, u, p, t)
     v_mC = 2.0; v_mP = 2.2; v_mR = 1.6; v_sB = 1.8; 
     v_sC = 2.2; v_sP = 2.4; v_sR = 1.6; 
     V_1R = 4; V_2R = 8; V_3R = 8; V_4R = 4; v_in = 0.7
-    delta = 1.
     Chk1 = 0
 
+    delta = 1.
     eps = 22.5
 
     GF = 1; K_agf = 0.1; k_dap1 = 0.15;  v_sap1 = 1
@@ -164,22 +163,21 @@ u0 = [Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, I
 # 54 -> Mb 
 # 37 -> Me
 diffeq = (reltol = 1e-6,  alg = Tsit5())
-df = CoupledODEs(circadian_cell_cycle!, rand(62); diffeq)
+df = CoupledODEs(circadian_cell_cycle!, rand(62), [2.2]; diffeq)
 _complete(y) = (length(y) == 3) ? rand(62) : y; 
-# proj = ProjectedDynamicalSystem(df, [14, 37, 54], u0[[1:13; 15:36; 38:53; 55:62]])
-proj = ProjectedDynamicalSystem(df, [14, 37, 54], _complete)
-
+proj = ProjectedDynamicalSystem(df, [14, 37, 54], u0[[1:13; 15:36; 38:53; 55:62]])
+# proj = ProjectedDynamicalSystem(df, [14, 37, 54], _complete)
 # yg = range(-1, 3; length = 1001)
 # grid = ntuple(x -> yg, dimension(df))
-pow = 3; xg = range(0, 2^(1/pow); length = 2001).^pow
+pow = 3; xg = range(0, 2^(1/pow); length = 20001).^pow
 # yg = xg = zg = range(0., 3., length = 2001)
 mapper = AttractorsViaRecurrences(proj, (xg,xg,xg); Δt = 1.0, consecutive_recurrences = 150)
 # mapper = AttractorsViaRecurrences(df, grid; Δt = 1.0, consecutive_recurrences = 500)    
 
-for _ in 1:1000
-    # @show mapper(rand(3))
-    @show mapper(rand(62)*0.4)
-end
+# for _ in 1:100
+#     @show mapper(rand(3))
+#     # @show mapper(rand(62)*0.4)
+# end
 #
 # prob = ODEProblem(circadian_cell_cycle!, u0, (0,1.))
 # sol = solve(prob, DP8(), abstol = 1e-12; dt = 0.01, adaptive = false)
@@ -188,3 +186,13 @@ end
 # y,t = trajectory(df, 400., rand(3); Ttr = 200, Δt = 0.01)
 # plot(t, y[:,62])
 # plot(y[:,1], y[:,2])
+
+prange = 2:0.5:5
+pidx = 1 # index of the parameter
+xg = range(0,2,length =10)
+grid = (xg,xg,xg)
+sampler, = statespace_sampler(grid)
+ascm = AttractorSeedContinueMatch(mapper)
+fractions_cont, attractors_cont = global_continuation(
+	ascm, prange, pidx, sampler; samples_per_parameter = 10
+)

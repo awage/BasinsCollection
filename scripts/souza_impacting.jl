@@ -27,7 +27,6 @@ function impact_oscillator(u, p, t)
 end
 
 
-
 function compute_impact(di::Dict)
     @unpack res = di
     ω = 0.417893;
