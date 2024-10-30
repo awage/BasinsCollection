@@ -3,6 +3,7 @@ using DrWatson
 using Attractors
 using LaTeXStrings
 using CairoMakie
+include(srcdir("print_fig.jl"))
 
 # On noninvertible mappings of the plane: Eruptions
 # Lora Billings;
@@ -26,11 +27,12 @@ function compute_bairstow(di::Dict)
     yg = xg = range(-4, 4, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg); show_progress = true)
     grid = (xg, yg)
-    return @strdict(bsn, att, grid, μ, j, res)
+    return @strdict(bsn, att, grid, res)
 end
 
 
-# res = 1000
+res = 1200
 a = 0.8
+a = 0.15
 params = @strdict res a 
 print_fig(params, "bairstow_map", compute_bairstow; xlab = L"u", ylab = L"v")
