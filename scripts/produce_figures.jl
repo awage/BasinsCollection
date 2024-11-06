@@ -23,6 +23,8 @@ include("4d_kicked.jl")
 
 include("kicked_rotor.jl")
 
+include("kicked_ott.jl")
+
 include("map_feudel.jl")
 
 include("map_grebogi.jl")

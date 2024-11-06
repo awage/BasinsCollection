@@ -56,10 +56,13 @@ everything should work out of the box, including correctly finding local paths.
 
    ![kicked_rotor_4d](./plots/kicked_rotor_4d_res=1200_ρ=6.5.png)
 
-* 4D kicked map rotor from `kicked_rotor.jl`: https://doi.org/10.1103/PhysRevE.54.71
-* 4D kicked map rotor from `kicked_ott.jl`: https://doi.org/10.1016/0167-2789(87)90108-4
+* A map with hundred of attractors: `kicked_rotor.jl`: https://doi.org/10.1103/PhysRevE.54.71
 
    ![kicked_rotor](./plots/kicked_rotor_f0=4.0_res=1200_ν=0.02.png)
+
+* 4D kicked map rotor from `kicked_ott.jl`: https://doi.org/10.1016/0167-2789(87)90108-4
+
+   ![kicked_rotor_ott](./plots/kicked_rotor_ott_f0=0.1_res=1200.png)
 
 * A map with Wada `map_feudel.jl`: https://doi.org/10.1103/PhysRevE.58.3060
 
