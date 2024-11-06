@@ -6,6 +6,9 @@ using Attractors
 using ProgressMeter
 using OrdinaryDiffEq:Vern9
 include(srcdir("print_fig.jl"))
+
+
+# Decroly, O., & Goldbeter, A. (1982). Birhythmicity, chaos, and other patterns of temporal self-organization in a multiply regulated biochemical system. Proceedings of the National Academy of Sciences, 79(22), 6917-6921.
 function biorhythm!(du, u, p, t)
     σ1 = 10; σ2 = 10; L_1 = 5e8; L_2 = 100
     q1 =50; q2 = 0.02; d = 1e-6

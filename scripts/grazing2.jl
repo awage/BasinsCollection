@@ -6,16 +6,7 @@ using CairoMakie
 using LaTeXStrings
 using ColorSchemes
 
-# @article{de2008suppressing,
-#   title={Suppressing grazing chaos in impacting system by structural nonlinearity},
-#   author={De Souza, SLT and Wiercigroch, Marian and Caldas, Iber{\^e} Luiz and Balthazar, Jos{\'e} Manoel},
-#   journal={Chaos, Solitons \& Fractals},
-#   volume={38},
-#   number={3},
-#   pages={864--869},
-#   year={2008},
-#   publisher={Elsevier}
-# }
+# Mason, J. F., Piiroinen, P. T., Wilson, R. E., & Homer, M. E. (2009). Basins of attraction in nonsmooth models of gear rattle. International Journal of Bifurcation and Chaos, 19(01), 203-224.
 # Equations of motion:
 function grazing2(u, p, t)
     γ = 0.1; α = 0.48; β = 0.1; ω = 1;

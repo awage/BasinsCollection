@@ -6,6 +6,7 @@ using CairoMakie
 using ProgressMeter
 include(srcdir("print_fig.jl"))
 
+# Ostrovskii, V. Y., Rybin, V. G., Karimov, A. I., & Butusov, D. N. (2022). Inducing multistability in discrete chaotic systems using numerical integration with variable symmetry. Chaos, Solitons & Fractals, 165, 112794.
 function map_chen!(dz, z, p, n)
 xn, yn, zn = z
 h = 0.01; a = 40; b = 3; c = 28 
@@ -45,4 +46,3 @@ end
 res = 1200; S = 0.77
 params = @strdict res S
 print_fig(params, "chen", compute_chen; xlab = L"x", ylab = L"y", force = false)
-# att =  get_att(params, "nash_equilibrium", compute_nash; force = true)

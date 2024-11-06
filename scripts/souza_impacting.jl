@@ -6,6 +6,7 @@ using CairoMakie
 using LaTeXStrings
 using ColorSchemes
 
+# De Souza, S. L. T., Wiercigroch, M., Caldas, I. L., & Balthazar, J. M. (2008). Suppressing grazing chaos in impacting system by structural nonlinearity. Chaos, Solitons & Fractals, 38(3), 864-869.
 function H(x) 
     gg = 0.63
     if x ≥ gg 

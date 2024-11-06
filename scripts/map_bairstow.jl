@@ -22,8 +22,9 @@ end
 function compute_bairstow(di::Dict)
     @unpack a, res = di
     ds = DeterministicIteratedMap(bairstow_map!, [1.0, 0.0], a)
-    yg = xg = range(-4., 4., length = 25000)
-    mapper = AttractorsViaRecurrences(ds, (xg,yg))
+    yg = xg = range(-10., 10., length = 2500)
+    mapper = AttractorsViaRecurrences(ds, (xg,yg); 
+        maximum_iterations = 200)
     yg = xg = range(-4, 4, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg); show_progress = true)
     grid = (xg, yg)
@@ -33,6 +34,7 @@ end
 
 res = 1200
 a = 0.8
-a = 0.15
+# a = 0.15
 params = @strdict res a 
-print_fig(params, "bairstow_map", compute_bairstow; xlab = L"u", ylab = L"v")
+print_fig(params, "bairstow_map", compute_bairstow; xlab = L"u", ylab = L"v", force = true)
+att = get_att(params, "bairstow_map", compute_bairstow)

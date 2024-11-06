@@ -8,7 +8,7 @@ using ColorSchemes
 using ProgressMeter
 include(srcdir("print_fig.jl"))
 
-
+# Brzeski, P., Kapitaniak, T., & Perlikowski, P. (2015). Analysis of transitions between different ringing schemes of the church bell. International Journal of Impact Engineering, 85, 57-66.
 function bell_yoke!(du, u, p, t)
     ϕ1, ϕ2, dϕ1, dϕ2 = u
     Tmax, lr = p

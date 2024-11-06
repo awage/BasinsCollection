@@ -80,4 +80,13 @@ everything should work out of the box, including correctly finding local paths.
 * Bairstow application: `map_bairstow.jl`: https://doi.org/10.1063/1.166158
 * Quadratic map for basin bifurcations: `map_mira.jl`: https://doi.org/10.1142/S0218127494000241
 * Geographic Economic competition model: `economic_geographic_model.jl`: http://dx.doi.org/10.1016/j.matcom.2014.01.004
-* Gear rattle oscilator: `gear_rattle.jl`
+* Nonsmooth models of gear rattle oscilator: `gear_rattle.jl`: https://doi.org/10.1142/S021812740902283X
+* Piecewise Smooth Dynamical System: `map_lai.jl`: https://doi.org/10.1063/1.2985853
+* Basin bifurcations in quasiperiodically forced coupled systems: `map_shrimali.jl`: https://doi.org/10.1103/PhysRevE.72.036215
+* Basins of attraction in nonsmooth models of gear rattle: `grazing2.jl`: https://doi.org/10.1142/S021812740902283X
+* Basins of attraction of different ringing schemes of the church bell: `bell_yoke2.jl`: https://doi.org/10.1016/j.ijimpeng.2015.06.008
+* Basins of a multiply regulated biochemical system: `decroly_biorhythm.jl`: https://doi.org/10.1073/pnas.79.22.6917   
+* Multistability in discrete chaotic systems using numerical integration with variable symmetry: `map_vcsd_chen.jl`: https://doi.org/10.1016/j.chaos.2022.112794
+* Adaptive synapse-based neuron model with heterogeneous multistability and riddled basins: `neuron_synapse.jl`: https://doi.org/10.1063/5.0125611
+* Grazing chaos in impacting system: `souza_impacting.jl`: https://doi.org/10.1016/j.chaos.2007.01.022
+* Simplified discretized Lorenz model: `lorenz_computational_chaos.jl`:  https://doi.org/10.1016/0167-2789(89)90072-9

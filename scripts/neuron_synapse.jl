@@ -5,6 +5,7 @@ using OrdinaryDiffEq
 using LaTeXStrings
 using CairoMakie
 include(srcdir("print_fig.jl"))
+
 # Adaptive synapse-based neuron model with
 # heterogeneous multistability and riddled basins
 #  Chaos 32, 123101 (2022); doi: 10.1063/5.0125611
