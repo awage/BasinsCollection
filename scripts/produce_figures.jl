@@ -95,7 +95,6 @@ include("co2_modulated_laser.jl")
 
 include("pumped_laser_dynamics.jl")
  
-include("economic_geographic_model.jl")
 
 include("TLNs_network.jl")
 
@@ -135,8 +134,6 @@ include("map_shrimali.jl")
 
 include("decroly_biorhythm.jl")
 
-include("map_vcsd_chen.jl")
-
 include("neuron_synapse.jl")
 
 include("souza_impacting.jl")
@@ -146,3 +143,5 @@ include("lorenz_computational_chaos.jl")
 include("grazing2.jl")
 
 include("bell_yoke2.jl")
+
+include("map_nash_eq.jl")

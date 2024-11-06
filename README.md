@@ -226,184 +226,62 @@ everything should work out of the box, including correctly finding local paths.
    ![megastable](./plots/megastable_res=1200.png)
 
 * Matryoshka multistability: `matryoshka.jl`: https://doi.org/10.1016/j.chaos.2024.115412
+
+   ![matryoshka](./plots/matryoshka_res=1200.png)
+
 * Bairstow application: `map_bairstow.jl`: https://doi.org/10.1063/1.166158
+
+   ![bairstow_map](./plots/bairstow_map_a=0.8_res=1200.png)
+
 * Quadratic map for basin bifurcations: `map_mira.jl`: https://doi.org/10.1142/S0218127494000241
+
+   ![mira_map](./plots/mira_map_a=-0.42_b=-1.32_res=1200.png)
+
 * Geographic Economic competition model: `economic_geographic_model.jl`: http://dx.doi.org/10.1016/j.matcom.2014.01.004
+
+   ![basins_economic](./plots/basins_economic_res=1500_Φ=0.085.png)
+
+* Multistability in a dynamic Cournot game: `map_nash_eq.jl`: 
+
+   ![nash_equilibrium](./plots/nash_equilibrium_res=1200_λ=0.5_μ=1.95.png)
+
 * Nonsmooth models of gear rattle oscilator: `gear_rattle.jl`: https://doi.org/10.1142/S021812740902283X
+
+   ![gear_rattle](./plots/gear_rattle_res=1200_β=0.6_δ=0.6_ε=0.1.png)
+
 * Piecewise Smooth Dynamical System: `map_lai.jl`: https://doi.org/10.1063/1.2985853
+
+   ![lai_pcw](./plots/lai_pcw_res=1200.png)
+
 * Basin bifurcations in quasiperiodically forced coupled systems: `map_shrimali.jl`: https://doi.org/10.1103/PhysRevE.72.036215
+
+   ![shrimali](./plots/shrimali_res=1200_α=3.25_β=0.01_ϵp=0.5.png)
+
 * Basins of attraction in nonsmooth models of gear rattle: `grazing2.jl`: https://doi.org/10.1142/S021812740902283X
+
+   ![grazing2](./plots/grazing2_res=1200.png)
+
 * Basins of attraction of different ringing schemes of the church bell: `bell_yoke2.jl`: https://doi.org/10.1016/j.ijimpeng.2015.06.008
+
+   ![bell_yoke](./plots/bell_yoke_Tmax=150_lr=-0.03_res=600.png)
+
 * Basins of a multiply regulated biochemical system: `decroly_biorhythm.jl`: https://doi.org/10.1073/pnas.79.22.6917   
+
+   ![biorhythm](./plots/biorhythm_ks=1.99_res=1200.png)
+
 * Multistability in discrete chaotic systems using numerical integration with variable symmetry: `map_vcsd_chen.jl`: https://doi.org/10.1016/j.chaos.2022.112794
+
+  ![chen](./plots/chen_S=0.77_res=1200.png)
+
 * Adaptive synapse-based neuron model with heterogeneous multistability and riddled basins: `neuron_synapse.jl`: https://doi.org/10.1063/5.0125611
+
+   ![neuron_synapse](./plots/neuron_synapse_B=2_c=1.8_g=1.7_res=1200.png)
+
 * Grazing chaos in impacting system: `souza_impacting.jl`: https://doi.org/10.1016/j.chaos.2007.01.022
+
+   ![impacting](./plots/impacting_res=1200.png)
+
 * Simplified discretized Lorenz model: `lorenz_computational_chaos.jl`:  https://doi.org/10.1016/0167-2789(89)90072-9
 
+   ![lorenz_complexity](./plots/lorenz_complexity_res=1200.png)
 
-duffing_0.05
-Number of basins: 4
-pendulum
-Number of basins: 2
-pendulum
-Number of basins: 3
-parametric_pendulum
-Number of basins: 5
-hh
-Number of basins: 4
-kicked_rotor_4d
-Number of basins: 19
-kicked_rotor
-Number of basins: 64
-feudel
-Number of basins: 4
-grebogi
-Number of basins: 2
-josephson
-Number of basins: 3
-mag_pend
-Number of basins: 3
-rikitake
-Number of basins: 12
-thomas
-Number of basins: 3
-lorenz84
-Number of basins: 5
-slim_fractal
-Number of basins: 3
-sporadical
-Number of basins: 2
-henon
-Number of basins: 4
-cold_atoms
-Number of basins: 3
-comptetion_model
-Number of basins: 3
-open_sinai
-Number of basins: 2
-open_disks
-Number of basins: 3
-kicked_rotor_ott
-Number of basins: 7
-![kicked_rotor_ott](./plots/kicked_rotor_ott_f0=0.1_res=1200.png)
-poon_disks
-Number of basins: 4
-hidden_chua
-Number of basins: 4
-li_sprott
-Number of basins: 2
-basin_sommerer
-Number of basins: 2
-black_holes
-Number of basins: 4
-pred_prey
-Number of basins: 3
-lebovitz
-Number of basins: 3
-cbic_map
-Number of basins: 5
-kapitaniak
-Number of basins: 8
-cplog
-Number of basins: 4
-hidden_memristor
-Number of basins: 4
-coupled_lorenz
-Number of basins: 6
-bogdanov
-Number of basins: 3
-cyc_comp
-Number of basins: 5
-dsnm
-Number of basins: 7
-split_ring_res
-Number of basins: 2
-eckhardt
-Number of basins: 3
-WARNING: using Graphs.Δ in module Main conflicts with an existing identifier.
-basins_kur
-┌ Warning: type DelayEmbeddings.Dataset{120,Float64} does not exist in workspace; reconstructing
-└ @ JLD2 ~/.julia/packages/JLD2/71i9S/src/data/reconstructing_datatypes.jl:577
-┌ Warning: some parameters could not be resolved for type Pair{Int32,JLD2.ReconstructedMutable{Symbol("Dataset{120,Float64}"), (:data,), Tuple{Any}}}; reading as Pair{Int32, JLD2.ReconstructedMutable{Symbol("Dataset{120,Float64}"), (:data,), Tuple{Any}}}
-└ @ JLD2 ~/.julia/packages/JLD2/71i9S/src/data/reconstructing_datatypes.jl:569
-┌ Warning: custom serialization of Dict{Int32,JLD2.ReconstructedMutable{Symbol("Dataset{120,Float64}"), (:data,), Tuple{Any}}} encountered, but the type does not exist in the workspace; the data will be read unconverted
-└ @ JLD2 ~/.julia/packages/JLD2/71i9S/src/data/reconstructing_datatypes.jl:108
-┌ Warning: type Pair{Int32,JLD2.ReconstructedMutable{Symbol("Dataset{120,Float64}"), (:data,), Tuple{Any}}} does not exist in workspace; interpreting Array{Pair{Int32,JLD2.ReconstructedMutable{Symbol("Dataset{120,Float64}"), (:data,), Tuple{Any}}}} as Array{Any}
-└ @ JLD2 ~/.julia/packages/JLD2/71i9S/src/datasets.jl:128
-Number of basins: 58
-alfven
-Number of basins: 3
-basins_CO2_laser
-Number of basins: 2
-basins_lasers
-Number of basins: 3
-basins_economic
-Number of basins: 10
-![basins_economic](./plots/basins_economic_res=1500_Φ=0.085.png)
-basins_tlns
-Number of basins: 5
-basins_tentacles
-Number of basins: 13
-cpashwin
-Number of basins: 2
-photonic_coupler
-Number of basins: 2
-megastable
-Number of basins: 10
-matryoshka
-Number of basins: 11
-![matryoshka](./plots/matryoshka_res=1200.png)
-megastable
-Number of basins: 10
-![megastable](./plots/megastable_res=1200.png)
-mira_map
-Number of basins: 2
-![mira_map](./plots/mira_map_a=-0.42_b=-1.32_res=1200.png)
-nash_equilibrium
-Number of basins: 5
-![nash_equilibrium](./plots/nash_equilibrium_res=1200_λ=0.5_μ=1.95.png)
-shrimali
-Number of basins: 4
-![shrimali](./plots/shrimali_res=1200_α=3.25_β=0.01_ϵp=0.5.png)
-Current script name: map_shrimali.jl
-chen
-Number of basins: 3
-![chen](./plots/chen_S=0.77_res=1200.png)
-bairstow_map
-Number of basins: 2
-![bairstow_map](./plots/bairstow_map_a=0.8_res=1200.png)
-carpet
-Number of basins: 167
-chimera_states
-Number of basins: 10
-chimera_states
-gear_rattle
-Number of basins: 4
-![gear_rattle](./plots/gear_rattle_res=1200_β=0.6_δ=0.6_ε=0.1.png)
-basins_economic
-Number of basins: 10
-![basins_economic](./plots/basins_economic_res=1500_Φ=0.085.png)
-lai_pcw
-Number of basins: 4
-![lai_pcw](./plots/lai_pcw_res=1200.png)
-lai_pcw
-shrimali
-Number of basins: 4
-![shrimali](./plots/shrimali_res=1200_α=3.25_β=0.01_ϵp=0.5.png)
-Current script name: map_shrimali.jl
-biorhythm
-Number of basins: 2
-![biorhythm](./plots/biorhythm_ks=1.99_res=1200.png)
-biorhythm
-chen
-Number of basins: 3
-![chen](./plots/chen_S=0.77_res=1200.png)
-neuron_synapse
-Number of basins: 6
-![neuron_synapse](./plots/neuron_synapse_B=2_c=1.8_g=1.7_res=1200.png)
-impacting
-Number of basins: 2
-![impacting](./plots/impacting_res=1200.png)
-lorenz_complexity
-Number of basins: 3
-![lorenz_complexity](./plots/lorenz_complexity_res=1200.png)
