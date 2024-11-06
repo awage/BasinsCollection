@@ -1,7 +1,7 @@
 using LaTeXStrings
 using CairoMakie
 
-function print_fig(params, sys_name, fun_name; w = 200, h = 200, cmap = nothing, xlab = L"x", ylab = L"y", force = false)
+function print_fig(params, sys_name, fun_name; w = 300, h = 300, cmap = nothing, xlab = L"x", ylab = L"y", force = false)
     println(sys_name)
     data, file = produce_or_load(
         datadir("basins"), params, fun_name;
@@ -10,18 +10,18 @@ function print_fig(params, sys_name, fun_name; w = 200, h = 200, cmap = nothing,
     @unpack bsn, grid = data
     xg, yg = grid
     fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
-            yticklabelsize = 40, 
-            xticklabelsize = 40, 
-            ylabelsize = 40, 
-            xlabelsize = 40, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    # ax = Axis(fig[1,1], 
-    #     xticksvisible = false, 
-    #     yticksvisible = false, 
-    #     xticklabelsvisible = false, 
-    #     yticklabelsvisible = false)
+    # ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
+    #         yticklabelsize = 40, 
+    #         xticklabelsize = 40, 
+    #         ylabelsize = 40, 
+    #         xlabelsize = 40, 
+    #         xticklabelfont = "cmr10", 
+    #         yticklabelfont = "cmr10")
+    ax = Axis(fig[1,1], 
+        xticksvisible = false, 
+        yticksvisible = false, 
+        xticklabelsvisible = false, 
+        yticklabelsvisible = false)
 
     if isnothing(cmap)
         println("Number of basins: " , length(unique(bsn)))
