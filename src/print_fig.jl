@@ -37,7 +37,7 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
     end
     # save(plotsdir(savename(sys_name,params,"pdf")),fig)
     save(plotsdir(savename(sys_name,params,"png")),fig)
-    println("![",sys_name,"](./plot/", savename(sys_name,params,"png"),")")
+    println("![",sys_name,"](./plots/", savename(sys_name,params,"png"),")")
 end
 
 

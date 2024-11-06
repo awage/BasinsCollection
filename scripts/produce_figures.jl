@@ -143,6 +143,6 @@ include("souza_impacting.jl")
 
 include("lorenz_computational_chaos.jl")
 
-include("grazin2.jl")
+include("grazing2.jl")
 
 include("bell_yoke2.jl")
