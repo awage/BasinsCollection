@@ -48,5 +48,5 @@ end
 
 res = 1200; 
 params = @strdict res 
-print_fig(params, "lai_pcw", compute_lai; xlab = L"x", ylab = L"y", force = true)
+print_fig(params, "lai_pcw", compute_lai; xlab = L"x", ylab = L"y", force = false)
 att =  get_att(params, "lai_pcw", compute_lai)

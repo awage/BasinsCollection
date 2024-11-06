@@ -130,3 +130,19 @@ include("gear_rattle.jl")
 include("economic_geographic_model.jl")
 
 include("map_lai.jl")
+ 
+include("map_shrimali.jl")
+
+include("decroly_biorhythm.jl")
+
+include("map_vcsd_chen.jl")
+
+include("neuron_synapse.jl")
+
+include("souza_impacting.jl")
+
+include("lorenz_computational_chaos.jl")
+
+include("grazin2.jl")
+
+include("bell_yoke2.jl")

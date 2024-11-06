@@ -1,7 +1,6 @@
 using LaTeXStrings
 using CairoMakie
 
-
 function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing, xlab = L"x", ylab = L"y", force = false)
     println(sys_name)
     data, file = produce_or_load(
@@ -36,7 +35,9 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
         println("Number of basins: " , length(unique(bsn)))
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end
-    save(plotsdir(savename(sys_name,params,"pdf")),fig)
+    # save(plotsdir(savename(sys_name,params,"pdf")),fig)
+    save(plotsdir(savename(sys_name,params,"png")),fig)
+    println("![",sys_name,"](./plot/", savename(sys_name,params,"png"),")")
 end
 
 

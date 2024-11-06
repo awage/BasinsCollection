@@ -25,6 +25,7 @@ everything should work out of the box, including correctly finding local paths.
 # Content: 
 
 * Basins for the Newton root finding algorithm
+![newton_2](./plot/newton_2_i=2_res=1200.png)
 * Riddled basins `ott_basins.jl`: https://doi.org/10.1016/0167-2789(94)90047-7
 * Riddled Basins from `sommerer_basins.jl`: Sommerer, John C. "The end of classical determinism." Johns Hopkins APL Technical Digest 16.4 (1995): 333.
 * Duffing oscillator basins `duffing_basins.jl`

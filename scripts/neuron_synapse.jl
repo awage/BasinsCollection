@@ -35,9 +35,10 @@ function compute_neuron_synapse(di::Dict)
     return @strdict(bsn, att, grid,  res)
 end
 
-c = 1.8; B = 2; g = 1.7
-res = 1200
-params = @strdict c B g res
-print_fig(params, "neuron_synapse", compute_neuron_synapse; ylab = L"y", xlab = L"x", force = true)
+let res = 1200
+    c = 1.8; B = 2; g = 1.7
+    params = @strdict c B g res
+    print_fig(params, "neuron_synapse", compute_neuron_synapse; ylab = L"y", xlab = L"x", force = false)
+end
 
 

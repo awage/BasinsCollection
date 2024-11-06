@@ -36,5 +36,5 @@ res = 1200
 a = 0.8
 # a = 0.15
 params = @strdict res a 
-print_fig(params, "bairstow_map", compute_bairstow; xlab = L"u", ylab = L"v", force = true)
-att = get_att(params, "bairstow_map", compute_bairstow)
+print_fig(params, "bairstow_map", compute_bairstow; xlab = L"u", ylab = L"v", force = false)
+# att = get_att(params, "bairstow_map", compute_bairstow)
