@@ -109,7 +109,9 @@ dPe = (V_m5e*(Me+a_e)*g(Pei,K_5e)-V_6e*(x_e1+x_e2*Chk1)*g(Pe,K_6e)-k_dpe*Pe)*eps
 # Module Cyclin A/Cdk2 : S phase and transition S/G2
 dCa = (k_ca*E2F*K_i11/(K_i11+pRB)*K_i12/(K_i12+pRBp)-k_com3*Ca*(Cdk2_tot-(Mei+Me+Mep27+Mai+Ma+Map27))+
 k_decom3*Mai-V_da*g(Ca,K_da)*g(Cdc20a,K_acdc20)-k_dda*Ca)*eps
+
 dMai = (k_com3*Ca*(Cdk2_tot-(Mei+Me+Mep27+Mai+Ma+Map27))-k_decom3*Mai+V_m2a*(Wee1+i_b2)*g(Ma,K_2a)-V_m1a*Pa*g(Mai,K_1a))*eps
+
 dMa = (V_m1a*Pa*g(Mai,K_1a)-V_m2a*(Wee1+i_b2)*g(Ma,K_2a)-k_c5*Ma*p27+k_c6*Map27)*eps
 dMap27 = (k_c5*Ma*p27-k_c6*Map27)*eps
 dp27 = (v_s1p27+v_s2p27*E2F*g(K_i13,pRB)*g(K_i14,pRBp)-k_c1*Md*p27+k_c2*Mdp27-k_c3*Me*p27+k_c4*Mep27-k_c5*Ma*p27+k_c6*Map27-k_c7*Mb*p27+k_c8*Mbp27-V_1p27*Me*g(p27,K_1p27)+V_2p27*g(p27p,K_2p27)-k_ddp27*p27)*eps
@@ -136,7 +138,7 @@ dMw = v_swee1+u*v_sw*f(Bn,K_aw,nmw)-V_dmw*g(Mw,K_dmw)
 dWee1 = (k_sw*Mw-V_m7b*(Mb+i_b)*g(Wee1,K_7b)+V_m8b*g(Wee1p,K_8b)-k_dwee1*Wee1)*eps
 dWee1p = (V_m7b*(Mb+i_b)*g(Wee1,K_7b)-V_m8b*g(Wee1p,K_8b)-k_dwee1p*Wee1p)*eps
 
-# @show X
+# @show X[5]
 
 dX .= dMp, dMc, dMbmal, dPc, dCc, dPcp, dCcp, dPCc, dPCn, dPCcp, dPCnp, dBc, dBcp, dBn, dBnp, dIn, dMr, dRc, dRn, dAP1, dpRB, dpRBc1, dpRBp, dpRBc2, dpRBpp, dE2F, dE2Fp, dCd, dMdi, dMd, dMdp27, dMce, dCe, dMei, dMe, dSkp2, dMep27, dPei, dPe, dCa, dMai, dMap27, dp27, dp27p, dCdh1i, dCdh1a, dPai, dPa, dCb, dMbi, dMb, dMbp27, dCdc20i, dCdc20a, dPbi, dPb, dMw, dWee1, dWee1p 
 
@@ -147,39 +149,23 @@ end
 Mp=1.1569999; Mc=1.7789; Mbmal=7.2195001; Pc=0.0062671001; Cc=325.28311; Pcp=0.0034558999; Ccp=0.76152998; PCc=0.70789999; PCn=0.19575; PCcp=5.2571998; PCnp=0.12734; Bc=2.1372001; Bcp=0.11593; Bn=1.3151; Bnp=0.076318003;  In=0.055312; Mr=0.96881002; Rc=0.1548; Rn=0.041343; AP1=6.0605998; pRB=1.5329; pRBc1=0.48471999; pRBp=12.9828; pRBc2=2.0545001; pRBpp=0.13319001; E2F=3.2801001; E2Fp=0.026215; Cd=0.094091997; Mdi=0.022845; Md=1.325; Mdp27=0.013466; Mce=0.024901001; Ce=0.005537; Mei=0.031500999; Me=1.1559; Skp2=11.8677; Mep27=0.0081121; Pei=0.014376; Pe=1.7049;  Ca=0.0046791998; Mai=0.046822; Ma=0.019317999; Map27=0.0002039; p27=0.0035139001; p27p=0.019300999; Cdh1i=0.54710001; Cdh1a=0.0055264998; Pai=0.63407999; Pa=0.29585001; Cb=0.95919001; Mbi=0.034823999; Mb=0.45019999; Mbp27=0.00094055; Cdc20i=0.026786; Cdc20a=1.8816; Pbi=0.057624999; Pb=1.0843; Mw=0.016368; Wee1=0.13579001; Wee1p=0.32049
 
 u0 = [Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, In, Mr, Rc, Rn, AP1, pRB, pRBc1, pRBp, pRBc2, pRBpp, E2F, E2Fp, Cd, Mdi, Md, Mdp27, Mce, Ce, Mei, Me, Skp2, Mep27, Pei, Pe, Ca, Mai, Map27, p27, p27p, Cdh1i, Cdh1a, Pai, Pa, Cb, Mbi, Mb, Mbp27, Cdc20i, Cdc20a, Pbi, Pb, Mw, Wee1, Wee1p]
+
+# 3 -> Mbmal 
 # 33 -> Ce : CyclinE/Cdk2
 # 49 -> Cb : CyclinB/Cdk1 
 diffeq = (reltol = 1e-6,  alg = Tsit5())
 df = CoupledODEs(circadian_cell_cycle!, rand(59); diffeq)
 # _complete(y) = (length(y) == 2) ? rand(59) : y; 
 # proj = ProjectedDynamicalSystem(df, [33, 49], u0[[1:32; 34:48; 50:59]])
-# proj = ProjectedDynamicalSystem(df, [14, 37, 54], _complete)
-# yg = range(-1, 3; length = 1001)
-# grid = ntuple(x -> yg, dimension(df))
-# pow = 3; xg = range(0, 2^(1/pow); length = 20001).^pow
-# # yg = xg   = range(0., 3., length = 2001)
+# yg = xg   = range(0., 3., length = 2001)
 # mapper = AttractorsViaRecurrences(proj, grid; Δt = 1.0)
-# mapper = AttractorsViaRecurrences(df, grid; Δt = 1.0, consecutive_recurrences = 500)    
 
-# for _ in 1:100
-#     @show mapper(rand(3))
-#     # @show mapper(rand(62)*0.4)
-# end
-#
-# prob = ODEProblem(circadian_cell_cycle!, u0, (0,1.))
-# sol = solve(prob, DP8(), abstol = 1e-12; dt = 0.01, adaptive = false)
+Mp=1.0568; Mc=1.8480999; Mbmal=6.3362999; Pc=0.0063677998; Cc=331.87189; Pcp=0.0036138999; Ccp=0.76160997; PCc=1.1508; PCn=0.53987998; PCcp=6.4289999; PCnp=0.9738; Bc=1.7359; Bcp=0.10505; Bn=0.78301001; Bnp=0.054529;  In=0.13778999; Mr=0.80400997; Rc=0.12732001; Rn=0.056669999; AP1=6.0605998; pRB=1.6623; pRBc1=0.064092003; pRBp=14.2593; pRBc2=0.27438; pRBpp=0.073599003; E2F=0.38652; E2Fp=0.13256; Cd=0.094083004; Mdi=0.022838; Md=1.3206; Mdp27=0.017968001; Mce=0.043490998; Ce=0.0096067004; Mei=0.029376; Me=0.85652; Skp2=10.3268; Mep27=0.0081107998; Pei=0.01898; Pe=1.6959;  Ca=0.0052708001; Mai=0.058660999; Ma=0.57453001; Map27=0.0034302; p27=0.0047358; p27p=0.019261001; Cdh1i=0.54900002; Cdh1a=0.001937; Pai=0.049509; Pa=1.3054; Cb=1.5501; Mbi=0.034116; Mb=0.45583999; Mbp27=0.0012757001; Cdc20i=0.026214; Cdc20a=1.6991; Pbi=0.056650002; Pb=1.0693001; Mw=0.012853; Wee1=0.11596; Wee1p=0.26273999; 
 
-y,t = trajectory(df, 400., u0; Δt = 0.01)
-# y,t = trajectory(df, 400., rand(3); Ttr = 200, Δt = 0.01)
-# plot(t, y[:,62])
-# plot(y[:,1], y[:,2])
+u1 = [Mp, Mc, Mbmal, Pc, Cc, Pcp, Ccp, PCc, PCn, PCcp, PCnp, Bc, Bcp, Bn, Bnp, In, Mr, Rc, Rn, AP1, pRB, pRBc1, pRBp, pRBc2, pRBpp, E2F, E2Fp, Cd, Mdi, Md, Mdp27, Mce, Ce, Mei, Me, Skp2, Mep27, Pei, Pe, Ca, Mai, Map27, p27, p27p, Cdh1i, Cdh1a, Pai, Pa, Cb, Mbi, Mb, Mbp27, Cdc20i, Cdc20a, Pbi, Pb, Mw, Wee1, Wee1p]
 
-# prange = 2:0.5:5
-# pidx = 1 # index of the parameter
-# xg = range(0,2,length =10)
-# grid = (xg,xg,xg)
-# sampler, = statespace_sampler(grid)
-# ascm = AttractorSeedContinueMatch(mapper)
-# fractions_cont, attractors_cont = global_continuation(
-# 	ascm, prange, pidx, sampler; samples_per_parameter = 10
-# )
+diffeq = (reltol = 1e-6,  alg = Tsit5())
+df = CoupledODEs(circadian_cell_cycle!, rand(59); diffeq)
+y,t = trajectory(df, 40., u1)
+
+lines(y[:,3],y[:,33])
