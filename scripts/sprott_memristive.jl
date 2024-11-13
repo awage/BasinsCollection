@@ -5,6 +5,7 @@ using LaTeXStrings
 using Attractors
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
+include(srcdir("print_fig.jl"))
 
 # Multistable dynamics and control of a new 4D memristive chaotic
 # Sprott B system
@@ -32,14 +33,14 @@ function compute_basins_memristor(di::Dict)
     mapper = AttractorsViaRecurrences(ds, grid; sparse = true, Δt = 0.01,   
         consecutive_basin_steps = 200,
         consecutive_recurrences = 1000,
-        attractor_locate_steps = 1000, maximum_iterations = Int(1e8), show_progress = true)
+        attractor_locate_steps = 1000)
     yr = range(-2, 2, length = res)
     xr = range(-2, 2, length = res)
-    bsn = @showprogress [ mapper([x,y,0.]) for x in xr, y in yr]
+    bsn = @showprogress [ mapper([x,y,0., 0.]) for x in xr, y in yr]
     grid = (xr,yr)
     return @strdict(bsn, grid, res)
 end
 
 α = 1; β = 0.05; γ = 0.5; g = 0.03; r = 5.8; m = 11; 
 params = @strdict α β γ g r m res
-print_fig(params, "hidden_memristor", compute_basins_memristor; force = false) 
+print_fig(params, "4d_sprott_memristor", compute_basins_memristor; force = false) 
