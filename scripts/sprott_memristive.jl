@@ -14,13 +14,13 @@ include(srcdir("print_fig.jl"))
 # https://doi.org/10.1016/j.chaos.2022.111834
 function memristor!(du, u, p, t)
     α, β, γ, g, r, m = p
-    x,y,z,t = u
+    x,y,z,v = u
     a = 1 
     W(u) = α + γ*abs(u) + β*u^2
     du[1] = r*y*z + g
     du[2] = x - y
     du[3] = 1 - m*W(t)*x*y
-    du[4] = a*x*y - t
+    du[4] = a*x*y - v
 end
 
 function compute_basins_memristor(di::Dict)
