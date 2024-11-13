@@ -166,7 +166,7 @@ everything should work out of the box, including correctly finding local paths.
 
 * Sprott-memristor model `sprott_memristive.jl`: https://doi.org/10.1016/j.chaos.2022.111834
 
-   ![hidden_memristor](./plots/hidden_memristor_g=0.03_m=11_r=5.8_res=1200_α=1_β=0.05_γ=0.5.png)
+   ![hidden_memristor](./plots/4d_sprott_memristor_g=0.03_m=11_r=5.8_res=1200_α=1_β=0.05_γ=0.5.png)
 
 * Parametrically forced pendulum `para_pendulum.jl`: http://dx.doi.org/10.1142/S0218127411030167
 
