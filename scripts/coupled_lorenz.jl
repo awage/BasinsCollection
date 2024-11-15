@@ -27,13 +27,8 @@ function compute_lorenz(di::Dict)
     @unpack res, α, β, ε, γ = di
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
     ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ]; diffeq)
-    # projection = [1, 2, 3]
-    # # complete_state = [1.,1.,1.,1.] # completed state just in the plane of last two dimensions
-    # complete_state(y) = [1,1,y[1],1,1,y[2]]
-    # prods = ProjectedDynamicalSystem(ds, projection, complete_state)
 
-
-    yg = range(-50, 50; length = 3200)
+    yg = range(-50, 50; length = 4000)
     grid = ntuple(x -> yg, 6)
     mapper = AttractorsViaRecurrences(ds, grid; Δt = 0.1, maximum_iterations = Int(1e8),
     attractor_locate_steps = 1000)
