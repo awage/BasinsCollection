@@ -5,6 +5,7 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
+include(srcdir("print_fig.jl"))
 
 # International Journal of Bifurcation and ChaosVol. 03, No. 04, pp. 803-842 (1993) Tutorials and ReviewsNo Access
 # THE BOGDANOV MAP: BIFURCATIONS, MODE LOCKING, AND CHAOS IN A DISSIPATIVE SYSTEM
@@ -19,8 +20,6 @@ function bogdanov_map!(dz, z, p, n)
 end
 
 
-
-
 function compute_bogdanov(di::Dict)
     @unpack μ, k, ε, res = di
     ds = DeterministicIteratedMap(bogdanov_map!, [1.0, 0.0], [μ, k, ε])
@@ -28,16 +27,19 @@ function compute_bogdanov(di::Dict)
     mapper = AttractorsViaRecurrences(ds, (xg,yg); sparse = true,    
         mx_chk_fnd_att = 1000,
         mx_chk_loc_att = 1000, maximum_iterations = Int(1e7), show_progress = true)
-    yg = xg = range(-0.8, 1.1, length = res)
+    yg = range(-0.8, 0.8, length = res)
+    xg = range(-0.6, 1., length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg); show_progress = true)
     grid = (xg, yg)
     return @strdict(bsn, att, grid, res)
 end
 
-
+using Colors
+using ColorSchemes
 μ = -0.1
 k = 1.2
 ε = 0.0125 
-# res = 1000
+res = 2000
 params = @strdict res μ k ε
-print_fig(params, "bogdanov", compute_bogdanov) 
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.7,0.7,0.7), RGB(1,0,0)] )
+print_fig(params, "bogdanov", compute_bogdanov; force = false,  cmap) 

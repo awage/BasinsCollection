@@ -5,6 +5,7 @@ using LaTeXStrings
 using Attractors
 using ProgressMeter
 using OrdinaryDiffEq:Vern9
+include(srcdir("print_fig.jl"))
 
 # PHYSICAL REVIEW E 96, 062203 (2017)
 # Coupled Lorenz oscillators near the Hopf boundary: Multistability, intermingled basins, and quasiriddling
@@ -32,25 +33,19 @@ function compute_lorenz(di::Dict)
     # prods = ProjectedDynamicalSystem(ds, projection, complete_state)
 
 
-    yg = range(-37, 37; length = 1001)
+    yg = range(-50, 50; length = 3200)
     grid = ntuple(x -> yg, 6)
-    mapper = AttractorsViaRecurrences(ds, grid; Δt = 1., Ttr = 100)
-    # mapper = AttractorsViaRecurrences(prods, grid; Δt = 1.,
-    # consecutive_recurrences = 1000, 
-    # attractor_locate_steps = 10000,
-    # consecutive_attractor_steps = 10)
-        # mx_chk_fnd_att = 100,  
-        # mx_chk_loc_att = 100, maximum_iterations = Int(1e8), Ttr = 100)
-    y1r = range(1, 20, length = res)
-    y2r = range(1, 20, length = res)
+    mapper = AttractorsViaRecurrences(ds, grid; Δt = 0.1, maximum_iterations = Int(1e8),
+    attractor_locate_steps = 1000)
+    y1r = range(10, 24, length = res)
+    y2r = range(10, 24, length = res)
     bsn = @showprogress [ mapper([1, 1, y1, 1, 1, y2]) for y1 in y1r, y2 in y2r] 
-    # bsn = @showprogress [ mapper([y1,y2]) for y1 in y1r, y2 in y2r] 
     grid = (y1r,y2r); att = mapper.bsn_nfo.attractors
     return @strdict(bsn, grid, att, res)
 end
 
-let res = 1000
+let res = 1200
 α = 10; β = 24.76; ε = 1.1; γ = 8/3; 
 params = @strdict res α β ε γ
-print_fig(params, "coupled_lorenz", compute_lorenz; force = false) 
+print_fig(params, "coupled_lorenz", compute_lorenz; force = false, xlab = L"z_1", ylab = L"z_2") 
 end

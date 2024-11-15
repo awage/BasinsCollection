@@ -19,7 +19,7 @@ function memristor!(du, u, p, t)
     W(u) = α + γ*abs(u) + β*u^2
     du[1] = r*y*z + g
     du[2] = x - y
-    du[3] = 1 - m*W(t)*x*y
+    du[3] = 1 - m*W(v)*x*y
     du[4] = a*x*y - v
 end
 
