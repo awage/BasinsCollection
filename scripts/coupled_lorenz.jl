@@ -28,10 +28,10 @@ function compute_lorenz(di::Dict)
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
     ds = CoupledODEs(coupled_lorenz!, zeros(6), [α, β, ε, γ]; diffeq)
 
-    yg = range(-50, 50; length = 4000)
+    yg = range(-50, 50; length = 400)
     grid = ntuple(x -> yg, 6)
     mapper = AttractorsViaRecurrences(ds, grid; Δt = 0.1, maximum_iterations = Int(1e9),
-    consecutive_recurrences = 1000,
+    consecutive_recurrences = 10000,
     attractor_locate_steps = 1000)
     y1r = range(10, 24, length = res)
     y2r = range(10, 24, length = res)
@@ -40,7 +40,7 @@ function compute_lorenz(di::Dict)
     return @strdict(bsn, grid, att, res)
 end
 
-let res = 300
+let res = 1200
 α = 10; β = 24.76; ε = 1.1; γ = 8/3; 
 params = @strdict res α β ε γ
 print_fig(params, "coupled_lorenz", compute_lorenz; force = true, xlab = L"z_1", ylab = L"z_2") 
