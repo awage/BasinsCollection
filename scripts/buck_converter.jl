@@ -6,6 +6,17 @@ using CairoMakie
 using LaTeXStrings
 using ColorSchemes
 include(srcdir("print_fig.jl"))
+
+# @article{di1997secondary,
+#   title={Secondary bifurcations and high periodic orbits in voltage controlled buck converter},
+#   author={Di Bernardo, Mario and Fossas, Enric and Olivar, Gerard and Vasca, Francesco},
+#   journal={International Journal of Bifurcation and Chaos},
+#   volume={7},
+#   number={12},
+#   pages={2755--2771},
+#   year={1997},
+#   publisher={World Scientific}
+# }
 # Equations of motion:
 function buck(u, p, t)
     R = 22; C = 47e-6; L = 20e-3; γ = 11.75
