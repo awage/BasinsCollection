@@ -43,5 +43,5 @@ end
 let res = 1200
 α = 10; β = 24.76; ε = 1.1; γ = 8/3; 
 params = @strdict res α β ε γ
-print_fig(params, "coupled_lorenz", compute_lorenz; force = true, xlab = L"z_1", ylab = L"z_2") 
+print_fig(params, "coupled_lorenz", compute_lorenz; force = false, xlab = L"z_1", ylab = L"z_2") 
 end

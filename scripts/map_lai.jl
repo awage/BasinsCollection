@@ -48,5 +48,6 @@ end
 
 res = 1200; 
 params = @strdict res 
-print_fig(params, "lai_pcw", compute_lai; xlab = L"x", ylab = L"y", force = false)
-att =  get_att(params, "lai_pcw", compute_lai)
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.1,0.1,0.1), RGB(1,0.46, 0.46), RGB(0.34,0.34,1)] )
+print_fig(params, "lai_pcw", compute_lai; xlab = L"x", ylab = L"y", cmap, force = false)
+# att =  get_att(params, "lai_pcw", compute_lai)
