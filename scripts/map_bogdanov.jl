@@ -5,6 +5,8 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
+using Colors
+using ColorSchemes
 include(srcdir("print_fig.jl"))
 
 # International Journal of Bifurcation and ChaosVol. 03, No. 04, pp. 803-842 (1993) Tutorials and ReviewsNo Access
@@ -34,8 +36,6 @@ function compute_bogdanov(di::Dict)
     return @strdict(bsn, att, grid, res)
 end
 
-using Colors
-using ColorSchemes
 μ = -0.1
 k = 1.2
 ε = 0.0125 

@@ -5,6 +5,8 @@ using Attractors
 using CairoMakie
 using LaTeXStrings
 using ColorSchemes
+using Colors
+using ColorSchemes
 include(srcdir("print_fig.jl"))
 
 # @article{di1997secondary,
@@ -38,15 +40,16 @@ function compute_buck(di::Dict)
     xg = range(-20,20.0,length = 5001)
     yg = range(-4.,4.,length = 5001)
     mapper = AttractorsViaRecurrences(smap, (xg, yg))
-    xg = range(10,14,length = res)
-    yg = range(0.5,1,length = res)
+    xg = range(11,14,length = res)
+    yg = range(0.5,0.9,length = res)
     grid = (xg, yg)
     bsn, att = basins_of_attraction(mapper, grid)
     return @strdict(bsn, att, grid, res)
 end
 
-res = 600; Vin = 30.10
+res = 1200; Vin = 30.10
 params = @strdict res Vin
-print_fig(params, "buck", compute_buck; ylab= L"V", xlab= L"i", force = true)
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.7,0.7,0.7), RGB(0.3,0.3,0.3)] )
+print_fig(params, "buck", compute_buck; ylab= L"V", xlab= L"i", force = false, cmap)
 
 
