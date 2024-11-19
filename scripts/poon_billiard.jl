@@ -69,4 +69,5 @@ end
 
 ww = 0.1; # res = 1400
 params = @strdict ww res
-print_fig(params, "poon_disks", compute_exit_poon_disks; xlab = L"x_0", ylab = L"\theta_0")
+cmap = ColorScheme([RGB(1,1,1), RGB(0.55,0.9,0.35), RGB(0.9,0.4,0.1),  RGB(0.50,0.24,1)] )
+print_fig(params, "poon_disks", compute_exit_poon_disks; xlab = L"x_0", ylab = L"\theta_0", cmap)

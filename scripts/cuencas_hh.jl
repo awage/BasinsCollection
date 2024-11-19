@@ -1,10 +1,12 @@
 using DrWatson
 @quickactivate # exports Attractors, GLMakie and other goodies in `src`
-
 using OrdinaryDiffEq
 using Attractors
 using CairoMakie
 using LaTeXStrings
+using Colors
+using ColorSchemes
+include(srcdir("print_fig.jl"))
 
 function henon_heiles_de(dv,v,p,t)
     x, px, y, py = v
@@ -67,33 +69,11 @@ function comp_basins_hh(di::Dict)
     return @strdict(bsn, grid, E, res)
 end
 
-
-function print_fig(w, h, E, res) 
-    params = @strdict E res
-    data, file = produce_or_load(
-        datadir("basins"), params, makesim;
-        prefix = "hh", storepatch = false, suffix = "jld2", force = false
-    )
-    @unpack bsn, grid = data
-    xg, yg = grid
-    cmap = ColorScheme([RGB(1,1,1), RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
-    fig = Figure(size = (w, h))
-    ax = Axis(fig[1,1], ylabel = L"y", xlabel = L"x", yticklabelsize = 30, 
-            xticklabelsize = 30, 
-            ylabelsize = 30, 
-            xlabelsize = 30, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
-    heatmap!(ax, xg, yg, bsn; rasterize = 1, colormap = cmap)
-    save(string("../plots/basins_hh_", E, ".png"),fig)
-
-end
-
+res = 1200
 E = 0.25; #res = 800
 params = @strdict E res
-print_fig(params, "hh", comp_basins_hh)
+# cmap = ColorScheme([RGB(1,1,1), RGB(0.55,0.9,0.35), RGB(0.1,0.4,0.1), RGB(0.25,0.25, 0.25), RGB(0.50,0.24,1)] )
+cmap = ColorScheme([RGB(1,1,1), RGB(0.55,0.9,0.35), RGB(0.9,0.4,0.1),  RGB(0.50,0.24,1)] )
+print_fig(params, "hh", comp_basins_hh; cmap)
 
-# E = 0.2; #res = 800
-# params = @strdict E res
-# print_fig(params, "hh", comp_basins_hh)
 

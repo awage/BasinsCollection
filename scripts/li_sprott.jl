@@ -42,6 +42,7 @@ end
 
 a = 13.; b = 0.55; #res = 500
 params = @strdict res a b
-print_fig(params, "li_sprott", compute_li_sprott) 
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.7,0.7,0.7), RGB(1,0,0)] )
+print_fig(params, "li_sprott", compute_li_sprott; cmap) 
 
 

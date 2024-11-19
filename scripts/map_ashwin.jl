@@ -34,6 +34,7 @@ end
 
 # a = 3.57480493875920; ε = -0.2
 ν = 1.28; α = 0.7; ε = 0.5; 
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.7,0.7,0.7), RGB(1,0,0)] )
 params = @strdict res α ε ν
-print_fig(params, "cpashwin", compute_ashwin) 
+print_fig(params, "cpashwin", compute_ashwin; cmap) 
 

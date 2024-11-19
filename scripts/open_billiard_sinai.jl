@@ -79,4 +79,5 @@ end
 
 Δ = 0.8; #res = 700
 params = @strdict Δ res
-print_fig(params, "open_sinai", compute_exit_open_sinai; xlab = L"x_0", ylab = L"\theta_0")
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.7,0.7,0.7), RGB(0.3,0.3,0.3)] )
+print_fig(params, "open_sinai", compute_exit_open_sinai; xlab = L"x_0", ylab = L"\theta_0",  cmap)
