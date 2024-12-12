@@ -260,7 +260,7 @@ everything should work out of the box, including correctly finding local paths.
 
    ![shrimali](./plots/shrimali_res=1200_α=3.25_β=0.01_ϵp=0.5.png)
 
-* Basins of attraction in nonsmooth models of gear rattle: `grazing2.jl`: https://doi.org/10.1142/S021812740902283X
+* Basins of attraction in a impact oscillator: `grazing2.jl`: (Ref. Lost!) 
 
    ![grazing2](./plots/grazing2_res=1200.png)
 

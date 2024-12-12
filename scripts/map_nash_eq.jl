@@ -36,5 +36,6 @@ end
 
 res = 1200; μ = 1.95; λ= 0.5
 params = @strdict res μ λ 
-print_fig(params, "nash_equilibrium", compute_nash; xlab = L"q_1", ylab = L"q_2", force = false)
+cmap = ColorScheme([RGB(1,1,1), RGB(0.55,0.9,0.35), RGB(0.9,0.4,0.1),  RGB(0.50,0.24,1)] )
+print_fig(params, "nash_equilibrium", compute_nash; xlab = L"q_1", ylab = L"q_2", force = false, cmap)
 # att =  get_att(params, "nash_equilibrium", compute_nash; force = true)

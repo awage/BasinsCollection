@@ -47,4 +47,5 @@ end
 
 β = 25; idc = 1.878; irf = 10.198; Ω = 1; #res = 700
 params = @strdict β idc irf Ω res
-print_fig(params, "josephson", compute_basins_josephson; ylab = L"\dot{\phi}", xlab = L"\phi", force = false)
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.4,0.1),  RGB(0.50,0.24,1)] )
+print_fig(params, "josephson", compute_basins_josephson; ylab = L"\dot{\phi}", xlab = L"\phi", force = false, cmap)

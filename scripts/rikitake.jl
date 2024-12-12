@@ -27,10 +27,10 @@ function compute_rikitake(di::Dict)
     @unpack μ, α, res = di
     diffeq = (alg = Vern9(), reltol = 1e-6, maxiters = 1e8)
     ds = CoupledODEs(rikitake_rule, rand(3), [μ, α]; diffeq)
-    xg = yg = range(-5,5,length=14001)
+    xg = yg = range(-5,5,length=1001)
     psys = ProjectedDynamicalSystem(ds, [1,2], [0.])
     mapper = AttractorsViaRecurrences(psys, (xg, yg) ; Δt = 0.1,
-        mx_chk_fnd_att = 10000,
+        mx_chk_fnd_att = 50000,
         mx_chk_loc_att = 10000)
     xg = yg = range(-2.5, 2.5, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg))
@@ -42,4 +42,5 @@ end
 # μ = 0.47; α = 1.; res = 200
 μ = 0.5; α = 1.; #res = 200
 params = @strdict res μ α
-print_fig(params, "rikitake", compute_rikitake; ylab = L"y", xlab = L"x", force = false)
+cmap = ColorScheme([RGB(1,1,1), RGB(0.9,0.15,0.15),RGB(0.95,0.95,0.95), RGB(0.95,0.95,0.95),   RGB(0.95,0.95,0.95),RGB(0.95,0.95,0.95),  RGB(0.15,0.9,0.15), RGB(0.9,0.4,0.1),  RGB(1.0,1.0,1.)] )
+print_fig(params, "rikitake", compute_rikitake; ylab = L"y", xlab = L"x", force = false, cmap)

@@ -55,6 +55,7 @@ end
 let res = 1200
     m = 0.02; f = 0.005
     params = @strdict res m f
-    print_fig(params, "basins_CO2_laser", compute_basins_CO2_lasers; force = false, xlab = L"\log x", ylab = L"y")
+    cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+    print_fig(params, "basins_CO2_laser", compute_basins_CO2_lasers; force = false, xlab = L"\log x", ylab = L"y", cmap)
 end
 

@@ -36,5 +36,6 @@ res = 1200
 a = 0.8
 # a = 0.15
 params = @strdict res a 
-print_fig(params, "bairstow_map", compute_bairstow; xlab = L"u", ylab = L"v", force = false)
+cmap = ColorScheme([RGB(1,1,1),  RGB(1,1,1),  RGB(1,1,1),  RGB(0.9,0.1,0.1)] )
+print_fig(params, "bairstow_map", compute_bairstow; xlab = L"u", ylab = L"v", force = false, cmap)
 # att = get_att(params, "bairstow_map", compute_bairstow)

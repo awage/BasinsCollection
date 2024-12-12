@@ -30,4 +30,5 @@ end
 
 
 params = @strdict res 
-print_fig(params, "grebogi", compute_grebogi; ylab = L"x", xlab = L"\theta")
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+print_fig(params, "grebogi", compute_grebogi; ylab = L"x", xlab = L"\theta", cmap)

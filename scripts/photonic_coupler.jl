@@ -49,6 +49,7 @@ end
 let res = 1200; 
 α = 2; β = 1.5; ε = 0.5; k = 5 
 params = @strdict res α β ε k 
-print_fig(params, "photonic_coupler", compute_phot_coupler; force = false, xlab = L"A_1", ylab = L"A_2") 
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+print_fig(params, "photonic_coupler", compute_phot_coupler; force = false, xlab = L"A_1", ylab = L"A_2", cmap) 
 # att = get_att(params, "photonic_coupler", compute_phot_coupler) 
 end

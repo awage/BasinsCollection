@@ -36,4 +36,5 @@ end
 a = -0.42
 b = -1.32
 params = @strdict res a b
-print_fig(params, "mira_map", compute_mira; xlab = L"x", ylab = L"y", force = false)
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+print_fig(params, "mira_map", compute_mira; xlab = L"x", ylab = L"y", force = false, cmap)

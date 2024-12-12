@@ -15,7 +15,6 @@ function grazing2(u, p, t)
     return SVector{2}(du1, du2)
 end
 
-# We have to define a callback to wrap the phase in [-π,π]
 function affect!(integrator)
     r = 0.9
     uu = integrator.u

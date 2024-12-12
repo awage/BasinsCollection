@@ -89,7 +89,8 @@ end
 
 res = 600; Tmax = 150; lr = -0.03
 params = @strdict res Tmax lr
-print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = false)
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = false, cmap)
 att = get_att(params, "bell_yoke", compute_bell_yoke)
 
 

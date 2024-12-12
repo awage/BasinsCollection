@@ -45,8 +45,9 @@ res = 1200;
 # for ks in 2.0:0.05:2.5
 ks = 1.99
 params = @strdict  ks res
-print_fig(params, "biorhythm", compute_biorhythm; ylab = L"y", xlab = L"x", force = false)
-att = get_att(params, "biorhythm", compute_biorhythm)
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+print_fig(params, "biorhythm", compute_biorhythm; ylab = L"y", xlab = L"x", force = false, cmap)
+# att = get_att(params, "biorhythm", compute_biorhythm)
 # end
 
 
