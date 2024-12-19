@@ -83,4 +83,5 @@ end
 
 x = -500; vx = 0.1; #res = 300
 params = @strdict x vx res
-print_fig(params, "cold_atoms", compute_cold_atoms; ylab = L"v_y", xlab = L"y")
+cmap = ColorScheme([RGB(1,1,1), RGB(0.55,0.9,0.35), RGB(0.9,0.4,0.1),  RGB(0.50,0.24,1)] )
+print_fig(params, "cold_atoms", compute_cold_atoms; ylab = L"v_y", xlab = L"y", cmap)
