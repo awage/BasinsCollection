@@ -73,4 +73,6 @@ end
 # res = 450; 
 Re = 307.
 params = @strdict res Re
-print_fig(params, "lebovitz", compute_LM)
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.1,0.1,0.1), RGB(1,0.46, 0.46), RGB(0.34,0.34,1)] )
+print_fig(params, "lebovitz", compute_LM; cmap)
+# att = get_att(params, "lebovitz", compute_LM)

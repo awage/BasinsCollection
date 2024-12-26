@@ -53,5 +53,5 @@ res = 1200
 params = @strdict res
 cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
 print_fig(params, "impacting", compute_impact; ylab= L"\dot{y}", xlab= L"y", force = false, cmap)
-# att = get_att(params, "gear_rattle", compute_gear_rattle)
+att = get_att(params, "impacting", compute_impact)
 
