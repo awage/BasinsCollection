@@ -27,14 +27,12 @@ end
 function compute_feudel(di::Dict)
     @unpack a, r, res = di
     ds = DeterministicIteratedMap(chaotic_map, [1.0, 0.0], [a, r])
-    θ = range(0.0, 1.0, length = 2500)
-    xg = range(0.0, 1.0, length = 2500)
+    θ = xg = range(0.0, 1.0, length = 2500)
     mapper = AttractorsViaRecurrences(ds, (xg,θ))
-    θ = range(0.0, 1.0, length = res)
-    xg = range(0.0, 1.0, length = res)
+    θ = xg = range(0.0, 1.0, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,θ); show_progress = true)
     grid = (xg, θ)
-    return @strdict(bsn, att, grid, b, res)
+    return @strdict(bsn, att, grid, res)
 end
 
 
