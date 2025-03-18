@@ -86,7 +86,7 @@ end
 let res = 1200
     N = 40
     params = @strdict res N
-    print_fig(params, "basins_tentacles", compute_basin_tentacle; force = false)
+    print_fig(params, "basins_tentacles", compute_basin_tentacle; force = false, xlab = L"\alpha_1", ylab = L"\alpha_2")
 end
 
 # dd = compute_basin_tentacle_feats(40, 100)

@@ -17,6 +17,7 @@ function chua!(du, u, p, t)
     du[1] = α*(y - x - ψ(x))
     du[2] = x - y + z
     du[3] = -(β*y + γ*z)
+    return nothing
 end
 
 
@@ -49,6 +50,6 @@ end
 # α = 8.5; β = 14.28; γ = 0; m0 = -8/7; m1 = -5/7
 α = 8.4562218418; β = 12.0732335925; γ = 0.0051631393; m0 = -0.1767573476; m1 = -1.1467573476; # res = 500
 params = @strdict α β γ m0 m1 res
-# cmap = :jet
-print_fig(params, "hidden_chua", compute_basins_chua; force = false)
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(1,0.46, 0.46), RGB(0.34,0.34,1), RGB(0.1,0.1,0.1) ] )
+print_fig(params, "hidden_chua", compute_basins_chua; force = false, cmap)
 
