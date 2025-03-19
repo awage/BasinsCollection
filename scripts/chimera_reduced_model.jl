@@ -35,7 +35,6 @@ end
 
 function compute_chimera(di::Dict)
     @unpack  res, ν, μ, β = di
-    # diffeq = (;reltol = 1e-7, alg = Vern9(), maxiters = 1e6)
     condition(u,t,integrator) = (integrator.u[3] < -π  || integrator.u[3] > π)
     cb = DiscreteCallback(condition,affect!)
     diffeq = (reltol = 1e-9,  alg = Vern9(), callback = cb)
