@@ -22,7 +22,7 @@ function compute_cplog(di::Dict)
     ds = DeterministicIteratedMap(cplog_map, [1.0, 0.0], [a, ε])
     yg = xg = range(-2., 2., length = 2500)
     mapper = AttractorsViaRecurrences(ds, (xg,yg);     
-        consecutive_recurrences = 100, Ttr = 5000)
+        consecutive_recurrences = 1000, Ttr = 5000)
     yg = xg = range(-0.05, 1.2, length = res)
     bsn, att = basins_of_attraction(mapper, (xg,yg); show_progress = true)
     grid = (xg, yg)
@@ -34,7 +34,7 @@ res = 1200
 # a = 3.57480493875920; ε = -0.2
 a = 3.6; ε = -1.
 params = @strdict res a ε
-cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(1,0.46, 0.46), RGB(0.34,0.34,1), RGB(0.1,0.1,0.1) ] )
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.34,0.34,1), RGB(1,0.46,0.46), RGB(0.1,0.1,0.1) ] )
 print_fig(params, "cplog", compute_cplog; force = false, cmap) 
 att = get_att(params, "cplog", compute_cplog) 
 

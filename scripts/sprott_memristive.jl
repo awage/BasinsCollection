@@ -43,4 +43,5 @@ end
 
 α = 1; β = 0.05; γ = 0.5; g = 0.03; r = 5.8; m = 11; 
 params = @strdict α β γ g r m res
-print_fig(params, "4d_sprott_memristor", compute_basins_memristor; force = false) 
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(1,0.36, 0.36), RGB(1.,1.,1.) ,RGB(0.34,0.34,1) ] )
+print_fig(params, "4d_sprott_memristor", compute_basins_memristor; force = false, cmap) 
