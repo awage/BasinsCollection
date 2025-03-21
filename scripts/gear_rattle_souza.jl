@@ -48,14 +48,14 @@ function compute_gear_rattle2(di::Dict)
     return @strdict(bsn, att, grid, res)
 end
 
-res = 12
+res = 1200
 params = @strdict res
-print_fig(params, "gear_rattle2", compute_grazing; ylab= L"\dot{\theta}", xlab= L"\theta", force = false)
-att = get_att(params, "gear_rattle2", compute_grazing)
+print_fig(params, "gear_rattle2", compute_gear_rattle2; ylab= L"\dot{\theta}", xlab= L"\theta", force = false)
+# att = get_att(params, "gear_rattle2", compute_gear_rattle2)
 
 # cb2 = ContinuousCallback(condition2,affect!; abstol = 1e-16, save_positions=(true,true))
 # diffeq = (reltol = 0, abstol= 1e-16, alg = Vern9(), callback = cb2)
-# df = CoupledODEs(grazing2, rand(2); diffeq)
+# df = CoupledODEs(gear_rattle2, rand(2); diffeq)
 # y,t = trajectory(df, 100, [-0.1,1])
 
 
