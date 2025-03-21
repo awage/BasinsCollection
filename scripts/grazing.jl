@@ -5,7 +5,10 @@ using Attractors
 using CairoMakie
 using LaTeXStrings
 using ColorSchemes
-
+# Physica D 130 (1999) 43–57
+# Grazing bifurcations and basins of attraction in an impact-friction
+# oscillator
+# L.N. Virgin ∗, C.J. Begley
 function g(x) 
     σl = -1.5; σr = 1.5; ρ = 1.;
     if x ≥ σr 

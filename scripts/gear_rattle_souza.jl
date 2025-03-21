@@ -6,9 +6,9 @@ using CairoMakie
 using LaTeXStrings
 using ColorSchemes
 
-# Mason, J. F., Piiroinen, P. T., Wilson, R. E., & Homer, M. E. (2009). Basins of attraction in nonsmooth models of gear rattle. International Journal of Bifurcation and Chaos, 19(01), 203-224.
+# De Souza, S. L. T., & Caldas, I. L. (2001). Basins of Attraction and Transient Chaos in a Gear-Rattling Model. Journal of Vibration and Control, 7(6), 849–862. doi:10.1177/107754630100700605 
 # Equations of motion:
-function grazing2(u, p, t)
+function gear_rattle2(u, p, t)
     γ = 0.1; α = 0.48; β = 0.1; ω = 1;
     du1 = u[2]
     du2 = -β*u[2] + γ  -α*β*ω*cos(ω*t) + α*ω^2*sin(ω*t)
@@ -29,11 +29,11 @@ end
 
     condition2(u,t,integrator) = (u[1] + 1)*u[1]
 
-function compute_grazing(di::Dict)
+function compute_gear_rattle2(di::Dict)
     @unpack res = di
     cb2 = ContinuousCallback(condition2,affect!; abstol = 1e-16, save_positions=(true,true), interp_points = 30)
     diffeq = (reltol = 0, abstol= 1e-14, alg = Vern9(), callback = cb2)
-    df = CoupledODEs(grazing2, rand(2); diffeq)
+    df = CoupledODEs(gear_rattle2, rand(2); diffeq)
     xg = range(-0.999,-0.001,length = 5001)
     yg = range(-4.,4.,length = 5001)
     mapper = AttractorsViaRecurrences(df, (xg, yg);
@@ -48,10 +48,10 @@ function compute_grazing(di::Dict)
     return @strdict(bsn, att, grid, res)
 end
 
-res = 1200
+res = 12
 params = @strdict res
-print_fig(params, "grazing2", compute_grazing; ylab= L"\dot{\theta}", xlab= L"\theta", force = false)
-att = get_att(params, "grazing2", compute_grazing)
+print_fig(params, "gear_rattle2", compute_grazing; ylab= L"\dot{\theta}", xlab= L"\theta", force = false)
+att = get_att(params, "gear_rattle2", compute_grazing)
 
 # cb2 = ContinuousCallback(condition2,affect!; abstol = 1e-16, save_positions=(true,true))
 # diffeq = (reltol = 0, abstol= 1e-16, alg = Vern9(), callback = cb2)
