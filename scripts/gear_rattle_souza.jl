@@ -50,7 +50,7 @@ end
 
 res = 1200
 params = @strdict res
-print_fig(params, "gear_rattle2", compute_gear_rattle2; ylab= L"\dot{\theta}", xlab= L"\theta", force = false)
+print_fig(params, "gear_rattle2", compute_gear_rattle2; ylab= L"\dot{s}", xlab= L"s", force = false)
 # att = get_att(params, "gear_rattle2", compute_gear_rattle2)
 
 # cb2 = ContinuousCallback(condition2,affect!; abstol = 1e-16, save_positions=(true,true))

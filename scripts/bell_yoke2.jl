@@ -80,14 +80,18 @@ function compute_bell_yoke(di::Dict)
     xg = range(-0.5,0.5,length = res)
     yg = range(-0.5,0.5,length = res)
     grid = (xg, yg)
-    bsn = @showprogress [mapper([x, y, 0., 0.]) for x in xg, y in yg]  
-
+    bsn = zeros(Int, res, res)
+    for (i,x) in enumerate(xg), (j,y) in enumerate(yg)
+        if abs(x - y) < 0.5349
+            bsn[i,j] = mapper([x, y, 0., 0.])
+        end
+    end
     att = extract_attractors(mapper)
     return @strdict(bsn, att, grid, res)
 end
 
 
-res = 600; Tmax = 150; lr = -0.03
+res = 10; Tmax = 150; lr = -0.03
 params = @strdict res Tmax lr
 cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
 print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = false, cmap)
