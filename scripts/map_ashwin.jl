@@ -7,7 +7,7 @@ using CairoMakie
 # Peter Ashwin, Jorge Buescu and Ian Stewart
 # Nonlinearity 9 (1996) 703–737. 
 # https://doi.org/10.1088/0951-7715/9/3/006
-function cplog_ashwin(dz, z, p, n)
+function cplog_ashwin!(dz, z, p, n)
     x1 = z[1]; x2 = z[2]
     α, ν, ε = p
     dz[1] = 3*√3/2*x1*(x1^2-1) + ε*x1*x2^2
@@ -18,7 +18,7 @@ end
 
 function compute_ashwin(di::Dict)
     @unpack α, ν, ε, res = di
-    ds = DeterministicIteratedMap(cplog_ashwin, [1.0, 0.0], [α, ν, ε])
+    ds = DeterministicIteratedMap(cplog_ashwin!, [1.0, 0.0], [α, ν, ε])
     yg = xg = range(-20., 20., length = 25001)
     mapper = AttractorsViaRecurrences(ds, (xg,yg); sparse = true,    
         consecutive_recurrences = 1000,
