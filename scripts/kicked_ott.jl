@@ -12,9 +12,9 @@ using ProgressMeter
 # Physica 25D 1987
 # https://doi.org/10.1016/0167-2789(87)90108-4
 function kicked_ott!(dz, z, p, t)
-    f0 = p[1]; T = 1
+    f0, ν = p; T = 1
     m1 = m2 = 1; 
-    ν1 = ν2 = ν = 0.1
+    ν1 = ν2 = ν
     l1 = 1/√2; l2 =1 
     s1 = ν*(3+√5)/2; s2 = ν*(3-√5)/2; 
 
@@ -38,9 +38,9 @@ end
 
 
 function compute_kicked_rotor_ott(di)
-    @unpack f0, res = di
+    @unpack f0, ν, res = di
     u0 = [0.; 0.; 0.; 0.]
-    p = [f0]
+    p = (f0, ν)
     df = DeterministicIteratedMap(kicked_ott!, u0, p) 
     θ1 = θ2= range(-2π, 2π, length = 10001)
     θd1 = θd2 = range(-30, 30, length = 10001)
@@ -50,7 +50,6 @@ function compute_kicked_rotor_ott(di)
             mx_chk_fnd_att = 3000, 
             mx_chk_loc_att = 3000, 
             # mx_chk_att = 2,
-             sparse = true,
     )
     θ1 = range(-π, π, length = res)
     θ2 = range(-π, π, length = res)
@@ -60,6 +59,7 @@ function compute_kicked_rotor_ott(di)
     return @strdict(bsn, att, grid, f0, res)
 end
 
-f0 = 0.1; #res = 700
-params = @strdict f0 res
-print_fig(params, "kicked_rotor_ott", compute_kicked_rotor_ott; xlab = L"\theta_1", ylab = L"\theta_2")
+# res = 200
+f0 = 0.1; ν = 0.1
+params = @strdict f0 ν res
+print_fig(params, "kicked_rotor_ott", compute_kicked_rotor_ott; xlab = L"\theta_1", ylab = L"\theta_2", force = true)

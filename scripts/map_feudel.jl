@@ -10,11 +10,9 @@ using OrdinaryDiffEq:Vern9
 # Basin bifurcation in quasiperiodically forced systems Ulrike Feudel, Annette Witt, Ying-Cheng Lai, and Celso Grebogi PRE 28, 1998
 # https://doi.org/10.1103/PhysRevE.58.3060
 function chaotic_map(dz, z, p, n)
-    xn = z[1]
-    θ = z[2]
-    a = p[1]
+    xn, θ = z
+    a, r = p
     ω = (sqrt(5.0) - 1.0) / 2.0
-    r = p[2]
     f(x) = r * x * (1.0 - x)
     Mn(n) = reduce(∘, fill(f, n))
     M = Mn(3)
