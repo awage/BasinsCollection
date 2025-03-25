@@ -41,6 +41,6 @@ res = 1200
 μ1 = 3.55; μ2 = 3.55
 params = @strdict res μ1 μ2
 # cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.34,0.34,1), RGB(1,0.46,0.46), RGB(0.1,0.1,0.1) ] )
-print_fig(params, "cournot2d", compute_cournot_2d; force = true) 
+print_fig(params, "cournot2d", compute_cournot_2d; force = false) 
 # att = get_att(params, "cournot2d", compute_cplog) 
 

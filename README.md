@@ -62,7 +62,7 @@ everything should work out of the box, including correctly finding local paths.
 
 * 4D kicked map rotor from `kicked_ott.jl`: https://doi.org/10.1016/0167-2789(87)90108-4
 
-   ![kicked_rotor_ott](./plots/kicked_rotor_ott_f0=0.1_res=1200.png)
+   ![kicked_rotor_ott](./plots/kicked_rotor_ott_f0=0.1_res=1200_ν=0.1.png)
 
 * A map with Wada `map_feudel.jl`: https://doi.org/10.1103/PhysRevE.58.3060
 
@@ -260,9 +260,9 @@ everything should work out of the box, including correctly finding local paths.
 
    ![shrimali](./plots/shrimali_res=1200_α=3.25_β=0.01_ϵp=0.5.png)
 
-* Basins of attraction in a impact oscillator: `grazing2.jl`: (Ref. Lost!) 
+* Basins of attraction in a gear ratlle oscillator: `gear_rattle_souza.jl`: https://doi.org/10.1177/107754630100700605 
 
-   ![grazing2](./plots/grazing2_res=1200.png)
+   ![gear_rattle2](./plots/gear_rattle2_res=1200.png)
 
 * Basins of attraction of different ringing schemes of the church bell: `bell_yoke2.jl`: https://doi.org/10.1016/j.ijimpeng.2015.06.008
 
@@ -288,3 +288,6 @@ everything should work out of the box, including correctly finding local paths.
 
    ![lorenz_complexity](./plots/lorenz_complexity_res=1200.png)
 
+* Cournot economic game in 2D: `map_bischi_cournot.jl`: https://doi.org/10.1016/S0960-0779(98)00130-1
+
+![cournot2d](./plots/cournot2d_res=1200_μ1=3.55_μ2=3.55.png)

@@ -144,8 +144,6 @@ include("souza_impacting.jl")
 
 include("lorenz_computational_chaos.jl")
 
-include("grazing2.jl")
-
 include("bell_yoke2.jl")
 
 include("map_nash_eq.jl")

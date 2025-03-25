@@ -1,7 +1,7 @@
 using LaTeXStrings
 using CairoMakie
 
-function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing, xlab = L"x", ylab = L"y", force = false, format = :pdf)
+function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing, xlab = L"x", ylab = L"y", force = false, format = :png)
     println(sys_name)
     data, file = produce_or_load(
         datadir("basins"), params, fun_name;
