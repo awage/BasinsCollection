@@ -142,7 +142,7 @@ everything should work out of the box, including correctly finding local paths.
 
 * Disipative nontwist map `dsnm.jl`: https://doi.org/10.1103/PhysRevE.107.024216
 
-   ![dsnm](./plots/dsnm_a=0.55_b=0.45_res=1200.png)
+   ![dsnm](./plots/dsnm_a=0.55_b=0.45_res=2000.png)
 
 * 6D Shear Flow model `lebovitz_mariotti.jl`: https://doi.org/10.1017/jfm.2013.38
 
@@ -174,11 +174,11 @@ everything should work out of the box, including correctly finding local paths.
 
 * Bogdanov map `map_bogdanov.jl`:  https://doi.org/10.1142/S021812749300074X
 
-   ![bogdanov](./plots/bogdanov_k=1.2_res=1200_ε=0.0125_μ=-0.1.png)
+   ![bogdanov](./plots/bogdanov_k=1.2_res=2000_ε=0.0125_μ=-0.1.png)
 
 * Coupled Lorenz systems `coupled_lorenz.jl`:  https://doi.org/10.1103/PhysRevE.96.062203
 
-   ![coupled_lorenz](./plots/coupled_lorenz_res=1000_α=10_β=24.8_γ=2.67_ε=1.1.png)
+   ![coupled_lorenz](./plots/coupled_lorenz_res=1200_α=10_β=24.8_γ=2.67_ε=1.1.png)
 
 * Rock-Paper-Scisors competition model `cyclic_competition.j`:  https://doi.org/10.1063/1.5045366
 

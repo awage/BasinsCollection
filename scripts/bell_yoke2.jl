@@ -91,7 +91,7 @@ function compute_bell_yoke(di::Dict)
 end
 
 
-res = 10; Tmax = 150; lr = -0.03
+res = 600; Tmax = 150; lr = -0.03
 params = @strdict res Tmax lr
 cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
 print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\dot{\phi}_1", xlab= L"\phi_2", force = false, cmap)
