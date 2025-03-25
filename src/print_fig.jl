@@ -10,18 +10,18 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
     @unpack bsn, grid = data
     xg, yg = grid
 
-    fig = Figure(size = (w, h))
 
     if format == :pdf
-    ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
-            yticklabelsize = 40, 
-            xticklabelsize = 40, 
-            ylabelsize = 40, 
-            xlabelsize = 40, 
-            xticklabelfont = "cmr10", 
-            yticklabelfont = "cmr10")
+        fig = Figure(size = (w, h))
+        ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
+                yticklabelsize = 40, 
+                xticklabelsize = 40, 
+                ylabelsize = 40, 
+                xlabelsize = 40, 
+                xticklabelfont = "cmr10", 
+                yticklabelfont = "cmr10")
     else
-        w = 40; h = 40;
+        fig = Figure(size = (40, 40))
         ax = Axis(fig[1,1], 
             xticksvisible = false, 
             yticksvisible = false, 
