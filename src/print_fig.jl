@@ -1,7 +1,7 @@
 using LaTeXStrings
 using CairoMakie
 
-function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing, xlab = L"x", ylab = L"y", force = false)
+function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing, xlab = L"x", ylab = L"y", force = false, format = :pdf)
     println(sys_name)
     data, file = produce_or_load(
         datadir("basins"), params, fun_name;
@@ -9,7 +9,10 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
     )
     @unpack bsn, grid = data
     xg, yg = grid
+
     fig = Figure(size = (w, h))
+
+    if format == :pdf
     ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
             yticklabelsize = 40, 
             xticklabelsize = 40, 
@@ -17,11 +20,14 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
             xlabelsize = 40, 
             xticklabelfont = "cmr10", 
             yticklabelfont = "cmr10")
-    # ax = Axis(fig[1,1], 
-    #     xticksvisible = false, 
-    #     yticksvisible = false, 
-    #     xticklabelsvisible = false, 
-    #     yticklabelsvisible = false)
+    else
+        w = 80; h = 80;
+        ax = Axis(fig[1,1], 
+            xticksvisible = false, 
+            yticksvisible = false, 
+            xticklabelsvisible = false, 
+            yticklabelsvisible = false)
+    end
 
     if isnothing(cmap)
         println("Number of basins: " , length(unique(bsn)))
@@ -35,9 +41,13 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
         println("Number of basins: " , length(unique(bsn)))
         heatmap!(ax, xg, yg, bsn, rasterize = 1, colormap = cmap)
     end
-    save(plotsdir(savename(sys_name,params,"pdf")),fig)
-    # save(plotsdir(savename(sys_name,params,"png")),fig)
-    # println("![",sys_name,"](./plots/", savename(sys_name,params,"png"),")")
+
+    if format == :pdf
+        save(plotsdir(savename(sys_name,params,"pdf")),fig)
+    else
+        save(plotsdir(savename(sys_name,params,"png")),fig)
+        println("![",sys_name,"](./plots/", savename(sys_name,params,"png"),")")
+    end
 end
 
 

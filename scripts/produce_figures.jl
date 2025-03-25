@@ -6,6 +6,7 @@ using ColorSchemes
 include(srcdir("print_fig.jl"))
 
 res = 1200
+format = :pdf
 
 include("newton_basins.jl")
 
@@ -97,7 +98,6 @@ include("co2_modulated_laser.jl")
 
 include("pumped_laser_dynamics.jl")
  
-
 include("TLNs_network.jl")
 
 include("kuramoto_basins_with_tentacles.jl")
@@ -128,6 +128,8 @@ include("chimera_reduced_model.jl")
 
 include("gear_rattle.jl")
 
+include("gear_rattle_souza.jl")
+
 include("economic_geographic_model.jl")
 
 include("map_lai.jl")
@@ -147,3 +149,5 @@ include("grazing2.jl")
 include("bell_yoke2.jl")
 
 include("map_nash_eq.jl")
+
+include("map_bischi_cournot.jl")
