@@ -11,6 +11,7 @@ function comptetion_model!(du, u, p, t)
     R = u[n+1:n+3]
     d = 1.
     D = 0.25/d
+    r = 1/d
     K = [0.2 0.05 0.50 0.05 0.50 0.03 0.51 0.51;
         0.15 0.06 0.05 0.50 0.30 0.18 0.04 0.31 ;
         0.15 0.50 0.30 0.06 0.05 0.18 0.31 0.04]
@@ -19,7 +20,7 @@ function comptetion_model!(du, u, p, t)
         0.10 0.10 0.20 0.20 0.10 0.10 0.10 0.22]
     tmp_v = zeros(n)
     for k in 1:n
-        tmp_v[k] = u[k]*min(R[1]/(K[1,k]+R[1]), R[2]/(K[2,k]+R[2]), R[3]/(K[3,k]+R[3]))
+        tmp_v[k] = r*u[k]*min(R[1]/(K[1,k]+R[1]), R[2]/(K[2,k]+R[2]), R[3]/(K[3,k]+R[3]))
         du[k] = tmp_v[k] - u[k]*D
     end
     du[n+1:n+3] = D*(10 .- R) .- C*tmp_v

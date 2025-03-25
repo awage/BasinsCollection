@@ -10,8 +10,8 @@ include(srcdir("print_fig.jl"))
 
 function henon_heiles_de(dv,v,p,t)
     x, px, y, py = v
-    ∂H∂x = x+2*x*y;
-    ∂H∂y = y-y^2+x^2;
+    ∂H∂x = x + 2*x*y;
+    ∂H∂y = y - (x^2 - y^2);
     ∂H∂px = px;
     ∂H∂py = py;
     dv[1] = ∂H∂px;

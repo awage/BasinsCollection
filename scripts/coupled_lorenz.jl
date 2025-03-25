@@ -45,4 +45,6 @@ let res = 1200
 params = @strdict res α β ε γ
 cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
 print_fig(params, "coupled_lorenz", compute_lorenz; force = false, xlab = L"z_1", ylab = L"z_2", cmap) 
+# att = get_att(params, "coupled_lorenz", compute_lorenz; force = false) 
+# @show att 
 end
