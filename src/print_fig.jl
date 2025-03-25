@@ -21,7 +21,7 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
                 xticklabelfont = "cmr10", 
                 yticklabelfont = "cmr10")
     else
-        fig = Figure(size = (150, 150))
+        fig = Figure(size = (200, 200))
         ax = Axis(fig[1,1], 
             xticksvisible = false, 
             yticksvisible = false, 
