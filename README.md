@@ -26,7 +26,7 @@ everything should work out of the box, including correctly finding local paths.
 
 * Basins for the Newton root finding algorithm
 
-   ![](./plots/newton_2_i=2_res=1200.png)
+   ![](./plots/newton__res=1200.png)
 
 * Riddled basins `ott_basins.jl`: https://doi.org/10.1016/0167-2789(94)90047-7
 
