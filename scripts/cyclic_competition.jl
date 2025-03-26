@@ -60,5 +60,6 @@ end
 let res = 1200
 r = 3.35; #res = 1500;
 params = @strdict r res
-print_fig(params , "cyc_comp", compute_cyc_comp; xlab = L"x", ylab = L"y") 
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(1,0.16, 0.16), RGB(0.14,0.14,1), RGB(0.8,0.8,0.1), RGB(0.1,0.1,0.1) ] )
+print_fig(params , "cyc_comp", compute_cyc_comp; xlab = L"x", ylab = L"y", cmap) 
 end

@@ -36,6 +36,7 @@ end
 let res = 1200
 ν = 0.01747; 
 params = @strdict ν res
-print_fig(params, "alfven", compute_alfven; ylab = L"b_z", xlab = L"b_y", force = false) 
+cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(1,0.26, 0.26), RGB(0.34,0.34,1), RGB(0.1,0.1,0.1) ] )
+print_fig(params, "alfven", compute_alfven; ylab = L"b_z", xlab = L"b_y", force = false, cmap) 
 end
 

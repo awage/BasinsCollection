@@ -50,7 +50,8 @@ end
 
 res = 1200
 params = @strdict res
-print_fig(params, "gear_rattle2", compute_gear_rattle2; ylab= L"\dot{s}", xlab= L"s", force = false)
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+print_fig(params, "gear_rattle2", compute_gear_rattle2; ylab= L"\dot{s}", xlab= L"s", force = false, cmap)
 # att = get_att(params, "gear_rattle2", compute_gear_rattle2)
 
 # cb2 = ContinuousCallback(condition2,affect!; abstol = 1e-16, save_positions=(true,true))
