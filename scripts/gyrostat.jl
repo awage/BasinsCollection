@@ -33,8 +33,6 @@ function compute_gyrostat(di)
     xg = yg = zg = range(-30, 30,length = 1501)
     mapper = AttractorsViaRecurrences(ds, (xg,yg,zg); Ttr = 2000,
                                       consecutive_recurrences = 1000)
-                # attractor_locate_steps = 1000,
-                # consecutive_attractor_steps = 10)
     xg = range(-50,50,length = res)
     yg = range(-50,50,length = res)
     bsn = @showprogress [ mapper([x,y,0.]) for x in xg, y in yg]

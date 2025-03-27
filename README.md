@@ -291,3 +291,7 @@ everything should work out of the box, including correctly finding local paths.
 * Cournot economic game in 2D: `map_bischi_cournot.jl`: https://doi.org/10.1016/S0960-0779(98)00130-1
 
 ![cournot2d](./plots/cournot2d_res=1200_μ1=3.55_μ2=3.55.png)
+
+* Chaotic Gyrostat basins: `gyrostat.jl`: https://doi.org/10.3390/math10111914
+
+![gyrostat](./plots/gyrostat=1200.png)
