@@ -21,6 +21,11 @@ using OrdinaryDiffEq:Vern9
     return SVector{3}(dx1, dx2, dx3)
 end
 
+  # \begin{align*}
+  #  \dot{x}_1 & = -b_{11} x_1 - b_{12} x_2 + b_{13} x_3 + F_{1m} x_2 x_3 + L_{1m} \\
+  #  \dot{x}_2 & = b_{21} x_1 + b_{22} x_2 + F_{2m} x_1 x_3 + L_{2m} \\
+  #  \dot{x}_3 & = -b_{31} x_1 - b_{33} x_3 + F_{3m} x_1 x_2 + L_{3m}
+  #  \end{align*}
 function compute_gyrostat(di)
     @unpack  res = di
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
@@ -38,8 +43,9 @@ function compute_gyrostat(di)
     return @strdict(bsn, att, grid,  res)
 end
 
- res = 100
+res = 1200
 params = @strdict res
-print_fig(params, "gyrostat", compute_gyrostat; ylab = L"y", xlab = L"x", force = true)
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.25,0.2)] )
+print_fig(params, "gyrostat", compute_gyrostat; ylab = L"y", xlab = L"x", force = false, cmap)
 att = get_att(params, "gyrostat", compute_gyrostat)
 
