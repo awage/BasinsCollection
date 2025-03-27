@@ -294,4 +294,4 @@ everything should work out of the box, including correctly finding local paths.
 
 * Chaotic Gyrostat basins: `gyrostat.jl`: https://doi.org/10.3390/math10111914
 
-![gyrostat](./plots/gyrostat=1200.png)
+![gyrostat](./plots/gyrostat_res=1200.png)
