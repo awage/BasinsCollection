@@ -21,11 +21,6 @@ using OrdinaryDiffEq:Vern9
     return SVector{3}(dx1, dx2, dx3)
 end
 
-  # \begin{align*}
-  #  \dot{x}_1 & = -b_{11} x_1 - b_{12} x_2 + b_{13} x_3 + F_{1m} x_2 x_3 + L_{1m} \\
-  #  \dot{x}_2 & = b_{21} x_1 + b_{22} x_2 + F_{2m} x_1 x_3 + L_{2m} \\
-  #  \dot{x}_3 & = -b_{31} x_1 - b_{33} x_3 + F_{3m} x_1 x_2 + L_{3m}
-  #  \end{align*}
 function compute_gyrostat(di)
     @unpack  res = di
     diffeq = (alg = Vern9(), reltol = 1e-9, maxiters = 1e8)
