@@ -12,7 +12,6 @@ include(srcdir("print_fig.jl"))
 function map_cazelle!(dz, z, p, n)
 x1, y1, x2, y2 = z
 dx = 0.175; dy = 0.002; k1 = 100.0; k2 = 75.0; r1 = 3.0; r2 = 3.5
-
 dz[1] = (1-dx)*x1*exp(r1*(1-(x1+y1)/k1)) + dx*x2*exp(r2*(1-(x2+y2)/k2))
 dz[2] = (1-dy)*y1*exp(r1*(1-(x1+y1)/k1)) + dy*y2*exp(r2*(1-(x2+y2)/k2))
 dz[3] = (1-dx)*x2*exp(r2*(1-(x2+y2)/k2)) + dx*x1*exp(r1*(1-(x1+y1)/k1))

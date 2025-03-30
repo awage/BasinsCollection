@@ -19,8 +19,8 @@ end
 function compute_RG(di)
     @unpack res= di
     ds = DeterministicIteratedMap(ricker_gatto!, rand(2))
-    xgg = range(0, 10, length = 40001)
-    ygg = range(0, 1, length = 40001)
+    xgg = range(0, 10, length = 100001)
+    ygg = range(0, 1, length = 100001)
     mapper = AttractorsViaRecurrences(ds, (xgg,ygg); 
                     consecutive_recurrences = 1000, 
                     consecutive_attractor_steps = 10
