@@ -6,6 +6,7 @@ using CairoMakie
 using ProgressMeter
 
 # Sommerer, J. C. (1995). The end of classical determinism. Johns Hopkins APL Technical Digest, 16(4), 333.
+# Sommerer, J. C., & Ott, E. (1996). Intermingled basins of attraction: uncomputability in a simple physical system. Physics Letters A, 214(5-6), 243-251.
 function forced_particle!(du, u, p, t)
     γ = 0.632; f₀ = 1.0688  ; ω = 2.2136; 
     s = 20.; p = 0.098; k = 10.;
