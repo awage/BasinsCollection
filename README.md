@@ -1,10 +1,17 @@
 # BasinsCollection
 
-This code base is using the Julia Language and [DrWatson](https://juliadynamics.github.io/DrWatson.jl/stable/)
-to make a reproducible scientific project named
-> BasinsCollection
+This is a collection of multistable systems with the code to simulate their 
+basins of attraction. Each file can be executed independently or there is a 
+file called 'produce_basins.jl' to compute all the basins. This may take several 
+days for some basins so be warned. Anyway, most basins will compute in some minutes for 
+a 1200x1200 resolution. 
 
-It is authored by Wagemakers.
+The code is under MIT License, please cite the this repository or the 
+companion article to this repo: 
+
+
+
+Alexandre Wagemakers
 
 To (locally) reproduce this project, do the following:
 
@@ -266,7 +273,7 @@ everything should work out of the box, including correctly finding local paths.
 
 * Basins of attraction of different ringing schemes of the church bell: `bell_yoke2.jl`: https://doi.org/10.1016/j.ijimpeng.2015.06.008
 
-   ![bell_yoke](./plots/bell_yoke_Tmax=150_lr=-0.03_res=600.png)
+   ![bell_yoke](./plots/bell_yoke_Tmax=150_lr=-0.03_res=700.png)
 
 * Basins of a multiply regulated biochemical system: `decroly_biorhythm.jl`: https://doi.org/10.1073/pnas.79.22.6917   
 
@@ -290,8 +297,16 @@ everything should work out of the box, including correctly finding local paths.
 
 * Cournot economic game in 2D: `map_bischi_cournot.jl`: https://doi.org/10.1016/S0960-0779(98)00130-1
 
-![cournot2d](./plots/cournot2d_res=1200_μ1=3.55_μ2=3.55.png)
+   ![cournot2d](./plots/cournot2d_res=1200_μ1=3.55_μ2=3.55.png)
 
 * Chaotic Gyrostat basins: `gyrostat.jl`: https://doi.org/10.3390/math10111914
 
-![gyrostat](./plots/gyrostat_res=1200.png)
+   ![gyrostat](./plots/gyrostat_res=1200.png)
+
+* Intermingled basins in a triangular map: `map_intermingled.jl`: https://doi.org/10.1017/S0143385700009020,
+
+   ![intermingled](./plots/triangular_img_res=3000_λ=1.03.png)
+
+* Ricker-Gatto competition model: `map_ricker_gatto.jl`: https://doi.org/10.1016/S0960-0779(00)00047-3
+
+   ![intermingled](./plots/ricker_gatto_res=2000.png)

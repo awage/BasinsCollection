@@ -35,6 +35,8 @@ function compute_lorenz84(di)
     return @strdict(bsn, att, grid, F, G, a, b, res)
 end
 
-F=6.846; G=1.287; a=0.25; b=4.; res = 1200
-params = @strdict F G a b res
-print_fig(params, "lorenz84", compute_lorenz84; ylab = L"y", xlab = L"x", force = false)
+let
+    F=6.846; G=1.287; a=0.25; b=4.; res = 1200
+    params = @strdict F G a b res
+    print_fig(params, "lorenz84", compute_lorenz84; ylab = L"y", xlab = L"x", force = false)
+end

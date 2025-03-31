@@ -99,35 +99,4 @@ print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\phi_1", xlab= L"\phi_
 att = get_att(params, "bell_yoke", compute_bell_yoke)
 
 
-# Tmax = 125; lr = 0.20
-# Tmax = 175; lr = 0.16
-# Tmax = 325; lr = -1.21
-# Tmax = 150; lr = -0.03
-# α = 0.5349 
-# Δ = 0.0001
-# cond(u,t,integrator) = abs(u[1] -  u[2]) > α + Δ
-# function aff!(integrator)
-#     uu = integrator.u
-#     # println("discrete callback")
-#     if uu[1] - uu[2] > α 
-#         # set_state!(integrator, SVector(uu[1], uu[1] + α - Δ/2, uu[3], uu[4]))
-#         set_state!(integrator, SVector(uu[2] + α - Δ/2 ,uu[2], uu[3], uu[4]))
-#         u_modified!(integrator, true)
-#     elseif uu[2] - uu[1] > α
-#         # set_state!(integrator, SVector(uu[1],uu[1] + α - Δ/2, uu[3], uu[4]))
-#         set_state!(integrator, SVector(uu[2] - α + Δ/2, uu[2], uu[3], uu[4]))
-#         u_modified!(integrator, true)
-#     end
-# end
-
-# cbd = DiscreteCallback(cond, aff!)
-# cb = ContinuousCallback(condition,affect!; abstol = 1e-18, save_positions=(true,true), interp_points = 30)
-# diffeq = (reltol = 0, abstol = 1e-17,  alg = Vern9(), callback = CallbackSet(cb,cbd))
-# df = CoupledODEs(bell_yoke!, rand(4), [Tmax, lr]; diffeq)
-# y,t = trajectory(df, 2000, rand(4)*0.05)
-# # lines(y[:,1],y[:,2])
-# # lines(y[19000:20000,1],y[19000:20000,2])
-# p = Figure(); ax = Axis(p[1,1])
-# lines!(ax, [-0.75; -0.2],  [-0.75+α; -0.2+α])
-# lines!(ax,y[18000:18200,1],y[18000:18200,2])
 

@@ -1,7 +1,7 @@
 using LaTeXStrings
 using CairoMakie
 
-function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing, xlab = L"x", ylab = L"y", force = false, format = :pdf)
+function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing, xlab = L"x", ylab = L"y", force = false, format = :png)
     println(sys_name)
     data, file = produce_or_load(
         datadir("basins"), params, fun_name;
@@ -14,12 +14,12 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
     if format == :pdf
         fig = Figure(size = (w, h))
         ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
-                yticklabelsize = 40, 
-                xticklabelsize = 40, 
+                yticklabelsize = 30, 
+                xticklabelsize = 30, 
                 ylabelsize = 40, 
                 xlabelsize = 40, 
-                xticklabelfont = "cmr10", 
-                yticklabelfont = "cmr10")
+                xticklabelfont = "NewComputerModern", 
+                yticklabelfont = "NewComputerModern")
     else
         fig = Figure(size = (200, 200))
         ax = Axis(fig[1,1], 

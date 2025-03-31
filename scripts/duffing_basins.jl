@@ -39,6 +39,8 @@ cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
 # params = @strdict d F ω res
 # print_fig(params, string("duffing_",d), compute_basins_duffing; ylab = L"$\dot{x}$", xlab = L"x", cmap) 
 
-d = 0.05; F=0.098; ω=1.15;  # smooth boundary
-params = @strdict d F ω res
-print_fig(params, string("duffing_",d), compute_basins_duffing; ylab = L"$\dot{x}$", xlab = L"x") 
+let
+    d = 0.05; F=0.098; ω=1.15;  # smooth boundary
+    params = @strdict d F ω res
+    print_fig(params, string("duffing_",d), compute_basins_duffing; ylab = L"$\dot{x}$", xlab = L"x") 
+end

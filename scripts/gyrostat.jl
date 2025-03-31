@@ -39,6 +39,6 @@ end
 res = 1200
 params = @strdict res
 cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.25,0.2)] )
-print_fig(params, "gyrostat", compute_gyrostat; ylab = L"y", xlab = L"x", force = false, cmap)
+print_fig(params, "gyrostat", compute_gyrostat; ylab = L"x_2", xlab = L"x_1", force = false, cmap)
 att = get_att(params, "gyrostat", compute_gyrostat)
 

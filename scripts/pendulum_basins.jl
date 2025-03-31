@@ -46,6 +46,7 @@ function compute_basins_pend(di::Dict)
 end
 
 
+let
 d = 0.2; F = 1.3636363636363635; ω = 0.5 # Parameters for Riddled Basins
 # res = 1000
 cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
@@ -57,3 +58,4 @@ d = 0.2; F = 1.66; ω = 1. # Parameters for Wada Basins
 params = @strdict d F ω res
 cmap = ColorScheme([RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
 print_fig(params, "pendulum", compute_basins_pend; cmap, ylab= L"\dot{\theta}", xlab= L"\theta")
+end

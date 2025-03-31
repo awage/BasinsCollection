@@ -149,3 +149,9 @@ include("bell_yoke2.jl")
 include("map_nash_eq.jl")
 
 include("map_bischi_cournot.jl")
+
+include("map_intermingled.jl")
+
+include("gyrostat.jl")
+
+include("map_ricker_gatto.jl")
