@@ -94,7 +94,7 @@ end
 
 res = 700; Tmax = 150; lr = -0.03
 params = @strdict res Tmax lr
-cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1), RGB(0.2,0.2,0.2)] )
 print_fig(params, "bell_yoke", compute_bell_yoke; ylab= L"\phi_1", xlab= L"\phi_2", force = false, cmap)
 att = get_att(params, "bell_yoke", compute_bell_yoke)
 
@@ -130,4 +130,4 @@ att = get_att(params, "bell_yoke", compute_bell_yoke)
 # p = Figure(); ax = Axis(p[1,1])
 # lines!(ax, [-0.75; -0.2],  [-0.75+α; -0.2+α])
 # lines!(ax,y[18000:18200,1],y[18000:18200,2])
-# p
+

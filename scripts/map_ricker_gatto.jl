@@ -25,7 +25,7 @@ function compute_RG(di)
                     consecutive_recurrences = 1000, 
                     consecutive_attractor_steps = 10
                                      )
-    xg = range(0, 6, length = res)
+    xg = range(3, 6, length = res)
     yg = range(0, 0.1, length = res)
     grid = (xg,yg)
     bsn, att = basins_of_attraction(mapper, grid; show_progress = true)
@@ -34,5 +34,5 @@ end
 
 res = 2000
 params = @strdict res 
-cmap = ColorScheme([RGB(1,1,1), RGB(1,1,1), RGB(0,0,0),  RGB(0.9,0.2,0.1)] )
+cmap = ColorScheme([RGB(0.1,0.1,0.1), RGB(1,1,1)] )
 print_fig(params, "ricker_gatto", compute_RG; xlab = L"x", ylab = L"y", force = false, cmap)
