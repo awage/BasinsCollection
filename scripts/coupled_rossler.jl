@@ -4,6 +4,8 @@ using CairoMakie
 using LaTeXStrings
 using Attractors
 using OrdinaryDiffEq:Vern9
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Reference: PHYSICAL REVIEW E 85, 035202(R) (2012)
 #How to obtain extreme multistability in coupled dynamical systems

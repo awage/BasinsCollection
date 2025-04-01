@@ -4,6 +4,7 @@ using OrdinaryDiffEq:Vern9
 using Attractors
 using CairoMakie
 using LaTeXStrings
+include(srcdir("print_fig.jl"))
 
 # Eur. Phys. J. Special Topics 226, 1979–1985 (2017)
 # https://doi.org/10.1140/epjst/e2017-70037-1

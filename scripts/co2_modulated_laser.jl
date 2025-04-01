@@ -6,6 +6,7 @@ using Attractors
 # using OrdinaryDiffEq:Vern9
 using OrdinaryDiffEq
 using ProgressMeter
+using Colors,ColorSchemes
 include(srcdir("print_fig.jl"))
 
 # Generalized multistability and its control in a laser featured

@@ -4,7 +4,8 @@ using OrdinaryDiffEq
 using Attractors
 using CairoMakie
 using LaTeXStrings
-using ColorSchemes
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 
 function circadian_cell_cycle!(du, u, p, t)

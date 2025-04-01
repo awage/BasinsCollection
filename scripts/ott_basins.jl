@@ -3,6 +3,8 @@ using DrWatson
 using OrdinaryDiffEq:Vern9
 using Attractors
 using CairoMakie
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Equations of motion: E. Ott, et al. I Physica D 76 (1994) 384-410
 # https://doi.org/10.1016/0167-2789(94)90047-7

@@ -4,6 +4,7 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
+include(srcdir("print_fig.jl"))
 
 
 

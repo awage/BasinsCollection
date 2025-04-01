@@ -4,6 +4,8 @@ using CairoMakie
 using LaTeXStrings
 using Attractors
 using StaticArrays
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Organized periodic structures and coexistence of triple attractors in a
 # predator–prey model with fear and refuge

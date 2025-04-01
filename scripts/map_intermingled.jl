@@ -3,6 +3,7 @@ using DrWatson
 using Attractors
 using LaTeXStrings
 using CairoMakie
+using Colors,ColorSchemes
 include(srcdir("print_fig.jl"))
 
 # James C. Alexander, Brian R. Hunt, Ittai Kan and James A. Yorke

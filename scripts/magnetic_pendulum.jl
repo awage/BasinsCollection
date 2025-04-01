@@ -4,6 +4,7 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq
+include(srcdir("print_fig.jl"))
 
 # https://cdn.ima.org.uk/wp/wp-content/uploads/2020/03/Chaos-in-the-Magnetic-Pendulum-from-MT-April-2020.pdf
 #ds = mag_pendulum(γ=1, d=0.5, α=0.175, ω=1., N=4)

@@ -3,6 +3,8 @@ using DrWatson
 using Attractors
 using LaTeXStrings
 using CairoMakie
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 # From attractor to chaotic saddle: a tale of transverse  instability
 # Peter Ashwin, Jorge Buescu and Ian Stewart
 # Nonlinearity 9 (1996) 703–737. 

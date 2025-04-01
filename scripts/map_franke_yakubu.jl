@@ -3,6 +3,8 @@ using DrWatson
 using Attractors
 using CairoMakie
 using LaTeXStrings
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Chaos, Solitons and Fractals 12 (2001) 301±311
 # Dynamics with riddled basins of attraction in models of

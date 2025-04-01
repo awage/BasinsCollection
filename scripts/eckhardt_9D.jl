@@ -6,6 +6,8 @@ using OrdinaryDiffEq:Vern9
 using CairoMakie
 using Random
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # A low-dimensional model for turbulent shear flows
 # Jeff Moehlis , Holger Faisst and Bruno Eckhardt

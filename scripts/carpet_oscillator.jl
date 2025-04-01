@@ -4,6 +4,8 @@ using OrdinaryDiffEq:Vern9
 using Attractors
 using CairoMakie
 using LaTeXStrings
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 # Pramana – J. Phys. (2018) 91:11
 # https://doi.org/10.1007/s12043-018-1581-6
 # Carpet oscillator: A new megastable nonlinear oscillator

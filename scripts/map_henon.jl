@@ -3,6 +3,8 @@ using DrWatson
 using Attractors
 using LaTeXStrings
 using CairoMakie
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 function henon_map!(dz, z, p, n)
     xn = z[1]; yn = z[2]

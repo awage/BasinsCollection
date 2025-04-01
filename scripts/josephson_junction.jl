@@ -4,6 +4,8 @@ using Attractors
 using OrdinaryDiffEq
 using LaTeXStrings
 using CairoMakie
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 # Cell-mapping techniques applied to the rf-driven Josephson junction
 # Article in Physical review A, Atomic, molecular, and optical physics · October 1987
 # DOI: 10.1103/PhysRevA.36.2455 · Source: PubMed

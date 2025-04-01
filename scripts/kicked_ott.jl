@@ -5,6 +5,8 @@ using LaTeXStrings
 using Attractors
 using OrdinaryDiffEq
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Multi dimenioned intertwined basin boundaries: basin structure of
 # the kicked double rotor

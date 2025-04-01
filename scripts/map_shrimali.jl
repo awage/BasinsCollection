@@ -4,6 +4,7 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 using ProgressMeter
+using Colors,ColorSchemes
 include(srcdir("print_fig.jl"))
 
   # title={Basin bifurcations in quasiperiodically forced coupled systems},

@@ -4,6 +4,8 @@ using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
 using LaTeXStrings
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Basins of attraction for chimera states
 # Erik A Martens1,2, Mark J Panaggio3,4 and Daniel M Abrams

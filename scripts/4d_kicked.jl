@@ -4,6 +4,7 @@ using CairoMakie
 using LaTeXStrings
 using Attractors
 using StaticArrays
+include(srcdir("print_fig.jl"))
 
 
 # REFERENCE: Feudel, U., Grebogi, C., Poon, L., & Yorke, J. A. (1998). Dynamical properties of a simple mechanical system with a large number of coexisting periodic attractors. Chaos, Solitons & Fractals, 9(1-2), 171-180.

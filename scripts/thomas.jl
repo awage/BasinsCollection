@@ -5,6 +5,8 @@ using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 """
     thomas_cyclical(u0 = [1.0, 0, 0]; b = 0.2)

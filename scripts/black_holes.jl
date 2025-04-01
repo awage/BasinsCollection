@@ -5,6 +5,8 @@ using Attractors
 using CairoMakie
 using LaTeXStrings
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # BASINS FOR MAJUMDAR-PAPAPETROU DOUBLE BLACK HOLE SYSTEM WITH SYMPLECTIC ALGORITHM*/
 function double_black_hole_de!(dv, v, p, t)

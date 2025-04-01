@@ -4,6 +4,8 @@ using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
 using LaTeXStrings
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Enhanced stability, bistability, and exceptional points in saturable active photonic couplers
 # Yertay Zhiyenbayev, Yannis Kominis, Constantinos Valagiannopoulos, Vassilios Kovanis and Anastasios Bountis

@@ -4,6 +4,7 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 using ProgressMeter
+using Colors,ColorSchemes
 include(srcdir("print_fig.jl"))
 
 # title={Multistability in a dynamic Cournot game with three oligopolists},

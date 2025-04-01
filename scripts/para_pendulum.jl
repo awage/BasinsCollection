@@ -4,6 +4,7 @@ using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
 using LaTeXStrings
+include(srcdir("print_fig.jl"))
 
 # φ = (- b  ̇φ - c φ - m*L*(μ − A_2*ω^2 cos ωt) sin φ - m*L*A_1*ω^2 sin ωt cos φ)/(m*L^2) 
 # Parametrically excited pendulum systems with several equilibrium positions. bifurcation analysis and rare attractors

@@ -5,6 +5,8 @@ using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 function slim_fractal_U2!(dz, z, p, n)
     x = z[1]; dx = z[2]; 

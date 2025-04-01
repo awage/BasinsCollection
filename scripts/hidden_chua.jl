@@ -5,7 +5,8 @@ using LaTeXStrings
 using Attractors
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
-# using Plots
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Physics Letters A Volume 375, Issue 23, 6 June 2011, Pages 2230-2233
 #Localization of hidden Chuaʼs attractors

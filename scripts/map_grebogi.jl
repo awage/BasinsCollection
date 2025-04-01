@@ -3,6 +3,8 @@ using DrWatson
 using Attractors
 using LaTeXStrings
 using CairoMakie
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # C. Grebogi, S. W. McDonald, E. Ott, J. A. Yorke, Final state sensitivity: An obstruction to predictability, Physics Letters A, 99, 9, 1983
 function grebogi_map(dz,z, p, n)

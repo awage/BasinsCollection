@@ -4,7 +4,8 @@ using OrdinaryDiffEq
 using Attractors
 using CairoMakie
 using LaTeXStrings
-using ColorSchemes
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # De Souza, S. L. T., & Caldas, I. L. (2001). Basins of Attraction and Transient Chaos in a Gear-Rattling Model. Journal of Vibration and Control, 7(6), 849–862. doi:10.1177/107754630100700605 
 # Equations of motion:

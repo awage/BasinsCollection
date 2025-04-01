@@ -3,6 +3,8 @@ using DrWatson
 using DynamicalBilliards
 using LaTeXStrings
 using CairoMakie
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 function escapewall!(p::AbstractParticle{T}, bd::Billiard{T}, t)::T where {T<:AbstractFloat}
 

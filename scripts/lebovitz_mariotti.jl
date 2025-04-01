@@ -4,6 +4,8 @@ using LaTeXStrings
 using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 
 # Lebovitz, N., & Mariotti, G. (2013). Edges in models of shear flow. Journal of Fluid Mechanics, 721, 386-402. doi:10.1017/jfm.2013.38

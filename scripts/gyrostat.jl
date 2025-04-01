@@ -6,6 +6,8 @@ using Attractors
 using StaticArrays
 using ProgressMeter
 using OrdinaryDiffEq:Vern9
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # https://doi.org/10.3390/math10111914
 @inline @inbounds function gyrostat(u, p, t)

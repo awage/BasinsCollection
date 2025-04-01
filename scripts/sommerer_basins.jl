@@ -4,6 +4,8 @@ using OrdinaryDiffEq:Vern9
 using Attractors
 using CairoMakie
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Sommerer, J. C. (1995). The end of classical determinism. Johns Hopkins APL Technical Digest, 16(4), 333.
 # Sommerer, J. C., & Ott, E. (1996). Intermingled basins of attraction: uncomputability in a simple physical system. Physics Letters A, 214(5-6), 243-251.

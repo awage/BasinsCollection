@@ -3,6 +3,8 @@ using DrWatson
 using Attractors
 using CairoMakie
 using LaTeXStrings
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 # International Journal of Bifurcation and ChaosVol. 04, No. 02, pp. 343-381 (1994) 
 # BASIN BIFURCATIONS OF TWO-DIMENSIONAL NONINVERTIBLE MAPS: FRACTALIZATION OF BASINS
 # C. MIRA , D. FOURNIER-PRUNARET, L. GARDINI , H. KAWAKAMI, and J.C. CATHALA

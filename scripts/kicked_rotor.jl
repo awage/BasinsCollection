@@ -3,6 +3,8 @@ using DrWatson
 using CairoMakie
 using LaTeXStrings
 using Attractors
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Reference: Map with more than 100 coexisting low-period periodic attractors, Ulrike Feudel,  Celso Grebogi, Brian R. Hunt, and James A. Yorke
 # Physical Review E, volume 54, number 1 1996

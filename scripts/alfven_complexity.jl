@@ -4,6 +4,8 @@ using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
 using LaTeXStrings
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # ALFVÉN BOUNDARY CRISIS
 # A. C.-L. CHIAN, F. A. BOROTTO and E. L. REMPEL

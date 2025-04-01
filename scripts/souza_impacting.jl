@@ -5,6 +5,8 @@ using Attractors
 using CairoMakie
 using LaTeXStrings
 using ColorSchemes
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # De Souza, S. L. T., Wiercigroch, M., Caldas, I. L., & Balthazar, J. M. (2008). Suppressing grazing chaos in impacting system by structural nonlinearity. Chaos, Solitons & Fractals, 38(3), 864-869.
 function H(x) 

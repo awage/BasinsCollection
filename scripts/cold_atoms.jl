@@ -5,6 +5,8 @@ using Attractors
 # using CairoMakie
 using LaTeXStrings
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 function cold_atoms_de!(dv,v,p,t)
     # α1 = p[1]; α2 = p[2]; β1 = p[3]; θ = p[4];   

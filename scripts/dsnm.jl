@@ -4,6 +4,8 @@ using CairoMakie
 using LaTeXStrings
 using Attractors
 using StaticArrays
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # https://doi.org/10.48550/arXiv.2211.06921
 # Disipative nontwist system

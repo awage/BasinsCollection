@@ -5,6 +5,8 @@ using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 
 # International Journal of Bifurcation and Chaos, Vol. 26, No. 14 (2016) 1650233 (11 pages)

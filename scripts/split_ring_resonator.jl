@@ -4,6 +4,8 @@ using Attractors
 using OrdinaryDiffEq:Vern9
 using CairoMakie
 using LaTeXStrings
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # Nonlinear dynamics of a single-gap terahertz
 # split-ring resonator under electromagnetic

@@ -5,6 +5,8 @@ using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 # This system is problematic: very very long transient (t > 2000 sometimes) that can be mistaken with attractors.
 
 # ```

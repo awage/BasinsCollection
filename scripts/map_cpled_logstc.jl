@@ -3,6 +3,7 @@ using DrWatson
 using Attractors
 using LaTeXStrings
 using CairoMakie
+using Colors,ColorSchemes
 include(srcdir("print_fig.jl"))
 
 # Transverse instability and riddled basins in a system of two coupled logistic maps

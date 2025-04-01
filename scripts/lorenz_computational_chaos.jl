@@ -5,6 +5,8 @@ using Attractors
 using CairoMakie
 using LaTeXStrings
 using ColorSchemes
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 
 # @article{lorenz1989computational,

@@ -4,6 +4,7 @@ using Attractors
 using LaTeXStrings
 using CairoMakie
 using OrdinaryDiffEq:Vern9
+include(srcdir("print_fig.jl"))
 
 # Bifurcations from locally to globally riddled basins
 # T. Kapitaniak, Yu. Maistrenko, A. Stefanski, and J. Brindley

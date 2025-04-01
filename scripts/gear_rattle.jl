@@ -4,7 +4,8 @@ using OrdinaryDiffEq
 using Attractors
 using CairoMakie
 using LaTeXStrings
-using ColorSchemes
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 # International Journal of Bifurcation and Chaos, Vol. 19, No. 1 (2009) 203–224
 # BASINS OF ATTRACTION IN NONSMOOTH MODELS OF GEAR RATTLE

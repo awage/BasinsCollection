@@ -5,6 +5,8 @@ using Attractors
 using OrdinaryDiffEq
 using CairoMakie
 using LaTeXStrings
+using Colors,ColorSchemes
+include(srcdir("print_fig.jl"))
 
 
 @inline @inbounds function duffing_pforced(u, p, t)
