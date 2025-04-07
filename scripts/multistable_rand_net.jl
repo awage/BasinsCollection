@@ -22,13 +22,10 @@ function rand_net!(du, u, p, t)
     return nothing
 end
 
-
-
-
 function compute_basins_rand_net(di::Dict)
-    @unpack  res,θ = di
-    s = 4.5; g = 0.4; N = 100
-    W = randn(N,N)
+    @unpack  res, s, g, N = di
+    rng = MersenneTwister(123);
+    W = randn(rng,N,N)
     for k in 1:N; W[k,k] = 0.0; end;
    
     diffeq = (alg = Vern9(), reltol = 1e-6, maxiters = 1e8)
@@ -53,12 +50,13 @@ end
 
 
 # let 
-res = 100
-θ = 1.; 
-params = @strdict res θ
-print_fig(params, "basins_multi_rand_net", compute_basins_rand_net; force = true, xlab = L"x_6", ylab = L"x_7")
+res = 500
+s = 4.5; g = 0.4; N = 100
+params = @strdict res s g N
+print_fig(params, "basins_multi_rand_net", compute_basins_rand_net; force = false, xlab = L"x", ylab = L"y")
 att = get_att(params, "basins_multi_rand_net", compute_basins_rand_net)
 # end
+
 
     # s = 2.5; g = 2.5; N = 200
     # W = randn(N,N)
