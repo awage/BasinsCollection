@@ -8,6 +8,9 @@ using Colors,ColorSchemes
 using ProgressMeter
 include(srcdir("print_fig.jl"))
 
+# Miriam Leon, Mae L. Woods, Alex J. H. Fedorec, Chris P. Barnes
+# "A computational method for the investigation of multistable systems and its application to genetic switches"
+# [10.1186/s12918-016-0375-z](https://doi.org/10.1186/s12918-016-0375-z)
 
 function ludp(u, p, t)
     # d = p[1]; F = p[2]; omega = p[3]

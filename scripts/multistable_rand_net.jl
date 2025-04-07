@@ -6,6 +6,7 @@ using Attractors
 using OrdinaryDiffEq:Vern9
 using ProgressMeter
 using LinearAlgebra 
+using Random
 
 include(srcdir("print_fig.jl"))
 
@@ -15,8 +16,6 @@ include(srcdir("print_fig.jl"))
 # DOI: 10.1103/PhysRevE.90.062710
 function rand_net!(du, u, p, t)
     W,s,g,N = p
-    # Δ = 0.1; xth = 0.68; 
-    # f(x) = 1/(1 +  exp((x - xth)/Δ))
     f(x) = tanh(x)
     du .= -u .+ s*f.(u) .+ g/sqrt(N)*W*f.(u) 
     return nothing
@@ -38,11 +37,6 @@ function compute_basins_rand_net(di::Dict)
     yr = range(-1., 1, length = res)
     xr = range(-1., 1, length = res)
     bsn = @showprogress [ mapper([x; y; zeros(N-2)]) for x in xr, y in yr]
-    # bsn = zeros(Int,res, res)
-    # for (j,x) in enumerate(xr), (k,y) in enumerate(yr)
-    #   @show  bsn[j,k] = mapper([x; y; zeros(N-2)])
-    # end
-    # bsn = @showprogress [ mapper([x;y;zeros(7)]) for x in xr, y in yr]
     grid = (xr,yr)
     att = extract_attractors(mapper)
     return @strdict(bsn, grid, res, att)
@@ -50,7 +44,8 @@ end
 
 
 # let 
-res = 500
+res = 1200
+# s = 4.5; g = 2.5; N = 100
 s = 4.5; g = 0.4; N = 100
 params = @strdict res s g N
 print_fig(params, "basins_multi_rand_net", compute_basins_rand_net; force = false, xlab = L"x", ylab = L"y")
@@ -58,7 +53,7 @@ att = get_att(params, "basins_multi_rand_net", compute_basins_rand_net)
 # end
 
 
-    # s = 2.5; g = 2.5; N = 200
+    # s = 4.5; g = 0.4; N = 100
     # W = randn(N,N)
     # for k in 1:N; W[k,k] = 0.0; end;
     # diffeq = (alg = Vern9(), reltol = 1e-6, maxiters = 1e8)
