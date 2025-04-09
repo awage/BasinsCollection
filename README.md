@@ -9,7 +9,7 @@ a 1200x1200 resolution.
 The code is under MIT License, please cite the this repository or the 
 companion article to this repo: 
 
-
+https://arxiv.org/abs/2504.01580
 
 Alexandre Wagemakers
 
