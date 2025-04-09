@@ -310,3 +310,11 @@ everything should work out of the box, including correctly finding local paths.
 * Ricker-Gatto competition model: `map_ricker_gatto.jl`: https://doi.org/10.1016/S0960-0779(00)00047-3
 
    ![intermingled](./plots/ricker_gatto_res=2000.png)
+
+* Dynamics of random neural networks with bistable units: `multistable_rand_net.jl` https://doi.org/10.1103/PhysRevE.90.062710
+
+   ![basins_multi_rand_net](./plots/basins_multi_rand_net_N=100_g=2.5_res=1200_s=4.5.png)
+
+* Earth magnetic field reversal model: `earth_field_reversal.jl`  https://10.1140/epjb/e2012-20799-5
+
+   ![earth_reversal](./plots/earth_reversal_res=1200_Γ=0.9_μ=0.119_ν=0.1.png)

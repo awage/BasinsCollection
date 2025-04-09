@@ -155,3 +155,7 @@ include("map_intermingled.jl")
 include("gyrostat.jl")
 
 include("map_ricker_gatto.jl")
+
+include("multistable_rand_net.jl")
+
+include("earth_field_reversal.jl")

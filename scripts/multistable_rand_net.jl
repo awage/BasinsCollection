@@ -45,8 +45,8 @@ end
 
 # let 
 res = 1200
-# s = 4.5; g = 2.5; N = 100
-s = 4.5; g = 0.4; N = 100
+s = 4.5; g = 2.5; N = 100
+# s = 4.5; g = 0.4; N = 100
 params = @strdict res s g N
 print_fig(params, "basins_multi_rand_net", compute_basins_rand_net; force = false, xlab = L"x", ylab = L"y")
 att = get_att(params, "basins_multi_rand_net", compute_basins_rand_net)
