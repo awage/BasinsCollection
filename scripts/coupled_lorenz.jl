@@ -5,6 +5,7 @@ using LaTeXStrings
 using Attractors
 using ProgressMeter
 using OrdinaryDiffEq:Vern9
+using ColorSchemes, Colors
 include(srcdir("print_fig.jl"))
 
 # PHYSICAL REVIEW E 96, 062203 (2017)
