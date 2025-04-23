@@ -6,7 +6,7 @@ using ColorSchemes, Colors
 using Attractors
 using StaticArrays
 using ProgressMeter
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 include(srcdir("print_fig.jl"))
 
  # C. Gissinger

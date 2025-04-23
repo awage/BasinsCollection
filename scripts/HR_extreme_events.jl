@@ -4,7 +4,7 @@ using CairoMakie
 using LaTeXStrings
 using Attractors
 using ProgressMeter
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 using ColorSchemes, Colors
 include(srcdir("print_fig.jl"))
 
@@ -49,10 +49,10 @@ function compute_HR(di::Dict)
     return @strdict(bsn, grid, att, res)
 end
 
-res = 400
+res = 1200
 params = @strdict res 
-cmap = ColorScheme([ RGB(0.9,0.2,0.1), RGB(1,1,1) ] )
-print_fig(params, "coupled_HR", compute_HR; force = true, xlab = L"z_1", ylab = L"z_2", cmap) 
+cmap = ColorScheme([ RGB(0.9,0.2,0.1), RGB(1,1,1), RGB(0,0,0) ] )
+print_fig(params, "coupled_HR", compute_HR; force = false, xlab = L"z_1", ylab = L"z_2", cmap) 
 att = get_att(params, "coupled_HR", compute_HR; force = false) 
 
 

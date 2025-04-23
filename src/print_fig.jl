@@ -1,3 +1,4 @@
+using JLD2
 using LaTeXStrings
 using CairoMakie
 
@@ -43,6 +44,7 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
     end
 
     if format == :pdf
+        resize_to_layout!(fig)
         save(plotsdir(savename(sys_name,params,"pdf")),fig)
     else
         save(plotsdir(savename(sys_name,params,"png")),fig)

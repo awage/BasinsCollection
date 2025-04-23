@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate
 using LaTeXStrings
 using Attractors
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 using CairoMakie
 using Colors,ColorSchemes
 include(srcdir("print_fig.jl"))

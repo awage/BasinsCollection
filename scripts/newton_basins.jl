@@ -58,7 +58,7 @@ function compute_basins_newton(di::Dict)
     )
     xg = yg = range(-2, 2; length = res)
     grid = (xg, yg)
-    bsn = zeros(Int8, res,res); 
+    bsn = zeros(Int, res,res); 
 @showprogress for (i,x) in enumerate(xg), (j,y) in enumerate(yg) 
         set_state!(ds, [x,y])
         n = _get_iterations!(ds,ε,max_it)

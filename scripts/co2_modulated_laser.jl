@@ -3,8 +3,8 @@ using DrWatson
 using CairoMakie
 using LaTeXStrings
 using Attractors
-# using OrdinaryDiffEq:Vern9
-using OrdinaryDiffEq
+# using OrdinaryDiffEqVerner
+using OrdinaryDiffEqVerner
 using ProgressMeter
 using Colors,ColorSchemes
 include(srcdir("print_fig.jl"))

@@ -1,7 +1,7 @@
 using DrWatson
 @quickactivate 
 using Attractors
-using OrdinaryDiffEq
+using OrdinaryDiffEqVerner
 using LaTeXStrings
 using CairoMakie
 include(srcdir("print_fig.jl"))

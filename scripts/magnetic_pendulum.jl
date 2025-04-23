@@ -3,7 +3,7 @@ using DrWatson
 using Attractors
 using LaTeXStrings
 using CairoMakie
-using OrdinaryDiffEq
+using OrdinaryDiffEqVerner
 include(srcdir("print_fig.jl"))
 
 # https://cdn.ima.org.uk/wp/wp-content/uploads/2020/03/Chaos-in-the-Magnetic-Pendulum-from-MT-April-2020.pdf

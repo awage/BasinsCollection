@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate # exports Attractors, GLMakie and other goodies in `src`
 using Attractors
 using Attractors
-using OrdinaryDiffEq
+using OrdinaryDiffEqTsit5
 using CairoMakie
 using LaTeXStrings
 using Colors,ColorSchemes

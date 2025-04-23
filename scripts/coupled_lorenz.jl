@@ -4,7 +4,7 @@ using CairoMakie
 using LaTeXStrings
 using Attractors
 using ProgressMeter
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 using ColorSchemes, Colors
 include(srcdir("print_fig.jl"))
 

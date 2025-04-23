@@ -1,6 +1,6 @@
 using DrWatson
 @quickactivate
-using OrdinaryDiffEq
+using OrdinaryDiffEqVerner
 using Attractors
 using CairoMakie
 using LaTeXStrings

@@ -1,6 +1,6 @@
 using DrWatson
 @quickactivate 
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 using Attractors
 using CairoMakie
 using Colors,ColorSchemes

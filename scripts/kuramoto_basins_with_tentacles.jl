@@ -3,7 +3,7 @@ using DrWatson
 using CairoMakie
 using LaTeXStrings
 using Attractors
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 using ProgressMeter
 using LinearAlgebra 
 using Random

@@ -5,7 +5,7 @@ using LaTeXStrings
 using Attractors
 using StaticArrays
 using ProgressMeter
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 using Colors,ColorSchemes
 include(srcdir("print_fig.jl"))
 

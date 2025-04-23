@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate
 using Graphs
 using LaTeXStrings
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 using Attractors
 using JLD2
 include(srcdir("print_fig.jl"))

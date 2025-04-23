@@ -5,7 +5,7 @@ using LaTeXStrings
 using Attractors
 using StaticArrays
 using ProgressMeter
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 include(srcdir("print_fig.jl"))
 
 # Multistability, phase diagrams, and intransitivity in the Lorenz-84 low-order atmospheric circulation model

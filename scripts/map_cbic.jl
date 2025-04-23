@@ -4,7 +4,7 @@ using Attractors
 using Attractors
 using LaTeXStrings
 using CairoMakie
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 include("../src/print_fig.jl")
 
 # Wada bifurcations and partially Wada basin boundaries in a two-dimensional cubic map Yongxiang Zhang , Guanwei Luo 

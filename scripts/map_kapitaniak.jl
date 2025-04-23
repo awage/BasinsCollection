@@ -3,7 +3,7 @@ using DrWatson
 using Attractors
 using LaTeXStrings
 using CairoMakie
-using OrdinaryDiffEq:Vern9
+using OrdinaryDiffEqVerner
 include(srcdir("print_fig.jl"))
 
 # Bifurcations from locally to globally riddled basins

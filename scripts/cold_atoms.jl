@@ -1,6 +1,6 @@
 using DrWatson
 @quickactivate # exports Attractors, GLMakie and other goodies in `src`
-using OrdinaryDiffEq
+using OrdinaryDiffEqVerner
 using Attractors
 # using CairoMakie
 using LaTeXStrings
