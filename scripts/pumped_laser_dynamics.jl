@@ -55,7 +55,6 @@ let res = 1200
 m = 0.8; f = 70.2e3
 # m = 1; f = 80e3
 params = @strdict res m f
-print_fig(params, "basins_lasers", compute_basins_lasers; force = true)
-get_att(params, "basins_lasers", compute_basins_lasers; force = false)
+print_fig(params, "basins_lasers", compute_basins_lasers; force = false)
 end
 
