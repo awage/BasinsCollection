@@ -36,7 +36,7 @@ function compute_basins_lasers(di::Dict)
     @unpack  res, m ,f = di
     ds = CoupledODEs(pumped_laser!, rand(2), [m,f])
     smap = StroboscopicMap(ds, 1/f)
-    pow = 2; xg = range(0, 1^(1/pow); length = 5000).^pow
+    pow = 2; xg = range(0, 10^(1/pow); length = 5000).^pow
     yg =  collect(range(0, 1; length = 5000))
     grid = (xg, yg)
     mapper = AttractorsViaRecurrences(smap, grid;
@@ -55,6 +55,7 @@ let res = 1200
 m = 0.8; f = 70.2e3
 # m = 1; f = 80e3
 params = @strdict res m f
-print_fig(params, "basins_lasers", compute_basins_lasers; force = false)
+print_fig(params, "basins_lasers", compute_basins_lasers; force = true)
+get_att(params, "basins_lasers", compute_basins_lasers; force = false)
 end
 

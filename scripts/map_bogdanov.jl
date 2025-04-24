@@ -42,4 +42,4 @@ k = 1.2
 res = 2000
 params = @strdict res μ k ε
 cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.7,0.7,0.7), RGB(1,0,0)] )
-print_fig(params, "bogdanov", compute_bogdanov; force = true,  cmap) 
+print_fig(params, "bogdanov", compute_bogdanov; force = false,  cmap) 

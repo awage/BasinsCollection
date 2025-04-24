@@ -13,7 +13,7 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
 
 
     if format == :pdf
-        fig = Figure(size = (w, h))
+        fig = Figure(figure_padding = 23, size = (w, h))
         ax = Axis(fig[1,1], ylabel = ylab, xlabel = xlab, 
                 yticklabelsize = 30, 
                 xticklabelsize = 30, 
@@ -33,6 +33,10 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
     if isnothing(cmap)
         println("Number of basins: " , length(unique(bsn)))
         cmap = :mk_12
+        if -1 ∈ unique(bsn)
+            bsn = Float32.(bsn)
+            bsn[bsn .== -1] .= NaN
+        end
         # cmap = :berlin10
         # cmap = :seaborn_bright
         # cmap = :dracula

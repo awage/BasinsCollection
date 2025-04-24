@@ -64,4 +64,5 @@ end
 # res = 200
 f0 = 0.1; ν = 0.1
 params = @strdict f0 ν res
-print_fig(params, "kicked_rotor_ott", compute_kicked_rotor_ott; xlab = L"\theta_1", ylab = L"\theta_2", force = false)
+cmap = ColorScheme([RGB(1,1,1), RGB(1,0,0), RGB(0.7,0.7,0.7), RGB(1,0,0)] )
+print_fig(params, "kicked_rotor_ott", compute_kicked_rotor_ott; xlab = L"\theta_1", ylab = L"\theta_2", force = false, cmap)

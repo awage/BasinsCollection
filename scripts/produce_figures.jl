@@ -116,8 +116,6 @@ include("map_mira.jl")
 
 include("map_nash_eq.jl")
 
-include("map_shrimali.jl")
-
 include("map_vcsd_chen.jl")
 
 include("map_bairstow.jl")
@@ -159,3 +157,5 @@ include("map_ricker_gatto.jl")
 include("multistable_rand_net.jl")
 
 include("earth_field_reversal.jl")
+
+include("buck_converter.jl")

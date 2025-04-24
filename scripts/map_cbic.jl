@@ -40,4 +40,5 @@ end
 j = 0.66
 # res = 1000
 params = @strdict res μ j
-print_fig(params, "cbic_map", compute_cbic_map) 
+cmap = ColorScheme([RGB(1,1,1), RGB(1,0,0), RGB(0.8,0.8,0.8), RGB(0,0,0)] )
+print_fig(params, "cbic_map", compute_cbic_map; cmap) 
