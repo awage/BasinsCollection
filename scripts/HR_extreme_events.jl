@@ -8,6 +8,10 @@ using OrdinaryDiffEqVerner
 using ColorSchemes, Colors
 include(srcdir("print_fig.jl"))
 
+# DOI: 10.1103/PhysRevE.97.062311
+# PHYSICAL REVIEW E 97, 062311 (2018)
+# Dragon-king-like extreme events in coupled bursting neurons
+# Arindam Mishra, Suman Saha, M. Vigneshwaran, Pinaki Pal, Tomasz Kapitaniak, and Syamal K. Dana
 function hindmarshrose_two_coupled(u0=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
 			a = 1.0, b = 3.0, c = 1.0, d = 5.0, r = 0.001, s = 4.0, xr = -1.6, I = 4.0,
 			k1 = 0.05, k2 = 0.05, k_el = 0.0, xv = 2.0)
@@ -56,4 +60,3 @@ print_fig(params, "coupled_HR", compute_HR; force = false, xlab = L"z_1", ylab =
 att = get_att(params, "coupled_HR", compute_HR; force = false) 
 
 
-    ds = hindmarshrose_two_coupled()
