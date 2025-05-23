@@ -57,6 +57,6 @@ res = 1200
 params = @strdict res 
 cmap = ColorScheme([ RGB(0.9,0.2,0.1), RGB(1,1,1), RGB(0,0,0) ] )
 print_fig(params, "coupled_HR", compute_HR; force = false, xlab = L"z_1", ylab = L"z_2", cmap) 
-att = get_att(params, "coupled_HR", compute_HR; force = false) 
+# att = get_att(params, "coupled_HR", compute_HR; force = false) 
 
 

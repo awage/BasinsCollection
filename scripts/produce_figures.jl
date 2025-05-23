@@ -2,6 +2,7 @@ using DrWatson
 @quickactivate 
 using Colors
 using ColorSchemes
+# using JLD2
 
 include(srcdir("print_fig.jl"))
 
@@ -93,10 +94,6 @@ include("eckhardt_9D.jl")
 include("kur_halekotte.jl")
 
 include("alfven_complexity.jl")
-
-include("co2_modulated_laser.jl")
-
-include("pumped_laser_dynamics.jl")
  
 include("TLNs_network.jl")
 
@@ -159,3 +156,9 @@ include("multistable_rand_net.jl")
 include("earth_field_reversal.jl")
 
 include("buck_converter.jl")
+
+include("co2_modulated_laser.jl")
+
+include("pumped_laser_dynamics.jl")
+
+include("HR_extreme_events.jl")

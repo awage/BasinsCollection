@@ -318,3 +318,7 @@ everything should work out of the box, including correctly finding local paths.
 * Earth magnetic field reversal model: `earth_field_reversal.jl`  https://10.1140/epjb/e2012-20799-5
 
    ![earth_reversal](./plots/earth_reversal_res=1200_Γ=0.9_μ=0.119_ν=0.1.png)
+
+* Riddled basins in Coupled Hindmarsh-Rose neuron model: `HR_extreme_events.jl` https://10.1103/PhysRevE.97.062311
+
+   ![coupled_HR](./plots/coupled_HR_res=1200.png)
