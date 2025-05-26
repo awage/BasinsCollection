@@ -162,3 +162,5 @@ include("co2_modulated_laser.jl")
 include("pumped_laser_dynamics.jl")
 
 include("HR_extreme_events.jl")
+
+include("coupled_hopfield_neuron.jl"

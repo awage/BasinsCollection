@@ -8,6 +8,10 @@ using OrdinaryDiffEqVerner
 using ColorSchemes, Colors
 include(srcdir("print_fig.jl"))
 
+# Bidirectional coupling of two single memristive Hopfield inertial neurons
+# Bertrand Frederick Boui A Boya1,2,a
+# Jacques Kengne
+# https://doi.org/10.1140/epjp/s13360-025-06339-4
 
 function coupled_hopfield!(dz, z, p, t)
     x, u, y, z, v, w = z 
@@ -43,8 +47,9 @@ function compute_hpf_cpld(di::Dict)
     return @strdict(bsn, grid, att, res)
 end
 
-res = 300
+res = 1200
 δ = 1.5; α = -0.1; b1 = 3.0; b2 = 3.0; β = -α
 params = @strdict res δ α b1 b2 β
-# cmap = ColorScheme([ RGB(0.9,0.2,0.1), RGB(1,1,1), RGB(0,0,0) ] )
-print_fig(params, "hopfield_neuron", compute_hpf_cpld; force = true, xlab = L"z_1", ylab = L"z_2") 
+cmap = :jet
+print_fig(params, "hopfield_neuron", compute_hpf_cpld; force = false, xlab = L"x", ylab = L"y", cmap) 
+# att = get_att(params, "hopfield_neuron", compute_hpf_cpld; force = false) 

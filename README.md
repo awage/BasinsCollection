@@ -322,3 +322,8 @@ everything should work out of the box, including correctly finding local paths.
 * Riddled basins in Coupled Hindmarsh-Rose neuron model: `HR_extreme_events.jl` https://doi.org/10.1103/PhysRevE.97.062311
 
    ![coupled_HR](./plots/coupled_HR_res=1200.png)
+
+* Fractal basins in two coupled Hopfield neurons: `coupled_hopfield_neuron.jl` https://doi.org/10.1140/epjp/s13360-025-06339-4
+
+
+![hopfield_neuron](./plots/hopfield_neuron_b1=3.0_b2=3.0_res=1200_α=-0.1_β=0.1_δ=1.5.png)
