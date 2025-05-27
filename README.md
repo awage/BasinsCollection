@@ -325,5 +325,10 @@ everything should work out of the box, including correctly finding local paths.
 
 * Fractal basins in two coupled Hopfield neurons: `coupled_hopfield_neuron.jl` https://doi.org/10.1140/epjp/s13360-025-06339-4
 
+   ![hopfield_neuron](./plots/hopfield_neuron_b1=3.0_b2=3.0_res=1200_α=-0.1_β=0.1_δ=1.5.png)
 
-![hopfield_neuron](./plots/hopfield_neuron_b1=3.0_b2=3.0_res=1200_α=-0.1_β=0.1_δ=1.5.png)
+* Fractal basins in two coupled Rulkov neurons `coupled_rulkov_neurons.jl` https://doi.org/10.3390/math13030415
+
+   ![coupled_rulkov](./plots/coupled_rulkov_res=1200_Δ=0.0_α=4.1_γ1=-1.75_γ2=-1.75_σ=0.035.png)
+
+
