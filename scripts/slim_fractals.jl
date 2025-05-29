@@ -49,4 +49,4 @@ end
 
 μ = 0.2; #res = 800
 params = @strdict μ res
-print_fig(params, "slim_fractal", compute_slim_fractal; ylab = L"v_0/v_{max}", xlab = L"\theta_0/(2\pi/3)")
+print_fig(params, "slim_fractal", compute_slim_fractal; ylab = L"v_0/v_{max}", xlab = L"\theta_0/(2\pi/3)", cmap)

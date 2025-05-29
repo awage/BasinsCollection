@@ -44,5 +44,5 @@ end
 let res = 1200
 m = 0.104; k = 7.935; 
 params = @strdict k m res
-print_fig(params, "pred_prey", compute_pred_prey; ylab = L"y_0", xlab = L"x_0", force = false)
+print_fig(params, "pred_prey", compute_pred_prey; ylab = L"y_0", xlab = L"x_0", force = false, cmap)
 end

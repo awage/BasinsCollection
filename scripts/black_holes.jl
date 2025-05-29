@@ -126,5 +126,5 @@ end
 
 Δpϕ = 0.03; #res = 500
 params = @strdict Δpϕ res
-    cmap = ColorScheme([RGB(1,1,1), RGB(0.99,0.4,0.4), RGB(0., .9, .7),  RGB(0.2,0.2,0.2)] )
+    # cmap = ColorScheme([RGB(1,1,1), RGB(0.99,0.4,0.4), RGB(0., .9, .7),  RGB(0.2,0.2,0.2)] )
 print_fig(params, "black_holes", compute_BH; xlab = L"\rho", ylab = L"z", force = false, cmap)

@@ -94,7 +94,7 @@ let res = 300
 # print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 
 ni = 14
 params = @strdict ni res
-print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\Delta\phi", ylab = L"\omega", force = false) 
+print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\Delta\phi", ylab = L"\omega", force = false, cmap) 
 # ni = 58
 # params = @strdict ni res
 # print_fig(params, "basins_kur", compute_kur_halekotte; xlab = L"\phi", ylab = L"\omega") 

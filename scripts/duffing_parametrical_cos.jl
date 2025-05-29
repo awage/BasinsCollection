@@ -54,4 +54,4 @@ end
 
 
 a = b = 1; c = 0.2; ω=1.;  # smooth boundary
-print_fig(600, 600, a, b, c, ω, 600) 
+print_fig(600, 600, a, b, c, ω, 600; cmap) 
