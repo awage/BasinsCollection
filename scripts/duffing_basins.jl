@@ -30,7 +30,7 @@ function compute_basins_duffing(di::Dict)
 end
 
 
-cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
+# cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
 
 # res = 600; 
 # d = 0.1; F=0.1; ω=0.1;  # smooth boundary
