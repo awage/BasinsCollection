@@ -8,7 +8,7 @@ include(srcdir("print_fig.jl"))
 
 res = 1200
 format = :pdf
-cmap = :jet
+cmap = :glasbey_bw_minc_20_hue_150_280_n256
 
 include("newton_basins.jl")
 
