@@ -21,13 +21,8 @@ end
 # We have to define a callback to wrap the phase in [-π,π]
 function affect!(integrator)
     uu = integrator.u
-    if integrator.u[1] < 0
-        set_state!(integrator, SVector(uu[1] + 2π, uu[2]))
-        u_modified!(integrator, true)
-    else
-        set_state!(integrator, SVector(uu[1] - 2π, uu[2]))
-        u_modified!(integrator, true)
-    end
+    integrator.u = uu[1] < 0 ? SVector(uu[1] + 2π, uu[2]) : SVector(uu[1] - 2π, uu[2])
+    u_modified!(integrator, true)
 end
 
 
