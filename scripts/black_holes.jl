@@ -88,14 +88,14 @@ function get_basin_BH(ρ,z, prm)
     end
          
     vi = [z, pz, ρ, pρ];
-    tspan=(0.0,50000.)
+    tspan=(0.0, 50000.)
     # Define callback to halt solver
     condition(u,t,integrator) = condition_ρ_z(u[3], u[1])
     affect!(integrator) = terminate!(integrator)
     cb = DiscreteCallback(condition,affect!)
-    prob = ODEProblem(double_black_hole_de!, vi, tspan, prm, callback=cb)
-    sol = solve(prob, Vern9(), reltol=1e-12, abstol=1e-12)
-    u = sol[end]
+    prob = ODEProblem(double_black_hole_de!, vi, tspan, prm, callback = cb)
+    sol = solve(prob, Vern9(), reltol = 1e-12, abstol = 1e-12)
+    u = sol[:, end]
     return salida_ρ_z(u[3], u[1], prm)
 end
 
@@ -115,7 +115,8 @@ function compute_BH(di::Dict)
     ρr = range(0., 2.; length = res)
     bsn = zeros(Int16, res, res)
     @showprogress for i in 1:res
-        Threads.@threads for j in 1:res
+        for j in 1:res
+        # Threads.@threads for j in 1:res
             z = zr[j]; ρ = ρr[i];
             bsn[i,j] = get_basin_BH(ρ, z, prm) 
         end

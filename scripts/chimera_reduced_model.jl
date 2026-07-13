@@ -55,7 +55,7 @@ function compute_chimera(di::Dict)
 end
 
 
-res = 1200; 
+# res = 1200; 
 A = 0.1; β = 0.025
 μ = (A+1)/2; ν = 1 - μ
 params = @strdict res μ ν β 

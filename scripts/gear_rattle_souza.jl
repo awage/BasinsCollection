@@ -49,7 +49,7 @@ function compute_gear_rattle2(di::Dict)
     return @strdict(bsn, att, grid, res)
 end
 
-res = 1200
+# res = 1200
 params = @strdict res
 # cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
 print_fig(params, "gear_rattle2", compute_gear_rattle2; ylab= L"\dot{s}", xlab= L"s", force = false, cmap)
