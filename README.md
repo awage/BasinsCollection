@@ -1,3 +1,5 @@
+
+
 # BasinsCollection
 
 This is a collection of multistable systems with the code to simulate their 
@@ -187,7 +189,7 @@ everything should work out of the box, including correctly finding local paths.
 
    ![coupled_lorenz](./plots/coupled_lorenz_res=1200_α=10_β=24.8_γ=2.67_ε=1.1.png)
 
-* Rock-Paper-Scisors competition model `cyclic_competition.j`:  https://doi.org/10.1063/1.5045366
+* Rock-Paper-Scissors competition model `cyclic_competition.jl`:  https://doi.org/10.1063/1.5045366
 
    ![cyc_comp](./plots/cyc_comp_r=3.35_res=1200.png)
 
@@ -330,5 +332,3 @@ everything should work out of the box, including correctly finding local paths.
 * Fractal basins in two coupled Rulkov neurons `coupled_rulkov_neurons.jl` https://doi.org/10.3390/math13030415
 
    ![coupled_rulkov](./plots/coupled_rulkov_res=1200_Δ=0.0_α=4.1_γ1=-1.75_γ2=-1.75_σ=0.035.png)
-
-
