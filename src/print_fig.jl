@@ -22,7 +22,7 @@ function print_fig(params, sys_name, fun_name; w = 800, h = 800, cmap = nothing,
                 xticklabelfont = "NewComputerModern", 
                 yticklabelfont = "NewComputerModern")
     else
-        fig = Figure(size = (200, 200))
+        fig = Figure(size = (2000, 2000))
         ax = Axis(fig[1,1], 
             xticksvisible = false, 
             yticksvisible = false, 

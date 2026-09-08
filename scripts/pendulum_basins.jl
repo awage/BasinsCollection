@@ -21,13 +21,8 @@ end
 # We have to define a callback to wrap the phase in [-π,π]
 function affect!(integrator)
     uu = integrator.u
-    if integrator.u[1] < 0
-        set_state!(integrator, SVector(uu[1] + 2π, uu[2]))
-        u_modified!(integrator, true)
-    else
-        set_state!(integrator, SVector(uu[1] - 2π, uu[2]))
-        u_modified!(integrator, true)
-    end
+    integrator.u = uu[1] < 0 ? SVector(uu[1] + 2π, uu[2]) : SVector(uu[1] - 2π, uu[2])
+    u_modified!(integrator, true)
 end
 
 
@@ -50,13 +45,13 @@ end
 let
 d = 0.2; F = 1.3636363636363635; ω = 0.5 # Parameters for Riddled Basins
 # res = 1000
-cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
+# cmap = ColorScheme([RGB(0,0,0), RGB(1,1,1)] )
 params = @strdict d F ω res
 # print_fig(600, 500, cmap, d, F, ω, 1000)
 print_fig(params, "pendulum", compute_basins_pend; cmap, ylab= L"\dot{\theta}", xlab= L"\theta")
 
 d = 0.2; F = 1.66; ω = 1. # Parameters for Wada Basins
 params = @strdict d F ω res
-cmap = ColorScheme([RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
+# cmap = ColorScheme([RGB(1,0,0), RGB(0,1,0), RGB(0,0,1)] )
 print_fig(params, "pendulum", compute_basins_pend; cmap, ylab= L"\dot{\theta}", xlab= L"\theta")
 end

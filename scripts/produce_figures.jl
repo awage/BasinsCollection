@@ -8,6 +8,7 @@ include(srcdir("print_fig.jl"))
 
 res = 1200
 format = :pdf
+cmap = :glasbey_bw_minc_20_hue_150_280_n256
 
 include("newton_basins.jl")
 
@@ -163,4 +164,4 @@ include("pumped_laser_dynamics.jl")
 
 include("HR_extreme_events.jl")
 
-include("coupled_hopfield_neuron.jl"
+include("coupled_hopfield_neuron.jl")

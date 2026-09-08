@@ -73,7 +73,7 @@ res = 1200
 E = 0.25; #res = 800
 params = @strdict E res
 # cmap = ColorScheme([RGB(1,1,1), RGB(0.55,0.9,0.35), RGB(0.1,0.4,0.1), RGB(0.25,0.25, 0.25), RGB(0.50,0.24,1)] )
-cmap = ColorScheme([RGB(1,1,1), RGB(0.55,0.9,0.35), RGB(0.9,0.4,0.1),  RGB(0.50,0.24,1)] )
+# cmap = ColorScheme([RGB(1,1,1), RGB(0.55,0.9,0.35), RGB(0.9,0.4,0.1),  RGB(0.50,0.24,1)] )
 print_fig(params, "hh", comp_basins_hh; cmap)
 
 

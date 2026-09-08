@@ -43,5 +43,5 @@ end
 
 μ = 0.5; α = 1.;
 params = @strdict res μ α
-cmap = ColorScheme([RGB(1,1,1), RGB(0.9,0.15,0.15),RGB(0.95,0.95,0.95), RGB(0.95,0.95,0.95),   RGB(0.95,0.95,0.95),RGB(0.95,0.95,0.95),  RGB(0.15,0.9,0.15), RGB(0.9,0.4,0.1),  RGB(1.0,1.0,1.)] )
+# cmap = ColorScheme([RGB(1,1,1), RGB(0.9,0.15,0.15),RGB(0.95,0.95,0.95), RGB(0.95,0.95,0.95),   RGB(0.95,0.95,0.95),RGB(0.95,0.95,0.95),  RGB(0.15,0.9,0.15), RGB(0.9,0.4,0.1),  RGB(1.0,1.0,1.)] )
 print_fig(params, "rikitake", compute_rikitake; ylab = L"y", xlab = L"x", force = false, cmap)

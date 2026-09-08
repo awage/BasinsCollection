@@ -38,7 +38,7 @@ end
 let res = 1200
     c = 1.8; B = 2; g = 1.7
     params = @strdict c B g res
-    print_fig(params, "neuron_synapse", compute_neuron_synapse; ylab = L"y", xlab = L"x", force = false)
+    print_fig(params, "neuron_synapse", compute_neuron_synapse; ylab = L"y", xlab = L"x", force = false, cmap)
 end
 
 

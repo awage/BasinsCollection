@@ -48,7 +48,7 @@ end
 
 res = 1200; ω = 1.0285; μ = 35 
 params = @strdict res ω μ
-cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+# cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
 print_fig(params, "split_ring_res", compute_split_ring; force = false, xlab = L"q_0", ylab = L"i_0", cmap) 
 
 # d = 0.4; F=0.1; ω=0.1;  # smooth boundary
