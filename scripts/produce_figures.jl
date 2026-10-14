@@ -165,3 +165,7 @@ include("pumped_laser_dynamics.jl")
 include("HR_extreme_events.jl")
 
 include("coupled_hopfield_neuron.jl")
+
+include("coupled_rulkov_neurons.jl")
+
+include("pulse_coupled_arithmetic.jl")

@@ -332,3 +332,7 @@ everything should work out of the box, including correctly finding local paths.
 * Fractal basins in two coupled Rulkov neurons `coupled_rulkov_neurons.jl` https://doi.org/10.3390/math13030415
 
    ![coupled_rulkov](./plots/coupled_rulkov_res=1200_Δ=0.0_α=4.1_γ1=-1.75_γ2=-1.75_σ=0.035.png)
+
+* Synch basins of Pulse Coupled Oscillators `pulse_coupled_arithmetic.jl` arXiv:2609.01668
+
+   ![pulsed_coupled_oscillators](./plots/pco_arithmetic_N=117_res=1200_γ=-1.0.png)
