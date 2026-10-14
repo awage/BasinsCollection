@@ -49,7 +49,7 @@ end
 
 res = 1200; Vin = 30.10
 params = @strdict res Vin
-cmap = ColorScheme([RGB(1,1,1),  RGB(0.7,0.7,0.7), RGB(0.3,0.3,0.3)] )
+# cmap = ColorScheme([RGB(1,1,1),  RGB(0.7,0.7,0.7), RGB(0.3,0.3,0.3)] )
 print_fig(params, "buck", compute_buck; ylab= L"V", xlab= L"i", force = false, cmap)
 
 

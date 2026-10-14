@@ -90,5 +90,5 @@ end
 
 Re = 425.; res = 1200
 params = @strdict res Re
-print_fig(params, "eckhardt", compute_E9D; ylab = L"$V_{att}-V_{att,sym}$", xlab = L"V_{att}+V_{att,sym}") 
+print_fig(params, "eckhardt", compute_E9D; ylab = L"$V_{att}-V_{att,sym}$", xlab = L"V_{att}+V_{att,sym}", cmap) 
 

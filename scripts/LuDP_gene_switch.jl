@@ -57,4 +57,4 @@ end
 
 res = 400
     params = @strdict res
-    print_fig(params, "ludp", compute_basins_ludp; ylab = L"y", xlab = L"x", force = false) 
+    print_fig(params, "ludp", compute_basins_ludp; ylab = L"y", xlab = L"x", force = false, cmap) 

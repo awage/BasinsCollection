@@ -68,4 +68,4 @@ end
 
 ww = 0.001; #res = 400
 params = @strdict ww res
-print_fig(params, "open_disks", compute_exit_three_disk; xlab = L"x_0", ylab = L"\theta_0")
+print_fig(params, "open_disks", compute_exit_three_disk; xlab = L"x_0", ylab = L"\theta_0", cmap)

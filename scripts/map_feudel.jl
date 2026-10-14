@@ -41,4 +41,4 @@ a = 0.0015
 # a = 0.0024
 # res = 400
 params = @strdict res a r
-print_fig(params, "feudel", compute_feudel; xlab = L"x", ylab = L"\theta", force = false)
+print_fig(params, "feudel", compute_feudel; xlab = L"x", ylab = L"\theta", force = false, cmap)

@@ -36,7 +36,7 @@ end
 res = 1200
 Δ = 0.0; γ1 = -1.75; γ2 = γ1 + Δ; α = 4.1 ; σ = 0.035
 params = @strdict res γ1 γ2  α Δ σ
-cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.34,0.34,1), RGB(1,0.46,0.46), RGB(0.1,0.1,0.1) ] )
+# cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.34,0.34,1), RGB(1,0.46,0.46), RGB(0.1,0.1,0.1) ] )
 print_fig(params, "coupled_rulkov", compute_cpld_rulkov; force = false, cmap) 
 
 

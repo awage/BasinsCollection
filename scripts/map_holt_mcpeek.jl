@@ -40,5 +40,5 @@ end
 
 res = 1200; 
 params = @strdict res 
-cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
+# cmap = ColorScheme([RGB(1,1,1),  RGB(0.9,0.2,0.1)] )
 print_fig(params, "cazelle", compute_cazelle; xlab = L"x", ylab = L"y", force = false, cmap)

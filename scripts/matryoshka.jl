@@ -76,7 +76,7 @@ end
 
 res = 1200
 params = @strdict res
-print_fig(params, "matryoshka", compute_matryoshka; force = false, ylab = L"z")
+print_fig(params, "matryoshka", compute_matryoshka; force = false, ylab = L"z",cmap)
 
 # data, file = produce_or_load(
 #     datadir("basins"), params, compute_matryoshka;

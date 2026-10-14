@@ -44,4 +44,4 @@ end
 
 res = 1200
 params = @strdict res
-print_fig(params, "basin_sommerer", _get_basins_sommerer; cmap = :dracula, force = false)
+print_fig(params, "basin_sommerer", _get_basins_sommerer; force = false, cmap)

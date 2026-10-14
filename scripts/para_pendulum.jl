@@ -35,4 +35,4 @@ end
 
 A_1 = 0.; A_2 = 4.1; ω = 1.5;
 params = @strdict A_1 A_2 ω res
-print_fig(params, "parametric_pendulum",compute_basins_pend_pforced; ylab= L"\dot{\theta}", xlab= L"\theta")
+print_fig(params, "parametric_pendulum",compute_basins_pend_pforced; ylab= L"\dot{\theta}", xlab= L"\theta",cmap)

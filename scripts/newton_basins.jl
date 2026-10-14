@@ -75,7 +75,7 @@ function compute_basins_newton(di::Dict)
 end
 
 # cmap = ColorScheme([RGB(0,0,0), RGB(1,0,0), RGB(0,1,0), RGB(0,0,1), RGB(1,1,0), RGB(1,0,1), RGB(0,1,1)] )
-cmap = :flag
+# cmap = :flag
 f(x) = (x + sin(2/x) * x*x)
 params = @strdict  res f
 print_fig(params,"newton_",compute_basins_newton; ylab = L"\Im{(z)}", xlab = L"\Re{(z)}", cmap, force = false)

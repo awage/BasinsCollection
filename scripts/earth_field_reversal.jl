@@ -42,6 +42,6 @@ end
 let
     μ = 0.1193; ν = 0.1; Γ = 0.9; res = 1200
     params = @strdict  res μ ν Γ 
-    cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.7,0.7,0.7), RGB(1,0,0)] )
+    # cmap = ColorScheme([RGB(1,1,1), RGB(0,1,0), RGB(0.7,0.7,0.7), RGB(1,0,0)] )
     print_fig(params, "earth_reversal", compute_earth_reversal; cmap, xlab = L"Q", ylab = L"D", force = false)
 end

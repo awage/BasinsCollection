@@ -88,14 +88,14 @@ function get_basin_BH(ρ,z, prm)
     end
          
     vi = [z, pz, ρ, pρ];
-    tspan=(0.0,50000.)
+    tspan=(0.0, 50000.)
     # Define callback to halt solver
     condition(u,t,integrator) = condition_ρ_z(u[3], u[1])
     affect!(integrator) = terminate!(integrator)
     cb = DiscreteCallback(condition,affect!)
-    prob = ODEProblem(double_black_hole_de!, vi, tspan, prm, callback=cb)
-    sol = solve(prob, Vern9(), reltol=1e-12, abstol=1e-12)
-    u = sol[end]
+    prob = ODEProblem(double_black_hole_de!, vi, tspan, prm, callback = cb)
+    sol = solve(prob, Vern9(), reltol = 1e-12, abstol = 1e-12)
+    u = sol[:, end]
     return salida_ρ_z(u[3], u[1], prm)
 end
 
@@ -115,7 +115,8 @@ function compute_BH(di::Dict)
     ρr = range(0., 2.; length = res)
     bsn = zeros(Int16, res, res)
     @showprogress for i in 1:res
-        Threads.@threads for j in 1:res
+        for j in 1:res
+        # Threads.@threads for j in 1:res
             z = zr[j]; ρ = ρr[i];
             bsn[i,j] = get_basin_BH(ρ, z, prm) 
         end
@@ -126,5 +127,5 @@ end
 
 Δpϕ = 0.03; #res = 500
 params = @strdict Δpϕ res
-    cmap = ColorScheme([RGB(1,1,1), RGB(0.99,0.4,0.4), RGB(0., .9, .7),  RGB(0.2,0.2,0.2)] )
+    # cmap = ColorScheme([RGB(1,1,1), RGB(0.99,0.4,0.4), RGB(0., .9, .7),  RGB(0.2,0.2,0.2)] )
 print_fig(params, "black_holes", compute_BH; xlab = L"\rho", ylab = L"z", force = false, cmap)

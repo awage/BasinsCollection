@@ -54,5 +54,5 @@ end
 
 b=0.1665; #res = 500
 params = @strdict res b
-print_fig(params, "thomas", compute_thomas; ylab = L"y", xlab = L"x")
+print_fig(params, "thomas", compute_thomas; ylab = L"y", xlab = L"x", cmap)
 att = get_att(params, "thomas", compute_thomas; force = false)

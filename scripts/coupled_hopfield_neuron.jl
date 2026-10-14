@@ -50,6 +50,6 @@ end
 res = 1200
 δ = 1.5; α = -0.1; b1 = 3.0; b2 = 3.0; β = -α
 params = @strdict res δ α b1 b2 β
-cmap = :jet
+# cmap = :jet
 print_fig(params, "hopfield_neuron", compute_hpf_cpld; force = false, xlab = L"x", ylab = L"y", cmap) 
 # att = get_att(params, "hopfield_neuron", compute_hpf_cpld; force = false) 
