@@ -2,7 +2,7 @@
 using LaTeXStrings
 using CairoMakie
 
-function print_fig(params, sys_name, fun_name; w = 300, h = 300, cmap = nothing, xlab = L"x", ylab = L"y", force = false, format = :png)
+function print_fig(params, sys_name, fun_name; w = 300, h = 300, cmap = nothing, xlab = L"x", ylab = L"y", force = false, format = :png, png_size = (2000, 2000))
     println(sys_name)
     data, file = produce_or_load(
         datadir("basins"), params, fun_name;
@@ -22,7 +22,7 @@ function print_fig(params, sys_name, fun_name; w = 300, h = 300, cmap = nothing,
                 xticklabelfont = "NewComputerModern", 
                 yticklabelfont = "NewComputerModern")
     else
-        fig = Figure(size = (2000, 2000))
+        fig = Figure(size = png_size)
         ax = Axis(fig[1,1], 
             xticksvisible = false, 
             yticksvisible = false, 
