@@ -39,7 +39,8 @@ struct HertzDisks
     L::Float64
 end
 
-HertzDisks(R, ϕ::Real) = HertzDisks(R, sqrt(π*sum(abs2, R)/ϕ))
+# Box side L fixed by the packing fraction ϕ.
+hertz_disks(R, ϕ) = HertzDisks(R, sqrt(π*sum(abs2, R)/ϕ))
 
 # Minimum image convention.
 wrap(d, L) = d - L*round(d/L)
@@ -194,7 +195,7 @@ end
 
 function compute_soft_spheres(di::Dict)
     @unpack ϕ, res = di
-    s = HertzDisks(R_16, ϕ)
+    s = hertz_disks(R_16, ϕ)
     Xc = X0_16 .+ 6.75.*N2_16
     xg = range(-6, 6, length = res)
     yg = range(-3.375, 3.375, length = round(Int, res*6.75/12))
