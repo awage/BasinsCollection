@@ -336,3 +336,8 @@ everything should work out of the box, including correctly finding local paths.
 * Synch basins of Pulse Coupled Oscillators `pulse_coupled_arithmetic.jl` arXiv:2609.01668
 
    ![pulsed_coupled_oscillators](./plots/pco_arithmetic_N=117_res=1200_γ=-1.0.png)
+
+* Soft sphere packings basins `soft_sphere_packings.jl` 
+
+   ![soft_sphere_packings](./plots/soft_spheres_N=16_res=1920_ϕ=0.9.png)
+
