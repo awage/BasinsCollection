@@ -34,7 +34,9 @@ function compute_RG(di)
     return @strdict(bsn, att,grid)
 end
 
-res = 500
+let 
+res = 2000
 params = @strdict res 
-# cmap = ColorScheme([RGB(0.1,0.1,0.1), RGB(1,1,1)] )
+# cmap_rick = ColorScheme([RGB(0.1,0.1,0.1), RGB(1,1,1)] )
 print_fig(params, "ricker_gatto", compute_RG; xlab = L"x", ylab = L"y", force = false, cmap)
+end

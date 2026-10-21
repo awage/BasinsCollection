@@ -217,5 +217,5 @@ end
 let res = 1920, N = 16, ϕ = 0.9
     params = @strdict res N ϕ
     print_fig(params, "soft_spheres", compute_soft_spheres; cmap = :glasbey_bw_n256,
-        xlab = L"p", ylab = L"q", force = false, png_size = (150, 84))
+        xlab = L"p", ylab = L"q", force = false, png_size = (500, 280))
 end
