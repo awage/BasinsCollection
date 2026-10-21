@@ -337,7 +337,7 @@ everything should work out of the box, including correctly finding local paths.
 
    ![pulsed_coupled_oscillators](./plots/pco_arithmetic_N=117_res=1200_γ=-1.0.png)
 
-* Soft sphere packings basins `soft_sphere_packings.jl` 
+* Soft sphere packings basins `soft_sphere_packings.jl` https://doi.org/10.1073/pnas.2604040123
 
    ![soft_sphere_packings](./plots/soft_spheres_N=16_res=1920_ϕ=0.9.png)
 
