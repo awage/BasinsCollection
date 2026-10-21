@@ -169,3 +169,5 @@ include("coupled_hopfield_neuron.jl")
 include("coupled_rulkov_neurons.jl")
 
 include("pulse_coupled_arithmetic.jl")
+
+include("soft_sphere_packings.jl")
